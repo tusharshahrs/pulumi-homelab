@@ -1,2 +1,2 @@
-# pulum-home
+# pulumi-home
 pulumi examples
