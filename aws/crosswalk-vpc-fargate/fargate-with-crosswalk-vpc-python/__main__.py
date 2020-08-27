@@ -1,7 +1,7 @@
 """An AWS fargate with crosswalk vpc"""
 
 import pulumi
-from pulumi import export, ResourceOptions, Config, StackReference, get_stack
+from pulumi import export, ResourceOptions, Config, StackReference, get_stack, get_project
 import json
 import pulumi_aws as aws
 
@@ -16,27 +16,53 @@ mycrosswalkvpc = StackReference(f"shaht/crosswalk-vpc/aws-vpc-dev")
 # Get all network values from previously created vpc #
 pulumi_vpc = mycrosswalkvpc.get_output("pulumi_vpc_id")
 pulumi_vpc_name = mycrosswalkvpc.get_output("pulumi_vpc_name")
+pulumi_vpc_cidr = mycrosswalkvpc.get_output("pulumi_vpc_cidr")
+pulumi_vpc_id = mycrosswalkvpc.get_output("pulumi_vpc_id")
 pulumi_private_subnets = mycrosswalkvpc.get_output("pulumi_vpc_private_subnet_ids")
 pulumi_public_subnets = mycrosswalkvpc.get_output("pulumi_vpc_public_subnet_ids")
 pulumi_az_amount = mycrosswalkvpc.get_output("pulumi_vpc_az_zones")
+env_stack = get_stack()
+env_project = get_project()
+config_file = "Pulumi." + env_stack + ".yaml"
 
-# AWS CLI install   https://docs.aws.amazon.com/elasticloadbalancing/latest/application/tutorial-application-load-balancer-cli.html
+# common tags
+my_tags = {"application":"fargate", "crosswalk-vpc":"yes", "demo":"yes", "costcenter":"1234", "env":"dev", "vpc_name": pulumi_vpc_name, "vpc_cidr":pulumi_vpc_cidr, "pulumi:project":env_project, "pulumi:stack":env_stack, "pulumi:Config":config_file}
 
-# Generic Tags
-my_tags = {"application":"fargate", "crosswalk-vpc":"yes", "demo":"yes", "costcenter":"1234", "env":"dev", "vpc_name": pulumi_vpc_name} 
+# Step 1.1: Create the Task Execution IAM Role https://docs.aws.amazon.com/AmazonECS/latest/userguide/ecs-cli-tutorial-fargate.html
+# IAM Role: https://www.pulumi.com/docs/reference/pkg/aws/iam/role/
+task_execution_role = aws.iam.Role(
+  "pulumi-fargate-task-execution-role",
+   assume_role_policy=json.dumps(
+       {
+        "Version": "2012-10-17",
+        "Statement": 
+        [
+            {
+            "Sid": "",
+            "Effect": "Allow",
+            "Principal": {"Service": "ecs-tasks.amazonaws.com"},
+            "Action": "sts:AssumeRole"
+            }
+        ],
+       }   
+    ),
+)   
 
-# cluster tags
-cluster_tags = dict(my_tags)
-cluster_tags.update({"Name":"pulumi-fargate-ecs-cluster"})
+# Step 1.2 Attach the task execution role policy: https://docs.aws.amazon.com/AmazonECS/latest/userguide/ecs-cli-tutorial-fargate.html
+# https://www.pulumi.com/docs/reference/pkg/aws/iam/rolepolicyattachment/
+task_execution_role_policy_attach = aws.iam.RolePolicyAttachment(
+    "pulumi-fargate-task-excution-policy-attach",
+    role = task_execution_role.name,
+    policy_arn="arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+)
 
-#1. Create an ECS cluster to run a container-based service.   https://www.pulumi.com/docs/reference/pkg/aws/ecs/cluster/
-cluster = aws.ecs.Cluster('pulumi-app-cluster', tags = cluster_tags)
-                          
-# Tags for security group
+# Step 3: Create a Cluster and Configure the Security Group https://docs.aws.amazon.com/AmazonECS/latest/userguide/ecs-cli-tutorial-fargate.html
+#  https://www.pulumi.com/docs/reference/pkg/aws/ec2/securitygroup/
+
+# tags for security group
 sec_tags = dict(my_tags)
 sec_tags.update({"Name":"pulumi-fargate-security-group"})
 
-#2. Create security group    https://www.pulumi.com/docs/reference/pkg/aws/ec2/securitygroup/
 sgroup = aws.ec2.SecurityGroup(
     'pulumi-fargate-sg',
     description='Enable HTTP access',
@@ -49,11 +75,21 @@ sgroup = aws.ec2.SecurityGroup(
     ],
     tags = sec_tags,
     )
+
+# tags for ecs cluster
+cluster_tags = dict(my_tags)
+cluster_tags.update({"Name":"pulumi-fargate-ecs-cluster"})
+
+# Create an ECS cluster to run a container-based service.   
+# https://www.pulumi.com/docs/reference/pkg/aws/ecs/cluster/
+cluster = aws.ecs.Cluster('pulumi-app-cluster', tags = cluster_tags)
+                          
  
 # 3. Create a load balancer to listen for requests and route them to the container.
+  # AWS CLI install   https://docs.aws.amazon.com/elasticloadbalancing/latest/application/tutorial-application-load-balancer-cli.html
   #https://www.pulumi.com/docs/reference/pkg/aws/alb/loadbalancer/
 
-#  Creating Tags for ALB
+#  tags for Application Load Balancer (ALB)
 alb_tags = dict(my_tags)
 alb_tags.update({"Name":"pulumi-fargate-alb"})
 
@@ -81,37 +117,11 @@ front_end_listener = aws.lb.Listener(
     }]
     )
 
-# IAM Role: https://www.pulumi.com/docs/reference/pkg/aws/iam/role/
-task_execution_role = aws.iam.Role(
-  "pulumi-fargate-task-execution-role",
-   assume_role_policy=json.dumps(
-       {
-        "Version": "2012-10-17",
-        "Statement": 
-        [
-            {
-            "Sid": "",
-            "Effect": "Allow",
-            "Principal": {"Service": "ecs-tasks.amazonaws.com"},
-            "Action": "sts:AssumeRole"
-            }
-        ],
-       }   
-    ),
-)   
-
-#Attach the task execution role policy: https://www.pulumi.com/docs/reference/pkg/aws/iam/rolepolicyattachment/
-task_execution_role_policy_attach = aws.iam.RolePolicyAttachment(
-    "pulumi-fargate-task-excution-policy-attach",
-    role = task_execution_role.name,
-    policy_arn="arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-)
-
-#  Creating Tags for task definitino
+#  tags for task definition
 task_definition_tags = dict(my_tags)
 task_definition_tags.update({"Name":"pulumi-fargate-alb"})
 
-#Task Definition https://www.pulumi.com/docs/reference/pkg/aws/ecs/taskdefinition/
+# Task Definition https://www.pulumi.com/docs/reference/pkg/aws/ecs/taskdefinition/
 task_definition = aws.ecs.TaskDefinition(
     "pulumi-fargate-task-definition",
     family='fargate-task-definition',
@@ -132,6 +142,7 @@ task_definition = aws.ecs.TaskDefinition(
 	}])
 )
 
+# ecs service tags
 service_tags = dict(my_tags)
 service_tags.update({"Name":"pulumi-fargate-service"})
 
@@ -158,4 +169,3 @@ service = aws.ecs.Service(
 
 export('Load Balancer URL', alb.dns_name)
 export("ECS Cluster Tags", cluster_tags)
-export("VPC", pulumi_vpc_name)
