@@ -62,7 +62,9 @@ OR Create a empty stack with a given name(`myvpc`) and update all the fields bel
 
 6. Pulumi Console to view everything:   https://app.pulumi.com/REPLACE_WITH_YOUR_ORG/crosswalk-vpc/aws-vpc-dev/
 
-7. View stack output:  ```$ pulumi config```
+7. Stack Outputs will be used as [StackReference](https://www.pulumi.com/docs/intro/concepts/organizing-stacks-projects/#inter-stack-dependencies) for ECS
+
+   View stack output:  ```$ pulumi config```
 
 ```
 Current stack outputs (8):
@@ -81,7 +83,7 @@ Current stack outputs (8):
 
     pulumic_vpc_number_of_nat_gateways  3
 
-More information at: https://app.pulumi.com/REPLACE_WITH_YOUR_ID/crosswalk-vpc/aws-vpc-dev 
+More information at: https://app.pulumi.com/shaht/crosswalk-vpc/aws-vpc-dev 
 ```
 
 7. Destroy VPC (only if there are no other resources running, do this)
