@@ -2,7 +2,7 @@
 
 ### What Is This?
 
-This is Pulumi code for deploying your own [ECS Fargate cluster with tags](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html) on top of [previously configured network in a different language](https://github.com/tusharshahrs/pulumi-homelab/aws/crosswalk-vpc-fargate/).
+This is [Pulumi](https://www.pulumi.com/) code for deploying your own [ECS Fargate cluster with tags](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html) on top of [previously configured network in a different language](https://github.com/tusharshahrs/pulumi-homelab/aws/crosswalk-vpc-fargate/).
 
 ### Why would you do this?  
 Code in whatever language you want, you can use things across go, python, typescript, and dotnet. Reuse whatever you can.
