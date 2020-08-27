@@ -36,6 +36,7 @@ const vpc = new awsx.ec2.Vpc(`${vpc_name}`, {
 export const pulumi_vpc_name = vpc_name;
 export const pulumi_vpc_id = vpc.id;
 export const pulumi_vpc_az_zones = zone_number;
+export const pulumi_vpc_cidr = vpc_cidr;
 export const pulumic_vpc_number_of_nat_gateways = number_of_nat_gateways;
 export const pulumi_vpc_private_subnet_ids = vpc.privateSubnetIds;
 export const pulumi_vpc_public_subnet_ids = vpc.publicSubnetIds;
