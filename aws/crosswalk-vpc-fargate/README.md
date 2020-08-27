@@ -1,4 +1,4 @@
-# Pulumi:  NGINX on AWS ECS Fargate using Python with a vpc built in Typescript
+# Using Pulumi for NGINX on AWS ECS Fargate using Python with a vpc built in Typescript
 
 ### What Is This?
 
