@@ -1,4 +1,4 @@
-# Pulumi:  # Pulumi:  NGINX on AWS ECS Fargate using Python with a vpc built in Typescript
+# Using Pulumi NGINX on AWS ECS Fargate using Python with a vpc built in Typescript
 
 ### What Is This?
 
@@ -6,7 +6,7 @@ ngxin on aws ecs fargate using `python` uses a vpc built via [crosswalk](https:/
 The VPC is built in `typescript`
 
 ### Why would you do this?  
-An example showing that you can easily infrastructure written in a different language than the one you are used to.
+An example showing that you can easily infrastructure written in a different language than the one you are used to.  The vpc outputs are used as inputs via [StackReference](https://www.pulumi.com/docs/intro/concepts/organizing-stacks-projects/#inter-stack-dependencies)
 
 ### Where are the vpc settings? 
 `Pulumi.aws-fargate-dev.yaml`
@@ -45,7 +45,7 @@ OR Create a empty stack with a given name(`qa`) and update all the fields below.
 5. Launch
  ```$ pulumi up```
 
-6. Pulumi Console to view everything:   https://app.pulumi.com/REPALCE_ME_WITH_YOUR_ORG/fargate-with-crosswalk-vpc/aws-fargate-dev/
+6. Pulumi Console to view everything:   https://app.pulumi.com/shaht/fargate-with-crosswalk-vpc/aws-fargate-dev/
 
 7. View stack output:  ```$ pulumi stack output```
 
@@ -58,4 +58,8 @@ Current stack outputs (8):
 ```
 
 7. Destroy ecs cluster
-   ```$ pulumi destroy```
+   
+   ```
+   $ pulumi destroy   
+   $ pulumi stack rm
+   ```
