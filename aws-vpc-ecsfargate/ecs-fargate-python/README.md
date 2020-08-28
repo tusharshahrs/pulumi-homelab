@@ -47,8 +47,15 @@ An example showing that you can easily infrastructure written in a different lan
 5. Launch
  ```$ pulumi up```
 
-6. Pulumi Console to view everything.  Note, you will have a url that shows up that will look similar to the url below.  The `shaht` will be replaced with your own org, `team-qa`:
-   https://app.pulumi.com/`shaht`/fargate-with-crosswalk-vpc/ecs-fargate-dev/   
+6. Pulumi Console to view everything.  Note, you will have a url that shows up that will look similar to the url below.  The `shaht` will be replaced with your own org, for example if your org name is: `team-qa`:
+
+   console view that matches above code as an example: 
+
+   https://app.pulumi.com/`shaht`/fargate-with-crosswalk-vpc/ecs-fargate-dev/
+
+   console view with YOUR ORG NAME:
+
+   https://app.pulumi.com/`team-qa`/fargate-with-crosswalk-vpc/ecs-fargate-dev/
 
 7.  View the outputs
 
