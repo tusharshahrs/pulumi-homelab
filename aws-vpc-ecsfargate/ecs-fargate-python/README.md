@@ -13,6 +13,33 @@ An example showing that you can easily infrastructure written in a different lan
  As a reference, we have included: `Pulumi.aws-fargate-dev.yaml`
  You will be creating a new file that holds your configs
 
+### Mandatory: AWS Console Fix for Tags:
+
+This is necessary so that the tags work properly in ecs
+[Tagging your Amazon ECS resources](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
+
+As per AWS:  `You must opt in to the new Amazon Resource Name (ARN) and resource identifier (ID) formats.`
+
+This has to be done per region until AWS enables it as default across the board(April 1, 2021).
+
+AWS Console -> Elastic Container Service ->  Account Settings -> 
+
+BEFORE
+```
+Resource                My IAM user or role account settings 
+Container Instance      Undefined
+Service                 Undefined
+Task                    Undefined
+```
+
+AFTER
+```
+Resource                My IAM user or role account settings 
+Container Instance      Enabled
+Service                 Enabled
+Task                    Enabled
+```
+
 ### Creating a new `Pulumi`.stackname`.yaml`
 
  1. Initialize a new stack called: `ecs-fargate-dev` via [pulumi config](https://www.pulumi.com/docs/reference/cli/pulumi_config_set/). 
