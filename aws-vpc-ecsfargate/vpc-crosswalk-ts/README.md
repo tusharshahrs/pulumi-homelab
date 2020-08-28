@@ -8,16 +8,21 @@ This example uses [Pulumi CrossWalk for AWS](https://www.pulumi.com/docs/guides/
 An example showing that you can easily infrastructure written in a different language than the one you are used to.
 
 ### Where are the vpc settings? 
-`Pulumi.aws-vpc-dev.yaml`
+ The settings are in `Pulumi`.stackname`.yaml`
+ As a reference, we have included: `Pulumi.aws-vpc-dev.yaml`
+ You will be creating a new file that holds your configs
 
-### How do I make changes to the cidr block, vpc name, zone number, aws region
-For Example: configs are in `Pulumi.aws-vpc-dev.yaml` and changes are made via [pulumi config](https://www.pulumi.com/docs/reference/cli/pulumi_config_set/).
+### Creating a new `Pulumi`.stackname`.yaml`
 
-1. Initialize a new stack with a name you want. Creating stack called: `vpc-fargate`
-```$ pulumi stack init vpc-fargate```
+1. Initialize a new stack called: `vpc-fargate` via [pulumi config](https://www.pulumi.com/docs/reference/cli/pulumi_config_set/). 
+```
+$ pulumi stack init vpc-fargate
+```
 
-2. View the current config settings.  This will be empty.
-   ```$ pulumi config```
+2. View the current config settings. This will be empty.
+   ```
+   $ pulumi config
+   ```
    ```
    KEY                     VALUE
    ```
