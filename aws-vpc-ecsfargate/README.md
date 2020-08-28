@@ -24,7 +24,7 @@ We are going to use [Pulumi Service backend](https://www.pulumi.com/docs/intro/c
 
 ### How do I use it
 
-1. Go inside `crosswalk-vpc-ts` directory for usage information.
-2. Go inside `fargate-with-crosswalk-vpc-python` directory for usage information.
+1. Go inside `vpc-crosswalk-ts` directory for usage information.
+2. Go inside `ecs-fargate--python` directory for usage information.
 
 The ecs fargate example is identical to original one https://github.com/pulumi/examples/tree/master/aws-py-fargate
