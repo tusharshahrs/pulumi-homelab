@@ -7,7 +7,7 @@ This example uses [Pulumi CrossWalk for AWS](https://www.pulumi.com/docs/guides/
 ### Why would you do this?  
 An example showing that you can easily infrastructure written in a different language than the one you are used to.
 
-### Where are the vpc settings? 
+### Where are the settings? 
  The settings are in `Pulumi`.stackname`.yaml`
  As a reference, we have included: `Pulumi.aws-vpc-dev.yaml`
  You will be creating a new file that holds your configs
