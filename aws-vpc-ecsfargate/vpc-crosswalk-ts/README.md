@@ -14,10 +14,10 @@ An example showing that you can easily infrastructure written in a different lan
 
 ### Creating a new `Pulumi`.stackname`.yaml`
 
-1. Initialize a new stack called: `vpc-fargate` via [pulumi config](https://www.pulumi.com/docs/reference/cli/pulumi_config_set/). 
-```
-$ pulumi stack init vpc-fargate
-```
+ 1. Initialize a new stack called: `vpc-fargate` via [pulumi config](https://www.pulumi.com/docs/reference/cli/pulumi_config_set/). 
+      ```
+      $ pulumi stack init vpc-fargate
+      ```
 
 2. View the current config settings. This will be empty.
    ```
@@ -52,7 +52,7 @@ $ pulumi stack init vpc-fargate
 6. Pulumi Console to view everything.  Note, you will have a url that shows up that will look similar to the url below.  The `shaht` will be replaced with your own org, `team-qa`:   
    https://app.pulumi.com/`shaht`/crosswalk-vpc/vpc-fargate/
 
-7. The stack outputs will be used as [StackReference](https://www.pulumi.com/docs/intro/concepts/organizing-stacks-projects/#inter-stack-dependencies) for ECS
+7. The stack outputs will be used as [StackReference](https://www.pulumi.com/docs/intro/concepts/organizing-stacks-projects/#inter-stack-dependencies) for ECS fargate (resides in ecs-fargate-python folder)
 
 ```$ pulumi stack output```
 
