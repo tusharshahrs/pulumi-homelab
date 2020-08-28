@@ -10,8 +10,11 @@ import pulumi_aws as aws
 # read local config settings - network
 config = Config()
 
-# read in vpc values from crosswalk vpc (externally created)
-mycrosswalkvpc = StackReference(f"shaht/crosswalk-vpc/aws-vpc-dev")
+# reading in vpc StackReference Path from local config
+mystackpath = config.get("mystackpath")
+
+# setting the StackReference
+mycrosswalkvpc = StackReference(f"{mystackpath}")
 
 # Get all network values from previously created vpc #
 pulumi_vpc = mycrosswalkvpc.get_output("pulumi_vpc_id")
