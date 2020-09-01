@@ -1,0 +1,2 @@
+config:
+  kubernetes-wordpress-helm-chart:isMinikube: "false"
