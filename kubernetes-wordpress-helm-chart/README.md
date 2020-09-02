@@ -12,4 +12,4 @@
  2. helm moved from version [2](https://www.pulumi.com/docs/reference/pkg/nodejs/pulumi/kubernetes/helm/v2/) to version [3](https://www.pulumi.com/docs/reference/pkg/nodejs/pulumi/kubernetes/helm/v3/#module-helm-v3)
 
 
-Code that needed to be updated is [wordpress block](https://github.com/pulumi/examples/blob/master/kubernetes-ts-helm-wordpress/index.ts#L13-L17)
+Code that needs to be updated is [wordpress block](https://github.com/pulumi/examples/blob/master/kubernetes-ts-helm-wordpress/index.ts#L13-L17)
