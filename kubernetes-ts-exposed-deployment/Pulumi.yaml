@@ -1,0 +1,3 @@
+name: kubernetes-ts-exposed-deployment
+runtime: nodejs
+description: Exposing a Deployment witha public IP Address
