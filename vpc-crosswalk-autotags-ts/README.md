@@ -57,7 +57,7 @@ The [pulumi stack outputs](https://www.pulumi.com/docs/reference/cli/pulumi_stac
  ```$ pulumi up```
 
 6. Pulumi Console to view everything.  Note, you will have a url that shows up that will look similar to the url below.  The `shaht` will be replaced with your own org, `team-qa`:   
-   https://app.pulumi.com/`shaht`/crosswalk-vpc/vpc-tags/
+   https://app.pulumi.com/shaht/crosswalk-vpc/vpc-tags/
 
 7. The stack outputs will be used as [StackReference](https://www.pulumi.com/docs/intro/concepts/organizing-stacks-projects/#inter-stack-dependencies) for ECS fargate (resides in ecs-fargate-python folder)
 
