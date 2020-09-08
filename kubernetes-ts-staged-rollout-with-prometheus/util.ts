@@ -21,7 +21,7 @@ export interface PromPortForwardOpts {
 // appropriate KubeDNS URL is not sufficient.
 export function forwardPrometheusService(
     service: pulumi.Input<k8s.core.v1.Service>,
-    deployment: pulumi.Input<k8s.extensions.v1.Deployment>,
+    deployment: pulumi.Input<k8s.apps.v1.Deployment>,
     opts: PromPortForwardOpts,
 ): pulumi.Output<() => void> {
     if (pulumi.runtime.isDryRun()) {
