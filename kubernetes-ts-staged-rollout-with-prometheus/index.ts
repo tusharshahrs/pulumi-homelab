@@ -6,7 +6,7 @@ import * as util from "./util";
 // Install Prometheus on the cluster.
 const prometheus = new k8s.helm.v3.Chart("p8s", {
     chart: "prometheus",
-    version: "11.14.0",
+    version: "11.15.0",
     fetchOpts: {
         repo:"https://prometheus-community.github.io/helm-charts"
     },
