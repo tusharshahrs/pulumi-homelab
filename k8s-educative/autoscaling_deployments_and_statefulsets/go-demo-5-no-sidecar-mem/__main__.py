@@ -8,9 +8,11 @@ go_demo_5_namespace = kubernetes.core.v1.Namespace("go_demo_5Namespace",
         "name": "go-demo-5",
     })
 #go_demo_5_api_ingress = kubernetes.extensions.v1beta1.Ingress("go_demo_5ApiIngress",
-go_demo_5_api_ingress = kubernetes.networking.v1.Ingress("go_demo_5ApiIngress",
+#go_demo_5_api_ingress = kubernetes.networking.v1.Ingress("go_demo_5ApiIngress",
+go_demo_5_api_ingress = kubernetes.networking.v1beta1.Ingress("go_demo_5ApiIngress",
     #api_version="extensions/v1beta1",
     #api_version="networking.k8s.io/v1beta1",
+    #api_version="networking.k8s.io/v1",
     api_version="networking.k8s.io/v1",
     kind="Ingress",
     metadata={
