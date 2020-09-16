@@ -5,12 +5,20 @@ import * as util from "./util";
 
 // Install Prometheus on the cluster.
 const prometheus = new k8s.helm.v3.Chart("p8s", {
-    chart: "prometheus",
-    version: "11.15.0",
+    chart: "kube-prometheus-stack",
+    version: "9.4.0",
     fetchOpts: {
-        repo:"https://prometheus-community.github.io/helm-charts"
+       repo:"https://prometheus-community.github.io/helm-charts"
     },
 });
+
+//const prometheus = new k8s.helm.v3.Chart("p8s", {
+//    chart: "prometheus",
+//    version: "11.13.1",
+//    fetchOpts: {
+//       repo:"https://prometheus-community.github.io/helm-charts"
+//    },
+//});
 
 const containerName = "example-app";
 // Define Pod template that deploys an instrumented app. Annotation `prometheus.io/scrape` instructs
