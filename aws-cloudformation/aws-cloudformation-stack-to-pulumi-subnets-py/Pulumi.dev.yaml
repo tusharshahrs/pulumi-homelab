@@ -1,0 +1,11 @@
+config:
+  aws:region: us-east-2
+  aws_subnet:mystackpath: shaht/aws_cloudformation/dev
+  aws_subnet:private_subnets:
+  - 10.0.2.128/25
+  - 10.0.3.0/25
+  - 10.0.3.128/25
+  aws_subnet:public_subnets:
+  - 10.0.0.0/24
+  - 10.0.1.0/24
+  - 10.0.2.0/25
