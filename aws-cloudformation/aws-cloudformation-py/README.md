@@ -48,6 +48,7 @@ Clone [the examples repo](https://github.com/pulumi/tusharshahrs/) and `cd` into
 
     ```bash
     $ pulumi config set aws:region us-east-2
+    $ pulumi config set myvpccidrblock 10.0.0.0/22
     ```
 
 5. Launch
@@ -65,7 +66,7 @@ Clone [the examples repo](https://github.com/pulumi/tusharshahrs/) and `cd` into
 
    https://app.pulumi.com/`team-qa`/aws_cloudformation/dev
 
-    Copy the StackReferene path. We will need this in the next part:
+    COPY the StackReference path. We will need this in the next part of the exercise
     
       `shaht`/aws_cloudformation/dev
 
@@ -76,9 +77,9 @@ Clone [the examples repo](https://github.com/pulumi/tusharshahrs/) and `cd` into
     ```
     Current stack outputs (3):
         OUTPUT                          VALUE
-        pulumi-cloudformation-arn       arn:aws:cloudformation:us-east-2:052848974346:stack/pulumi-vpc-cloudformation-e9ae52e/8f0d1280-f9ef-11ea-9318-0af2d26319e4
+        pulumi-cloudformation-arn       arn:aws:cloudformation:us-east-2:052848974346:stack/pulumi-vpc-cloudformation-df18e27/42843ed0-fc14-11ea-bd56-021a782363a8
         pulumi-cloudformation-vpc-cidr  10.0.0.0/22
-        pulumi-cloudformation-vpc-id    vpc-0fcd9f2a42e910f39
+        pulumi-cloudformation-vpc-id    vpc-0ac80e58472ac7dc4
 
 8.  Continue to the subnets, igw, and route table section:
     
