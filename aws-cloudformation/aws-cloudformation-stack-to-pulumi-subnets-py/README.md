@@ -59,7 +59,7 @@ Clone [the examples repo](https://github.com/pulumi/tusharshahrs/) and `cd` into
     
     ```
 
-3.  View the current config settings. This will be empty.
+5.  View the current config settings. This will be empty.
     ```
     $ pulumi config
     ```
@@ -71,41 +71,35 @@ Clone [the examples repo](https://github.com/pulumi/tusharshahrs/) and `cd` into
     public_subnets   ["10.0.0.0/24","10.0.1.0/24","10.0.2.0/25"]
     ```
     
-5. Launch
+6. Launch
  ```$ pulumi up```
 
     Select `y` to continue
 
-6. Pulumi Console to view everything.  Note, you will have a url that shows up that will look similar to the url below.  The `shaht` will be replaced with your own org, for example if your org name is: `team-qa`:
+7. Pulumi Console to view everything.  Note, you will have a url that shows up that will look similar to the url below.  The `shaht` will be replaced with your own org, for example if your org name is: `team-qa`:
 
    console view that matches above code as an example: 
 
-   https://app.pulumi.com/`shaht`/aws_cloudformation/dev
+   https://app.pulumi.com/`shaht`/aws_subnet/dev
 
    console view with YOUR ORG NAME:
 
-   https://app.pulumi.com/`team-qa`/aws_cloudformation/dev
+   https://app.pulumi.com/`team-qa`/aws_subnet/dev
 
-    Copy the StackReferene path. We will need this in the next part:
-    
-      `shaht`/aws_cloudformation/dev
 
-7.  View the outputs
+8.  View the outputs
 
     ```$ pulumi stack output```
 
     ```
-    Current stack outputs (3):
-        OUTPUT                          VALUE
-        pulumi-cloudformation-arn       arn:aws:cloudformation:us-east-2:052848974346:stack/pulumi-vpc-cloudformation-e9ae52e/8f0d1280-f9ef-11ea-9318-0af2d26319e4
-        pulumi-cloudformation-vpc-cidr  10.0.0.0/22
-        pulumi-cloudformation-vpc-id    vpc-0fcd9f2a42e910f39
-
-8.  Continue to the subnets, igw, and route table section:
-    
-    ```
-    cd aws-cloudformation-stack-to-pulumi-subnets-py 
-    ```
+    Current stack outputs (6):
+        OUTPUT                  VALUE
+        my availability zones   ["us-east-2a","us-east-2b","us-east-2c"]
+        my cloud formation arn  arn:aws:cloudformation:us-east-2:052848974346:stack/pulumi-vpc-cloudformation-df18e27/42843ed0-fc14-11ea-bd56-021a782363a8
+        my private subnets      ["subnet-08f20f5aab15e7037","subnet-0c4c5a67f427ebb18","subnet-0f70327599b447b5c"]
+        my public subnets       ["subnet-0e354fcdd1b87ea90","subnet-03e8798e40ef27e90","subnet-087ffd6cc4616683a"]
+        my vpc cidr block       10.0.0.0/22
+        my vpc id               vpc-0ac80e58472ac7dc4
 
 9.  Cleanup
     ```
