@@ -12,9 +12,9 @@ mystackpath = config.get("mystackpath")
 
 # setting the StackReference
 mycloudformationvpc = StackReference(f"{mystackpath}")
-myvpccidrblock = mycloudformationvpc.get_output("pulumi-cloudformation-vpc-cidr")
-myvpcid= mycloudformationvpc.get_output("pulumi-cloudformation-vpc-id")
-pulumi_cloudformation_vpc_with_arn = mycloudformationvpc.get_output("pulumi-cloudformation-arn")
+myvpccidrblock = mycloudformationvpc.require_output("pulumi-cloudformation-vpc-cidr")
+myvpcid= mycloudformationvpc.require_output("pulumi-cloudformation-vpc-id")
+pulumi_cloudformation_vpc_with_arn = mycloudformationvpc.require_output("pulumi-cloudformation-arn")
 
 # Retrieve public subnet cidrs blocks from local config
 public_subnet_cidrs = config.require_object("public_subnets")
