@@ -1,0 +1,3 @@
+config:
+  gcp:project: pulumi-ce-team
+  gcp:zone: us-central1-a
