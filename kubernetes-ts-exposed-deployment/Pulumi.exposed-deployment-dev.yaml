@@ -1,2 +1,0 @@
-config:
-  kubernetes-ts-exposed-deployment:isMinikube: "false"

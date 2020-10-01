@@ -1,3 +1,0 @@
-name: kubernetes-ts-staged-rollout-with-prometheus
-runtime: nodejs
-description: A minimal Kubernetes TypeScript Pulumi program

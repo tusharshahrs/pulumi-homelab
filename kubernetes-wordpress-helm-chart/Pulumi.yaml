@@ -1,3 +1,0 @@
-name: kubernetes-wordpress-helm-chart
-runtime: nodejs
-description: A wordpress with helm chart

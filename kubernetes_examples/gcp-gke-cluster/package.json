@@ -1,0 +1,11 @@
+{
+    "name": "gke-kubernetes-cluster-hello",
+    "devDependencies": {
+        "@types/node": "^10.0.0"
+    },
+    "dependencies": {
+        "@pulumi/gcp": "^3.21.1",
+        "@pulumi/kubernetes": "^2.5.0",
+        "@pulumi/pulumi": "^2.9.2"
+    }
+}
