@@ -31,8 +31,8 @@ const cluster = new eks.Cluster(name,
     instanceType: "t2.small",
     storageClasses: "gp2",
     deployDashboard: false,
-    }, {additionalSecretOutputs:["certificateAuthority"]}
-    );
+    }, { additionalSecretOutputs:["certificateAuthority"], 
+    });
 
 // additional_secret_outputs specify properties that must be encrypted as secrets
 // https://www.pulumi.com/docs/intro/concepts/programming-model/#additionalsecretoutputs
