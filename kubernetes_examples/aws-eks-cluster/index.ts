@@ -2,7 +2,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as awsx from "@pulumi/awsx";
 import * as eks from "@pulumi/eks";
 import * as k8s from "@pulumi/kubernetes";
-import { CertificateAuthority } from "@pulumi/aws/acmpca";
+import { Cluster } from "@pulumi/aws/cloudhsmv2";
 
 //const config =  new pulumi.Config();
 //const currentstackpath = config.get("mystackpath");
@@ -20,7 +20,7 @@ const mypublicsubnets = mynetwork.requireOutput("pulumi_vpc_public_subnet_ids")
 const name = "shahteks";
 
 // Create an EKS cluster with non-default configuration
-const cluster = new eks.Cluster(name, 
+const cluster = new eks.Cluster(name,
     {
     vpcId: myvpc,
     privateSubnetIds: myprivatesubnets,
@@ -31,15 +31,15 @@ const cluster = new eks.Cluster(name,
     instanceType: "t2.small",
     storageClasses: "gp2",
     deployDashboard: false,
-    }, { additionalSecretOutputs:["certificateAuthority"], 
     });
 
 // additional_secret_outputs specify properties that must be encrypted as secrets
 // https://www.pulumi.com/docs/intro/concepts/programming-model/#additionalsecretoutputs
-//{ additionalSecretOutputs: [cluster.kubeconfig]};
-//{ additionalSecretOutputs: ["certificate-authority-data"] };
+//{ additionalSecretOutputs: [certificateAuthority]};
 
 // Export the clusters' kubeconfig.
+
 export const eksvpc = myvpc;
 export const myprivate_subnets = myprivatesubnets;
-export const kubeconfig = cluster.kubeconfig;
+export const eks_cluster_arn = cluster.eksCluster.arn;
+export const kubeconfig = pulumi.secret(cluster.kubeconfig);
