@@ -40,11 +40,12 @@ server_resource = azure_nextgen.sql.latest.Server("mysqlserver",
     server_name=server_name_param,
     )
 
+
 export("resource group",resource_group.name)
 export("database name", database_resource.name)
-export("database id", database_resource.id)
+#export("database id", database_resource.id)
 export("database status", database_resource.status)
-export("server_id", server_resource.id)
+#export("server_id", server_resource.id)
 export("server_name", server_resource.name)
 export("server_state", server_resource.state)
 export("server_fqdn", server_resource.fully_qualified_domain_name)
