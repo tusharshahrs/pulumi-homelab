@@ -1,0 +1,1824 @@
+Previewing update (dev)
+
+View Live: https://app.pulumi.com/shaht/azure-mysql-server/dev/previews/9b29c535-8189-4f1e-a4ea-658eddb2ed31
+
+
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:31:35 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:31:35 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:31:35 Testing if Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:31:35 Testing if Managed Service Identity is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:31:35 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:31:35 Using Obtaining a token from the Azure CLI for Authentication
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://graph.windows.net/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://storage.azure.com/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:31:35 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev, custom=False
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg, custom=True
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver managed_by
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver tags
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver properties
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver type
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=azure-nextgen:sql/latest:Database, name=databaseResource, custom=True
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver collation
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver create_mode
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver database_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver edition
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver elastic_pool_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver max_size_bytes
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver read_scale
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver recovery_services_recovery_point_resource_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver requested_service_objective_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver requested_service_objective_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver restore_point_in_time
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver sample_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver server_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver source_database_deletion_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver source_database_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver tags
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver zone_redundant
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver containment_state
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver creation_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver current_service_objective_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver database_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver default_secondary_location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver earliest_restore_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver failover_group_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver kind
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver recommended_index
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver service_level_objective
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver service_tier_advisors
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver status
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver transparent_data_encryption
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver type
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Waiting for outstanding RPCs to complete
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource outputs
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: waiting for quiescence; 4 RPCs outstanding
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource registration prepared: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: resource_group_name -> resourceGroupName
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver/tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x1046ae3d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: database_name -> databaseName
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: ty=pulumi:pulumi:Stack, urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: resource_group -> resource_group
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name resource_group
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration prepared: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:31:48 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:31:48 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:31:48 Testing if Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:31:48 Testing if Managed Service Identity is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:31:48 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:31:48 Using Obtaining a token from the Azure CLI for Authentication
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: Resource "https://graph.windows.net/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: Resource "https://storage.azure.com/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:31:48 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    azure-nextgen:resources/latest:ResourceGroup shahtsqlserver-rg  
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: ty=azure-nextgen:resources/latest:ResourceGroup, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:resources/latest:ResourceGroup::shahtsqlserver-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: name -> name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: eastus2 -> eastus2
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: properties -> properties
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: {'provisioningState': 'Succeeded'} -> {'provisioning_state': 'Succeeded'}
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: id -> id
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: type -> type
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: Microsoft.Resources/resourceGroups -> Microsoft.Resources/resourceGroups
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name properties
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name type
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: resource_group_name -> resourceGroupName
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: server_name -> serverName
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: created-by -> created-by
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: creationSource -> creationSource
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: owner -> owner
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: purpose -> purpose
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: env -> env
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: tags -> tags
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: zone_redundant -> zoneRedundant
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver/tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x1046ae3d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration prepared: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+ +  azure-nextgen:sql/latest:Database databaseResource create 
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: ty=azure-nextgen:sql/latest:Database, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:sql/latest:Database::databaseResource
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: serverName -> server_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharserver -> tusharserver
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: eastus2 -> eastus2
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: databaseName -> database_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharserver/tusharsqldb -> tusharserver/tusharsqldb
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: zoneRedundant -> zone_redundant
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: True -> True
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: resourceGroupName -> resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: tags -> tags
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: {'env': 'dev', 'created-by': 'tusharshah', 'owner': 'team-qa', 'creationSource': 'pulumiapi', 'purpose': 'test template'} -> {'env': 'dev', 'created-by': 'tusharshah', 'owner': 'team-qa', 'creationSource': 'pulumiapi', 'purpose': 'test template'}
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name server_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name database_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name zone_redundant
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name tags
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: register resource outputs prepared: urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev, props=fields {
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev, props=fields {
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: waiting for quiescence; 3 RPCs outstanding
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: waiting for quiescence; 2 RPCs outstanding
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: waiting for quiescence; 1 RPCs outstanding
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: Canceling all outstanding tasks
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: run_pulumi_func completed
+    pulumi:pulumi:Stack azure-mysql-server-dev  143 debugs
+ 
+Diagnostics:
+  pulumi:pulumi:Stack (azure-mysql-server-dev):
+    debug: 2020/10/07 15:31:35 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    debug: 2020/10/07 15:31:35 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:31:35 Testing if Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:31:35 Testing if Managed Service Identity is applicable for Authentication..
+    debug: 2020/10/07 15:31:35 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    debug: 2020/10/07 15:31:35 Using Obtaining a token from the Azure CLI for Authentication
+    debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    debug: Resource "https://graph.windows.net/" isn't a management domain
+    debug: Resource "https://storage.azure.com/" isn't a management domain
+    debug: 2020/10/07 15:31:35 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    debug: registering resource: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev, custom=False
+    debug: preparing resource for RPC
+    debug: registering resource: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg, custom=True
+    debug: preparing resource for RPC
+    debug: adding resolver location
+    debug: adding resolver managed_by
+    debug: adding resolver resource_group_name
+    debug: adding resolver tags
+    debug: adding resolver name
+    debug: adding resolver properties
+    debug: adding resolver type
+    debug: registering resource: ty=azure-nextgen:sql/latest:Database, name=databaseResource, custom=True
+    debug: preparing resource for RPC
+    debug: adding resolver collation
+    debug: adding resolver create_mode
+    debug: adding resolver database_name
+    debug: adding resolver edition
+    debug: adding resolver elastic_pool_name
+    debug: adding resolver location
+    debug: adding resolver max_size_bytes
+    debug: adding resolver read_scale
+    debug: adding resolver recovery_services_recovery_point_resource_id
+    debug: adding resolver requested_service_objective_id
+    debug: adding resolver requested_service_objective_name
+    debug: adding resolver resource_group_name
+    debug: adding resolver restore_point_in_time
+    debug: adding resolver sample_name
+    debug: adding resolver server_name
+    debug: adding resolver source_database_deletion_date
+    debug: adding resolver source_database_id
+    debug: adding resolver tags
+    debug: adding resolver zone_redundant
+    debug: adding resolver containment_state
+    debug: adding resolver creation_date
+    debug: adding resolver current_service_objective_id
+    debug: adding resolver database_id
+    debug: adding resolver default_secondary_location
+    debug: adding resolver earliest_restore_date
+    debug: adding resolver failover_group_id
+    debug: adding resolver kind
+    debug: adding resolver name
+    debug: adding resolver recommended_index
+    debug: adding resolver service_level_objective
+    debug: adding resolver service_tier_advisors
+    debug: adding resolver status
+    debug: adding resolver transparent_data_encryption
+    debug: adding resolver type
+    debug: Waiting for outstanding RPCs to complete
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource outputs
+    debug: waiting for quiescence; 4 RPCs outstanding
+    debug: preparing resource registration: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    debug: resource {} preparing to wait for dependencies
+    debug: resource {} prepared
+    debug: resource registration prepared: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    debug: preparing resource registration: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} preparing to wait for dependencies
+    debug: top-level input property translated: location -> location
+    debug: top-level input property translated: resource_group_name -> resourceGroupName
+    debug: preparing resource registration: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver/tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x1046ae3d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} preparing to wait for dependencies
+    debug: top-level input property translated: database_name -> databaseName
+    debug: top-level input property translated: location -> location
+    debug: resource registration successful: ty=pulumi:pulumi:Stack, urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev
+    debug: incoming output property translated: resource_group -> resource_group
+    debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    debug: looking for resolver using translated name resource_group
+    debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} prepared
+    debug: resource registration prepared: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    debug: 2020/10/07 15:31:48 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    debug: 2020/10/07 15:31:48 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:31:48 Testing if Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:31:48 Testing if Managed Service Identity is applicable for Authentication..
+    debug: 2020/10/07 15:31:48 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    debug: 2020/10/07 15:31:48 Using Obtaining a token from the Azure CLI for Authentication
+    debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    debug: Resource "https://graph.windows.net/" isn't a management domain
+    debug: Resource "https://storage.azure.com/" isn't a management domain
+    debug: 2020/10/07 15:31:48 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    debug: resource registration successful: ty=azure-nextgen:resources/latest:ResourceGroup, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:resources/latest:ResourceGroup::shahtsqlserver-rg
+    debug: incoming output property translated: name -> name
+    debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    debug: incoming output property translated: location -> location
+    debug: incoming output value translated: eastus2 -> eastus2
+    debug: incoming output property translated: properties -> properties
+    debug: incoming output value translated: {'provisioningState': 'Succeeded'} -> {'provisioning_state': 'Succeeded'}
+    debug: incoming output property translated: id -> id
+    debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg
+    debug: incoming output property translated: type -> type
+    debug: incoming output value translated: Microsoft.Resources/resourceGroups -> Microsoft.Resources/resourceGroups
+    debug: looking for resolver using translated name name
+    debug: looking for resolver using translated name location
+    debug: looking for resolver using translated name properties
+    debug: looking for resolver using translated name type
+    debug: top-level input property translated: resource_group_name -> resourceGroupName
+    debug: top-level input property translated: server_name -> serverName
+    debug: transforming input property: created-by -> created-by
+    debug: transforming input property: creationSource -> creationSource
+    debug: transforming input property: owner -> owner
+    debug: transforming input property: purpose -> purpose
+    debug: transforming input property: env -> env
+    debug: top-level input property translated: tags -> tags
+    debug: top-level input property translated: zone_redundant -> zoneRedundant
+    debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver/tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x1046ae3d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} prepared
+    debug: resource registration prepared: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    debug: resource registration successful: ty=azure-nextgen:sql/latest:Database, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:sql/latest:Database::databaseResource
+    debug: incoming output property translated: serverName -> server_name
+    debug: incoming output value translated: tusharserver -> tusharserver
+    debug: incoming output property translated: location -> location
+    debug: incoming output value translated: eastus2 -> eastus2
+    debug: incoming output property translated: databaseName -> database_name
+    debug: incoming output value translated: tusharserver/tusharsqldb -> tusharserver/tusharsqldb
+    debug: incoming output property translated: zoneRedundant -> zone_redundant
+    debug: incoming output value translated: True -> True
+    debug: incoming output property translated: resourceGroupName -> resource_group_name
+    debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg
+    debug: incoming output property translated: tags -> tags
+    debug: incoming output value translated: {'env': 'dev', 'created-by': 'tusharshah', 'owner': 'team-qa', 'creationSource': 'pulumiapi', 'purpose': 'test template'} -> {'env': 'dev', 'created-by': 'tusharshah', 'owner': 'team-qa', 'creationSource': 'pulumiapi', 'purpose': 'test template'}
+    debug: looking for resolver using translated name server_name
+    debug: looking for resolver using translated name location
+    debug: looking for resolver using translated name database_name
+    debug: looking for resolver using translated name zone_redundant
+    debug: looking for resolver using translated name resource_group_name
+    debug: looking for resolver using translated name tags
+    debug: register resource outputs prepared: urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev, props=fields {
+      key: "database_id"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_name"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_status"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_transparent data encryptyion"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "resource_group"
+      value {
+        string_value: "tusharshah-rg"
+      }
+    }
+    debug: resource registration successful: urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev, props=fields {
+      key: "database_id"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_name"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_status"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_transparent data encryptyion"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "resource_group"
+      value {
+        string_value: "tusharshah-rg"
+      }
+    }
+    debug: waiting for quiescence; 3 RPCs outstanding
+    debug: waiting for quiescence; 2 RPCs outstanding
+    debug: waiting for quiescence; 1 RPCs outstanding
+    debug: Canceling all outstanding tasks
+    debug: run_pulumi_func completed
+ 
+Outputs:
+  + database_id                          : output<string>
+  + database_name                        : output<string>
+  + database_status                      : output<string>
+  + database_transparent data encryptyion: output<string>
+
+
+Updating (dev)
+
+View Live: https://app.pulumi.com/shaht/azure-mysql-server/dev/updates/13
+
+
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:31:52 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:31:52 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:31:52 Testing if Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:31:52 Testing if Managed Service Identity is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:31:52 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:31:52 Using Obtaining a token from the Azure CLI for Authentication
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://graph.windows.net/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://storage.azure.com/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:31:52 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev, custom=False
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg, custom=True
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver managed_by
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver tags
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver properties
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver type
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=azure-nextgen:sql/latest:Database, name=databaseResource, custom=True
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver collation
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver create_mode
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver database_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver edition
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver elastic_pool_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver max_size_bytes
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver read_scale
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver recovery_services_recovery_point_resource_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver requested_service_objective_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver requested_service_objective_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver restore_point_in_time
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver sample_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver server_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver source_database_deletion_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver source_database_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver tags
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver zone_redundant
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver containment_state
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver creation_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver current_service_objective_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver database_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver default_secondary_location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver earliest_restore_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver failover_group_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver kind
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver recommended_index
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver service_level_objective
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver service_tier_advisors
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver status
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver transparent_data_encryption
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver type
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Waiting for outstanding RPCs to complete
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource outputs
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: waiting for quiescence; 4 RPCs outstanding
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource registration prepared: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: resource_group_name -> resourceGroupName
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver/tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x1041a33d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: database_name -> databaseName
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: ty=pulumi:pulumi:Stack, urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: resource_group -> resource_group
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name resource_group
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration prepared: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    azure-nextgen:resources/latest:ResourceGroup shahtsqlserver-rg  
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: ty=azure-nextgen:resources/latest:ResourceGroup, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:resources/latest:ResourceGroup::shahtsqlserver-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: name -> name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: eastus2 -> eastus2
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: id -> id
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: properties -> properties
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: {'provisioningState': 'Succeeded'} -> {'provisioning_state': 'Succeeded'}
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: type -> type
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: Microsoft.Resources/resourceGroups -> Microsoft.Resources/resourceGroups
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name properties
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name type
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: resource_group_name -> resourceGroupName
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: server_name -> serverName
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: created-by -> created-by
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: creationSource -> creationSource
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: owner -> owner
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: purpose -> purpose
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: env -> env
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: tags -> tags
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: zone_redundant -> zoneRedundant
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver/tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x1041a33d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration prepared: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+ +  azure-nextgen:sql/latest:Database databaseResource creating 
+ +  azure-nextgen:sql/latest:Database databaseResource creating error: Code="Failed" Message="The async operation failed." AdditionalInfo=[{"message":"No HTTP resource was found that matches the request URI 'https://management.azure.com/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg/providers/Microsoft.Sql/servers/tusharserver/databases/tusharserver/tusharsqldb?api-version=2014-04-01'."}]
+ +  azure-nextgen:sql/latest:Database databaseResource **creating failed** error: Code="Failed" Message="The async operation failed." AdditionalInfo=[{"message":"No HTTP resource was found that matches the request URI 'https://management.azure.com/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg/providers/Microsoft.Sql/servers/tusharserver/databases/tusharserver/tusharsqldb?api-version=2014-04-01'."}]
+    pulumi:pulumi:Stack azure-mysql-server-dev running error: update failed
+    pulumi:pulumi:Stack azure-mysql-server-dev **failed** 1 error; 108 debugs
+ 
+Diagnostics:
+  pulumi:pulumi:Stack (azure-mysql-server-dev):
+    debug: 2020/10/07 15:31:52 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    debug: 2020/10/07 15:31:52 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:31:52 Testing if Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:31:52 Testing if Managed Service Identity is applicable for Authentication..
+    debug: 2020/10/07 15:31:52 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    debug: 2020/10/07 15:31:52 Using Obtaining a token from the Azure CLI for Authentication
+    debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    debug: Resource "https://graph.windows.net/" isn't a management domain
+    debug: Resource "https://storage.azure.com/" isn't a management domain
+    debug: 2020/10/07 15:31:52 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    debug: registering resource: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev, custom=False
+    debug: preparing resource for RPC
+    debug: registering resource: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg, custom=True
+    debug: preparing resource for RPC
+    debug: adding resolver location
+    debug: adding resolver managed_by
+    debug: adding resolver resource_group_name
+    debug: adding resolver tags
+    debug: adding resolver name
+    debug: adding resolver properties
+    debug: adding resolver type
+    debug: registering resource: ty=azure-nextgen:sql/latest:Database, name=databaseResource, custom=True
+    debug: preparing resource for RPC
+    debug: adding resolver collation
+    debug: adding resolver create_mode
+    debug: adding resolver database_name
+    debug: adding resolver edition
+    debug: adding resolver elastic_pool_name
+    debug: adding resolver location
+    debug: adding resolver max_size_bytes
+    debug: adding resolver read_scale
+    debug: adding resolver recovery_services_recovery_point_resource_id
+    debug: adding resolver requested_service_objective_id
+    debug: adding resolver requested_service_objective_name
+    debug: adding resolver resource_group_name
+    debug: adding resolver restore_point_in_time
+    debug: adding resolver sample_name
+    debug: adding resolver server_name
+    debug: adding resolver source_database_deletion_date
+    debug: adding resolver source_database_id
+    debug: adding resolver tags
+    debug: adding resolver zone_redundant
+    debug: adding resolver containment_state
+    debug: adding resolver creation_date
+    debug: adding resolver current_service_objective_id
+    debug: adding resolver database_id
+    debug: adding resolver default_secondary_location
+    debug: adding resolver earliest_restore_date
+    debug: adding resolver failover_group_id
+    debug: adding resolver kind
+    debug: adding resolver name
+    debug: adding resolver recommended_index
+    debug: adding resolver service_level_objective
+    debug: adding resolver service_tier_advisors
+    debug: adding resolver status
+    debug: adding resolver transparent_data_encryption
+    debug: adding resolver type
+    debug: Waiting for outstanding RPCs to complete
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource outputs
+    debug: waiting for quiescence; 4 RPCs outstanding
+    debug: preparing resource registration: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    debug: resource {} preparing to wait for dependencies
+    debug: resource {} prepared
+    debug: resource registration prepared: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    debug: preparing resource registration: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} preparing to wait for dependencies
+    debug: top-level input property translated: location -> location
+    debug: top-level input property translated: resource_group_name -> resourceGroupName
+    debug: preparing resource registration: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver/tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x1041a33d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} preparing to wait for dependencies
+    debug: top-level input property translated: database_name -> databaseName
+    debug: top-level input property translated: location -> location
+    debug: resource registration successful: ty=pulumi:pulumi:Stack, urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev
+    debug: incoming output property translated: resource_group -> resource_group
+    debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    debug: looking for resolver using translated name resource_group
+    debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} prepared
+    debug: resource registration prepared: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    debug: resource registration successful: ty=azure-nextgen:resources/latest:ResourceGroup, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:resources/latest:ResourceGroup::shahtsqlserver-rg
+    debug: incoming output property translated: name -> name
+    debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    debug: incoming output property translated: location -> location
+    debug: incoming output value translated: eastus2 -> eastus2
+    debug: incoming output property translated: id -> id
+    debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg
+    debug: incoming output property translated: properties -> properties
+    debug: incoming output value translated: {'provisioningState': 'Succeeded'} -> {'provisioning_state': 'Succeeded'}
+    debug: incoming output property translated: type -> type
+    debug: incoming output value translated: Microsoft.Resources/resourceGroups -> Microsoft.Resources/resourceGroups
+    debug: looking for resolver using translated name name
+    debug: looking for resolver using translated name location
+    debug: looking for resolver using translated name properties
+    debug: looking for resolver using translated name type
+    debug: looking for resolver using translated name resource_group_name
+    debug: top-level input property translated: resource_group_name -> resourceGroupName
+    debug: top-level input property translated: server_name -> serverName
+    debug: transforming input property: created-by -> created-by
+    debug: transforming input property: creationSource -> creationSource
+    debug: transforming input property: owner -> owner
+    debug: transforming input property: purpose -> purpose
+    debug: transforming input property: env -> env
+    debug: top-level input property translated: tags -> tags
+    debug: top-level input property translated: zone_redundant -> zoneRedundant
+    debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver/tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x1041a33d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} prepared
+    debug: resource registration prepared: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    error: update failed
+ 
+  azure-nextgen:sql/latest:Database (databaseResource):
+    error: Code="Failed" Message="The async operation failed." AdditionalInfo=[{"message":"No HTTP resource was found that matches the request URI 'https://management.azure.com/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg/providers/Microsoft.Sql/servers/tusharserver/databases/tusharserver/tusharsqldb?api-version=2014-04-01'."}]
+ 
+Outputs:
+  - resource_group: "tusharshah-rg"
+
+Resources:
+    2 unchanged
+
+Duration: 15s
+
+Previewing update (dev)
+
+View Live: https://app.pulumi.com/shaht/azure-mysql-server/dev/previews/afa22a40-d63c-41fa-ab07-5fd9fb669b72
+
+
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:37:29 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:37:29 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:37:29 Testing if Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:37:29 Testing if Managed Service Identity is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:37:29 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:37:29 Using Obtaining a token from the Azure CLI for Authentication
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://graph.windows.net/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://storage.azure.com/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:37:29 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev, custom=False
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg, custom=True
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver managed_by
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver tags
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver properties
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver type
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=azure-nextgen:sql/latest:Database, name=databaseResource, custom=True
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver collation
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver create_mode
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver database_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver edition
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver elastic_pool_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver max_size_bytes
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver read_scale
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver recovery_services_recovery_point_resource_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver requested_service_objective_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver requested_service_objective_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver restore_point_in_time
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver sample_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver server_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver source_database_deletion_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver source_database_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver tags
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver zone_redundant
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver containment_state
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver creation_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver current_service_objective_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver database_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver default_secondary_location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver earliest_restore_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver failover_group_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver kind
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver recommended_index
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver service_level_objective
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver service_tier_advisors
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver status
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver transparent_data_encryption
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver type
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Waiting for outstanding RPCs to complete
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource outputs
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: waiting for quiescence; 4 RPCs outstanding
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource registration prepared: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: resource_group_name -> resourceGroupName
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x10e18e4f0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: database_name -> databaseName
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: ty=pulumi:pulumi:Stack, urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: resource_group -> resource_group
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name resource_group
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration prepared: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:37:42 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:37:42 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:37:42 Testing if Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:37:42 Testing if Managed Service Identity is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:37:42 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:37:42 Using Obtaining a token from the Azure CLI for Authentication
+    azure-nextgen:resources/latest:ResourceGroup shahtsqlserver-rg  
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: Resource "https://graph.windows.net/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: ty=azure-nextgen:resources/latest:ResourceGroup, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:resources/latest:ResourceGroup::shahtsqlserver-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: Resource "https://storage.azure.com/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:37:42 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: eastus2 -> eastus2
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: properties -> properties
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: {'provisioningState': 'Succeeded'} -> {'provisioning_state': 'Succeeded'}
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: type -> type
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: Microsoft.Resources/resourceGroups -> Microsoft.Resources/resourceGroups
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: id -> id
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: name -> name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name properties
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name type
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: resource_group_name -> resourceGroupName
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: server_name -> serverName
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: created-by -> created-by
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: creationSource -> creationSource
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: owner -> owner
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: purpose -> purpose
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: env -> env
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: tags -> tags
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: zone_redundant -> zoneRedundant
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x10e18e4f0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration prepared: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+ +  azure-nextgen:sql/latest:Database databaseResource create 
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: ty=azure-nextgen:sql/latest:Database, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:sql/latest:Database::databaseResource
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: resourceGroupName -> resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: serverName -> server_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharserver -> tusharserver
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: eastus2 -> eastus2
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: tags -> tags
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: {'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'created-by': 'tusharshah', 'env': 'dev'} -> {'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'created-by': 'tusharshah', 'env': 'dev'}
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: zoneRedundant -> zone_redundant
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: True -> True
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: databaseName -> database_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharserver-tusharsqldb -> tusharserver-tusharsqldb
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name server_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name tags
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name zone_redundant
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name database_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: register resource outputs prepared: urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev, props=fields {
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev, props=fields {
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: waiting for quiescence; 3 RPCs outstanding
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: waiting for quiescence; 2 RPCs outstanding
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: waiting for quiescence; 1 RPCs outstanding
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: Canceling all outstanding tasks
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: run_pulumi_func completed
+    pulumi:pulumi:Stack azure-mysql-server-dev  143 debugs
+ 
+Diagnostics:
+  pulumi:pulumi:Stack (azure-mysql-server-dev):
+    debug: 2020/10/07 15:37:29 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    debug: 2020/10/07 15:37:29 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:37:29 Testing if Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:37:29 Testing if Managed Service Identity is applicable for Authentication..
+    debug: 2020/10/07 15:37:29 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    debug: 2020/10/07 15:37:29 Using Obtaining a token from the Azure CLI for Authentication
+    debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    debug: Resource "https://graph.windows.net/" isn't a management domain
+    debug: Resource "https://storage.azure.com/" isn't a management domain
+    debug: 2020/10/07 15:37:29 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    debug: registering resource: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev, custom=False
+    debug: preparing resource for RPC
+    debug: registering resource: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg, custom=True
+    debug: preparing resource for RPC
+    debug: adding resolver location
+    debug: adding resolver managed_by
+    debug: adding resolver resource_group_name
+    debug: adding resolver tags
+    debug: adding resolver name
+    debug: adding resolver properties
+    debug: adding resolver type
+    debug: registering resource: ty=azure-nextgen:sql/latest:Database, name=databaseResource, custom=True
+    debug: preparing resource for RPC
+    debug: adding resolver collation
+    debug: adding resolver create_mode
+    debug: adding resolver database_name
+    debug: adding resolver edition
+    debug: adding resolver elastic_pool_name
+    debug: adding resolver location
+    debug: adding resolver max_size_bytes
+    debug: adding resolver read_scale
+    debug: adding resolver recovery_services_recovery_point_resource_id
+    debug: adding resolver requested_service_objective_id
+    debug: adding resolver requested_service_objective_name
+    debug: adding resolver resource_group_name
+    debug: adding resolver restore_point_in_time
+    debug: adding resolver sample_name
+    debug: adding resolver server_name
+    debug: adding resolver source_database_deletion_date
+    debug: adding resolver source_database_id
+    debug: adding resolver tags
+    debug: adding resolver zone_redundant
+    debug: adding resolver containment_state
+    debug: adding resolver creation_date
+    debug: adding resolver current_service_objective_id
+    debug: adding resolver database_id
+    debug: adding resolver default_secondary_location
+    debug: adding resolver earliest_restore_date
+    debug: adding resolver failover_group_id
+    debug: adding resolver kind
+    debug: adding resolver name
+    debug: adding resolver recommended_index
+    debug: adding resolver service_level_objective
+    debug: adding resolver service_tier_advisors
+    debug: adding resolver status
+    debug: adding resolver transparent_data_encryption
+    debug: adding resolver type
+    debug: Waiting for outstanding RPCs to complete
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource outputs
+    debug: waiting for quiescence; 4 RPCs outstanding
+    debug: preparing resource registration: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    debug: resource {} preparing to wait for dependencies
+    debug: resource {} prepared
+    debug: resource registration prepared: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    debug: preparing resource registration: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} preparing to wait for dependencies
+    debug: top-level input property translated: location -> location
+    debug: top-level input property translated: resource_group_name -> resourceGroupName
+    debug: preparing resource registration: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x10e18e4f0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} preparing to wait for dependencies
+    debug: top-level input property translated: database_name -> databaseName
+    debug: top-level input property translated: location -> location
+    debug: resource registration successful: ty=pulumi:pulumi:Stack, urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev
+    debug: incoming output property translated: resource_group -> resource_group
+    debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    debug: looking for resolver using translated name resource_group
+    debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} prepared
+    debug: resource registration prepared: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    debug: 2020/10/07 15:37:42 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    debug: 2020/10/07 15:37:42 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:37:42 Testing if Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:37:42 Testing if Managed Service Identity is applicable for Authentication..
+    debug: 2020/10/07 15:37:42 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    debug: 2020/10/07 15:37:42 Using Obtaining a token from the Azure CLI for Authentication
+    debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    debug: Resource "https://graph.windows.net/" isn't a management domain
+    debug: resource registration successful: ty=azure-nextgen:resources/latest:ResourceGroup, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:resources/latest:ResourceGroup::shahtsqlserver-rg
+    debug: Resource "https://storage.azure.com/" isn't a management domain
+    debug: 2020/10/07 15:37:42 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    debug: incoming output property translated: location -> location
+    debug: incoming output value translated: eastus2 -> eastus2
+    debug: incoming output property translated: properties -> properties
+    debug: incoming output value translated: {'provisioningState': 'Succeeded'} -> {'provisioning_state': 'Succeeded'}
+    debug: incoming output property translated: type -> type
+    debug: incoming output value translated: Microsoft.Resources/resourceGroups -> Microsoft.Resources/resourceGroups
+    debug: incoming output property translated: id -> id
+    debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg
+    debug: incoming output property translated: name -> name
+    debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    debug: looking for resolver using translated name location
+    debug: looking for resolver using translated name properties
+    debug: looking for resolver using translated name type
+    debug: looking for resolver using translated name name
+    debug: top-level input property translated: resource_group_name -> resourceGroupName
+    debug: top-level input property translated: server_name -> serverName
+    debug: transforming input property: created-by -> created-by
+    debug: transforming input property: creationSource -> creationSource
+    debug: transforming input property: owner -> owner
+    debug: transforming input property: purpose -> purpose
+    debug: transforming input property: env -> env
+    debug: top-level input property translated: tags -> tags
+    debug: top-level input property translated: zone_redundant -> zoneRedundant
+    debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x10e18e4f0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} prepared
+    debug: resource registration prepared: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    debug: resource registration successful: ty=azure-nextgen:sql/latest:Database, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:sql/latest:Database::databaseResource
+    debug: incoming output property translated: resourceGroupName -> resource_group_name
+    debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg
+    debug: incoming output property translated: serverName -> server_name
+    debug: incoming output value translated: tusharserver -> tusharserver
+    debug: incoming output property translated: location -> location
+    debug: incoming output value translated: eastus2 -> eastus2
+    debug: incoming output property translated: tags -> tags
+    debug: incoming output value translated: {'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'created-by': 'tusharshah', 'env': 'dev'} -> {'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'created-by': 'tusharshah', 'env': 'dev'}
+    debug: incoming output property translated: zoneRedundant -> zone_redundant
+    debug: incoming output value translated: True -> True
+    debug: incoming output property translated: databaseName -> database_name
+    debug: incoming output value translated: tusharserver-tusharsqldb -> tusharserver-tusharsqldb
+    debug: looking for resolver using translated name resource_group_name
+    debug: looking for resolver using translated name server_name
+    debug: looking for resolver using translated name location
+    debug: looking for resolver using translated name tags
+    debug: looking for resolver using translated name zone_redundant
+    debug: looking for resolver using translated name database_name
+    debug: register resource outputs prepared: urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev, props=fields {
+      key: "database_id"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_name"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_status"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_transparent data encryptyion"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "resource_group"
+      value {
+        string_value: "tusharshah-rg"
+      }
+    }
+    debug: resource registration successful: urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev, props=fields {
+      key: "database_id"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_name"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_status"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_transparent data encryptyion"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "resource_group"
+      value {
+        string_value: "tusharshah-rg"
+      }
+    }
+    debug: waiting for quiescence; 3 RPCs outstanding
+    debug: waiting for quiescence; 2 RPCs outstanding
+    debug: waiting for quiescence; 1 RPCs outstanding
+    debug: Canceling all outstanding tasks
+    debug: run_pulumi_func completed
+ 
+Outputs:
+  + database_id                          : output<string>
+  + database_name                        : output<string>
+  + database_status                      : output<string>
+  + database_transparent data encryptyion: output<string>
+
+
+Updating (dev)
+
+View Live: https://app.pulumi.com/shaht/azure-mysql-server/dev/updates/14
+
+
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:37:46 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:37:46 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:37:46 Testing if Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:37:46 Testing if Managed Service Identity is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:37:46 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:37:46 Using Obtaining a token from the Azure CLI for Authentication
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://graph.windows.net/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://storage.azure.com/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:37:46 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev, custom=False
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg, custom=True
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver managed_by
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver tags
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver properties
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver type
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=azure-nextgen:sql/latest:Database, name=databaseResource, custom=True
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver collation
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver create_mode
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver database_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver edition
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver elastic_pool_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver max_size_bytes
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver read_scale
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver recovery_services_recovery_point_resource_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver requested_service_objective_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver requested_service_objective_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver restore_point_in_time
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver sample_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver server_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver source_database_deletion_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver source_database_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver tags
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver zone_redundant
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver containment_state
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver creation_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver current_service_objective_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver database_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver default_secondary_location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver earliest_restore_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver failover_group_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver kind
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver recommended_index
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver service_level_objective
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver service_tier_advisors
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver status
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver transparent_data_encryption
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver type
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Waiting for outstanding RPCs to complete
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource outputs
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: waiting for quiescence; 4 RPCs outstanding
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource registration prepared: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: resource_group_name -> resourceGroupName
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x103f4c3d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: database_name -> databaseName
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: ty=pulumi:pulumi:Stack, urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: resource_group -> resource_group
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name resource_group
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration prepared: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    azure-nextgen:resources/latest:ResourceGroup shahtsqlserver-rg  
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: ty=azure-nextgen:resources/latest:ResourceGroup, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:resources/latest:ResourceGroup::shahtsqlserver-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: id -> id
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: name -> name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: eastus2 -> eastus2
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: properties -> properties
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: {'provisioningState': 'Succeeded'} -> {'provisioning_state': 'Succeeded'}
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: type -> type
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: Microsoft.Resources/resourceGroups -> Microsoft.Resources/resourceGroups
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name properties
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name type
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: resource_group_name -> resourceGroupName
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: server_name -> serverName
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: created-by -> created-by
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: creationSource -> creationSource
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: owner -> owner
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: purpose -> purpose
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: env -> env
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: tags -> tags
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: zone_redundant -> zoneRedundant
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x103f4c3d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration prepared: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+ +  azure-nextgen:sql/latest:Database databaseResource creating 
+ +  azure-nextgen:sql/latest:Database databaseResource creating error: Code="Failed" Message="The async operation failed." AdditionalInfo=[{"message":"No HTTP resource was found that matches the request URI 'https://management.azure.com/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg/providers/Microsoft.Sql/servers/tusharserver/databases/tusharserver-tusharsqldb?api-version=2014-04-01'."}]
+ +  azure-nextgen:sql/latest:Database databaseResource **creating failed** error: Code="Failed" Message="The async operation failed." AdditionalInfo=[{"message":"No HTTP resource was found that matches the request URI 'https://management.azure.com/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg/providers/Microsoft.Sql/servers/tusharserver/databases/tusharserver-tusharsqldb?api-version=2014-04-01'."}]
+    pulumi:pulumi:Stack azure-mysql-server-dev running error: update failed
+    pulumi:pulumi:Stack azure-mysql-server-dev **failed** 1 error; 108 debugs
+ 
+Diagnostics:
+  pulumi:pulumi:Stack (azure-mysql-server-dev):
+    debug: 2020/10/07 15:37:46 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    debug: 2020/10/07 15:37:46 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:37:46 Testing if Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:37:46 Testing if Managed Service Identity is applicable for Authentication..
+    debug: 2020/10/07 15:37:46 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    debug: 2020/10/07 15:37:46 Using Obtaining a token from the Azure CLI for Authentication
+    debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    debug: Resource "https://graph.windows.net/" isn't a management domain
+    debug: Resource "https://storage.azure.com/" isn't a management domain
+    debug: 2020/10/07 15:37:46 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    debug: registering resource: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev, custom=False
+    debug: preparing resource for RPC
+    debug: registering resource: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg, custom=True
+    debug: preparing resource for RPC
+    debug: adding resolver location
+    debug: adding resolver managed_by
+    debug: adding resolver resource_group_name
+    debug: adding resolver tags
+    debug: adding resolver name
+    debug: adding resolver properties
+    debug: adding resolver type
+    debug: registering resource: ty=azure-nextgen:sql/latest:Database, name=databaseResource, custom=True
+    debug: preparing resource for RPC
+    debug: adding resolver collation
+    debug: adding resolver create_mode
+    debug: adding resolver database_name
+    debug: adding resolver edition
+    debug: adding resolver elastic_pool_name
+    debug: adding resolver location
+    debug: adding resolver max_size_bytes
+    debug: adding resolver read_scale
+    debug: adding resolver recovery_services_recovery_point_resource_id
+    debug: adding resolver requested_service_objective_id
+    debug: adding resolver requested_service_objective_name
+    debug: adding resolver resource_group_name
+    debug: adding resolver restore_point_in_time
+    debug: adding resolver sample_name
+    debug: adding resolver server_name
+    debug: adding resolver source_database_deletion_date
+    debug: adding resolver source_database_id
+    debug: adding resolver tags
+    debug: adding resolver zone_redundant
+    debug: adding resolver containment_state
+    debug: adding resolver creation_date
+    debug: adding resolver current_service_objective_id
+    debug: adding resolver database_id
+    debug: adding resolver default_secondary_location
+    debug: adding resolver earliest_restore_date
+    debug: adding resolver failover_group_id
+    debug: adding resolver kind
+    debug: adding resolver name
+    debug: adding resolver recommended_index
+    debug: adding resolver service_level_objective
+    debug: adding resolver service_tier_advisors
+    debug: adding resolver status
+    debug: adding resolver transparent_data_encryption
+    debug: adding resolver type
+    debug: Waiting for outstanding RPCs to complete
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource outputs
+    debug: waiting for quiescence; 4 RPCs outstanding
+    debug: preparing resource registration: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    debug: resource {} preparing to wait for dependencies
+    debug: resource {} prepared
+    debug: resource registration prepared: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    debug: preparing resource registration: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} preparing to wait for dependencies
+    debug: top-level input property translated: location -> location
+    debug: top-level input property translated: resource_group_name -> resourceGroupName
+    debug: preparing resource registration: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x103f4c3d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} preparing to wait for dependencies
+    debug: top-level input property translated: database_name -> databaseName
+    debug: top-level input property translated: location -> location
+    debug: resource registration successful: ty=pulumi:pulumi:Stack, urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev
+    debug: incoming output property translated: resource_group -> resource_group
+    debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    debug: looking for resolver using translated name resource_group
+    debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} prepared
+    debug: resource registration prepared: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    debug: resource registration successful: ty=azure-nextgen:resources/latest:ResourceGroup, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:resources/latest:ResourceGroup::shahtsqlserver-rg
+    debug: incoming output property translated: id -> id
+    debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg
+    debug: incoming output property translated: name -> name
+    debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    debug: incoming output property translated: location -> location
+    debug: incoming output value translated: eastus2 -> eastus2
+    debug: incoming output property translated: properties -> properties
+    debug: incoming output value translated: {'provisioningState': 'Succeeded'} -> {'provisioning_state': 'Succeeded'}
+    debug: incoming output property translated: type -> type
+    debug: incoming output value translated: Microsoft.Resources/resourceGroups -> Microsoft.Resources/resourceGroups
+    debug: looking for resolver using translated name name
+    debug: looking for resolver using translated name location
+    debug: looking for resolver using translated name properties
+    debug: looking for resolver using translated name type
+    debug: looking for resolver using translated name resource_group_name
+    debug: top-level input property translated: resource_group_name -> resourceGroupName
+    debug: top-level input property translated: server_name -> serverName
+    debug: transforming input property: created-by -> created-by
+    debug: transforming input property: creationSource -> creationSource
+    debug: transforming input property: owner -> owner
+    debug: transforming input property: purpose -> purpose
+    debug: transforming input property: env -> env
+    debug: top-level input property translated: tags -> tags
+    debug: top-level input property translated: zone_redundant -> zoneRedundant
+    debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x103f4c3d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': True, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} prepared
+    debug: resource registration prepared: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    error: update failed
+ 
+  azure-nextgen:sql/latest:Database (databaseResource):
+    error: Code="Failed" Message="The async operation failed." AdditionalInfo=[{"message":"No HTTP resource was found that matches the request URI 'https://management.azure.com/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg/providers/Microsoft.Sql/servers/tusharserver/databases/tusharserver-tusharsqldb?api-version=2014-04-01'."}]
+ 
+Outputs:
+  - resource_group: "tusharshah-rg"
+
+Resources:
+    2 unchanged
+
+Duration: 15s
+
+Previewing update (dev)
+
+View Live: https://app.pulumi.com/shaht/azure-mysql-server/dev/previews/b7eea8c2-1042-4b63-86a4-1d3094e76595
+
+
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:47:36 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:47:36 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:47:36 Testing if Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:47:36 Testing if Managed Service Identity is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:47:36 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:47:36 Using Obtaining a token from the Azure CLI for Authentication
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://graph.windows.net/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://storage.azure.com/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:47:36 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev, custom=False
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg, custom=True
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver managed_by
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver tags
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver properties
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver type
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=azure-nextgen:sql/latest:Database, name=databaseResource, custom=True
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver collation
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver create_mode
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver database_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver edition
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver elastic_pool_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver max_size_bytes
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver read_scale
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver recovery_services_recovery_point_resource_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver requested_service_objective_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver requested_service_objective_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver restore_point_in_time
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver sample_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver server_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver source_database_deletion_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver source_database_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver tags
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver zone_redundant
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver containment_state
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver creation_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver current_service_objective_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver database_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver default_secondary_location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver earliest_restore_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver failover_group_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver kind
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver recommended_index
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver service_level_objective
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver service_tier_advisors
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver status
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver transparent_data_encryption
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver type
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Waiting for outstanding RPCs to complete
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource outputs
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: waiting for quiescence; 4 RPCs outstanding
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource registration prepared: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: resource_group_name -> resourceGroupName
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x10dd294f0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': False, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: database_name -> databaseName
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: ty=pulumi:pulumi:Stack, urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: resource_group -> resource_group
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name resource_group
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration prepared: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:47:49 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:47:49 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:47:49 Testing if Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:47:49 Testing if Managed Service Identity is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:47:49 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:47:49 Using Obtaining a token from the Azure CLI for Authentication
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    azure-nextgen:resources/latest:ResourceGroup shahtsqlserver-rg  
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: Resource "https://graph.windows.net/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: Resource "https://storage.azure.com/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: 2020/10/07 15:47:49 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: ty=azure-nextgen:resources/latest:ResourceGroup, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:resources/latest:ResourceGroup::shahtsqlserver-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: eastus2 -> eastus2
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: name -> name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: id -> id
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: type -> type
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: Microsoft.Resources/resourceGroups -> Microsoft.Resources/resourceGroups
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: properties -> properties
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: {'provisioningState': 'Succeeded'} -> {'provisioning_state': 'Succeeded'}
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name type
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name properties
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: resource_group_name -> resourceGroupName
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: server_name -> serverName
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: created-by -> created-by
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: creationSource -> creationSource
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: owner -> owner
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: purpose -> purpose
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: env -> env
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: tags -> tags
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: zone_redundant -> zoneRedundant
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x10dd294f0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': False, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration prepared: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+ +  azure-nextgen:sql/latest:Database databaseResource create 
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: ty=azure-nextgen:sql/latest:Database, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:sql/latest:Database::databaseResource
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: eastus2 -> eastus2
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: serverName -> server_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharserver -> tusharserver
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: zoneRedundant -> zone_redundant
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: False -> False
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: databaseName -> database_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharserver-tusharsqldb -> tusharserver-tusharsqldb
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: tags -> tags
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: {'env': 'dev', 'creationSource': 'pulumiapi', 'purpose': 'test template', 'owner': 'team-qa', 'created-by': 'tusharshah'} -> {'env': 'dev', 'creationSource': 'pulumiapi', 'purpose': 'test template', 'owner': 'team-qa', 'created-by': 'tusharshah'}
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: resourceGroupName -> resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name server_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name zone_redundant
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name database_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name tags
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: register resource outputs prepared: urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev, props=fields {
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev, props=fields {
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: waiting for quiescence; 3 RPCs outstanding
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: waiting for quiescence; 2 RPCs outstanding
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: waiting for quiescence; 1 RPCs outstanding
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: Canceling all outstanding tasks
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: run_pulumi_func completed
+    pulumi:pulumi:Stack azure-mysql-server-dev  143 debugs
+ 
+Diagnostics:
+  pulumi:pulumi:Stack (azure-mysql-server-dev):
+    debug: 2020/10/07 15:47:36 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    debug: 2020/10/07 15:47:36 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:47:36 Testing if Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:47:36 Testing if Managed Service Identity is applicable for Authentication..
+    debug: 2020/10/07 15:47:36 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    debug: 2020/10/07 15:47:36 Using Obtaining a token from the Azure CLI for Authentication
+    debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    debug: Resource "https://graph.windows.net/" isn't a management domain
+    debug: Resource "https://storage.azure.com/" isn't a management domain
+    debug: 2020/10/07 15:47:36 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    debug: registering resource: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev, custom=False
+    debug: preparing resource for RPC
+    debug: registering resource: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg, custom=True
+    debug: preparing resource for RPC
+    debug: adding resolver location
+    debug: adding resolver managed_by
+    debug: adding resolver resource_group_name
+    debug: adding resolver tags
+    debug: adding resolver name
+    debug: adding resolver properties
+    debug: adding resolver type
+    debug: registering resource: ty=azure-nextgen:sql/latest:Database, name=databaseResource, custom=True
+    debug: preparing resource for RPC
+    debug: adding resolver collation
+    debug: adding resolver create_mode
+    debug: adding resolver database_name
+    debug: adding resolver edition
+    debug: adding resolver elastic_pool_name
+    debug: adding resolver location
+    debug: adding resolver max_size_bytes
+    debug: adding resolver read_scale
+    debug: adding resolver recovery_services_recovery_point_resource_id
+    debug: adding resolver requested_service_objective_id
+    debug: adding resolver requested_service_objective_name
+    debug: adding resolver resource_group_name
+    debug: adding resolver restore_point_in_time
+    debug: adding resolver sample_name
+    debug: adding resolver server_name
+    debug: adding resolver source_database_deletion_date
+    debug: adding resolver source_database_id
+    debug: adding resolver tags
+    debug: adding resolver zone_redundant
+    debug: adding resolver containment_state
+    debug: adding resolver creation_date
+    debug: adding resolver current_service_objective_id
+    debug: adding resolver database_id
+    debug: adding resolver default_secondary_location
+    debug: adding resolver earliest_restore_date
+    debug: adding resolver failover_group_id
+    debug: adding resolver kind
+    debug: adding resolver name
+    debug: adding resolver recommended_index
+    debug: adding resolver service_level_objective
+    debug: adding resolver service_tier_advisors
+    debug: adding resolver status
+    debug: adding resolver transparent_data_encryption
+    debug: adding resolver type
+    debug: Waiting for outstanding RPCs to complete
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource outputs
+    debug: waiting for quiescence; 4 RPCs outstanding
+    debug: preparing resource registration: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    debug: resource {} preparing to wait for dependencies
+    debug: resource {} prepared
+    debug: resource registration prepared: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    debug: preparing resource registration: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} preparing to wait for dependencies
+    debug: top-level input property translated: location -> location
+    debug: top-level input property translated: resource_group_name -> resourceGroupName
+    debug: preparing resource registration: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x10dd294f0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': False, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} preparing to wait for dependencies
+    debug: top-level input property translated: database_name -> databaseName
+    debug: top-level input property translated: location -> location
+    debug: resource registration successful: ty=pulumi:pulumi:Stack, urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev
+    debug: incoming output property translated: resource_group -> resource_group
+    debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    debug: looking for resolver using translated name resource_group
+    debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} prepared
+    debug: resource registration prepared: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    debug: 2020/10/07 15:47:49 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    debug: 2020/10/07 15:47:49 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:47:49 Testing if Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:47:49 Testing if Managed Service Identity is applicable for Authentication..
+    debug: 2020/10/07 15:47:49 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    debug: 2020/10/07 15:47:49 Using Obtaining a token from the Azure CLI for Authentication
+    debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    debug: Resource "https://graph.windows.net/" isn't a management domain
+    debug: Resource "https://storage.azure.com/" isn't a management domain
+    debug: 2020/10/07 15:47:49 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    debug: resource registration successful: ty=azure-nextgen:resources/latest:ResourceGroup, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:resources/latest:ResourceGroup::shahtsqlserver-rg
+    debug: incoming output property translated: location -> location
+    debug: incoming output value translated: eastus2 -> eastus2
+    debug: incoming output property translated: name -> name
+    debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    debug: incoming output property translated: id -> id
+    debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg
+    debug: incoming output property translated: type -> type
+    debug: incoming output value translated: Microsoft.Resources/resourceGroups -> Microsoft.Resources/resourceGroups
+    debug: incoming output property translated: properties -> properties
+    debug: incoming output value translated: {'provisioningState': 'Succeeded'} -> {'provisioning_state': 'Succeeded'}
+    debug: looking for resolver using translated name location
+    debug: looking for resolver using translated name name
+    debug: looking for resolver using translated name type
+    debug: looking for resolver using translated name properties
+    debug: top-level input property translated: resource_group_name -> resourceGroupName
+    debug: top-level input property translated: server_name -> serverName
+    debug: transforming input property: created-by -> created-by
+    debug: transforming input property: creationSource -> creationSource
+    debug: transforming input property: owner -> owner
+    debug: transforming input property: purpose -> purpose
+    debug: transforming input property: env -> env
+    debug: top-level input property translated: tags -> tags
+    debug: top-level input property translated: zone_redundant -> zoneRedundant
+    debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x10dd294f0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': False, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} prepared
+    debug: resource registration prepared: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    debug: resource registration successful: ty=azure-nextgen:sql/latest:Database, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:sql/latest:Database::databaseResource
+    debug: incoming output property translated: location -> location
+    debug: incoming output value translated: eastus2 -> eastus2
+    debug: incoming output property translated: serverName -> server_name
+    debug: incoming output value translated: tusharserver -> tusharserver
+    debug: incoming output property translated: zoneRedundant -> zone_redundant
+    debug: incoming output value translated: False -> False
+    debug: incoming output property translated: databaseName -> database_name
+    debug: incoming output value translated: tusharserver-tusharsqldb -> tusharserver-tusharsqldb
+    debug: incoming output property translated: tags -> tags
+    debug: incoming output value translated: {'env': 'dev', 'creationSource': 'pulumiapi', 'purpose': 'test template', 'owner': 'team-qa', 'created-by': 'tusharshah'} -> {'env': 'dev', 'creationSource': 'pulumiapi', 'purpose': 'test template', 'owner': 'team-qa', 'created-by': 'tusharshah'}
+    debug: incoming output property translated: resourceGroupName -> resource_group_name
+    debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg
+    debug: looking for resolver using translated name location
+    debug: looking for resolver using translated name server_name
+    debug: looking for resolver using translated name zone_redundant
+    debug: looking for resolver using translated name database_name
+    debug: looking for resolver using translated name tags
+    debug: looking for resolver using translated name resource_group_name
+    debug: register resource outputs prepared: urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev, props=fields {
+      key: "database_id"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_name"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_status"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_transparent data encryptyion"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "resource_group"
+      value {
+        string_value: "tusharshah-rg"
+      }
+    }
+    debug: resource registration successful: urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev, props=fields {
+      key: "database_id"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_name"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_status"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "database_transparent data encryptyion"
+      value {
+        string_value: "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
+      }
+    }
+    fields {
+      key: "resource_group"
+      value {
+        string_value: "tusharshah-rg"
+      }
+    }
+    debug: waiting for quiescence; 3 RPCs outstanding
+    debug: waiting for quiescence; 2 RPCs outstanding
+    debug: waiting for quiescence; 1 RPCs outstanding
+    debug: Canceling all outstanding tasks
+    debug: run_pulumi_func completed
+ 
+Outputs:
+  + database_id                          : output<string>
+  + database_name                        : output<string>
+  + database_status                      : output<string>
+  + database_transparent data encryptyion: output<string>
+
+
+Updating (dev)
+
+View Live: https://app.pulumi.com/shaht/azure-mysql-server/dev/updates/15
+
+
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:47:53 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:47:53 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:47:53 Testing if Service Principal / Client Secret is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:47:53 Testing if Managed Service Identity is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:47:53 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:47:53 Using Obtaining a token from the Azure CLI for Authentication
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://graph.windows.net/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Resource "https://storage.azure.com/" isn't a management domain
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: 2020/10/07 15:47:53 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev, custom=False
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg, custom=True
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver managed_by
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver tags
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver properties
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver type
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: registering resource: ty=azure-nextgen:sql/latest:Database, name=databaseResource, custom=True
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource for RPC
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver collation
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver create_mode
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver database_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver edition
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver elastic_pool_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver max_size_bytes
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver read_scale
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver recovery_services_recovery_point_resource_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver requested_service_objective_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver requested_service_objective_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver restore_point_in_time
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver sample_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver server_name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver source_database_deletion_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver source_database_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver tags
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver zone_redundant
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver containment_state
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver creation_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver current_service_objective_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver database_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver default_secondary_location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver earliest_restore_date
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver failover_group_id
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver kind
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver name
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver recommended_index
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver service_level_objective
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver service_tier_advisors
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver status
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver transparent_data_encryption
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: adding resolver type
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: Waiting for outstanding RPCs to complete
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: beginning rpc register resource outputs
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: waiting for quiescence; 4 RPCs outstanding
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource registration prepared: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: resource_group_name -> resourceGroupName
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: preparing resource registration: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x108e483d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': False, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} preparing to wait for dependencies
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: database_name -> databaseName
+    pulumi:pulumi:Stack azure-mysql-server-dev  debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: ty=pulumi:pulumi:Stack, urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: resource_group -> resource_group
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name resource_group
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration prepared: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    azure-nextgen:resources/latest:ResourceGroup shahtsqlserver-rg  
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration successful: ty=azure-nextgen:resources/latest:ResourceGroup, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:resources/latest:ResourceGroup::shahtsqlserver-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: type -> type
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: Microsoft.Resources/resourceGroups -> Microsoft.Resources/resourceGroups
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: name -> name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: location -> location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: eastus2 -> eastus2
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: id -> id
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output property translated: properties -> properties
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: incoming output value translated: {'provisioningState': 'Succeeded'} -> {'provisioning_state': 'Succeeded'}
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name type
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name location
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name properties
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: looking for resolver using translated name resource_group_name
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: resource_group_name -> resourceGroupName
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: server_name -> serverName
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: created-by -> created-by
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: creationSource -> creationSource
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: owner -> owner
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: purpose -> purpose
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: transforming input property: env -> env
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: tags -> tags
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: top-level input property translated: zone_redundant -> zoneRedundant
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x108e483d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': False, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} prepared
+    pulumi:pulumi:Stack azure-mysql-server-dev running debug: resource registration prepared: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+ +  azure-nextgen:sql/latest:Database databaseResource creating 
+ +  azure-nextgen:sql/latest:Database databaseResource creating error: Code="Failed" Message="The async operation failed." AdditionalInfo=[{"message":"No HTTP resource was found that matches the request URI 'https://management.azure.com/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg/providers/Microsoft.Sql/servers/tusharserver/databases/tusharserver-tusharsqldb?api-version=2014-04-01'."}]
+ +  azure-nextgen:sql/latest:Database databaseResource **creating failed** error: Code="Failed" Message="The async operation failed." AdditionalInfo=[{"message":"No HTTP resource was found that matches the request URI 'https://management.azure.com/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg/providers/Microsoft.Sql/servers/tusharserver/databases/tusharserver-tusharsqldb?api-version=2014-04-01'."}]
+    pulumi:pulumi:Stack azure-mysql-server-dev running error: update failed
+    pulumi:pulumi:Stack azure-mysql-server-dev **failed** 1 error; 108 debugs
+ 
+Diagnostics:
+  pulumi:pulumi:Stack (azure-mysql-server-dev):
+    debug: 2020/10/07 15:47:53 Testing if Service Principal / Client Certificate is applicable for Authentication..
+    debug: 2020/10/07 15:47:53 Testing if Multi Tenant Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:47:53 Testing if Service Principal / Client Secret is applicable for Authentication..
+    debug: 2020/10/07 15:47:53 Testing if Managed Service Identity is applicable for Authentication..
+    debug: 2020/10/07 15:47:53 Testing if Obtaining a token from the Azure CLI is applicable for Authentication..
+    debug: 2020/10/07 15:47:53 Using Obtaining a token from the Azure CLI for Authentication
+    debug: Resource "https://management.core.windows.net/" isn't for the correct Tenant
+    debug: Resource "https://graph.windows.net/" isn't a management domain
+    debug: Resource "https://storage.azure.com/" isn't a management domain
+    debug: 2020/10/07 15:47:53 Getting OAuth config for endpoint https://login.microsoftonline.com/ with  tenant 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+    debug: registering resource: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev, custom=False
+    debug: preparing resource for RPC
+    debug: registering resource: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg, custom=True
+    debug: preparing resource for RPC
+    debug: adding resolver location
+    debug: adding resolver managed_by
+    debug: adding resolver resource_group_name
+    debug: adding resolver tags
+    debug: adding resolver name
+    debug: adding resolver properties
+    debug: adding resolver type
+    debug: registering resource: ty=azure-nextgen:sql/latest:Database, name=databaseResource, custom=True
+    debug: preparing resource for RPC
+    debug: adding resolver collation
+    debug: adding resolver create_mode
+    debug: adding resolver database_name
+    debug: adding resolver edition
+    debug: adding resolver elastic_pool_name
+    debug: adding resolver location
+    debug: adding resolver max_size_bytes
+    debug: adding resolver read_scale
+    debug: adding resolver recovery_services_recovery_point_resource_id
+    debug: adding resolver requested_service_objective_id
+    debug: adding resolver requested_service_objective_name
+    debug: adding resolver resource_group_name
+    debug: adding resolver restore_point_in_time
+    debug: adding resolver sample_name
+    debug: adding resolver server_name
+    debug: adding resolver source_database_deletion_date
+    debug: adding resolver source_database_id
+    debug: adding resolver tags
+    debug: adding resolver zone_redundant
+    debug: adding resolver containment_state
+    debug: adding resolver creation_date
+    debug: adding resolver current_service_objective_id
+    debug: adding resolver database_id
+    debug: adding resolver default_secondary_location
+    debug: adding resolver earliest_restore_date
+    debug: adding resolver failover_group_id
+    debug: adding resolver kind
+    debug: adding resolver name
+    debug: adding resolver recommended_index
+    debug: adding resolver service_level_objective
+    debug: adding resolver service_tier_advisors
+    debug: adding resolver status
+    debug: adding resolver transparent_data_encryption
+    debug: adding resolver type
+    debug: Waiting for outstanding RPCs to complete
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource
+    debug: beginning rpc register resource outputs
+    debug: waiting for quiescence; 4 RPCs outstanding
+    debug: preparing resource registration: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    debug: resource {} preparing to wait for dependencies
+    debug: resource {} prepared
+    debug: resource registration prepared: ty=pulumi:pulumi:Stack, name=azure-mysql-server-dev
+    debug: preparing resource registration: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} preparing to wait for dependencies
+    debug: top-level input property translated: location -> location
+    debug: top-level input property translated: resource_group_name -> resourceGroupName
+    debug: preparing resource registration: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x108e483d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': False, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} preparing to wait for dependencies
+    debug: top-level input property translated: database_name -> databaseName
+    debug: top-level input property translated: location -> location
+    debug: resource registration successful: ty=pulumi:pulumi:Stack, urn=urn:pulumi:dev::azure-mysql-server::pulumi:pulumi:Stack::azure-mysql-server-dev
+    debug: incoming output property translated: resource_group -> resource_group
+    debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    debug: looking for resolver using translated name resource_group
+    debug: resource {'location': 'eastus2', 'managed_by': None, 'resource_group_name': 'tusharshah-rg', 'tags': None, 'name': None, 'properties': None, 'type': None} prepared
+    debug: resource registration prepared: ty=azure-nextgen:resources/latest:ResourceGroup, name=shahtsqlserver-rg
+    debug: resource registration successful: ty=azure-nextgen:resources/latest:ResourceGroup, urn=urn:pulumi:dev::azure-mysql-server::azure-nextgen:resources/latest:ResourceGroup::shahtsqlserver-rg
+    debug: incoming output property translated: type -> type
+    debug: incoming output value translated: Microsoft.Resources/resourceGroups -> Microsoft.Resources/resourceGroups
+    debug: incoming output property translated: name -> name
+    debug: incoming output value translated: tusharshah-rg -> tusharshah-rg
+    debug: incoming output property translated: location -> location
+    debug: incoming output value translated: eastus2 -> eastus2
+    debug: incoming output property translated: id -> id
+    debug: incoming output value translated: /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg -> /subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/tusharshah-rg
+    debug: incoming output property translated: properties -> properties
+    debug: incoming output value translated: {'provisioningState': 'Succeeded'} -> {'provisioning_state': 'Succeeded'}
+    debug: looking for resolver using translated name type
+    debug: looking for resolver using translated name name
+    debug: looking for resolver using translated name location
+    debug: looking for resolver using translated name properties
+    debug: looking for resolver using translated name resource_group_name
+    debug: top-level input property translated: resource_group_name -> resourceGroupName
+    debug: top-level input property translated: server_name -> serverName
+    debug: transforming input property: created-by -> created-by
+    debug: transforming input property: creationSource -> creationSource
+    debug: transforming input property: owner -> owner
+    debug: transforming input property: purpose -> purpose
+    debug: transforming input property: env -> env
+    debug: top-level input property translated: tags -> tags
+    debug: top-level input property translated: zone_redundant -> zoneRedundant
+    debug: resource {'collation': None, 'create_mode': None, 'database_name': 'tusharserver-tusharsqldb', 'edition': None, 'elastic_pool_name': None, 'location': 'eastus2', 'max_size_bytes': None, 'read_scale': None, 'recovery_services_recovery_point_resource_id': None, 'requested_service_objective_id': None, 'requested_service_objective_name': None, 'resource_group_name': <pulumi_azure_nextgen.resources.latest.resource_group.ResourceGroup object at 0x108e483d0>, 'restore_point_in_time': None, 'sample_name': None, 'server_name': 'tusharserver', 'source_database_deletion_date': None, 'source_database_id': None, 'tags': {'created-by': 'tusharshah', 'creationSource': 'pulumiapi', 'owner': 'team-qa', 'purpose': 'test template', 'env': 'dev'}, 'zone_redundant': False, 'containment_state': None, 'creation_date': None, 'current_service_objective_id': None, 'database_id': None, 'default_secondary_location': None, 'earliest_restore_date': None, 'failover_group_id': None, 'kind': None, 'name': None, 'recommended_index': None, 'service_level_objective': None, 'service_tier_advisors': None, 'status': None, 'transparent_data_encryption': None, 'type': None} prepared
+    debug: resource registration prepared: ty=azure-nextgen:sql/latest:Database, name=databaseResource
+    error: update failed
+ 
+  azure-nextgen:sql/latest:Database (databaseResource):
+    error: Code="Failed" Message="The async operation failed." AdditionalInfo=[{"message":"No HTTP resource was found that matches the request URI 'https://management.azure.com/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourceGroups/subscriptions/32b9cb2e-69be-4040-80a6-02cd6b2cc5ec/resourcegroups/tusharshah-rg/providers/Microsoft.Sql/servers/tusharserver/databases/tusharserver-tusharsqldb?api-version=2014-04-01'."}]
+ 
+Outputs:
+  - resource_group: "tusharshah-rg"
+
+Resources:
+    2 unchanged
+
+Duration: 15s
+
