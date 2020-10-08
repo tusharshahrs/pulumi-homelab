@@ -1,7 +1,8 @@
 config:
-  azure-mysql-server:administratorLoginParam: shahtshaht
+  azure-mysql-server:administratorLoginParam:
+    secure: AAABAKZQfeGzIMsROa7r7WqA/A2RQZuC7I7AYPjXLOMLYTw26JaWv0O2
   azure-mysql-server:administratorLoginPasswordParam:
-    secure: AAABAC1BxSkFyqkt5NOwuCjxqnv1UDUd1oXObvcisGa/onmr4/pz/VUkzg==
+    secure: AAABAAu83a1C9qVccrlUQq+yJrRDPUYBQ1E2czS+5FqE0QC46fYuWmGXT4gzGm+vwloaswe7
   azure-mysql-server:locationParam: eastus2
   azure-mysql-server:resourceGroupNameParam: tusharshah-rg
   azure-mysql-server:serverNameParam: tusharserver
