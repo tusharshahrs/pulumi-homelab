@@ -50,8 +50,18 @@ database_resource = azure_nextgen.sql.latest.Database("databaseResource",
     tags=database_tags,
 )
 
+# The end IP address of the firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress. Use value '0.0.0.0' to represent all Azure-internal IP addresses.
+# The start IP address of the firewall rule. Must be IPv4 format. Use value '0.0.0.0' to represent all Azure-internal IP addresses.
+#
+firewall_rule_resource = azure_nextgen.sql.v20150501preview.FirewallRule("firewallRuleResource",
+    end_ip_address="0.0.0.0",
+    firewall_rule_name=f"{server_name_param}-AllowAllWindowsAzureIps",
+    resource_group_name=resource_group.name,
+    server_name=server_resource.name,
+    start_ip_address="0.0.0.0")
+
 #key_resource = azure_nextgen.sql.v20150501preview.ServerKey("keyResource",
-#    key_name=f"{server_name_param}/ServiceManaged",
+#    key_name=f"{server_name_param}-ServiceManaged",
 #    kind="servicemanaged",
 #    resource_group_name=resource_group.name,
 #    server_name=server_resource.name,
@@ -61,29 +71,17 @@ database_resource = azure_nextgen.sql.latest.Database("databaseResource",
 #    resource_group_name=resource_group.name,
 #    server_name=server_resource.name,
 #    storage_container_path=vulnerability_assessments_default_storage_container_path_param,
-#    vulnerability_assessment_name=f"{server_name_param}/Default",
+#    vulnerability_assessment_name=f"{server_name_param}-Default",
 #    recurring_scans={
 #        "email_subscription_admins": True,
 #        "is_enabled": False,
 #    },
 #)
 
-# The end IP address of the firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress. Use value '0.0.0.0' to represent all Azure-internal IP addresses.
-# The start IP address of the firewall rule. Must be IPv4 format. Use value '0.0.0.0' to represent all Azure-internal IP addresses.
-#
-#v20150501preview
-firewall_rule_resource = azure_nextgen.sql.v20150501preview.FirewallRule("firewallRuleResource",
-    end_ip_address="0.0.0.0",
-    firewall_rule_name=f"{server_name_param}-AllowAllWindowsAzureIps",
-    resource_group_name=resource_group.name,
-    server_name=server_resource.name,
-    #resource_group_name=resource_group_name_param,
-    #server_name=server_name_param,
-    start_ip_address="0.0.0.0")
 
 export("resource group",resource_group.name)
-#export("database name",database_resource.name)
-#export("database status",database_resource.status)
+export("database name",database_resource.name)
+export("database status",database_resource.status)
 export("sqlserver name",server_resource.name)
 export("sqlserver state",server_resource.state)
 export("sqlserver fqdn",server_resource.fully_qualified_domain_name)
