@@ -7,3 +7,4 @@ config:
   azure-mysql-server:resourceGroupNameParam: tusharshah-rg
   azure-mysql-server:serverNameParam: tusharserver
   azure-mysql-server:sqlDBNameParam: tusharsqldb
+  azure-mysql-server:vulnerabilityAssessmentsDefaultStorageContainerPathParam: shahtstorage
