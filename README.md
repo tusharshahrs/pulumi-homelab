@@ -1,2 +1,0 @@
-# pulumi-homelab
-pulumi examples
