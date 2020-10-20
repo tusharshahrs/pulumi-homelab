@@ -1,0 +1,4 @@
+config:
+  azure-nextgen-ts-webserver:instanceCount: "2"
+  azure-nextgen-ts-webserver:location: eastus2
+  azure-nextgen-ts-webserver:nameprefix: mydemo
