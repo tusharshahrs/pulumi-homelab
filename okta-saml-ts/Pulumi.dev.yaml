@@ -1,0 +1,11 @@
+config:
+  aws:region: us-east-1
+  okta:apiToken:
+    secure: AAABAL7DBPlvINM4cOHel23PH0fZ1bNqv2D6oXtatMOXc9A8T/2WqosFlw90md67ZEejYYw8CBYCn2ezVREFTlAsmW7mMh9r1rw=
+  okta:backoff: "2"
+  okta:baseUrl: okta.com
+  okta:maxRetries: "3"
+  okta:maxWaitSeconds: "100"
+  okta:minWaitSeconds: "20"
+  okta:orgName:
+    secure: AAABADq6YThu1AylkmvzOqYxMaGutGYBiZI08UL0KnLYDZV7BIFD0HE=
