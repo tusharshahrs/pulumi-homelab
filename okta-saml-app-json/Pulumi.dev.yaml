@@ -7,6 +7,6 @@ config:
   okta-saml-app-json:minWaitSeconds: "30"
   okta-saml-app-json:role: user
   okta:apiToken:
-    secure: AAABAPKF9bGYWeky+suNNVw/vkdUIEkr8XAvDvEpwvHX4P65XxHsCMLWSbaQqFcScD8OAxOTt7xqzISBy8OblpkNG/EN+0XYTEs=
-  okta:baseUrl: okta.com
-  okta:orgName: pulumidev
+    secure: AAABAIK86EOPlKTg0gX/dc8QG/jdqPKcBF/YWYZYRxhIUczomxHWGkZBbn/utX4etAxso4w45MzzQkSPXOCnmkpdRMFYWhYLS3E=
+  okta:baseUrl: oktapreview.com
+  okta:orgName: dev-7962294
