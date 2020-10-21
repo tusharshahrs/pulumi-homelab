@@ -1,4 +1,4 @@
 /bin/
 /node_modules/
-droneapp-noauth/
-droneapp-auth/
+/droneapp-noauth/
+/droneapp-auth/
