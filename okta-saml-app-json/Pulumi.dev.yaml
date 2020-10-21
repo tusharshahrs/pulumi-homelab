@@ -8,5 +8,5 @@ config:
   okta-saml-app-json:role: user
   okta:apiToken:
     secure: AAABAIK86EOPlKTg0gX/dc8QG/jdqPKcBF/YWYZYRxhIUczomxHWGkZBbn/utX4etAxso4w45MzzQkSPXOCnmkpdRMFYWhYLS3E=
-  okta:baseUrl: oktapreview.com
+  okta:baseUrl: okta.com
   okta:orgName: dev-7962294
