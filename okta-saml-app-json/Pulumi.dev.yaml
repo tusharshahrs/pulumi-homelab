@@ -1,9 +1,4 @@
 config:
-  okta-saml-app-json:OKTA_API_TOKEN:
-    secure: AAABAHwMGEzeumrpVv1lT82rE5c0g67sfSJlEvOC/OlkYvzPhKUbDWhI+sTRYI13YZRYXh43Jogfi0czo3K3jhibLz+GzHWEMLQ=
-  okta-saml-app-json:OKTA_BASE_URL: okta.com
-  okta-saml-app-json:OKTA_ORG_NAME:
-    secure: AAABAGAErZkNRtck2zeX7o1GVm0iJLoyy/8+v8pk8DaAf5vFXo4xxg4=
   okta-saml-app-json:awsaccountid:
     secure: AAABADjmb5UkssY193HHrVjMRzQRED+h3SnYRUkyFUI5xGM0Qi+2sy9ykJI=
   okta-saml-app-json:backoff: "true"
@@ -11,3 +6,7 @@ config:
   okta-saml-app-json:maxWaitSeconds: "60"
   okta-saml-app-json:minWaitSeconds: "30"
   okta-saml-app-json:role: user
+  okta:apiToken:
+    secure: AAABAPKF9bGYWeky+suNNVw/vkdUIEkr8XAvDvEpwvHX4P65XxHsCMLWSbaQqFcScD8OAxOTt7xqzISBy8OblpkNG/EN+0XYTEs=
+  okta:baseUrl: okta.com
+  okta:orgName: pulumidev
