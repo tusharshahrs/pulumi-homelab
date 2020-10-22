@@ -49,7 +49,7 @@ okta_application = okta.app.Saml(
             "roleValuePattern": "arn:aws:iam::${accountid}:saml-provider/OKTA,arn:aws:iam::${accountid}:role/${role}",
             "sessionDuration": 3600,
             "groupFilter": "aws_(?{{accountid}}//d+)_(?{{role}}[a-zA-Z0-9+=,.@//-_]+)",
-            "identityProviderArn": "arn:aws:iam::{accountid}:saml-provider/some-name",
+            "identityProviderArn": "arn:aws:iam::{accountid}:saml-provider/dev-7962294",
             "useGroupMapping": false   
             }
             """
