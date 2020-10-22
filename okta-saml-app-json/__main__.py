@@ -2,11 +2,15 @@ import pulumi_okta as okta
 import pulumi
 from pulumi import Config, export
 
+# User email
 sourceemail = "tushar@pulumi.com"
-
+# Getting config values from pulumi config
 config = Config()
+# Retrieving AWS account ID that is passed in
 accountid = config.get("awsaccountid")
+# Retrieving iam saml provider
 iam_saml_provider = config.get("iamsamlprovider")
+# Retrieving role
 role = config.get("myrole")
 
 # Creating identityProviderArn for app_setting_json
@@ -62,4 +66,4 @@ export("SAML Label", okta_application.label)
 export("myidentityProviderArn", myidentityProviderArn)
 export("myroleValuePattern", myroleValuePattern)
 export("mygroupFilter", mygroupFilter)
-export("app_setting_json_total", app_setting_json_total)
+#export("app_setting_json_total", app_setting_json_total)
