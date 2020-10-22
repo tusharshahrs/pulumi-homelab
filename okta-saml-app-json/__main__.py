@@ -8,18 +8,18 @@ sourceemail = "tushar@pulumi.com"
 config = Config()
 accountid = config.get("awsaccountid")
 
-user = okta.app.User("exampleuser",
-    app_id = "0oad3g1tU4Tq3yOX95d5",
-    user_id = "00ucyhfiZaIXZGdUJ5d5",
-    username = "tushar@pulumi.com")
+#user = okta.app.User("exampleuser",
+#    app_id = "0oad3g1tU4Tq3yOX95d5",
+#    user_id = "00ucyhfiZaIXZGdUJ5d5",
+#    username = "tushar@pulumi.com")
 
 okta_application = okta.app.Saml(
     "test_okta_application",
     attribute_statements=[okta.app.SamlAttributeStatementArgs(
         name="amazon_aws",
-        filter_type  = "REGEX",
-        filter_value = ".*",
-        type         = "GROUP"
+        #filter_type  = "REGEX",
+        #filter_value = ".*",
+        #type         = "GROUP"
     )],
     honor_force_authn=False,
     label="AWS Ks Poc",
@@ -27,6 +27,7 @@ okta_application = okta.app.Saml(
         "PUSH_NEW_USERS",
         "PUSH_PROFILE_UPDATES"
     ],
+    preconfigured_app="amazon_aws",
     user_name_template="tushar@pulumi.com",
     user_name_template_type="BUILT_IN",
     sso_url="https://dev-7962294.okta.com",
@@ -46,7 +47,7 @@ okta_application = okta.app.Saml(
             "joinAllRoles": false,
             "loginURL": "https://console.aws.amazon.com/ec2/home",
             "roleValuePattern": "arn:aws:iam::${accountid}:saml-provider/OKTA,arn:aws:iam::${accountid}:role/${role}",
-            "sessionDuration": 61,
+            "sessionDuration": 3600,
             "groupFilter": "aws_(?{{accountid}}//d+)_(?{{role}}[a-zA-Z0-9+=,.@//-_]+)",
             "identityProviderArn": "arn:aws:iam::{accountid}:saml-provider/some-name",
             "useGroupMapping": false   
