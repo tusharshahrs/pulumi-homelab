@@ -15,7 +15,7 @@
 4. Add applications while in **Classic UI** mode ->
 - Click on `Applications` -> `Add Application`
 
-    <img src="images/3___Add_Application_via_classic_UI.png" alt = Add Application via classic ui>
+    <img src="images/3__Add_Application_via_classic_UI.png" alt = Add Application via classic ui>
 
 5. Search for `AWS`.  You want `AWS Account Federation`
 
@@ -23,13 +23,13 @@
 
 6. Now you can run your `pulumi` code.
 
-** Validation Steps **
+            ** Validation Steps **
 
 7. Select your application
     - Stay in the **Classic UI** console-> `Applications` -> Click on your application name that shows up.  For Example:  AWS ** POC
 
-       <img src="images/5__Validation_Select_Your_Application.png" alt = Select on your application that was created after `pulumi up`> 
+    <img src="images/5__Validation_Select_Your_Application.png" alt = Select on your application that was created after pulumi up>
 
 8. Click on `Sign On` and validate your settings by scrolling down.
 
-           <img src="images/6__Sign_On.png" alt = Validate settings in Sign On> 
+    <img src="images/6__Sign_On.png" alt = Validate settings in Sign On>
