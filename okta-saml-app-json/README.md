@@ -2,9 +2,9 @@
 
 1.  Sign up for a okta [developer account](https://developer.okta.com/)
 
-2.  Make sure you are in the developer console.  Click on [Add Person] box.
+2.  Make sure you are in the developer console.  Click on `Add Person` box.
 
-- ![Developer Console Add Person](/images/1__Developer_Console_Add_Person.png)
+    ![Developer Console Add Person](../images/1__Developer_Console_Add_Person.png)
 
 3. Switch over to Developer Console -> **Classic UI**
 - Go to the top left where it says: `Developer Console`
