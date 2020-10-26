@@ -1,8 +1,12 @@
 import * as pulumi from "@pulumi/pulumi";
+import * as tls from "@pulumi/tls";
 
 const config = new pulumi.Config();
 
 export const projectName = pulumi.getProject()
 export const stackName = pulumi.getStack()
 
-export const sshKey = config.get("sshKey") || "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCv4zd2Z3+9W/pWdPHR0/d0qRJyYGJXeTL9JKrUxpTuVDx9ixBxYiXIKWZfXJuiQMXU6uPLAI7yl2CWy95YER8H2KcT0JxZBgkQ2G9ml4Cd+ESXhJcwtVQp5Gn0lGGQNag78A/Yw1mLCV281NIEpkplmbMXNjiUNJIeTc/Ys24CJDAIYC5dY0I/ehZ/rMsGbIoc7Kldv0c7aWxCgasCHGjKmueAHKxj/Z/vLT5tb9GbSzFRiUrBJPieZA1WNujetfa3mmUpxSAmDFKoMeODO+1knl9pfN54WmDx8Sk9087ZfsCEHk8wNr8XafBkOFM2BzZmVWGvAyUpwRH20zZVVgah4KMxpeAeCuow4/dQGLYqpLhZosZ+hSkrPeN55yVR8QfF30B1wJl4HL5IsbKZV72bBtXyr1tDGyINc4BOcOGkVd9/lOrW1jFiR0283tw6VAP87Pbyz46EKtncK6WXJi1Jj6MlngV0Jd9p6DFkMMYSTiUqk1fQWD1HJDFM2GYi8QjvL5F8Xqp/BOj6oV9R++jBa6svIgMdyfWtJuwnMvBcpB3KuoTgEyZ/GTzovBvqUKDXuz/vALMTnZFZ8sKisdQtK1G23PeR7iCpNB8QRnABJzFA8jvLhSCViO4Tg37o3QRR+75oILLuWX6hE8mknKhfLhNbH3XxF769WFpf6U3ojw== cameron@cameronstokes.com";
+export const sshKey = new tls.PrivateKey(projectName, 
+    {
+        algorithm: "RSA",
+    });
