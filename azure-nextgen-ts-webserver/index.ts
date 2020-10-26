@@ -4,8 +4,8 @@ import * as network from "@pulumi/azure-nextgen/network/latest";
 import * as compute from "@pulumi/azure-nextgen/compute/latest";
 import * as iotcentral from "@pulumi/azure-nextgen/iotcentral/latest"
 
-import { sshKey, projectName, stackName,} from "./config";
-import  { tagAllResources, } from "./taggable";
+import { sshKey, projectName, stackName, } from "./config";
+import { tagAllResources, } from "./taggable";
 
 const config = new pulumi.Config()
 const location = config.get("location") || "westus";
@@ -20,7 +20,7 @@ const baseTags = {
     'stack': stackName,
 };
 
-tagAllResources({"costcenter": projectName});
+tagAllResources({ "costcenter": projectName });
 
 // Create an Azure Resource Group. All resources will share a resource group.
 const resourceGroup = new resources.ResourceGroup("resourceGroup", {
@@ -31,12 +31,12 @@ const resourceGroup = new resources.ResourceGroup("resourceGroup", {
 
 // Create a virtualnetwork (~vpc)
 const virtualNetwork = new network.VirtualNetwork("virtualNetwork", {
-     resourceGroupName: resourceGroup.name,
-     location,
-     virtualNetworkName: `${myname}-vnet`,
-     addressSpace: {addressPrefixes: [`${mynetworkcidrblock}`]},
-     tags: baseTags,
-    });
+    resourceGroupName: resourceGroup.name,
+    location,
+    virtualNetworkName: `${myname}-vnet`,
+    addressSpace: { addressPrefixes: [`${mynetworkcidrblock}`] },
+    tags: baseTags,
+});
 
 // create subnet 1
 const subnet1 = new network.Subnet("subnet1", {
@@ -55,18 +55,18 @@ const subnet2 = new network.Subnet("subnet2", {
 });
 
 // Create a Public IP and security group resources
-const network_security_group = new network.NetworkSecurityGroup("networkSecurityGroup", 
- {
-     location,
-     resourceGroupName: resourceGroup.name,
-     networkSecurityGroupName: `${myname}-nsg`, 
-});
+const network_security_group = new network.NetworkSecurityGroup("networkSecurityGroup",
+    {
+        location,
+        resourceGroupName: resourceGroup.name,
+        networkSecurityGroupName: `${myname}-nsg`,
+    });
 
-const security_rule  = new network.SecurityRule("securityRule", {
-    access:"Deny",
-    destinationAddressPrefix:"11.0.0.0/8",
-    destinationPortRange:"8080",
-    direction:"Outbound",
+const security_rule = new network.SecurityRule("securityRule", {
+    access: "Deny",
+    destinationAddressPrefix: "11.0.0.0/8",
+    destinationPortRange: "8080",
+    direction: "Outbound",
     networkSecurityGroupName: network_security_group.name,
     protocol: "*",
     priority: 100,
@@ -74,23 +74,11 @@ const security_rule  = new network.SecurityRule("securityRule", {
     sourceAddressPrefix: "10.0.0.0/8",
     sourcePortRange: "*",
     securityRuleName: `${myname}-rule1`,
-}, {parent: network_security_group})
+}, { parent: network_security_group })
 
 
 // create instances
 const instanceCount = config.getNumber("instanceCount") ?? 1;
-
- const iotCentralApp = new iotcentral.App("iotapp", {
-    displayName: "My IoT Central App",
-    location:location,
-    resourceGroupName: resourceGroup.name,
-    resourceName: "myiotdevice1",
-    subdomain: "my-iot-central-app",
-    sku: {
-        name: "ST1",
-    },
-});
-
 
 const initScript = `#!/bin/bash\n
 echo "Hello, World from Pulumi!" > index.html
@@ -99,14 +87,13 @@ nohup python -m SimpleHTTPServer 80 &`;
 const userName = "pulumi-admin";
 const password = config.requireSecret("password");
 
-for (let i = 0; i < instanceCount; i ++)
-    {
+for (let i = 0; i < instanceCount; i++) {
     const publicIp = new network.PublicIPAddress(`${myname}-ip-${i}`, {
         publicIpAddressName: `${myname}-ip-${i}`,
         resourceGroupName: resourceGroup.name,
         location,
         publicIPAllocationMethod: "Dynamic",
-        });
+    });
 
     const networkInterface = new network.NetworkInterface(`${myname}-nic-${i}`, {
         resourceGroupName: resourceGroup.name,
@@ -114,11 +101,11 @@ for (let i = 0; i < instanceCount; i ++)
         networkInterfaceName: `${myname}-nic-${i}`,
         ipConfigurations: [{
             name: `${myname}-nic-${i}-ipcfg`,
-            subnet: {id: subnet1.id},
+            subnet: { id: subnet1.id },
             privateIPAllocationMethod: "Dynamic",
-            publicIPAddress: { id: publicIp.id},
+            publicIPAddress: { id: publicIp.id },
         }],
-    }, {parent: publicIp });
+    }, { parent: publicIp });
 
     const myvmName = `${projectName}-vm-${i}`;
     const webServer = new compute.VirtualMachine(myvmName, {
@@ -126,7 +113,7 @@ for (let i = 0; i < instanceCount; i ++)
         location,
         vmName: myvmName,
         networkProfile: {
-            networkInterfaces: [{ id: networkInterface.id}],
+            networkInterfaces: [{ id: networkInterface.id }],
         },
         hardwareProfile: {
             vmSize: "Standard_A0",
@@ -159,9 +146,21 @@ for (let i = 0; i < instanceCount; i ++)
                 version: "latest",
             },
         },
-       
-    }, {parent: networkInterface });
-    }
+
+    }, { parent: networkInterface });
+}
+
+const iotCentralApp = new iotcentral.App("iotapp", {
+    displayName: "My IoT Central App",
+    location: location,
+    resourceGroupName: resourceGroup.name,
+    resourceName: "myiotdevice1",
+    subdomain: "my-iot-central-app",
+    sku: {
+        name: "ST1",
+    },
+});
+
 export const resource_group = resourceGroup.name;
 export const network_cidr_block = virtualNetwork.addressSpace;
 export const network_name = virtualNetwork.name;
