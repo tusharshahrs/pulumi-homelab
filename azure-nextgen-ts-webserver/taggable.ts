@@ -141,7 +141,7 @@ const taggableResourceTypes = [
     "azure-nextgen:devtestlab/latest:lab",
     "azure-nextgen:devtestlab/latest:environment",
     "azure-nextgen:devtestlab/latest:serviceRunner",
-    "azure-nextgen:devtestlab/latest:virtualMachine",
+    "azure-nextgen:devtestlab/latest:VirtualMachine",
     "azure-nextgen:devtestlab/latest:schedule",
     "azure-nextgen:digitaltwins/latest:digitalTwinsInstance",
     "azure-nextgen:documentdb/latest:databaseAccount",
