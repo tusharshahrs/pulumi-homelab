@@ -1,5 +1,4 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as resources from "@pulumi/azure-nextgen/resources/latest";
 import * as network from "@pulumi/azure-nextgen/network/latest";
 import * as compute from "@pulumi/azure-nextgen/compute/latest";
 import * as iotcentral from "@pulumi/azure-nextgen/iotcentral/latest"
@@ -10,7 +9,7 @@ import { tagAllResources, } from "./taggable";
 
 const config = new pulumi.Config()
 const location = config.get("location") || "westus";
-const myname = config.get("myname");
+const myname = config.get("myname") || projectName;
 
 /**
  * Resources
