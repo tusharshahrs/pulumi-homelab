@@ -1,13 +1,10 @@
 config:
-  okta-saml-app-json:OKTA_API_TOKEN:
-    secure: AAABAHwMGEzeumrpVv1lT82rE5c0g67sfSJlEvOC/OlkYvzPhKUbDWhI+sTRYI13YZRYXh43Jogfi0czo3K3jhibLz+GzHWEMLQ=
-  okta-saml-app-json:OKTA_BASE_URL: okta.com
-  okta-saml-app-json:OKTA_ORG_NAME:
-    secure: AAABAFmAa3oOKBMrHqywnD/gjfsHvjiGoMEwu700iTffiFjMn37567w=
   okta-saml-app-json:awsaccountid:
-    secure: AAABALOEviWgciqt+Dq9fnKg0xRZBvK6qwe8BnHtqeh7Ox+h2d1wp714WYw=
-  okta-saml-app-json:backoff: "true"
-  okta-saml-app-json:maxRetries: "5"
-  okta-saml-app-json:maxWaitSeconds: "60"
-  okta-saml-app-json:minWaitSeconds: "30"
+    secure: AAABADjmb5UkssY193HHrVjMRzQRED+h3SnYRUkyFUI5xGM0Qi+2sy9ykJI=
+  okta-saml-app-json:iamsamlprovider: SAMLADFS
+  okta-saml-app-json:myrole: admin
   okta-saml-app-json:role: user
+  okta:apiToken:
+    secure: AAABAIK86EOPlKTg0gX/dc8QG/jdqPKcBF/YWYZYRxhIUczomxHWGkZBbn/utX4etAxso4w45MzzQkSPXOCnmkpdRMFYWhYLS3E=
+  okta:baseUrl: okta.com
+  okta:orgName: dev-7962294

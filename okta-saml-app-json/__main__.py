@@ -1,69 +1,69 @@
-"""A Python Pulumi program"""
-import pulumi
 import pulumi_okta as okta
-from pulumi import Config
+import pulumi
+from pulumi import Config, export
 
-example = okta.app.Saml("example",
-    attribute_statements=[okta.app.SamlAttributeStatementArgs(
-        filter_type="REGEX",
-        filter_value=".*",
-        name="groups",
-        type="GROUP",
-    )],
-    audience="http://example.com/audience",
-    authn_context_class_ref="urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
-    destination="http://example.com",
-    digest_algorithm="SHA256",
-    honor_force_authn=False,
-    label="example",
-    recipient="http://example.com",
-    response_signed=True,
-    signature_algorithm="RSA_SHA256",
-    sso_url="http://example.com",
-    subject_name_id_format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
-    subject_name_id_template="tushar@pulumi.com")
+# User email
+sourceemail = "tushar@pulumi.com"
+# Getting config values from pulumi config
+config = Config()
+# Retrieving AWS account ID that is passed in
+accountid = config.get("awsaccountid")
+# Retrieving iam saml provider
+iam_saml_provider = config.get("iamsamlprovider")
+# Retrieving role
+role = config.get("myrole")
 
-#config = Config()
-#accountid = config.require("awsaccountid")
-""" sourceemail = "tushar@pulumi.com"
-# shahexample = okta.app.Saml(
-self.okta_application = okta.app.Saml(
-    "shahshahexample",
+# Creating identityProviderArn for app_setting_json
+myidentityProviderArn = f"arn:aws:iam::{accountid}:saml-provider/{iam_saml_provider}"
+# Creating roleValuePattern for app_setting_json
+myroleValuePattern= f"arn:aws:iam::{accountid}:saml-provider/OKTA,arn:aws:iam::{accountid}:role/{role}"
+# Creating groupFilter for app_setting_json
+mygroupFilter = f"aws_(?{accountid}//d+)_(?{role}[a-zA-Z0-9+=,.@//-_]+)"
+
+# Combing it all to create the app_setting_json
+app_setting_json_total ='{' + f'''
+            "appFilter":"okta",
+            "awsEnvironmentType":"aws.amazon",
+            "joinAllRoles": false,
+            "sessionDuration": 14400,
+            "loginURL": "https://console.aws.amazon.com/ec2/home",
+            "identityProviderArn":"{myidentityProviderArn}",
+            "roleValuePattern":"{myroleValuePattern}",
+            "groupFilter":"{mygroupFilter}",
+            "useGroupMapping": false
+             ''' + '}'
+
+okta_application = okta.app.Saml(
+    "test_okta_application",
     attribute_statements=[okta.app.SamlAttributeStatementArgs(
         name="amazon_aws",
-        # name="shahtushar_okta_bot",
-        # name="groups",
-        # type="GROUP",
     )],
     honor_force_authn=False,
-    label="Tushar Shah Okta Bot",
+    label="AWS KS POC",
     features=[
         "PUSH_NEW_USERS",
         "PUSH_PROFILE_UPDATES"
     ],
-    user_name_template="${sourceemail}",
+    preconfigured_app="amazon_aws",
+    user_name_template="tushar@pulumi.com",
     user_name_template_type="BUILT_IN",
-    sso_url="https://test.okta.com",
-    recipient="https://test.okta.com",
+    sso_url="https://dev-7962294.okta.com",
+    recipient="https://dev-7962294.okta.com",
     destination="https://console.aws.amazon.com/ec2/home",
-    audience="http://test.okta.com/audience",
+    audience="http://dev-7962294.okta.com/audience",
     response_signed=True,
     signature_algorithm="RSA_SHA256",
     digest_algorithm="SHA256",
     authn_context_class_ref="urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
-    subject_name_id_template="${sourceemail}",
+    subject_name_id_template="tushar@pulumi.com",
     subject_name_id_format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
-    opts=ResourceOptions(parent=self.provider),
-    app_settings_json='''{
-        "appFilter": "okta",
-        "groupFilter": "aws_(?{{accountid}}\\d+)_(?{{role}}[a-zA-Z0-9+=,.@\\-_]+)",
-        "useGroupMapping": false,
-        "joinAllRoles": false,
-        "identityProviderArn": "arn:aws:iam::${accountid}:saml-provider/Kenshoo-Okta",
-        "sessionDuration": 14400,
-        "roleValuePattern": "arn:aws:iam::${accountid}:saml-provider/OKTA,arn:aws:iam::${accountid}:role/${role}",
-        "awsEnvironmentType": "aws.amazon",
-        "loginURL": "https://console.aws.amazon.com/ec2/home
-        }'''
-)
- """
+    app_settings_json = app_setting_json_total
+    )
+    
+export("SAML APP Name",okta_application.name)
+export("SAML Sign On Mode",okta_application.sign_on_mode)
+export("SAML Label", okta_application.label)
+export("myidentityProviderArn", myidentityProviderArn)
+export("myroleValuePattern", myroleValuePattern)
+export("mygroupFilter", mygroupFilter)
+#export("app_setting_json_total", app_setting_json_total)
