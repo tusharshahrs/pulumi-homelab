@@ -19,7 +19,7 @@ const baseTags = {
     'stack': stackName,
 };
 
-tagAllResources({ "costcenter": projectName });
+tagAllResources({ "costcenter": projectName, "team":"qa" });
 
 //  Resource Creation starts from here
 // Creating StandardAccount via component resources
