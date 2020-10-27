@@ -23,7 +23,6 @@ const baseTags = {
 
 tagAllResources({ "costcenter": projectName });
 
-
 //  Resource Creation starts from here
 // Creating StandardAccount via component resources
 const lz = new StandardAccount(`${myname}`, {
