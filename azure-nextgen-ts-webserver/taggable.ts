@@ -26,9 +26,11 @@ export function isTaggable(t: string): boolean {
     return (taggableResourceTypes.indexOf(t) !== -1);
 }
 
+// The list below is based on this: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/tag-support
+// Currently, this is a manual effort.
 // taggableResourceTypes is a list of known Azure Next Gen type tokens that are taggable.
 const taggableResourceTypes = [
-    "azure-nextgen:agfoodplatform/latest:Farmbeat",
+"azure-nextgen:agfoodplatform/latest:Farmbeat",
 "azure-nextgen:alertsmanagement/latest:Actionrule",
 "azure-nextgen:alertsmanagement/latest:SmartDetectorAlertRule",
 "azure-nextgen:analysisservices/latest:Server",
