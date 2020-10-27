@@ -1,6 +1,6 @@
 config:
-  azure-nextgen-ts-webserver:instanceCount: "2"
-  azure-nextgen-ts-webserver:location: eastus
-  azure-nextgen-ts-webserver:myname: customerdemo
-  azure-nextgen-ts-webserver:password:
+  demo-azure-nextgen-ts-webserver:instanceCount: "2"
+  demo-azure-nextgen-ts-webserver:location: eastus
+  demo-azure-nextgen-ts-webserver:myname: customerdemo
+  demo-azure-nextgen-ts-webserver:password:
     secure: AAABADw2UUnyXfqMMZ9fx6glYnVjdUkpZ18p2dGi2Sok0RfImOqbmYyHUbNbI8wZ7YE=
