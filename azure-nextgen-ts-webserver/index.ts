@@ -8,8 +8,7 @@ import { sshKey, projectName, stackName, } from "./config";
 import { tagAllResources, } from "./taggable";
 
 const config = new pulumi.Config()
-const location = config.get("location") || "westus";
-const myname = config.get("myname") || projectName;
+const location ="westus";
 
 /**
  * Resources
@@ -24,21 +23,21 @@ tagAllResources({ "costcenter": projectName });
 
 //  Resource Creation starts from here
 // Creating StandardAccount via component resources
-const lz = new StandardAccount(`${myname}`, {
+const lz = new StandardAccount(`${projectName}`, {
     location: location,
     cidrBlock: "10.0.0.0/22",
     subnetCidrBlocks: ["10.0.0.0/23", "10.0.2.0/23"]
 });
 
 // Create a network security group resource
-const network_security_group = new network.NetworkSecurityGroup(`${myname}-networkSecurityGroup`, {
+const network_security_group = new network.NetworkSecurityGroup(`${projectName}-networkSecurityGroup`, {
     location,
     resourceGroupName: lz.resourceGroup.name,
-    networkSecurityGroupName: `${myname}-nsg`,
+    networkSecurityGroupName: `${projectName}-nsg`,
 });
 
 // Creeate a security rule.  This is created in the network security group.
-const security_rule = new network.SecurityRule(`${myname}-securityRule`, {
+const security_rule = new network.SecurityRule(`${projectName}-securityRule`, {
     access: "Deny",
     destinationAddressPrefix: "11.0.0.0/8",
     destinationPortRange: "8080",
@@ -49,7 +48,7 @@ const security_rule = new network.SecurityRule(`${myname}-securityRule`, {
     resourceGroupName: lz.resourceGroup.name,
     sourceAddressPrefix: "10.0.0.0/8",
     sourcePortRange: "*",
-    securityRuleName: `${myname}-security-rule`,
+    securityRuleName: `${projectName}-security-rule`,
 }, { parent: network_security_group });
 
 // Get instance count
@@ -64,20 +63,20 @@ nohup python -m SimpleHTTPServer 80 &`;
 for (let i = 0; i < instanceCount; i++) {
 
     // Creating public ip address
-    const publicIp = new network.PublicIPAddress(`${myname}-ip-${i}`, {
-        publicIpAddressName: `${myname}-ip-${i}`,
+    const publicIp = new network.PublicIPAddress(`${projectName}-ip-${i}`, {
+        publicIpAddressName: `${projectName}-ip-${i}`,
         resourceGroupName: lz.resourceGroup.name,
         location,
         publicIPAllocationMethod: "Dynamic",
     }, {parent: lz} );
 
     // Creating network interface
-    const networkInterface = new network.NetworkInterface(`${myname}-nic-${i}`, {
-        networkInterfaceName: `${myname}-nic-nsg-${i}`,
+    const networkInterface = new network.NetworkInterface(`${projectName}-nic-${i}`, {
+        networkInterfaceName: `${projectName}-nic-nsg-${i}`,
         resourceGroupName: lz.resourceGroup.name,
         location,
         ipConfigurations: [{
-            name: `${myname}-nic-ipcfg-${i}`,
+            name: `${projectName}-nic-ipcfg-${i}`,
             subnet: { id: lz.subnets[i].id },
             publicIPAddress: { id: publicIp.id },
             privateIPAllocationMethod: "Dynamic"
@@ -87,7 +86,7 @@ for (let i = 0; i < instanceCount; i++) {
     // Creating user name for virtual machines
     const userName = "pulumi-admin";
     // Creating virtual machines names
-    const myvmName = `${myname}-vm-${i}`;
+    const myvmName = `${projectName}-vm-${i}`;
     // Creating virtual machines
     const webServer = new compute.VirtualMachine(myvmName, {
         resourceGroupName: lz.resourceGroup.name,
@@ -132,12 +131,12 @@ for (let i = 0; i < instanceCount; i++) {
 }
  
 // creating iot app
-const iotCentralApp = new iotcentral.App(`${myname}-iotapp`, {
+const iotCentralApp = new iotcentral.App(`${projectName}-iotapp`, {
     displayName: "My IoT Central App",
     location: lz.resourceGroup.location,
     resourceGroupName: lz.resourceGroup.name,
-    resourceName: `${myname}-iotapp`,
-    subdomain: `${myname}-my-iot-central-app-subdomain`,
+    resourceName: `${projectName}-iotapp`,
+    subdomain: `${projectName}-my-iot-central-app-subdomain`,
     sku: {
         name: "ST1",
     },
