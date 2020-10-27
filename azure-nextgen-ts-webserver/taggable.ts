@@ -84,7 +84,7 @@ const taggableResourceTypes = [
     "azure-nextgen:compute/latest:sharedVMImage",
     "azure-nextgen:compute/latest:snapshot",
     "azure-nextgen:compute/latest:sshPublicKey",
-    "azure-nextgen:compute/latest:virtualMachine",
+    "azure-nextgen:compute/latest:VirtualMachine",
     "azure-nextgen:compute/latest:extension",
     "azure-nextgen:compute/latest:runCommand",
     "azure-nextgen:compute/latest:virtualMachineScaleSet",
