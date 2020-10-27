@@ -1,7 +1,6 @@
 config:
   azure-nextgen-ts-webserver:instanceCount: "2"
-  azure-nextgen-ts-webserver:location: eastus2
-  azure-nextgen-ts-webserver:nameprefix: mydemo
-  azure-nextgen-ts-webserver:network_cidr_block: 10.0.0.0/22
+  azure-nextgen-ts-webserver:location: eastus
+  azure-nextgen-ts-webserver:myname: customerdemo
   azure-nextgen-ts-webserver:password:
     secure: AAABADw2UUnyXfqMMZ9fx6glYnVjdUkpZ18p2dGi2Sok0RfImOqbmYyHUbNbI8wZ7YE=
