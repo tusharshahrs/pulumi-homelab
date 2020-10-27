@@ -173,16 +173,18 @@ for (let i = 0; i < instanceCount; i++) {
     }, { parent: networkInterface });
 }
 
-/* const iotCentralApp = new iotcentral.App("iotapp", {
+ const iotCentralApp = new iotcentral.App(`${myname}-iotapp`, {
     displayName: "My IoT Central App",
     location: lz.resourceGroup.location,
     resourceGroupName: lz.resourceGroup.name,
-    resourceName: "myiotdevice1",
-    subdomain: "my-iot-central-app",
+    //resourceName: "myiotdevice1",
+    resourceName: `${myname}-iotapp`,
+    //subdomain: "my-iot-central-app",
+    subdomain: `${myname}-my-iot-central-app-subdomain`,
     sku: {
         name: "ST1",
     },
-}); */
+}, {parent: lz});
 
 //export const resource_group = resourceGroup.name;
 //export const network_cidr_block = virtualNetwork.addressSpace;
@@ -199,5 +201,5 @@ export const network_security_rule_name = security_rule.name;
 export const azure_region = location;
 export const total_number_of_virtual_machines = instanceCount;
 //export const vmnames = webServer.name
-//export const iot_central_app_name = iotCentralApp.name;
-//export const iot_central_app_name_sku = iotCentralApp.sku;
+export const iot_central_app_name = iotCentralApp.name;
+export const iot_central_app_name_sku = iotCentralApp.sku;
