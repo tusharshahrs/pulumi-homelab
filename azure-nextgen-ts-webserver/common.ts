@@ -21,7 +21,7 @@ export class StandardAccount extends pulumi.ComponentResource {
     public readonly subnets: network.Subnet[];
 
     constructor(name: string, args: StandardAccountArgs, opts?: pulumi.ComponentResourceOptions) {
-        super("custom:StandardAccount", name, args, opts);
+        super("custom:x:StandardAccount", name, args, opts);
 
         // All resources will share a resource group. location is required in azure-next gen
         this.resourceGroup = new resources.ResourceGroup(`${name}-rg`, {

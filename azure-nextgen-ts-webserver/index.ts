@@ -23,21 +23,23 @@ const baseTags = {
 
 tagAllResources({ "costcenter": projectName });
 
+
+//  Resource Creation starts from here
+// Creating StandardAccount via component resources
 const lz = new StandardAccount(`${myname}`, {
     location: location,
     cidrBlock: "10.0.0.0/22",
-    subnetCidrBlocks: ["10.0.0.0/23", "10.0.2.0/23" ]
-
+    subnetCidrBlocks: ["10.0.0.0/23", "10.0.2.0/23"]
 });
 
-// Create a Public IP and security group resources
-const network_security_group = new network.NetworkSecurityGroup(`${myname}-networkSecurityGroup`,
-    {
-        location,
-        resourceGroupName: lz.resourceGroup.name,
-        networkSecurityGroupName: `${myname}-nsg`,
-    });
+// Create a network security group resource
+const network_security_group = new network.NetworkSecurityGroup(`${myname}-networkSecurityGroup`, {
+    location,
+    resourceGroupName: lz.resourceGroup.name,
+    networkSecurityGroupName: `${myname}-nsg`,
+});
 
+// Creeate a security rule.  This is created in the network security group.
 const security_rule = new network.SecurityRule(`${myname}-securityRule`, {
     access: "Deny",
     destinationAddressPrefix: "11.0.0.0/8",
@@ -50,51 +52,20 @@ const security_rule = new network.SecurityRule(`${myname}-securityRule`, {
     sourceAddressPrefix: "10.0.0.0/8",
     sourcePortRange: "*",
     securityRuleName: `${myname}-security-rule`,
-}, { parent: network_security_group })
-// Create an Azure Resource Group. All resources will share a resource group.
-//const resourceGroup = new resources.ResourceGroup("resourceGroup", {
-//    resourceGroupName: `${myname}-rg`,
-//    location,
-//    tags: baseTags,
-//});
+}, { parent: network_security_group });
 
-// Create a virtualnetwork (~vpc)
-//const virtualNetwork = new network.VirtualNetwork("virtualNetwork", {
-//    resourceGroupName: resourceGroup.name,
-//    location,
-//    virtualNetworkName: `${myname}-vnet`,
-//    addressSpace: { addressPrefixes: [`${mynetworkcidrblock}`] },
-//    tags: baseTags,
-//});
-
-// create subnet 1
-//const subnet1 = new network.Subnet("subnet1", {
-//    subnetName: `${myname}-subnet-1`,
-//    resourceGroupName: resourceGroup.name,
-//    virtualNetworkName: virtualNetwork.name,
-//    addressPrefix: "10.0.0.0/23",
-//});
-
-//create subnet 2
-//const subnet2 = new network.Subnet("subnet2", {
-//    subnetName: `${myname}-subnet-2`,
-//    resourceGroupName: resourceGroup.name,
-//    virtualNetworkName: virtualNetwork.name,
-//    addressPrefix: "10.0.2.0/23",
-//});
-
-
-// create instances
+// Get instance count
 const instanceCount = config.getNumber("instanceCount") ?? 1;
-
+// Retrieving password from config
+const password = config.requireSecret("password");
 const initScript = `#!/bin/bash\n
 echo "Hello, World from Pulumi!" > index.html
 nohup python -m SimpleHTTPServer 80 &`;
 
-//const userName = "pulumi-admin";
-const password = config.requireSecret("password");
-
+// Creating N number of instances ( where N = instanceCount)
 for (let i = 0; i < instanceCount; i++) {
+
+    // Creating public ip address
     const publicIp = new network.PublicIPAddress(`${myname}-ip-${i}`, {
         publicIpAddressName: `${myname}-ip-${i}`,
         resourceGroupName: lz.resourceGroup.name,
@@ -102,35 +73,24 @@ for (let i = 0; i < instanceCount; i++) {
         publicIPAllocationMethod: "Dynamic",
     }, {parent: lz} );
 
+    // Creating network interface
     const networkInterface = new network.NetworkInterface(`${myname}-nic-${i}`, {
         networkInterfaceName: `${myname}-nic-nsg-${i}`,
         resourceGroupName: lz.resourceGroup.name,
-        //enableAcceleratedNetworking: true,
         location,
         ipConfigurations: [{
             name: `${myname}-nic-ipcfg-${i}`,
-            //subnet: { id: lz.subnets[0].id},
-            subnet: { id: lz.subnets[i].id},
-            //subnet: lz.network.subnets[i].id,
+            subnet: { id: lz.subnets[i].id },
             publicIPAddress: { id: publicIp.id },
             privateIPAllocationMethod: "Dynamic"
         }]
-        
-    }, { parent: publicIp })
-    //const networkInterface = new network.NetworkInterface(`${myname}-nic-${i}`, {
-    //    resourceGroupName: resourceGroup.name,
-    //    location,
-    //    networkInterfaceName: `${myname}-nic-${i}`,
-    //    ipConfigurations: [{
-    //        name: `${myname}-nic-${i}-ipcfg`,
-    //        subnet: { id: subnet1.id },
-    //        privateIPAllocationMethod: "Dynamic",
-    //        publicIPAddress: { id: publicIp.id },
-    //    }],
-    //}, { parent: publicIp });
+    }, { parent: publicIp });
 
+    // Creating user name for virtual machines
     const userName = "pulumi-admin";
+    // Creating virtual machines names
     const myvmName = `${myname}-vm-${i}`;
+    // Creating virtual machines
     const webServer = new compute.VirtualMachine(myvmName, {
         resourceGroupName: lz.resourceGroup.name,
         location,
@@ -172,27 +132,19 @@ for (let i = 0; i < instanceCount; i++) {
 
     }, { parent: networkInterface });
 }
-
- const iotCentralApp = new iotcentral.App(`${myname}-iotapp`, {
+ 
+// creating iot app
+const iotCentralApp = new iotcentral.App(`${myname}-iotapp`, {
     displayName: "My IoT Central App",
     location: lz.resourceGroup.location,
     resourceGroupName: lz.resourceGroup.name,
-    //resourceName: "myiotdevice1",
     resourceName: `${myname}-iotapp`,
-    //subdomain: "my-iot-central-app",
     subdomain: `${myname}-my-iot-central-app-subdomain`,
     sku: {
         name: "ST1",
     },
-}, {parent: lz});
+}, { parent: lz });
 
-//export const resource_group = resourceGroup.name;
-//export const network_cidr_block = virtualNetwork.addressSpace;
-//export const network_name = virtualNetwork.name;
-//export const network_subnet_1 = subnet1.name;
-//export const network_subnet_1_cidr = subnet1.addressPrefix;
-//export const network_subnet_2 = subnet2.name;
-//export const network_subnet_2_cidr = subnet2.addressPrefix;
 export const resource_group = lz.resourceGroup.name;
 export const network_cidr_block = lz.network.addressSpace;
 export const network_name = lz.network.name;
@@ -200,6 +152,5 @@ export const network_security_group_name = network_security_group.name;
 export const network_security_rule_name = security_rule.name;
 export const azure_region = location;
 export const total_number_of_virtual_machines = instanceCount;
-//export const vmnames = webServer.name
 export const iot_central_app_name = iotCentralApp.name;
 export const iot_central_app_name_sku = iotCentralApp.sku;
