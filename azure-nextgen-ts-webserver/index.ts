@@ -31,14 +31,14 @@ const lz = new StandardAccount(`${myname}`, {
 });
 
 // Create a Public IP and security group resources
-const network_security_group = new network.NetworkSecurityGroup("networkSecurityGroup",
+const network_security_group = new network.NetworkSecurityGroup(`${myname}-networkSecurityGroup`,
     {
         location,
         resourceGroupName: lz.resourceGroup.name,
         networkSecurityGroupName: `${myname}-nsg`,
     });
 
-const security_rule = new network.SecurityRule("securityRule", {
+const security_rule = new network.SecurityRule(`${myname}-securityRule`, {
     access: "Deny",
     destinationAddressPrefix: "11.0.0.0/8",
     destinationPortRange: "8080",
@@ -195,9 +195,9 @@ export const resource_group = lz.resourceGroup.name;
 export const network_cidr_block = lz.network.addressSpace;
 export const network_name = lz.network.name;
 export const network_security_group_name = network_security_group.name;
-export const security_rule_name = security_rule.name;
+export const network_security_rule_name = security_rule.name;
 export const azure_region = location;
-export const number_of_vms_launched = instanceCount;
+export const total_number_of_virtual_machines = instanceCount;
 //export const vmnames = webServer.name
 //export const iot_central_app_name = iotCentralApp.name;
 //export const iot_central_app_name_sku = iotCentralApp.sku;
