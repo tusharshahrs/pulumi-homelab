@@ -8,7 +8,7 @@ import { sshKey, projectName, stackName, } from "./config";
 import { tagAllResources, } from "./taggable";
 
 const config = new pulumi.Config()
-const location ="westus";
+const location ="eastus2";
 
 /**
  * Resources
@@ -19,7 +19,7 @@ const baseTags = {
     'stack': stackName,
 };
 
-//tagAllResources({ "costcenter": projectName, "team":"qa" });
+tagAllResources({ "costcenter": projectName, "team":"qa" });
 
 //  Resource Creation starts from here
 // Creating StandardAccount via component resources
@@ -37,7 +37,8 @@ const network_security_group = new network.NetworkSecurityGroup(`${projectName}-
 });
 
 // Creeate a security rule.  This is created in the network security group.
-const security_rule = new network.SecurityRule(`${projectName}-securityRule`, {
+// OutBound Security Rule
+const security_rule1 = new network.SecurityRule(`${projectName}-securityRule1`, {
     access: "Deny",
     destinationAddressPrefix: "11.0.0.0/8",
     destinationPortRange: "8080",
@@ -48,7 +49,22 @@ const security_rule = new network.SecurityRule(`${projectName}-securityRule`, {
     resourceGroupName: lz.resourceGroup.name,
     sourceAddressPrefix: "10.0.0.0/8",
     sourcePortRange: "*",
-    securityRuleName: `${projectName}-security-rule`,
+    securityRuleName: `${projectName}-security-rule1`,
+}, { parent: network_security_group });
+
+// SSH Port 22 security group rule
+const security_rule2 = new network.SecurityRule(`${projectName}-securityRule2`, {
+    access: "Allow",
+    destinationAddressPrefix: "*",
+    destinationPortRange: "22",
+    direction: "InBound",
+    networkSecurityGroupName: network_security_group.name,
+    protocol: "*",
+    priority: 100,
+    resourceGroupName: lz.resourceGroup.name,
+    sourceAddressPrefix: "*",
+    sourcePortRange: "*",
+    securityRuleName: `${projectName}-security-rule2`,
 }, { parent: network_security_group });
 
 // Get instance count
@@ -146,7 +162,12 @@ export const resource_group = lz.resourceGroup.name;
 export const network_cidr_block = lz.network.addressSpace;
 export const network_name = lz.network.name;
 export const network_security_group_name = network_security_group.name;
-export const network_security_rule_name = security_rule.name;
+export const network_security_outbound_rule_name1 = security_rule1.name;
+export const network_security_outbound_rule_direction = security_rule1.direction;
+export const network_security_outbound_rule_port_range = security_rule1.destinationPortRange;
+export const network_security_inbound_rule_name1 = security_rule2.name;
+export const network_security_inbound_rule_direction = security_rule2.direction;
+export const network_security_inbound_rule_port_range = security_rule2.destinationPortRange;
 export const azure_region = location;
 export const total_number_of_virtual_machines = instanceCount;
 export const iot_central_app_name = iotCentralApp.name;
