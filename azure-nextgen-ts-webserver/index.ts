@@ -14,11 +14,7 @@ const location ="eastus2";
  * Resources
  */
 
-const baseTags = {
-    'cost-center': projectName,
-    'stack': stackName,
-};
-
+ // After pulumi up is done 1st time.  Uncomment the tagAllResources for stacktransformation example. Then run pulumi up
 //tagAllResources({ "costcenter": projectName, "env":"dev","team":"engineering", "demo":"yes", "cloud_location": `${location}` });
 
 //  Resource Creation starts from here
@@ -50,7 +46,7 @@ const security_rule1 = new network.SecurityRule(`${projectName}-securityRule1`, 
     sourceAddressPrefix: "10.0.0.0/8",
     sourcePortRange: "*",
     securityRuleName: `${projectName}-security-rule1`,
-}, { parent: network_security_group });
+}, { parent: network_security_group, ignoreChanges:["tags"], });
 
 // SSH Port 22 security group rule
 const security_rule2 = new network.SecurityRule(`${projectName}-securityRule2`, {
@@ -65,7 +61,7 @@ const security_rule2 = new network.SecurityRule(`${projectName}-securityRule2`, 
     sourceAddressPrefix: "*",
     sourcePortRange: "*",
     securityRuleName: `${projectName}-security-rule2`,
-}, { parent: network_security_group });
+}, { parent: network_security_group, ignoreChanges:["tags"], });
 
 // Get instance count
 const instanceCount = config.getNumber("instanceCount") ?? 1;
@@ -152,12 +148,12 @@ const iotCentralApp = new iotcentral.App(`${projectName}-iotapp`, {
     location: lz.resourceGroup.location,
     resourceGroupName: lz.resourceGroup.name,
     //resourceName: `${projectName}-iotapp`,
-    resourceName: "myiotappdevic",
-    subdomain: "my-iot-central-subdomain",
+    resourceName: "myiotappdev",
+    subdomain: "my-iotcentral-sub",
     sku: {
         name: "ST1",
     },
-}, { parent: lz.resourceGroup });
+},);
 
 export const resource_group = lz.resourceGroup.name;
 export const network_cidr_block = lz.network.addressSpace;
