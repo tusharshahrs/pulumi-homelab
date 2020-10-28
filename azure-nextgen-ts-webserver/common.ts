@@ -32,7 +32,7 @@ export class StandardAccount extends pulumi.ComponentResource {
             location: args.location,
             virtualNetworkName: `${name}-vnet`,
             addressSpace: { addressPrefixes: [args.cidrBlock]},
-        }, {parent: this,});
+        }, {parent: this, });
 
         // Create subnets
         this.subnets = [];
@@ -42,7 +42,8 @@ export class StandardAccount extends pulumi.ComponentResource {
                 virtualNetworkName: this.network.name,
                 subnetName: `${name}-subnet-${i}`,
                 addressPrefix: args.subnetCidrBlocks[i],
-            }, {parent: this.network });
+            }, { parent: this.network, ignoreChanges:["tags"], }); // This is because we hit this error: https://bit.ly/3jo96U8
+
              this.subnets.push(subnet);
         }
         this.registerOutputs({});
