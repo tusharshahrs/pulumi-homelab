@@ -151,23 +151,24 @@ const iotCentralApp = new iotcentral.App(`${projectName}-iotapp`, {
     displayName: "My IoT Central App",
     location: lz.resourceGroup.location,
     resourceGroupName: lz.resourceGroup.name,
-    resourceName: `${projectName}-iotapp`,
-    subdomain: `${projectName}-my-iot-central-app-subdomain`,
+    //resourceName: `${projectName}-iotapp`,
+    resourceName: "myiotappdevic",
+    subdomain: "my-iot-central-subdomain",
     sku: {
         name: "ST1",
     },
-}, { parent: lz });
+}, { parent: lz.resourceGroup });
 
 export const resource_group = lz.resourceGroup.name;
 export const network_cidr_block = lz.network.addressSpace;
 export const network_name = lz.network.name;
 export const network_security_group_name = network_security_group.name;
-export const network_security_outbound_rule_name1 = security_rule1.name;
-export const network_security_outbound_rule_direction = security_rule1.direction;
-export const network_security_outbound_rule_port_range = security_rule1.destinationPortRange;
-export const network_security_inbound_rule_name1 = security_rule2.name;
-export const network_security_inbound_rule_direction = security_rule2.direction;
-export const network_security_inbound_rule_port_range = security_rule2.destinationPortRange;
+export const network_security_outbound_rule1_name = security_rule1.name;
+export const network_security_outbound_rule1_direction = security_rule1.direction;
+export const network_security_outbound_rule1_port_range = security_rule1.destinationPortRange;
+export const network_security_inbound_rule2_name = security_rule2.name;
+export const network_security_inbound_rule2_direction = security_rule2.direction;
+export const network_security_inbound_rule2_port_range = security_rule2.destinationPortRange;
 export const azure_region = location;
 export const total_number_of_virtual_machines = instanceCount;
 export const iot_central_app_name = iotCentralApp.name;
