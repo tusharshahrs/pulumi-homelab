@@ -8,8 +8,7 @@ import { sshKey, projectName, stackName, } from "./config";
 import { tagAllResources, } from "./taggable";
 
 const config = new pulumi.Config()
-const location = config.get("location") || "westus";
-const myname = config.get("myname") || projectName;
+const location ="eastus2";
 
 /**
  * Resources
@@ -20,25 +19,26 @@ const baseTags = {
     'stack': stackName,
 };
 
-tagAllResources({ "costcenter": projectName });
+//tagAllResources({ "costcenter": projectName, "env":"dev","team":"engineering", "demo":"yes", "cloud_location": `${location}` });
 
 //  Resource Creation starts from here
 // Creating StandardAccount via component resources
-const lz = new StandardAccount(`${myname}`, {
+const lz = new StandardAccount(`${projectName}`, {
     location: location,
     cidrBlock: "10.0.0.0/22",
     subnetCidrBlocks: ["10.0.0.0/23", "10.0.2.0/23"]
 });
 
 // Create a network security group resource
-const network_security_group = new network.NetworkSecurityGroup(`${myname}-networkSecurityGroup`, {
+const network_security_group = new network.NetworkSecurityGroup(`${projectName}-networkSecurityGroup`, {
     location,
     resourceGroupName: lz.resourceGroup.name,
-    networkSecurityGroupName: `${myname}-nsg`,
+    networkSecurityGroupName: `${projectName}-nsg`,
 });
 
 // Creeate a security rule.  This is created in the network security group.
-const security_rule = new network.SecurityRule(`${myname}-securityRule`, {
+// OutBound Security Rule
+const security_rule1 = new network.SecurityRule(`${projectName}-securityRule1`, {
     access: "Deny",
     destinationAddressPrefix: "11.0.0.0/8",
     destinationPortRange: "8080",
@@ -49,7 +49,22 @@ const security_rule = new network.SecurityRule(`${myname}-securityRule`, {
     resourceGroupName: lz.resourceGroup.name,
     sourceAddressPrefix: "10.0.0.0/8",
     sourcePortRange: "*",
-    securityRuleName: `${myname}-security-rule`,
+    securityRuleName: `${projectName}-security-rule1`,
+}, { parent: network_security_group });
+
+// SSH Port 22 security group rule
+const security_rule2 = new network.SecurityRule(`${projectName}-securityRule2`, {
+    access: "Allow",
+    destinationAddressPrefix: "*",
+    destinationPortRange: "22",
+    direction: "InBound",
+    networkSecurityGroupName: network_security_group.name,
+    protocol: "*",
+    priority: 100,
+    resourceGroupName: lz.resourceGroup.name,
+    sourceAddressPrefix: "*",
+    sourcePortRange: "*",
+    securityRuleName: `${projectName}-security-rule2`,
 }, { parent: network_security_group });
 
 // Get instance count
@@ -64,20 +79,20 @@ nohup python -m SimpleHTTPServer 80 &`;
 for (let i = 0; i < instanceCount; i++) {
 
     // Creating public ip address
-    const publicIp = new network.PublicIPAddress(`${myname}-ip-${i}`, {
-        publicIpAddressName: `${myname}-ip-${i}`,
+    const publicIp = new network.PublicIPAddress(`${projectName}-ip-${i}`, {
+        publicIpAddressName: `${projectName}-ip-${i}`,
         resourceGroupName: lz.resourceGroup.name,
         location,
         publicIPAllocationMethod: "Dynamic",
     }, {parent: lz} );
 
     // Creating network interface
-    const networkInterface = new network.NetworkInterface(`${myname}-nic-${i}`, {
-        networkInterfaceName: `${myname}-nic-nsg-${i}`,
+    const networkInterface = new network.NetworkInterface(`${projectName}-nic-${i}`, {
+        networkInterfaceName: `${projectName}-nic-nsg-${i}`,
         resourceGroupName: lz.resourceGroup.name,
         location,
         ipConfigurations: [{
-            name: `${myname}-nic-ipcfg-${i}`,
+            name: `${projectName}-nic-ipcfg-${i}`,
             subnet: { id: lz.subnets[i].id },
             publicIPAddress: { id: publicIp.id },
             privateIPAllocationMethod: "Dynamic"
@@ -87,7 +102,7 @@ for (let i = 0; i < instanceCount; i++) {
     // Creating user name for virtual machines
     const userName = "pulumi-admin";
     // Creating virtual machines names
-    const myvmName = `${myname}-vm-${i}`;
+    const myvmName = `${projectName}-vm-${i}`;
     // Creating virtual machines
     const webServer = new compute.VirtualMachine(myvmName, {
         resourceGroupName: lz.resourceGroup.name,
@@ -132,22 +147,28 @@ for (let i = 0; i < instanceCount; i++) {
 }
  
 // creating iot app
-const iotCentralApp = new iotcentral.App(`${myname}-iotapp`, {
+const iotCentralApp = new iotcentral.App(`${projectName}-iotapp`, {
     displayName: "My IoT Central App",
     location: lz.resourceGroup.location,
     resourceGroupName: lz.resourceGroup.name,
-    resourceName: `${myname}-iotapp`,
-    subdomain: `${myname}-my-iot-central-app-subdomain`,
+    //resourceName: `${projectName}-iotapp`,
+    resourceName: "myiotappdevic",
+    subdomain: "my-iot-central-subdomain",
     sku: {
         name: "ST1",
     },
-}, { parent: lz });
+}, { parent: lz.resourceGroup });
 
 export const resource_group = lz.resourceGroup.name;
 export const network_cidr_block = lz.network.addressSpace;
 export const network_name = lz.network.name;
 export const network_security_group_name = network_security_group.name;
-export const network_security_rule_name = security_rule.name;
+export const network_security_outbound_rule1_name = security_rule1.name;
+export const network_security_outbound_rule1_direction = security_rule1.direction;
+export const network_security_outbound_rule1_port_range = security_rule1.destinationPortRange;
+export const network_security_inbound_rule2_name = security_rule2.name;
+export const network_security_inbound_rule2_direction = security_rule2.direction;
+export const network_security_inbound_rule2_port_range = security_rule2.destinationPortRange;
 export const azure_region = location;
 export const total_number_of_virtual_machines = instanceCount;
 export const iot_central_app_name = iotCentralApp.name;
