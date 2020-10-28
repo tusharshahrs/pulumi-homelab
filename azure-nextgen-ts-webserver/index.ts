@@ -50,7 +50,7 @@ const security_rule1 = new network.SecurityRule(`${projectName}-securityRule1`, 
     sourceAddressPrefix: "10.0.0.0/8",
     sourcePortRange: "*",
     securityRuleName: `${projectName}-security-rule1`,
-}, { parent: network_security_group });
+}, { parent: network_security_group, ignoreChanges:["tags"], });
 
 // SSH Port 22 security group rule
 const security_rule2 = new network.SecurityRule(`${projectName}-securityRule2`, {
@@ -65,7 +65,7 @@ const security_rule2 = new network.SecurityRule(`${projectName}-securityRule2`, 
     sourceAddressPrefix: "*",
     sourcePortRange: "*",
     securityRuleName: `${projectName}-security-rule2`,
-}, { parent: network_security_group });
+}, { parent: network_security_group, ignoreChanges:["tags"], });
 
 // Get instance count
 const instanceCount = config.getNumber("instanceCount") ?? 1;
