@@ -14,11 +14,7 @@ const location ="eastus2";
  * Resources
  */
 
-const baseTags = {
-    'cost-center': projectName,
-    'stack': stackName,
-};
-
+ // After pulumi up is done 1st time.  Uncomment the tagAllResources for stacktransformation example. Then run pulumi up
 //tagAllResources({ "costcenter": projectName, "env":"dev","team":"engineering", "demo":"yes", "cloud_location": `${location}` });
 
 //  Resource Creation starts from here
