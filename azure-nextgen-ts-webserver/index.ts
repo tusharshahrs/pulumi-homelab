@@ -152,12 +152,12 @@ const iotCentralApp = new iotcentral.App(`${projectName}-iotapp`, {
     location: lz.resourceGroup.location,
     resourceGroupName: lz.resourceGroup.name,
     //resourceName: `${projectName}-iotapp`,
-    resourceName: "myiotappdevic",
-    subdomain: "my-iot-central-subdomain",
+    resourceName: "myiotappdev",
+    subdomain: "my-iotcentral-sub",
     sku: {
         name: "ST1",
     },
-}, { parent: lz.resourceGroup });
+},);
 
 export const resource_group = lz.resourceGroup.name;
 export const network_cidr_block = lz.network.addressSpace;
