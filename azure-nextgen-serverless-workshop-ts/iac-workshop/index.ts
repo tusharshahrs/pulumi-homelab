@@ -1,11 +1,11 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as resources from "@pulumi/azure-nextgen/resources/latest";
 import * as storage from "@pulumi/azure-nextgen/storage/latest";
-import { containerName, mylocation, projectName, stackName } from "./config";
+import { containerName, mylocation, projectName, stackName, myname } from "./config";
 
 //const config = new pulumi.Config();
 //const mylocation = config.get("location");
-const myname = "shahtworkshop";
+// const myname = "shahtworkshop";
 //const mylocation = "eastus2";
 
 //const projectName = pulumi.getProject()
