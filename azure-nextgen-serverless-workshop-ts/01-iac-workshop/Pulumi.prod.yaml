@@ -1,4 +1,4 @@
 config:
   iac-workshop-azurenextgen:container: htmlprod
   iac-workshop-azurenextgen:location: eastus
-  iac-workshop-azurenextgen:name: shaht2ws
+  iac-workshop-azurenextgen:name: shahtiac2
