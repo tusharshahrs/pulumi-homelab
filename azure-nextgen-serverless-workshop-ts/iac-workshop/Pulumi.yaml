@@ -1,0 +1,3 @@
+name: iac-workshop-azurenextgen
+runtime: nodejs
+description: A minimal TypeScript Pulumi program

@@ -1,0 +1,3 @@
+config:
+  iac-workshop-azurenextgen:container: html
+  iac-workshop-azurenextgen:location: eastus2
