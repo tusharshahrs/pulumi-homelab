@@ -4,37 +4,37 @@ import * as compute from "@pulumi/azure-nextgen/compute/latest";
 import * as iotcentral from "@pulumi/azure-nextgen/iotcentral/latest"
 import { StandardAccount } from "./common"
 
-import { sshKey, projectName, stackName, } from "./config";
+import { sshKey, projectName, stackName, location, nameprefix } from "./config";
 import { tagAllResources, } from "./taggable";
 
 const config = new pulumi.Config()
-const location ="eastus2";
 
 /**
  * Resources
  */
 
  // After pulumi up is done 1st time.  Uncomment the tagAllResources for stacktransformation example. Then run pulumi up
-//tagAllResources({ "costcenter": projectName, "env":"dev","team":"engineering", "demo":"yes", "cloud_location": `${location}` });
+//tagAllResources({ "cost-center": projectName, "stack":stackName, "env":"dev","team":"engineering", "demo":"yes", "cloud_location": `${location}` });
 
 //  Resource Creation starts from here
 // Creating StandardAccount via component resources
-const lz = new StandardAccount(`${projectName}`, {
+const lz = new StandardAccount(`${nameprefix}`, {
     location: location,
     cidrBlock: "10.0.0.0/22",
     subnetCidrBlocks: ["10.0.0.0/23", "10.0.2.0/23"]
-});
+}); 
+// "10.0.0.0/21", for policy violation trigger 
 
 // Create a network security group resource
-const network_security_group = new network.NetworkSecurityGroup(`${projectName}-networkSecurityGroup`, {
+const network_security_group = new network.NetworkSecurityGroup(`${nameprefix}-networkSecurityGroup`, {
     location,
     resourceGroupName: lz.resourceGroup.name,
-    networkSecurityGroupName: `${projectName}-nsg`,
+    networkSecurityGroupName: `${nameprefix}-nsg`,
 });
 
 // Creeate a security rule.  This is created in the network security group.
 // OutBound Security Rule
-const security_rule1 = new network.SecurityRule(`${projectName}-securityRule1`, {
+const security_rule1 = new network.SecurityRule(`${nameprefix}-securityRule1`, {
     access: "Deny",
     destinationAddressPrefix: "11.0.0.0/8",
     destinationPortRange: "8080",
@@ -45,11 +45,11 @@ const security_rule1 = new network.SecurityRule(`${projectName}-securityRule1`, 
     resourceGroupName: lz.resourceGroup.name,
     sourceAddressPrefix: "10.0.0.0/8",
     sourcePortRange: "*",
-    securityRuleName: `${projectName}-security-rule1`,
+    securityRuleName: `${nameprefix}-security-rule1`,
 }, { parent: network_security_group, ignoreChanges:["tags"], });
 
 // SSH Port 22 security group rule
-const security_rule2 = new network.SecurityRule(`${projectName}-securityRule2`, {
+const security_rule2 = new network.SecurityRule(`${nameprefix}-securityRule2`, {
     access: "Allow",
     destinationAddressPrefix: "*",
     destinationPortRange: "22",
@@ -60,13 +60,13 @@ const security_rule2 = new network.SecurityRule(`${projectName}-securityRule2`, 
     resourceGroupName: lz.resourceGroup.name,
     sourceAddressPrefix: "*",
     sourcePortRange: "*",
-    securityRuleName: `${projectName}-security-rule2`,
+    securityRuleName: `${nameprefix}-security-rule2`,
 }, { parent: network_security_group, ignoreChanges:["tags"], });
 
 // Get instance count
 const instanceCount = config.getNumber("instanceCount") ?? 1;
 // Retrieving password from config
-const password = config.requireSecret("password");
+//const password = config.getSecret("osprofile_password");
 const initScript = `#!/bin/bash\n
 echo "Hello, World from Pulumi!" > index.html
 nohup python -m SimpleHTTPServer 80 &`;
@@ -75,20 +75,20 @@ nohup python -m SimpleHTTPServer 80 &`;
 for (let i = 0; i < instanceCount; i++) {
 
     // Creating public ip address
-    const publicIp = new network.PublicIPAddress(`${projectName}-ip-${i}`, {
-        publicIpAddressName: `${projectName}-ip-${i}`,
+    const publicIp = new network.PublicIPAddress(`${nameprefix}-ip-${i}`, {
+        publicIpAddressName: `${nameprefix}-ip-${i}`,
         resourceGroupName: lz.resourceGroup.name,
         location,
         publicIPAllocationMethod: "Dynamic",
     }, {parent: lz} );
 
     // Creating network interface
-    const networkInterface = new network.NetworkInterface(`${projectName}-nic-${i}`, {
-        networkInterfaceName: `${projectName}-nic-nsg-${i}`,
+    const networkInterface = new network.NetworkInterface(`${nameprefix}-nic-${i}`, {
+        networkInterfaceName: `${nameprefix}-nic-nsg-${i}`,
         resourceGroupName: lz.resourceGroup.name,
         location,
         ipConfigurations: [{
-            name: `${projectName}-nic-ipcfg-${i}`,
+            name: `${nameprefix}-nic-ipcfg-${i}`,
             subnet: { id: lz.subnets[i].id },
             publicIPAddress: { id: publicIp.id },
             privateIPAllocationMethod: "Dynamic"
@@ -98,7 +98,7 @@ for (let i = 0; i < instanceCount; i++) {
     // Creating user name for virtual machines
     const userName = "pulumi-admin";
     // Creating virtual machines names
-    const myvmName = `${projectName}-vm-${i}`;
+    const myvmName = `${nameprefix}-vm-${i}`;
     // Creating virtual machines
     const webServer = new compute.VirtualMachine(myvmName, {
         resourceGroupName: lz.resourceGroup.name,
@@ -114,7 +114,7 @@ for (let i = 0; i < instanceCount; i++) {
         osProfile: {
             computerName: "hostname",
             adminUsername: userName,
-            adminPassword: password,
+            //adminPassword: password,  // Uncomment out for password
             customData: Buffer.from(initScript).toString("base64"),
             linuxConfiguration: {
                 disablePasswordAuthentication: true,
@@ -138,18 +138,20 @@ for (let i = 0; i < instanceCount; i++) {
                 version: "latest",
             },
         },
+        //tags: { "Name": myvmName},  // Uncomment this out for the policy pack
 
     }, { parent: networkInterface });
 }
  
 // creating iot app
-const iotCentralApp = new iotcentral.App(`${projectName}-iotapp`, {
+const iotCentralApp = new iotcentral.App(`${nameprefix}-iotapp`, {
     displayName: "My IoT Central App",
     location: lz.resourceGroup.location,
     resourceGroupName: lz.resourceGroup.name,
-    //resourceName: `${projectName}-iotapp`,
-    resourceName: "myiotappdev",
-    subdomain: "my-iotcentral-sub",
+    resourceName: `${nameprefix}-iotapp`,
+    //resourceName: "myiotappdev",
+    subdomain: `${nameprefix}-subdomain`,
+    //subdomain: "my-iotcentral-sub",
     sku: {
         name: "ST1",
     },

@@ -1,0 +1,4 @@
+config:
+  iac-workshop-azurenextgen:container: html
+  iac-workshop-azurenextgen:location: eastus2
+  iac-workshop-azurenextgen:name: shahtiac1

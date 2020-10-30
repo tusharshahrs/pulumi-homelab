@@ -1,11 +1,10 @@
 {
-    "name": "azure-nextgen-ts-webserver",
+    "name": "iac-workshop-azurenextgen",
     "devDependencies": {
         "@types/node": "^10.0.0"
     },
     "dependencies": {
         "@pulumi/azure-nextgen": "^0.2.3",
-        "@pulumi/pulumi": "^2.0.0",
-        "@pulumi/tls": "^2.3.0"
+        "@pulumi/pulumi": "^2.0.0"
     }
 }

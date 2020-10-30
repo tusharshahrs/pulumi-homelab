@@ -1,0 +1,409 @@
+{
+    "version": 3,
+    "deployment": {
+        "manifest": {
+            "time": "2020-10-30T14:20:10.926515-04:00",
+            "magic": "edb82401dc4d5dc5fdd86767ab7f427143cf70891d9ac40673af9ae34b9022ce",
+            "version": "v2.12.1"
+        },
+        "secrets_providers": {
+            "type": "service",
+            "state": {
+                "url": "https://api.pulumi.com",
+                "owner": "shaht",
+                "project": "aws-sgrules-ts",
+                "stack": "dev"
+            }
+        },
+        "resources": [
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::pulumi:pulumi:Stack::aws-sgrules-ts-dev",
+                "custom": false,
+                "type": "pulumi:pulumi:Stack",
+                "outputs": {
+                    "bucketName": "my-bucket-00d2243",
+                    "vpcId": "vpc-073dbb76fb2cb3dff",
+                    "vpcPrivateSubnetIds": [
+                        "subnet-03a5e44ad9e7d90af",
+                        "subnet-01976ba1240f65a19",
+                        "subnet-091ed9956a305a1be"
+                    ],
+                    "vpcPublicSubnetIds": [
+                        "subnet-0b2eb2cec4816ad4a",
+                        "subnet-0b7ce2f0ffed30e00",
+                        "subnet-0a35dfcfb10f190e7"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc::tusharcustom",
+                "custom": false,
+                "type": "awsx:x:ec2:Vpc",
+                "parent": "urn:pulumi:dev::aws-sgrules-ts::pulumi:pulumi:Stack::aws-sgrules-ts-dev"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::pulumi:providers:aws::default_3_11_0",
+                "custom": true,
+                "id": "49cb56cc-770c-440e-8377-777efda84586",
+                "type": "pulumi:providers:aws",
+                "inputs": {
+                    "region": "us-east-2",
+                    "version": "3.11.0"
+                },
+                "outputs": {
+                    "region": "us-east-2",
+                    "version": "3.11.0"
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::aws:s3/bucket:Bucket::my-bucket",
+                "custom": true,
+                "id": "my-bucket-00d2243",
+                "type": "aws:s3/bucket:Bucket",
+                "inputs": {
+                    "__defaults": [
+                        "acl",
+                        "bucket",
+                        "forceDestroy"
+                    ],
+                    "acl": "private",
+                    "bucket": "my-bucket-00d2243",
+                    "forceDestroy": false
+                },
+                "outputs": {
+                    "accelerationStatus": "",
+                    "acl": "private",
+                    "arn": "arn:aws:s3:::my-bucket-00d2243",
+                    "bucket": "my-bucket-00d2243",
+                    "bucketDomainName": "my-bucket-00d2243.s3.amazonaws.com",
+                    "bucketRegionalDomainName": "my-bucket-00d2243.s3.amazonaws.com",
+                    "corsRules": [],
+                    "forceDestroy": false,
+                    "grants": [],
+                    "hostedZoneId": "Z3AQBSTGFYJSTF",
+                    "id": "my-bucket-00d2243",
+                    "lifecycleRules": [],
+                    "loggings": [],
+                    "objectLockConfiguration": null,
+                    "region": "us-east-1",
+                    "replicationConfiguration": null,
+                    "requestPayer": "BucketOwner",
+                    "serverSideEncryptionConfiguration": null,
+                    "tags": {},
+                    "versioning": {
+                        "enabled": false,
+                        "mfaDelete": false
+                    },
+                    "website": null
+                },
+                "parent": "urn:pulumi:dev::aws-sgrules-ts::pulumi:pulumi:Stack::aws-sgrules-ts-dev",
+                "provider": "urn:pulumi:dev::aws-sgrules-ts::pulumi:providers:aws::default_3_11_0::49cb56cc-770c-440e-8377-777efda84586"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway::tusharcustom-0",
+                "custom": false,
+                "type": "awsx:x:ec2:NatGateway",
+                "parent": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc::tusharcustom"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::tusharcustom-public-2",
+                "custom": false,
+                "type": "awsx:x:ec2:Subnet",
+                "parent": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc::tusharcustom",
+                "aliases": [
+                    "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Subnet::tusharcustom-public-2"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::tusharcustom-private-0",
+                "custom": false,
+                "type": "awsx:x:ec2:Subnet",
+                "parent": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc::tusharcustom",
+                "aliases": [
+                    "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Subnet::tusharcustom-private-0"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$awsx:x:ec2:InternetGateway::tusharcustom",
+                "custom": false,
+                "type": "awsx:x:ec2:InternetGateway",
+                "parent": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc::tusharcustom"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::tusharcustom-public-1",
+                "custom": false,
+                "type": "awsx:x:ec2:Subnet",
+                "parent": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc::tusharcustom",
+                "aliases": [
+                    "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Subnet::tusharcustom-public-1"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::tusharcustom-public-0",
+                "custom": false,
+                "type": "awsx:x:ec2:Subnet",
+                "parent": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc::tusharcustom",
+                "aliases": [
+                    "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Subnet::tusharcustom-public-0"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::tusharcustom-private-1",
+                "custom": false,
+                "type": "awsx:x:ec2:Subnet",
+                "parent": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc::tusharcustom",
+                "aliases": [
+                    "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Subnet::tusharcustom-private-1"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::tusharcustom-private-2",
+                "custom": false,
+                "type": "awsx:x:ec2:Subnet",
+                "parent": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc::tusharcustom",
+                "aliases": [
+                    "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Subnet::tusharcustom-private-2"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::tusharcustom",
+                "custom": true,
+                "id": "vpc-073dbb76fb2cb3dff",
+                "type": "aws:ec2/vpc:Vpc",
+                "inputs": {
+                    "__defaults": [],
+                    "assignGeneratedIpv6CidrBlock": false,
+                    "cidrBlock": "10.0.0.0/24",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "instanceTenancy": "default",
+                    "tags": {
+                        "Name": "pulumi-vpc-shaht-ro",
+                        "__defaults": []
+                    }
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:us-east-1:052848974346:vpc/vpc-073dbb76fb2cb3dff",
+                    "assignGeneratedIpv6CidrBlock": false,
+                    "cidrBlock": "10.0.0.0/24",
+                    "defaultNetworkAclId": "acl-036154aceac2de0dc",
+                    "defaultRouteTableId": "rtb-06720d8e43d1479ed",
+                    "defaultSecurityGroupId": "sg-08485e2a8f64f458b",
+                    "dhcpOptionsId": "dopt-34f2a34f",
+                    "enableClassiclink": false,
+                    "enableClassiclinkDnsSupport": false,
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "id": "vpc-073dbb76fb2cb3dff",
+                    "instanceTenancy": "default",
+                    "ipv6AssociationId": "",
+                    "ipv6CidrBlock": "",
+                    "mainRouteTableId": "rtb-06720d8e43d1479ed",
+                    "ownerId": "052848974346",
+                    "tags": {
+                        "Name": "pulumi-vpc-shaht-ro"
+                    }
+                },
+                "parent": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc::tusharcustom",
+                "provider": "urn:pulumi:dev::aws-sgrules-ts::pulumi:providers:aws::default_3_11_0::49cb56cc-770c-440e-8377-777efda84586",
+                "propertyDependencies": {
+                    "assignGeneratedIpv6CidrBlock": null,
+                    "cidrBlock": null,
+                    "enableDnsHostnames": null,
+                    "enableDnsSupport": null,
+                    "instanceTenancy": null,
+                    "tags": null
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-sgrules-ts::aws:ec2/vpc:Vpc::tusharcustom"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$awsx:x:ec2:InternetGateway$aws:ec2/internetGateway:InternetGateway::tusharcustom",
+                "custom": true,
+                "id": "igw-04e30399b6b0d3c07",
+                "type": "aws:ec2/internetGateway:InternetGateway",
+                "inputs": {
+                    "__defaults": [],
+                    "vpcId": "vpc-073dbb76fb2cb3dff"
+                },
+                "outputs": {
+                    "arn": "arn:aws:ec2:us-east-1:052848974346:internet-gateway/igw-04e30399b6b0d3c07",
+                    "id": "igw-04e30399b6b0d3c07",
+                    "ownerId": "052848974346",
+                    "tags": {},
+                    "vpcId": "vpc-073dbb76fb2cb3dff"
+                },
+                "parent": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$awsx:x:ec2:InternetGateway::tusharcustom",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::tusharcustom"
+                ],
+                "provider": "urn:pulumi:dev::aws-sgrules-ts::pulumi:providers:aws::default_3_11_0::49cb56cc-770c-440e-8377-777efda84586",
+                "propertyDependencies": {
+                    "vpcId": [
+                        "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::tusharcustom"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::aws:ec2/securityGroup:SecurityGroup::datastore-sg-shared-sg",
+                "custom": true,
+                "id": "sg-07782890b4d12d021",
+                "type": "aws:ec2/securityGroup:SecurityGroup",
+                "inputs": {
+                    "__defaults": [
+                        "name",
+                        "revokeRulesOnDelete"
+                    ],
+                    "description": "Managed by Pulumi",
+                    "egress": [
+                        {
+                            "__defaults": [
+                                "self"
+                            ],
+                            "description": "Egress securitygroup",
+                            "fromPort": 0,
+                            "protocol": "tcp",
+                            "self": false,
+                            "toPort": 0
+                        }
+                    ],
+                    "ingress": [
+                        {
+                            "__defaults": [],
+                            "fromPort": 0,
+                            "protocol": "tcp",
+                            "self": true,
+                            "toPort": 0
+                        }
+                    ],
+                    "name": "datastore-sg-shared-sg-bbc3259",
+                    "revokeRulesOnDelete": false,
+                    "tags": {
+                        "__defaults": [],
+                        "awsx": "yes",
+                        "customer-demo": "yes",
+                        "testing": "no"
+                    }
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":600000000000},\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:us-east-1:052848974346:security-group/sg-07782890b4d12d021",
+                    "description": "Managed by Pulumi",
+                    "egress": [],
+                    "id": "sg-07782890b4d12d021",
+                    "ingress": [
+                        {
+                            "cidrBlocks": [],
+                            "description": "",
+                            "fromPort": 0,
+                            "ipv6CidrBlocks": [],
+                            "prefixListIds": [],
+                            "protocol": "tcp",
+                            "securityGroups": [],
+                            "self": true,
+                            "toPort": 0
+                        }
+                    ],
+                    "name": "datastore-sg-shared-sg-bbc3259",
+                    "namePrefix": "",
+                    "ownerId": "052848974346",
+                    "revokeRulesOnDelete": false,
+                    "tags": {
+                        "awsx": "yes",
+                        "customer-demo": "yes",
+                        "testing": "no"
+                    },
+                    "vpcId": "vpc-00fa4d7a"
+                },
+                "parent": "urn:pulumi:dev::aws-sgrules-ts::pulumi:pulumi:Stack::aws-sgrules-ts-dev",
+                "provider": "urn:pulumi:dev::aws-sgrules-ts::pulumi:providers:aws::default_3_11_0::49cb56cc-770c-440e-8377-777efda84586",
+                "propertyDependencies": {
+                    "description": null,
+                    "egress": null,
+                    "ingress": null,
+                    "tags": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-sgrules-ts::aws:ec2/securityGroupRule:SecurityGroupRule::datastore-sg-shared-eks-nodes-sgr",
+                "custom": true,
+                "id": "sgrule-3363274961",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [],
+                    "description": "ingress securitygrouprule port 5432",
+                    "fromPort": 5432,
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-07782890b4d12d021",
+                    "sourceSecurityGroupId": "sg-07782890b4d12d021",
+                    "toPort": 5432,
+                    "type": "ingress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "description": "ingress securitygrouprule port 5432",
+                    "fromPort": 5432,
+                    "id": "sgrule-3363274961",
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-07782890b4d12d021",
+                    "self": false,
+                    "sourceSecurityGroupId": "sg-07782890b4d12d021",
+                    "toPort": 5432,
+                    "type": "ingress"
+                },
+                "parent": "urn:pulumi:dev::aws-sgrules-ts::pulumi:pulumi:Stack::aws-sgrules-ts-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-sgrules-ts::aws:ec2/securityGroup:SecurityGroup::datastore-sg-shared-sg"
+                ],
+                "provider": "urn:pulumi:dev::aws-sgrules-ts::pulumi:providers:aws::default_3_11_0::49cb56cc-770c-440e-8377-777efda84586",
+                "propertyDependencies": {
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:dev::aws-sgrules-ts::aws:ec2/securityGroup:SecurityGroup::datastore-sg-shared-sg"
+                    ],
+                    "sourceSecurityGroupId": [
+                        "urn:pulumi:dev::aws-sgrules-ts::aws:ec2/securityGroup:SecurityGroup::datastore-sg-shared-sg"
+                    ],
+                    "toPort": null,
+                    "type": null
+                }
+            }
+        ],
+        "pending_operations": [
+            {
+                "resource": {
+                    "urn": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$awsx:x:ec2:InternetGateway$aws:ec2/internetGateway:InternetGateway::tusharcustom",
+                    "custom": true,
+                    "id": "igw-04e30399b6b0d3c07",
+                    "type": "aws:ec2/internetGateway:InternetGateway",
+                    "inputs": {
+                        "__defaults": [],
+                        "vpcId": "vpc-073dbb76fb2cb3dff"
+                    },
+                    "outputs": {
+                        "arn": "arn:aws:ec2:us-east-1:052848974346:internet-gateway/igw-04e30399b6b0d3c07",
+                        "id": "igw-04e30399b6b0d3c07",
+                        "ownerId": "052848974346",
+                        "tags": {},
+                        "vpcId": "vpc-073dbb76fb2cb3dff"
+                    },
+                    "parent": "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$awsx:x:ec2:InternetGateway::tusharcustom",
+                    "dependencies": [
+                        "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::tusharcustom"
+                    ],
+                    "provider": "urn:pulumi:dev::aws-sgrules-ts::pulumi:providers:aws::default_3_11_0::49cb56cc-770c-440e-8377-777efda84586",
+                    "propertyDependencies": {
+                        "vpcId": [
+                            "urn:pulumi:dev::aws-sgrules-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::tusharcustom"
+                        ]
+                    }
+                },
+                "type": "deleting"
+            }
+        ]
+    }
+}
