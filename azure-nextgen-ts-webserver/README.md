@@ -54,6 +54,29 @@
     pulumi up --policy-pack policy-as-code/
     ```
 
+1.  Check the output via 
+    
+    `pulumi stack output`
+
+    ```
+    Current stack outputs (14):
+    OUTPUT                                      VALUE
+    azure_region                                eastus
+    iot_central_app_name                        tushar1-iotapp
+    iot_central_app_name_sku                    {"name":"ST1"}
+    network_cidr_block                          {"addressPrefixes":["10.0.0.0/22"]}
+    network_name                                tushar1-vnet
+    network_security_group_name                 tushar1-nsg
+    network_security_inbound_rule2_direction    Inbound
+    network_security_inbound_rule2_name         tushar1-security-rule2
+    network_security_inbound_rule2_port_range   22
+    network_security_outbound_rule1_direction   Outbound
+    network_security_outbound_rule1_name        tushar1-security-rule1
+    network_security_outbound_rule1_port_range  8080
+    resource_group                              tushar1-rg
+    total_number_of_virtual_machines            1```
+
+
 ## Clean Up
 
 In each of the directories, run the following command to tear down the resources that are part of our
