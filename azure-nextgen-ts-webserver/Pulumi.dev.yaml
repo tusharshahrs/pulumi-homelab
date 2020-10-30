@@ -2,5 +2,5 @@ config:
   demo-azure-nextgen-ts-webserver:instanceCount: "2"
   demo-azure-nextgen-ts-webserver:location: eastus2
   demo-azure-nextgen-ts-webserver:nameprefix: shaht3
-  demo-azure-nextgen-ts-webserver:password:
-    secure: AAABANR8jXmsgoqlx7wRMK3bS/k31S3FNv5FCwtowpot92AOZYycBAXR2jQ6
+  demo-azure-nextgen-ts-webserver:osprofile_password:
+    secure: AAABAII7zF2l291cfzbtENWGs/KAhsTNNsbEdqQtKgieKpmqRVodJwbU14g=
