@@ -3,6 +3,8 @@ import * as resources from "@pulumi/azure-nextgen/resources/latest";
 import * as storage from "@pulumi/azure-nextgen/storage/latest";
 import * as network from "@pulumi/azure-nextgen/network/latest";
 import * as compute from "@pulumi/azure-nextgen/compute/latest";
+import * as iotcentral from "@pulumi/azure-nextgen/iotcentral/latest"
+
 import { PolicyPack, validateResourceOfType } from "@pulumi/policy";
 import * as pulumi from "@pulumi/pulumi";
 
@@ -66,7 +68,7 @@ new PolicyPack("azure", {
             description: "Prohibit restricted services.",
             enforcementLevel: "advisory",
             validateResource: (resource, reportViolation) => {
-                const prohibitedServices = ["azure:iotcentral"];
+                const prohibitedServices = ["iotcentral"];
                 prohibitedServices.forEach(it => {
                     if (resource.type.startsWith(it)) {
                         reportViolation(`Use of [${resource.type}] is prohibited`);
