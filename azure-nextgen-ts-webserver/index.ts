@@ -20,9 +20,10 @@ const config = new pulumi.Config()
 // Creating StandardAccount via component resources
 const lz = new StandardAccount(`${nameprefix}`, {
     location: location,
-    cidrBlock: "10.0.0.0/22", // "10.0.0.0/21", for policy violation trigger 
+    cidrBlock: "10.0.0.0/22",
     subnetCidrBlocks: ["10.0.0.0/23", "10.0.2.0/23"]
-});
+}); 
+// "10.0.0.0/21", for policy violation trigger 
 
 // Create a network security group resource
 const network_security_group = new network.NetworkSecurityGroup(`${nameprefix}-networkSecurityGroup`, {
@@ -65,7 +66,7 @@ const security_rule2 = new network.SecurityRule(`${nameprefix}-securityRule2`, {
 // Get instance count
 const instanceCount = config.getNumber("instanceCount") ?? 1;
 // Retrieving password from config
-const password = config.requireSecret("password");
+//const password = config.getSecret("osprofile_password");
 const initScript = `#!/bin/bash\n
 echo "Hello, World from Pulumi!" > index.html
 nohup python -m SimpleHTTPServer 80 &`;
@@ -113,7 +114,7 @@ for (let i = 0; i < instanceCount; i++) {
         osProfile: {
             computerName: "hostname",
             adminUsername: userName,
-            adminPassword: password,
+            //adminPassword: password,  // Uncomment out for password
             customData: Buffer.from(initScript).toString("base64"),
             linuxConfiguration: {
                 disablePasswordAuthentication: true,
@@ -137,7 +138,7 @@ for (let i = 0; i < instanceCount; i++) {
                 version: "latest",
             },
         },
-        //tags: { "Name": myvmName},
+        //tags: { "Name": myvmName},  // Uncomment this out for the policy pack
 
     }, { parent: networkInterface });
 }
