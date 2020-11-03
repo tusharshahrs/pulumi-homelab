@@ -39,6 +39,6 @@ export const eks_cluster_arn = cluster.eksCluster.arn;
 export const eks_cluster_version = cluster.eksCluster.version;
 export const eks_cluster_platform_version = cluster.eksCluster.platformVersion;
 export const eks_cluster_status = cluster.eksCluster.status;
-//export const kubeconfig =  pulumi.secret(cluster.kubeconfig)
+//export const kubeconfig =  cluster.kubeconfig
 export const kubeconfig =  pulumi.secret(cluster.kubeconfig);
 export const k8sProvider = cluster.provider;
