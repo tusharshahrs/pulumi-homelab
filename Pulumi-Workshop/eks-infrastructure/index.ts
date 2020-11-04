@@ -26,6 +26,8 @@ const cluster = new eks.Cluster("shahteks",
     instanceType:"t3a.medium",
     //instanceType: "t4g.medium",
     tags: mytags,
+    //version:'latest'
+    version: "1.18",
 });
 
 //export const vpcId = vpc.id;
