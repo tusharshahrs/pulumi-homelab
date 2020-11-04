@@ -11,6 +11,7 @@ import pulumi_azure_nextgen.databricks.latest as databricks
 from pulumi import export, ResourceOptions, Config, StackReference, get_stack, get_project
 
 config = Config()
+# my subscription id
 mysubid = config.get("mysubid")
 stackName = get_stack()
 projectName = get_project()
@@ -18,6 +19,7 @@ mylocation = "eastus2"
 myname = "shaht"
 myresourcegroupname = "shaht-databrick-rg"
 myWorkspacename = "myWorkspace"
+mysecondvirtualnetwork = "shahtdatabrickvnetpeerstuff"
 basetags = {"cost-center": projectName, "stack":stackName, "env":"dev","team":"engineering", "demo":"yes", "cloud_location": mylocation}
 # Create an Azure Resource Group
 resource_group = resources.ResourceGroup("shaht-databrick-resourcegroup",
@@ -35,7 +37,6 @@ workspace = databricks.Workspace("shaht-databrick-workspace",
             "value": True,
         },
     },
-    #managed_resource_group_id=f"/subscriptions/{mysubid}/resourceGroups/myWorkspace",
     managed_resource_group_id=f"/subscriptions/{mysubid}/resourceGroups/{myWorkspacename}",
 )
 
@@ -45,7 +46,7 @@ v_net_peering = databricks.VNetPeering("vNetPeering",
     allow_virtual_network_access=True,
     peering_name="vNetPeeringTest",
     remote_virtual_network={
-        "id": f"/subscriptions/{mysubid}/resourceGroups/shaht-databrick-vnetpeer-rg/providers/Microsoft.Network/virtualNetworks/shahtdatabrickvnetpeerstuff",
+        "id": f"/subscriptions/{mysubid}/resourceGroups/shaht-databrick-vnetpeer-rg/providers/Microsoft.Network/virtualNetworks/{mysecondvirtualnetwork}",
     },
     resource_group_name=resource_group.name,
     use_remote_gateways=False,
