@@ -12,15 +12,25 @@ from pulumi import export, ResourceOptions, Config, StackReference, get_stack, g
 
 config = Config()
 # my subscription id
+#mysubid = config.get("mysubid")
 mysubid = config.get("mysubid")
+# stackname for tags
 stackName = get_stack()
+# projectname for tags
 projectName = get_project()
+# azure location
 mylocation = "eastus2"
-myname = "shaht"
+# resource group name
 myresourcegroupname = "shaht-databrick-rg"
+# workspace name
 myWorkspacename = "myWorkspace"
+# 2nd virtual network.  Needed for peering.  This code assumes that the network below already exist before this pulumi code is run
 mysecondvirtualnetwork = "shahtdatabrickvnetpeerstuff"
+# collection of tags
 basetags = {"cost-center": projectName, "stack":stackName, "env":"dev","team":"engineering", "demo":"yes", "cloud_location": mylocation}
+
+# Creating azure resources - start
+
 # Create an Azure Resource Group
 resource_group = resources.ResourceGroup("shaht-databrick-resourcegroup",
     resource_group_name = myresourcegroupname,
@@ -28,6 +38,7 @@ resource_group = resources.ResourceGroup("shaht-databrick-resourcegroup",
     tags=basetags,
     )
 
+# Create an azure workspace
 workspace = databricks.Workspace("shaht-databrick-workspace",
     location=mylocation,
     resource_group_name=resource_group.name,
@@ -40,6 +51,7 @@ workspace = databricks.Workspace("shaht-databrick-workspace",
     managed_resource_group_id=f"/subscriptions/{mysubid}/resourceGroups/{myWorkspacename}",
 )
 
+# setup vnet peering with another network on workspace
 v_net_peering = databricks.VNetPeering("vNetPeering",
     allow_forwarded_traffic=False,
     allow_gateway_transit=False,
@@ -52,7 +64,7 @@ v_net_peering = databricks.VNetPeering("vNetPeering",
     use_remote_gateways=False,
     workspace_name=workspace.name)
 
-
+# Exporting outputs
 pulumi.export("resource group name", resource_group.name)
 pulumi.export("resource group location", resource_group.location)
 pulumi.export("workspace name", workspace.name)
