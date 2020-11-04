@@ -15,7 +15,20 @@ const myproject = getProject(); */
 const namespace = new k8s.core.v1.Namespace(projectName, {
     metadata:
     {
-        name: projectName,
+        name: `${projectName}-ns`,
     }
 }, { provider: k8sProvider });
-export const namespaceName = namespace.metadata.name;
+
+const appLabels = { app: "nginx" };
+const deployment = new k8s.apps.v1.Deployment("nginx-deployment", {
+    spec: {
+        selector: { matchLabels: appLabels },
+        replicas: 2,
+        template: {
+            metadata: { labels: appLabels },
+            spec: { containers: [{ name: "nginx", image: "nginx" }] }
+        }
+    }
+});
+export const namespacename = namespace.metadata.name;
+export const deploymentname = deployment.metadata.name;
