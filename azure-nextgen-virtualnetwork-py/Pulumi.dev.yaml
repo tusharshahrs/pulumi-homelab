@@ -1,0 +1,7 @@
+config:
+  azure-nextgen-virtualnetwork-py:location: eastus2
+  azure-nextgen-virtualnetwork-py:network_name: shaht-vnet-for-peering
+  azure-nextgen-virtualnetwork-py:resource_group_name: shaht-vnet-rg
+  azure-nextgen-virtualnetwork-py:subnet_1_cidr: 10.0.0.0/23
+  azure-nextgen-virtualnetwork-py:subnet_2_cidr: 10.0.2.0/23
+  azure-nextgen-virtualnetwork-py:virtual_network_cidr: 10.0.0.0/22
