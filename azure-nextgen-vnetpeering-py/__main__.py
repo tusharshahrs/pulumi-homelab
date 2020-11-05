@@ -13,7 +13,7 @@ config = Config()
 mystackpath = config.require("stackreference")
 # setting the StackReference
 mynetworkstackreference = StackReference(mystackpath)
-my_subid = config.get_secret("subid")
+my_subid = config.get("subid")
 my_resource_group = mynetworkstackreference.get_output("resource_group_name")
 my_virtual_network_name = mynetworkstackreference.get_output("virtual_network_name")
 my_remote_resource_group = "myWorkspace"
