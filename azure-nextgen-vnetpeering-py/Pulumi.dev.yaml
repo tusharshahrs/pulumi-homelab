@@ -1,0 +1,4 @@
+config:
+  azure-nextgen-vnetpeering-py:stackreference: shaht/azure-nextgen-virtualnetwork-py/dev
+  azure-nextgen-vnetpeering-py:subid:
+    secure: AAABAI3DuOdZM/vQ7y2L5er5qwTgCfLA1W/MhybaybfVwlbAiN1kIllMJx3tLbE3pInaaFGbPGJiqTe5HcmKW7nvqiM=
