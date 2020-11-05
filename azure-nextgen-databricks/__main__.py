@@ -11,8 +11,15 @@ import pulumi_azure_nextgen.databricks.latest as databricks
 from pulumi import export, ResourceOptions, Config, StackReference, get_stack, get_project
 
 config = Config()
+# reading in StackReference Path from local config
+#mystackpath = config.require("stackreference")
+# setting the StackReference
+#mynetworkstackreference = StackReference(mystackpath)
+#mysecondvirtualnetwork = mynetworkstackreference.get_output("virtual_network_name")
+#my_remote_resourcegroup = mynetworkstackreference.get_output("resource_group_name")
+mysecondvirtualnetwork =  "shaht-vnet-for-peering"
+my_remote_resourcegroup = "shaht-rg-for-peering"
 # my subscription id
-#mysubid = config.get("mysubid")
 mysubid = config.get("mysubid")
 # stackname for tags
 stackName = get_stack()
@@ -25,7 +32,10 @@ myresourcegroupname = "shaht-databrick-rg"
 # workspace name
 myWorkspacename = "myWorkspace"
 # 2nd virtual network.  Needed for peering.  This code assumes that the network below already exist before this pulumi code is run
-mysecondvirtualnetwork = "shahtdatabrickvnetpeerstuff"
+#mysecondvirtualnetwork = "shahtdatabrickvnetpeerstuff"
+
+#
+my_peering_name="databricks_vnet_peering"
 # collection of tags
 basetags = {"cost-center": projectName, "stack":stackName, "env":"dev","team":"engineering", "demo":"yes", "cloud_location": mylocation}
 
@@ -53,12 +63,13 @@ workspace = databricks.Workspace("shaht-databrick-workspace",
 
 # setup vnet peering with another network on workspace
 v_net_peering = databricks.VNetPeering("vNetPeering",
-    allow_forwarded_traffic=False,
+    allow_forwarded_traffic=True,
     allow_gateway_transit=False,
     allow_virtual_network_access=True,
-    peering_name="vNetPeeringTest",
+    peering_name=my_peering_name,
     remote_virtual_network={
-        "id": f"/subscriptions/{mysubid}/resourceGroups/shaht-databrick-vnetpeer-rg/providers/Microsoft.Network/virtualNetworks/{mysecondvirtualnetwork}",
+        #"id": f"/subscriptions/{mysubid}/resourceGroups/shaht-databrick-vnetpeer-rg/providers/Microsoft.Network/virtualNetworks/{mysecondvirtualnetwork}",
+        "id": f"/subscriptions/{mysubid}/resourceGroups/{my_remote_resourcegroup}/providers/Microsoft.Network/virtualNetworks/{mysecondvirtualnetwork}",
     },
     resource_group_name=resource_group.name,
     use_remote_gateways=False,
