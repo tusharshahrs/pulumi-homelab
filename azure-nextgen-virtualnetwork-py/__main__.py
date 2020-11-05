@@ -9,7 +9,7 @@ from pulumi import export, ResourceOptions, Config, StackReference, get_stack, g
 
 config = Config()
 my_location = config.get("location")
-my_resource_group_name = config.get("resource_group_name")#"shaht-vnet-rg"
+my_resource_group_name = config.get("resource_group_name")
 my_network_name=config.get("network_name")
 my_cidr_block = config.get("virtual_network_cidr")
 my_subnet_1_cidr = config.get("subnet_1_cidr")
@@ -38,6 +38,8 @@ virtual_network = network.VirtualNetwork("virtualNetwork",
     virtual_network_name=my_network_name,
     tags=mytags)
 
+# Create subnet 1
+# https://www.pulumi.com/docs/reference/pkg/azure-nextgen/network/subnet/
 subnet1 = network.Subnet(f"{my_network_name}-subnet1",
     resource_group_name=resource_group.name,
     virtual_network_name=virtual_network.name,
@@ -45,6 +47,8 @@ subnet1 = network.Subnet(f"{my_network_name}-subnet1",
     address_prefix=my_subnet_1_cidr,
     )
 
+# Create subnet 2
+# https://www.pulumi.com/docs/reference/pkg/azure-nextgen/network/subnet/
 subnet2 = network.Subnet(f"{my_network_name}-subnet2",
     resource_group_name=resource_group.name,
     virtual_network_name=virtual_network.name,
