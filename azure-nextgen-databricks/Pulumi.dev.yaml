@@ -1,4 +1,5 @@
 config:
+  azure-nextgen-databricks:location: useast2
   azure-nextgen-databricks:mysubid:
     secure: AAABALAF2e2Ed5YUn7sAJDVB/D4p+0gk3rY/4S/mx1NROWJbB4Vf8OnBUHizCpxY4Nc4TTeQ87ZWrRy9rnUf0ficfjY=
   azure-nextgen-databricks:stackreference: shaht/azure-nextgen-virtualnetwork-py/dev

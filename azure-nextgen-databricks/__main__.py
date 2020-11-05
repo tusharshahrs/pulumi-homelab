@@ -26,7 +26,8 @@ stackName = get_stack()
 # projectname for tags
 projectName = get_project()
 # azure location
-mylocation = "eastus2"
+#mylocation = "eastus2"
+mylocation = config.get("location")
 # resource group name
 myresourcegroupname = "shaht-databrick-rg"
 # workspace name
