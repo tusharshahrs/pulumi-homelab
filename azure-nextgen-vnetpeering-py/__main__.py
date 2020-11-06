@@ -18,7 +18,7 @@ my_resource_group = mynetworkstackreference.get_output("resource_group_name")
 my_virtual_network_name = mynetworkstackreference.get_output("virtual_network_name")
 my_remote_resource_group = "myWorkspace"
 my_remote_virtual_network = "workers-vnet"
-my_virtual_network_peering_name = "shaht2vnetpeering"
+my_virtual_network_peering_name = "shaht-vnet-peering-back-to-databricks"
 
 v_net_peering = network.VirtualNetworkPeering("virtualNetworkPeering",
     allow_forwarded_traffic=True,
