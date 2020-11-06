@@ -17,7 +17,9 @@ mystackpath = config.require("stackreference")
 my_network_stackreference = StackReference(mystackpath)
 my_secondvirtualnetwork_output = my_network_stackreference.get_output("virtual_network_name")
 my_remote_resourcegroup_output = my_network_stackreference.get_output("resource_group_name")
-#my_secondvirtualnetwork = my_secondvirtualnetwork_output.apply(lambda my_secondvirtualnetwork_output: input)
+#my_secondvirtualnetwork = my_secondvirtualnetwork_output.apply(lambda my_secondvirtualnetwork_output: f"{my_secondvirtualnetwork_output}")
+#my_remote_resourcegroup = my_remote_resourcegroup_output.apply(lambda my_remote_resourcegroup_output: f"{my_remote_resourcegroup_output}")
+
 my_secondvirtualnetwork =  "shaht-vnet-peering-to-databricks"
 my_remote_resourcegroup = "shaht-rg-peering-to-databricks"
 
@@ -82,12 +84,13 @@ v_net_peering = databricks.VNetPeering(f"{my_name}-vNetPeering",
     allow_virtual_network_access=True,
     peering_name=my_peering_name,
     remote_virtual_network={
-        #"id": f"/subscriptions/{mysubid}/resourceGroups/shaht-databrick-vnetpeer-rg/providers/Microsoft.Network/virtualNetworks/{mysecondvirtualnetwork}",
         "id": f"/subscriptions/{mysubid}/resourceGroups/{my_remote_resourcegroup}/providers/Microsoft.Network/virtualNetworks/{my_secondvirtualnetwork}",
+        #"id": f"/subscriptions/{mysubid}/resourceGroups/{my_remote_resourcegroup}/providers/Microsoft.Network/virtualNetworks/{my_secondvirtualnetwork}",
     },
     resource_group_name=resource_group.name,
     use_remote_gateways=False,
     workspace_name=workspace.name)
+
 # Exporting outputs
 pulumi.export("resource group name", resource_group.name)
 pulumi.export("resource group location", resource_group.location)
