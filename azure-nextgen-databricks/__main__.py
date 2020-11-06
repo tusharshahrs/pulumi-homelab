@@ -8,22 +8,17 @@ import pulumi_azure_nextgen.storage.latest as storage
 import pulumi_azure_nextgen.resources.latest as resources
 import pulumi_azure_nextgen.databricks.latest as databricks
 
-from pulumi import export, ResourceOptions, Config, StackReference, get_stack, get_project
+from pulumi import Output, export, ResourceOptions, Config, StackReference, get_stack, get_project
 
 config = Config()
 # reading in StackReference Path from local config
 mystackpath = config.require("stackreference")
 # setting the StackReference
 my_network_stackreference = StackReference(mystackpath)
-my_secondvirtualnetwork = my_network_stackreference.get_output("virtual_network_name")
-my_remote_resourcegroup = my_network_stackreference.get_output("resource_group_name")
-#my_secondvirtualnetwork =  "shaht-vnet-for-peering"
-#my_remote_resourcegroup = "shaht-rg-for-peering"
-
-# stackname for tags
-stackName = get_stack()
-# projectname for tags
-projectName = get_project()
+#my_secondvirtualnetwork_output = my_network_stackreference.get_output("virtual_network_name")
+#my_remote_resourcegroup_output = my_network_stackreference.get_output("resource_group_name")
+my_secondvirtualnetwork =  "shaht-vnet-peering-to-databricks"
+my_remote_resourcegroup = "shaht-rg-peering-to-databricks"
 
 # local variables from config file
 #   my subscription id
@@ -41,8 +36,15 @@ my_Workspacename = config.get("workspacename")
 #my_secondvirtualnetwork = "shahtdatabrickvnetpeerstuff"
 
 #
-my_peering_name="databricks_vnet_peering"
+my_peering_name="databricks_peering"
+# Tags
+# stackname for tags
+stackName = get_stack()
+# projectname for tags
+projectName = get_project()
+
 # collection of tags
+#
 basetags = {"cost-center": projectName, "stack":stackName, "env":"databricks","team":"engineering", "pulumi_cli":"yes", "cloud_location": my_location, "console_azure":"no"}
 
 # Creating azure resources - start
@@ -73,7 +75,7 @@ workspace = databricks.Workspace(f"{my_name}-workspace",
 # 2. pulumi up -y --refresh
 # 3. uncomment the commented out block below.
 # 4. pulumi up -y --refresh
-"""v_net_peering = databricks.VNetPeering(f"{my_name}-vNetPeering",
+v_net_peering = databricks.VNetPeering(f"{my_name}-vNetPeering",
     allow_forwarded_traffic=True,
     allow_gateway_transit=False,
     allow_virtual_network_access=True,
@@ -85,16 +87,14 @@ workspace = databricks.Workspace(f"{my_name}-workspace",
     resource_group_name=resource_group.name,
     use_remote_gateways=False,
     workspace_name=workspace.name)
- """
 # Exporting outputs
 pulumi.export("resource group name", resource_group.name)
 pulumi.export("resource group location", resource_group.location)
 pulumi.export("workspace name", workspace.name)
 pulumi.export("workspace status", workspace.provisioning_state)
 pulumi.export("workspace url", workspace.workspace_url)
-""" pulumi.export("vnet peering provisioning_state", v_net_peering.provisioning_state)
+pulumi.export("vnet peering provisioning_state", v_net_peering.provisioning_state)
 pulumi.export("vnet peering peering_state", v_net_peering.peering_state)
 pulumi.export("vnet peering name", v_net_peering.name)
 pulumi.export("vnet peering remote_address_space", v_net_peering.remote_address_space)
 pulumi.export("vnet peering urn", v_net_peering.urn)
- """
