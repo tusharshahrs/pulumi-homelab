@@ -17,11 +17,11 @@ my_subnet_2_cidr = config.get("subnet_2_cidr")
 projectName = get_project()
 stackName = get_stack()
 
-mytags = {"stack":stackName,"project":projectName,"created_by":"johnsmith","launched_via":"pulumi"}
+mytags = {"stack":stackName,"project":projectName,"created_by":"johnsmith","launched_via":"pulumi", "team":"engineering","cli":"yes"}
 
 # Create an Azure Resource Group
 # https://www.pulumi.com/docs/reference/pkg/azure-nextgen/resources/resourcegroup/
-resource_group = resources.ResourceGroup('resource_group',
+resource_group = resources.ResourceGroup(f"{my_network_name}-resource-group",
     resource_group_name=my_resource_group_name,
     location=my_location,
     tags=mytags,
@@ -29,7 +29,7 @@ resource_group = resources.ResourceGroup('resource_group',
 
 # Create a virtual network
 # https://www.pulumi.com/docs/reference/pkg/azure-nextgen/network/virtualnetwork/
-virtual_network = network.VirtualNetwork("virtualNetwork",
+virtual_network = network.VirtualNetwork(f"{my_network_name}-virtualNetwork",
     address_space={
         "addressPrefixes": [my_cidr_block],
     },
