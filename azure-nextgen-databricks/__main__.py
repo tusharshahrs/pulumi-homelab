@@ -14,13 +14,12 @@ config = Config()
 # reading in StackReference Path from local config
 mystackpath = config.require("stackreference")
 # setting the StackReference
-mynetworkstackreference = StackReference(mystackpath)
-my_secondvirtualnetwork = mynetworkstackreference.get_output("virtual_network_name")
-my_remote_resourcegroup = mynetworkstackreference.get_output("resource_group_name")
+my_network_stackreference = StackReference(mystackpath)
+my_secondvirtualnetwork = my_network_stackreference.get_output("virtual_network_name")
+my_remote_resourcegroup = my_network_stackreference.get_output("resource_group_name")
 #my_secondvirtualnetwork =  "shaht-vnet-for-peering"
-my_remote_resourcegroup = "shaht-rg-for-peering"
-# my subscription id
-mysubid = config.get("mysubid")
+#my_remote_resourcegroup = "shaht-rg-for-peering"
+
 # stackname for tags
 stackName = get_stack()
 # projectname for tags
@@ -35,8 +34,9 @@ my_location = config.get("location")
 my_resource_group_name = config.get("resource_group_name")
 #   name
 my_name = config.get("name")
-# workspace name
-myWorkspacename = "myWorkspace"
+#   workspace name
+my_Workspacename = config.get("workspacename")
+
 # 2nd virtual network.  Needed for peering.  This code assumes that the network below already exist before this pulumi code is run
 #my_secondvirtualnetwork = "shahtdatabrickvnetpeerstuff"
 
@@ -55,16 +55,16 @@ resource_group = resources.ResourceGroup(f"{my_name}-resourcegroup",
     )
 
 # Create an azure workspace
-""" workspace = databricks.Workspace(f"{my_name}-workspace",
+workspace = databricks.Workspace(f"{my_name}-workspace",
     location=my_location,
     resource_group_name=resource_group.name,
-    workspace_name=myWorkspacename,
+    workspace_name=my_Workspacename,
     parameters={
         "prepareEncryption": {
             "value": True,
         },
     },
-    managed_resource_group_id=f"/subscriptions/{mysubid}/resourceGroups/{myWorkspacename}",
+    managed_resource_group_id=f"/subscriptions/{mysubid}/resourceGroups/{my_Workspacename}",
 )
 
 # setup vnet peering with another network on workspace
@@ -73,7 +73,7 @@ resource_group = resources.ResourceGroup(f"{my_name}-resourcegroup",
 # 2. pulumi up -y --refresh
 # 3. uncomment the commented out block below.
 # 4. pulumi up -y --refresh
-v_net_peering = databricks.VNetPeering(f"{my_name}-vNetPeering",
+"""v_net_peering = databricks.VNetPeering(f"{my_name}-vNetPeering",
     allow_forwarded_traffic=True,
     allow_gateway_transit=False,
     allow_virtual_network_access=True,
@@ -89,10 +89,10 @@ v_net_peering = databricks.VNetPeering(f"{my_name}-vNetPeering",
 # Exporting outputs
 pulumi.export("resource group name", resource_group.name)
 pulumi.export("resource group location", resource_group.location)
-""" pulumi.export("workspace name", workspace.name)
+pulumi.export("workspace name", workspace.name)
 pulumi.export("workspace status", workspace.provisioning_state)
 pulumi.export("workspace url", workspace.workspace_url)
-pulumi.export("vnet peering provisioning_state", v_net_peering.provisioning_state)
+""" pulumi.export("vnet peering provisioning_state", v_net_peering.provisioning_state)
 pulumi.export("vnet peering peering_state", v_net_peering.peering_state)
 pulumi.export("vnet peering name", v_net_peering.name)
 pulumi.export("vnet peering remote_address_space", v_net_peering.remote_address_space)
