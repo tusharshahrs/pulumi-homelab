@@ -15,8 +15,9 @@ config = Config()
 mystackpath = config.require("stackreference")
 # setting the StackReference
 my_network_stackreference = StackReference(mystackpath)
-#my_secondvirtualnetwork_output = my_network_stackreference.get_output("virtual_network_name")
-#my_remote_resourcegroup_output = my_network_stackreference.get_output("resource_group_name")
+my_secondvirtualnetwork_output = my_network_stackreference.get_output("virtual_network_name")
+my_remote_resourcegroup_output = my_network_stackreference.get_output("resource_group_name")
+#my_secondvirtualnetwork = my_secondvirtualnetwork_output.apply(lambda my_secondvirtualnetwork_output: input)
 my_secondvirtualnetwork =  "shaht-vnet-peering-to-databricks"
 my_remote_resourcegroup = "shaht-rg-peering-to-databricks"
 
