@@ -104,7 +104,7 @@
         virtual_network_subnet2_cidr_block  10.0.2.0/23
         virtual_network_subnet2_cidr_name   shaht-vnet-peering-to-databricks-subnet2
     ```
-1. Grab the stack reference information.
+1. Grab the [StackReference](https://www.pulumi.com/docs/intro/concepts/organizing-stacks-projects/#inter-stack-dependencies) for this stack. The StackReference constructor takes as input a string of the form `<organization>/<project>/<stack>`, and lets you access the outputs of that stack.
     ```
     pulumi stack
     ```
