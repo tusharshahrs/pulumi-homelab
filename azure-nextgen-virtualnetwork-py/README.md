@@ -33,7 +33,7 @@
     $ pip3 install -r requirements.txt
     ```
 
-1. Populate the config.
+1. Populate the config via [pulumi config set](https://www.pulumi.com/docs/reference/cli/pulumi_config_set/).
 
    Here are Azure regions [see this infographic](https://azure.microsoft.com/en-us/global-infrastructure/regions/) for a list of available regions)
    
@@ -45,7 +45,7 @@
    $ pulumi config set subnet_1_cidr 10.0.0.0/22
    $ pulumi config set subnet_2_cidr 10.0.2.0/23
    ```
-1. Run `pulumi up` to preview and deploy changes:
+1. Run `pulumi up` to preview and deploy changes: You must select `y` to continue
   
     ```
     $ pulumi up
@@ -94,7 +94,7 @@
     Resources:
         + 5 created
         ```
-1. View the outputs created.
+1. View the outputs created via [pulumi stack output](https://www.pulumi.com/docs/reference/cli/pulumi_stack_output/)
     ```
         pulumi stack output
     Current stack outputs (8):
@@ -145,3 +145,8 @@
     
     Note yours will be something along the lines of:
     `yourname/azure-nextgen-virtualnetwork-py/dev`
+
+ ### Clean up
+ 1. Make sure all your `OTHER` stacks that depend on this network have their resources all deleted `BEFORE` you clean up any networking resources.
+ 1. `pulumi destroy -y`   
+ 2. `pulumi stack rm dev`
