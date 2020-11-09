@@ -131,7 +131,47 @@
     databricks to secondvirtual network is `intialized`.  The connection will `NOT` show `connected` until the vnet  peering connection from the second virtualnetwork to databricks is triggered.
     
 ### Clean up
- 1. Make sure all your `vnetpeering` pulumi stack is `destroyed` before you run this.  Note:  You have to run [pulumi refresh][https://www.pulumi.com/docs/reference/cli/pulumi_refresh/] before you [pulumi destroy](https://www.pulumi.com/docs/reference/cli/pulumi_destroy/) because the `vnet peering` status was changed to `connected` by another stack.
+ 1. Make sure all your `vnetpeering` pulumi stack is `destroyed` before you continue below.  
+
+ 1. Note:  You have to run [pulumi refresh][https://www.pulumi.com/docs/reference/cli/pulumi_refresh/] before you [pulumi destroy](https://www.pulumi.com/docs/reference/cli/pulumi_destroy/) because the `vnet peering` status was changed to `connected` by another stack.
  1. `pulumi refresh`
+    ```
+        View Live: https://app.pulumi.com/shaht/azure-nextgen-databricks/dev/previews/8ef4631a-7989-4a7d-9627-b132b12ca3b2
+
+            Type                                             Name                                       Plan       
+            pulumi:pulumi:Stack                              azure-nextgen-databricks-dev                          
+            ├─ pulumi:pulumi:StackReference                  shaht/azure-nextgen-virtualnetwork-py/dev             
+            ├─ azure-nextgen:resources/latest:ResourceGroup  shaht-databricks-resourcegroup                        
+        ~   ├─ azure-nextgen:databricks/latest:vNetPeering   shaht-databricks-vNetPeering               update     
+            └─ azure-nextgen:databricks/latest:Workspace     shaht-databricks-workspace                            
+        
+        Resources:
+            ~ 1 to update
+            4 unchanged
+        Do you want to perform this refresh?
+        No resources will be modified as part of this refresh; just your stack's state will be.  [Use arrows to move, enter to select, type to filter]
+        yes
+        no
+        >details
+    ```
+    If you click on `details` you will see that the status is changing from `Initiated` to `Disconnected`.  This is expected.  Click `y` to continue.
+ 1. After selecting `y` on refresh
+    ```
+        No resources will be modified as part of this refresh; just your stack's state will be. yes
+    Refreshing (dev)
+
+    View Live: https://app.pulumi.com/shaht/azure-nextgen-databricks/dev/updates/50
+
+        Type                                             Name                                       Status      
+        pulumi:pulumi:Stack                              azure-nextgen-databricks-dev                           
+        ├─ pulumi:pulumi:StackReference                  shaht/azure-nextgen-virtualnetwork-py/dev              
+        ├─ azure-nextgen:resources/latest:ResourceGroup  shaht-databricks-resourcegroup                         
+    ~   ├─ azure-nextgen:databricks/latest:vNetPeering   shaht-databricks-vNetPeering               updated     
+        └─ azure-nextgen:databricks/latest:Workspace     shaht-databricks-workspace
+    ...
+    Resources:
+    ~ 1 updated
+    4 unchanged  
+    ```
  1. `pulumi destroy -y`   
  1. `pulumi stack rm dev`
