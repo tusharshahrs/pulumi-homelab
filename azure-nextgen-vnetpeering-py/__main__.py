@@ -1,8 +1,6 @@
 """An Azure RM Python Pulumi program"""
 
 import pulumi
-import pulumi_azure_nextgen.storage.latest as storage
-import pulumi_azure_nextgen.resources.latest as resources
 import pulumi_azure_nextgen.network.latest as network
 from pulumi import Config, StackReference
 
@@ -13,13 +11,23 @@ config = Config()
 mystackpath = config.require("stackreference")
 # setting the StackReference
 mynetworkstackreference = StackReference(mystackpath)
+# get azure subscription id
 my_subid = config.get("subid")
+
+# getting the resource group that where the current virtualnetwork ( the one that doesn't have databricks) is.
 my_resource_group = mynetworkstackreference.get_output("resource_group_name")
+
+# getting the virutal network that where the current virtualnetwork ( the one that doesn't have databricks) is.
 my_virtual_network_name = mynetworkstackreference.get_output("virtual_network_name")
+
+# Databricks resource group
 my_remote_resource_group = "myWorkspace"
+# Databricks virtual network
 my_remote_virtual_network = "workers-vnet"
+# vnet peering name FROM the virtualnetwork TO the databricks virtualnetwork
 my_virtual_network_peering_name = "shaht-vnet-peering-back-to-databricks"
 
+# vnet peering resource
 v_net_peering = network.VirtualNetworkPeering("virtualNetworkPeering",
     allow_forwarded_traffic=True,
     allow_gateway_transit=False,
