@@ -1,6 +1,10 @@
 [![Deploy](https://get.pulumi.com/new/button.svg)](https://app.pulumi.com/new)
 
 # Pulumi:  A VirtualNetwork with two subnets on Azure-NextGen built in Python.
+* Built using [azure-nextgen](https://www.pulumi.com/docs/reference/pkg/azure-nextgen/) api
+    * [resource groups](https://www.pulumi.com/docs/reference/pkg/azure-nextgen/resources/resourcegroup/)
+    * [virtual network](https://www.pulumi.com/docs/reference/pkg/azure-nextgen/network/virtualnetwork/) 
+    * [subnet](https://www.pulumi.com/docs/reference/pkg/azure-nextgen/network/subnet/)
 
 ## Prerequisites
 
