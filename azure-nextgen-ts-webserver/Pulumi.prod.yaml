@@ -1,5 +1,5 @@
 config:
-  demo-azure-nextgen-ts-webserver:location: eastus
-  demo-azure-nextgen-ts-webserver:nameprefix: tushar1
+  demo-azure-nextgen-ts-webserver:location: eastus2
+  demo-azure-nextgen-ts-webserver:nameprefix: shahtdotnet
   demo-azure-nextgen-ts-webserver:osprofile_password:
     secure: AAABALcTsBfI47PhEJr2PCcPEYZGF6PvkxhYvN2u/zGKOJQqDE/7mUitW6zi
