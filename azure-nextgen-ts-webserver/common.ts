@@ -32,7 +32,7 @@ export class StandardAccount extends pulumi.ComponentResource {
             location: args.location,
             virtualNetworkName: `${name}-vnet`,
             addressSpace: { addressPrefixes: [args.cidrBlock]},
-        }, {parent: this, }); // This is because we hit this error: Custom diff for VirtualNetwork https://github.com/pulumi/pulumi-azure-nextgen-provider/issues/74
+        }, {parent: this, ignoreChanges:["tags"] }); // This is because we hit this error: Custom diff for VirtualNetwork https://github.com/pulumi/pulumi-azure-nextgen-provider/issues/74
 
         // Create subnets
         this.subnets = [];
