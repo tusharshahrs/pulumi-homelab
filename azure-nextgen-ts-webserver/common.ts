@@ -42,7 +42,7 @@ export class StandardAccount extends pulumi.ComponentResource {
                 virtualNetworkName: this.network.name,
                 subnetName: `${name}-subnet-${i}`,
                 addressPrefix: args.subnetCidrBlocks[i],
-            }, { parent: this.network,});
+            }, { parent: this.network, });
              this.subnets.push(subnet);
         }
         this.registerOutputs({});
