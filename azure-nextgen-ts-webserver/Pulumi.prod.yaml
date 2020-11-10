@@ -1,4 +1,5 @@
 config:
+  demo-azure-nextgen-ts-webserver:instanceCount: "2"
   demo-azure-nextgen-ts-webserver:location: eastus2
   demo-azure-nextgen-ts-webserver:nameprefix: shahtapps
   demo-azure-nextgen-ts-webserver:osprofile_password:
