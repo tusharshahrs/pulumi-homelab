@@ -154,7 +154,7 @@ const iotCentralApp = new iotcentral.App(`${nameprefix}-iotapp`, {
     sku: {
         name: "ST1",
     },
-},{ parent: lz });
+},{ dependsOn: [lz.resourceGroup] });
 
 export const resource_group = lz.resourceGroup.name;
 export const network_cidr_block = lz.network.addressSpace;
