@@ -14,16 +14,15 @@ const config = new pulumi.Config()
  */
 
  // After pulumi up is done 1st time.  Uncomment the tagAllResources for stacktransformation example. Then run pulumi up
-//tagAllResources({ "cost-center": projectName, "stack":stackName, "env":"dev","team":"engineering", "demo":"yes", "cloud_location": `${location}` });
+tagAllResources({ "cost-center": projectName, "stack":stackName, "env":"dev","team":"engineering", "demo":"yes", "cloud_location": `${location}` });
 
 //  Resource Creation starts from here
 // Creating StandardAccount via component resources
 const lz = new StandardAccount(`${nameprefix}`, {
     location: location,
     cidrBlock: "10.0.0.0/22",
-    subnetCidrBlocks: ["10.0.0.0/23", "10.0.2.0/23"]
+    subnetCidrBlocks: ["10.0.0.0/23", "10.0.2.0/23"],
 }); 
-// "10.0.0.0/21", for policy violation trigger 
 
 // Create a network security group resource
 const network_security_group = new network.NetworkSecurityGroup(`${nameprefix}-networkSecurityGroup`, {
@@ -155,7 +154,7 @@ const iotCentralApp = new iotcentral.App(`${nameprefix}-iotapp`, {
     sku: {
         name: "ST1",
     },
-},);
+},{ parent: lz });
 
 export const resource_group = lz.resourceGroup.name;
 export const network_cidr_block = lz.network.addressSpace;
