@@ -14,7 +14,7 @@ const config = new pulumi.Config()
  */
 
  // After pulumi up is done 1st time.  Uncomment the tagAllResources for stacktransformation example. Then run pulumi up
-tagAllResources({ "cost-center": projectName, "stack":stackName, "env":"dev","team":"engineering", "demo":"yes", "cloud_location": `${location}` });
+//tagAllResources({ "cost-center": projectName, "stack":stackName, "env":"dev","team":"engineering", "demo":"yes", "cloud_location": `${location}` });
 
 //  Resource Creation starts from here
 // Creating StandardAccount via component resources
