@@ -1,8 +1,39 @@
 using Pulumi;
 using AzureNextGen = Pulumi.AzureNextGen;
+using Pulumi.AzureNextGen.StreamAnalytics.V20170401Preview.Inputs;
+using System; 
+using System.Reflection;
 
 class MyStack : Stack
-{
+{   
+    public static class UnionConverter
+    {
+        public static dynamic ConvertToInputUnion(PropertyInfo property, object value) =>
+            ConvertToInputUnionImpl(property.PropertyType, value);
+
+        private static dynamic ConvertToInputUnionImpl(Type type, object value)
+        {
+            var genericType = type.GetGenericTypeDefinition();
+            if (genericType != typeof(InputUnion<,>))
+                throw new Exception("Expected an InputUnion<T0, T1> type");
+            var leftType = type.GetGenericArguments()[0];
+            if (value.GetType() == leftType)
+            {
+                var leftConverter = type.GetMethod("op_Implicit", new[] { leftType });
+                return leftConverter.Invoke(null, new[] { value });
+            }
+            
+            var rightType = type.GetGenericArguments()[1];
+            var converter = type.GetMethod("op_Implicit", new[] { rightType });
+            if (value.GetType() == rightType)
+            {
+                return converter.Invoke(null, new[] { value });
+            }
+
+            var recursiveResult = ConvertToInputUnionImpl(rightType, value);
+            return converter.Invoke(null, new[] { recursiveResult });
+        }
+    }
     public MyStack()
     {
         var resourceGroup = new AzureNextGen.Resources.Latest.ResourceGroup("resourceGroup", new AzureNextGen.Resources.Latest.ResourceGroupArgs
@@ -37,25 +68,27 @@ class MyStack : Stack
             },
         });
 
-        var function = new AzureNextGen.StreamAnalytics.Latest.Function("function", new AzureNextGen.StreamAnalytics.Latest.FunctionArgs
+        var function = new AzureNextGen.StreamAnalytics.V20170401Preview.Function("function", new AzureNextGen.StreamAnalytics.V20170401Preview.FunctionArgs
         {
             FunctionName = "function8197",
             JobName = streamingJob.Name, //"sj8653",
-            Properties = new AzureNextGen.StreamAnalytics.Latest.Inputs.ScalarFunctionPropertiesArgs
+            Properties = new AzureNextGen.StreamAnalytics.V20170401Preview.Inputs.ScalarFunctionPropertiesArgs
             {
-                Binding = new AzureNextGen.StreamAnalytics.Latest.Inputs.JavaScriptFunctionBindingArgs
-                {
-                 Script = "function (x, y) { return x + y; }",
-                 Type = "Microsoft.StreamAnalytics/JavascriptUdf",
-                },
+                Binding = UnionConverter.ConvertToInputUnion(
+                    typeof(ScalarFunctionPropertiesArgs).GetProperty(nameof(ScalarFunctionPropertiesArgs.Binding)),
+                    new JavaScriptFunctionBindingArgs
+                    {
+                    Script = "function (x, y) { return x + y; }",
+                    Type = "Microsoft.StreamAnalytics/JavascriptUdf",
+                    }),
                 Inputs = 
                 {
-                    new AzureNextGen.StreamAnalytics.Latest.Inputs.FunctionInputArgs
+                    new AzureNextGen.StreamAnalytics.V20170401Preview.Inputs.FunctionInputArgs
                     {
                         DataType = "Any",
                     },
                 },
-                Output = new AzureNextGen.StreamAnalytics.Latest.Inputs.FunctionOutputArgs
+                Output = new AzureNextGen.StreamAnalytics.V20170401Preview.Inputs.FunctionOutputArgs
                 {
                     DataType = "Any",
                 },
