@@ -5,26 +5,26 @@ const vpc = new aws.ec2.Vpc("kafka", {cidrBlock: "192.168.0.0/22"});
 const azs = aws.getAvailabilityZones({
     state: "available",
 });
-const subnetAz1 = new aws.ec2.Subnet("kafkasubnetAz1", {
+const subnetAz1 = new aws.ec2.Subnet("kafka-subnetAz1", {
     availabilityZone: azs.then(azs => azs.names[0]),
     cidrBlock: "192.168.0.0/24",
     vpcId: vpc.id,
 });
-const subnetAz2 = new aws.ec2.Subnet("kafkasubnetAz2", {
+const subnetAz2 = new aws.ec2.Subnet("kafka-subnetAz2", {
     availabilityZone: azs.then(azs => azs.names[1]),
     cidrBlock: "192.168.1.0/24",
     vpcId: vpc.id,
 });
-const subnetAz3 = new aws.ec2.Subnet("kafkasubnetAz3", {
+const subnetAz3 = new aws.ec2.Subnet("kafka-subnetAz3", {
     availabilityZone: azs.then(azs => azs.names[2]),
     cidrBlock: "192.168.2.0/24",
     vpcId: vpc.id,
 });
-const sg = new aws.ec2.SecurityGroup("kafkasg", {vpcId: vpc.id});
-const kms = new aws.kms.Key("kafkakms", {description: "example"});
-const test = new aws.cloudwatch.LogGroup("kafkatest", {});
-const bucket = new aws.s3.Bucket("kafkabucket", {acl: "private"});
-const firehoseRole = new aws.iam.Role("kafkafirehoseRole", {assumeRolePolicy: `{
+const sg = new aws.ec2.SecurityGroup("kafka-sg", {vpcId: vpc.id});
+const kms = new aws.kms.Key("kafka-kms", {description: "msk"});
+const test = new aws.cloudwatch.LogGroup("kafka-test", {});
+const bucket = new aws.s3.Bucket("kafka-bucket", {acl: "private"});
+const firehoseRole = new aws.iam.Role("kafka-firehoseRole", {assumeRolePolicy: `{
 "Version": "2012-10-17",
 "Statement": [
   {
@@ -38,7 +38,7 @@ const firehoseRole = new aws.iam.Role("kafkafirehoseRole", {assumeRolePolicy: `{
   ]
 }
 `});
-const testStream = new aws.kinesis.FirehoseDeliveryStream("kafkatestStream", {
+const testStream = new aws.kinesis.FirehoseDeliveryStream("kafka-testStream", {
     destination: "s3",
     s3Configuration: {
         roleArn: firehoseRole.arn,
@@ -48,9 +48,9 @@ const testStream = new aws.kinesis.FirehoseDeliveryStream("kafkatestStream", {
         LogDeliveryEnabled: "placeholder",
     },
 });
-const example = new aws.msk.Cluster("kafkaexample", {
-    clusterName: "kafkaexample",
-    kafkaVersion: "2.4.1.1",
+const msk = new aws.msk.Cluster("kafka-msk", {
+    clusterName: "kafka-msk",
+    kafkaVersion: "2.6.0",
     numberOfBrokerNodes: 3,
     brokerNodeGroupInfo: {
         //instanceType: "kafka.m5.large",
@@ -65,6 +65,7 @@ const example = new aws.msk.Cluster("kafkaexample", {
     },
     encryptionInfo: {
         encryptionAtRestKmsKeyArn: kms.arn,
+        encryptionInTransit: {clientBroker:"TLS", inCluster: true }
     },
     openMonitoring: {
         prometheus: {
@@ -94,11 +95,15 @@ const example = new aws.msk.Cluster("kafkaexample", {
         },
     },
     tags: {
-        foo: "kafkabar",
+        foo: "kafka-foobar",
     },
 });
-export const zookeeperConnectString = example.zookeeperConnectString;
-export const bootstrapBrokersTls = example.bootstrapBrokersTls;
-export const mks_kafka_version= example.kafkaVersion;
-export const mks_kafka_clustername=example.clusterName;
-export const mks_kafka_numberOfBrokerNodes=example.numberOfBrokerNodes;
+export const zookeeperConnectString = msk.zookeeperConnectString;
+export const bootstrapBrokersTls = msk.bootstrapBrokersTls;
+export const mks_kafka_version= msk.kafkaVersion;
+export const mks_kafka_clustername=msk.clusterName;
+export const mks_kafka_numberOfBrokerNodes=msk.numberOfBrokerNodes;
+export const mks_kafka_id=msk.id;
+export const mks_kafka_encryptioninfo=msk.encryptionInfo;
+export const mks_kafka_enhancedMonitoring=msk.enhancedMonitoring;
+export const mks_kafka_arn=msk.arn;
