@@ -29,7 +29,6 @@ const cluster = new eks.Cluster("shahteks",
     instanceType:"t3a.medium",
     //instanceType: "t4g.medium",
     tags: mytags,
-    //version:'latest'
     version: "1.18",
 });
 
@@ -48,11 +47,12 @@ const ngstandard = new eks.NodeGroup(`${projectName}-ng`, {
     maxSize: 15,
     spotPrice: "0.08",
     labels: { "clusterType": "standard" },
-    kubeletExtraArgs: "--read-only-port 10255",
+    //kubeletExtraArgs: "--read-only-port 10255",
     encryptRootBockDevice: true,
     nodeRootVolumeSize: 10,
     //autoScalingGroupTags: autoscaling_tags,
     cloudFormationTags: autoscaling_tags,
+    
 
 });
 /* const ngstandard = eks.createNodeG(`${projectName}-ng`, {

@@ -1,0 +1,4 @@
+config:
+  iac-workshop-azurenextgen:container: htmlqa
+  iac-workshop-azurenextgen:location: eastu2
+  iac-workshop-azurenextgen:name: somethingelse
