@@ -1,5 +1,5 @@
 ## Azure-Nextgen WebServer in TypeScript
-1. Uses with [component resources](https://www.pulumi.com/docs/reference/pkg/python/pulumi/#pulumi.ComponentResource)
+1. Uses [component resources](https://www.pulumi.com/docs/reference/pkg/python/pulumi/#pulumi.ComponentResource)
 1. [Azure-nextgen api](https://www.pulumi.com/docs/reference/pkg/azure-nextgen/)
 1. Sets up an azure-nextgen vnet with subnets
 1. Launches vm's, creates security group rules, and launches an iot central app
@@ -32,11 +32,12 @@
     ```bash
     pulumi stack init dev
     ```
-1. Install the Azure NextGen Package
+1. Install the Azure NextGen Package for the policy as code
 
     Run the following command to install the Azure NextGen package:
 
     ```bash
+    cd policy-as-code
     npm install @pulumi/azure-nextgen
     ```
 
@@ -60,21 +61,28 @@
 
     ```
     Current stack outputs (14):
-    OUTPUT                                      VALUE
-    azure_region                                eastus
-    iot_central_app_name                        tushar1-iotapp
-    iot_central_app_name_sku                    {"name":"ST1"}
-    network_cidr_block                          {"addressPrefixes":["10.0.0.0/22"]}
-    network_name                                tushar1-vnet
-    network_security_group_name                 tushar1-nsg
-    network_security_inbound_rule2_direction    Inbound
-    network_security_inbound_rule2_name         tushar1-security-rule2
-    network_security_inbound_rule2_port_range   22
-    network_security_outbound_rule1_direction   Outbound
-    network_security_outbound_rule1_name        tushar1-security-rule1
-    network_security_outbound_rule1_port_range  8080
-    resource_group                              tushar1-rg
-    total_number_of_virtual_machines            1```
+    Outputs:
+    azure_region                              : "westus"
+    iot_central_app_name                      : "demo-azure-nextgen-ts-webserver-iotapp"
+    iot_central_app_name_sku                  : {
+        name: "ST1"
+    }
+    network_cidr_block                        : {
+        addressPrefixes: [
+            [0]: "10.0.0.0/22"
+        ]
+    }
+    network_name                              : "demo-azure-nextgen-ts-webserver-vnet"
+    network_security_group_name               : "demo-azure-nextgen-ts-webserver-nsg"
+    network_security_inbound_rule2_direction  : "Inbound"
+    network_security_inbound_rule2_name       : "demo-azure-nextgen-ts-webserver-security-rule2"
+    network_security_inbound_rule2_port_range : "22"
+    network_security_outbound_rule1_direction : "Outbound"
+    network_security_outbound_rule1_name      : "demo-azure-nextgen-ts-webserver-security-rule1"
+    network_security_outbound_rule1_port_range: "8080"
+    resource_group                            : "demo-azure-nextgen-ts-webserver-rg"
+    total_number_of_virtual_machines          : 1
+    ```
 
 
 ## Clean Up

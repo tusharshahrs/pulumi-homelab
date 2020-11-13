@@ -28,7 +28,7 @@ new PolicyPack("azure", {
                 properties: {
                     maxSubnetPrefixLength: {
                         type: "number",
-                        default: 22,
+                        default: 23,
                     },
                 },
             },

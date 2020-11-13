@@ -1,0 +1,6 @@
+name: azure-nextgen-databricks
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: A minimal Azure NextGen Python Pulumi program

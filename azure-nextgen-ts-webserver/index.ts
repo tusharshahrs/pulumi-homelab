@@ -1,10 +1,11 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as network from "@pulumi/azure-nextgen/network/latest";
 import * as compute from "@pulumi/azure-nextgen/compute/latest";
-import * as iotcentral from "@pulumi/azure-nextgen/iotcentral/latest"
-import { StandardAccount } from "./common"
+import * as iotcentral from "@pulumi/azure-nextgen/iotcentral/latest";
+//import * as random from "@pulumi/random";
 
-import { sshKey, projectName, stackName, location, nameprefix } from "./config";
+import { StandardAccount, suffix } from "./common"
+import { sshKey, projectName, stackName, location, nameprefix, } from "./config";
 import { tagAllResources, } from "./taggable";
 
 const config = new pulumi.Config()
@@ -21,15 +22,14 @@ const config = new pulumi.Config()
 const lz = new StandardAccount(`${nameprefix}`, {
     location: location,
     cidrBlock: "10.0.0.0/22",
-    subnetCidrBlocks: ["10.0.0.0/23", "10.0.2.0/23"]
+    subnetCidrBlocks: ["10.0.0.0/23", "10.0.2.0/23"],
 }); 
-// "10.0.0.0/21", for policy violation trigger 
 
 // Create a network security group resource
 const network_security_group = new network.NetworkSecurityGroup(`${nameprefix}-networkSecurityGroup`, {
     location,
     resourceGroupName: lz.resourceGroup.name,
-    networkSecurityGroupName: `${nameprefix}-nsg`,
+    networkSecurityGroupName: pulumi.interpolate`${nameprefix}-nsg-${suffix.result}`,
 });
 
 // Creeate a security rule.  This is created in the network security group.
@@ -45,7 +45,7 @@ const security_rule1 = new network.SecurityRule(`${nameprefix}-securityRule1`, {
     resourceGroupName: lz.resourceGroup.name,
     sourceAddressPrefix: "10.0.0.0/8",
     sourcePortRange: "*",
-    securityRuleName: `${nameprefix}-security-rule1`,
+    securityRuleName: pulumi.interpolate`${nameprefix}-security-rule1-${suffix.result}`,
 }, { parent: network_security_group, ignoreChanges:["tags"], });
 
 // SSH Port 22 security group rule
@@ -60,7 +60,7 @@ const security_rule2 = new network.SecurityRule(`${nameprefix}-securityRule2`, {
     resourceGroupName: lz.resourceGroup.name,
     sourceAddressPrefix: "*",
     sourcePortRange: "*",
-    securityRuleName: `${nameprefix}-security-rule2`,
+    securityRuleName: pulumi.interpolate`${nameprefix}-security-rule2-${suffix.result}`,
 }, { parent: network_security_group, ignoreChanges:["tags"], });
 
 // Get instance count
@@ -76,7 +76,7 @@ for (let i = 0; i < instanceCount; i++) {
 
     // Creating public ip address
     const publicIp = new network.PublicIPAddress(`${nameprefix}-ip-${i}`, {
-        publicIpAddressName: `${nameprefix}-ip-${i}`,
+        publicIpAddressName: pulumi.interpolate`${nameprefix}-publicip-${i}-${suffix.result}`,
         resourceGroupName: lz.resourceGroup.name,
         location,
         publicIPAllocationMethod: "Dynamic",
@@ -84,11 +84,11 @@ for (let i = 0; i < instanceCount; i++) {
 
     // Creating network interface
     const networkInterface = new network.NetworkInterface(`${nameprefix}-nic-${i}`, {
-        networkInterfaceName: `${nameprefix}-nic-nsg-${i}`,
+        networkInterfaceName: pulumi.interpolate`${nameprefix}-nic-${i}-${suffix.result}`,
         resourceGroupName: lz.resourceGroup.name,
         location,
         ipConfigurations: [{
-            name: `${nameprefix}-nic-ipcfg-${i}`,
+            name: pulumi.interpolate`${nameprefix}-nic-ipcfg-${i}-${suffix.result}`,
             subnet: { id: lz.subnets[i].id },
             publicIPAddress: { id: publicIp.id },
             privateIPAllocationMethod: "Dynamic"
@@ -99,11 +99,11 @@ for (let i = 0; i < instanceCount; i++) {
     const userName = "pulumi-admin";
     // Creating virtual machines names
     const myvmName = `${nameprefix}-vm-${i}`;
-    // Creating virtual machines
+     // Creating virtual machines
     const webServer = new compute.VirtualMachine(myvmName, {
         resourceGroupName: lz.resourceGroup.name,
         location,
-        vmName: myvmName,
+        vmName: pulumi.interpolate`${nameprefix}-vm-${i}-${suffix.result}`,
         networkProfile: {
             networkInterfaces: [{ id: networkInterface.id }],
         },
@@ -129,7 +129,7 @@ for (let i = 0; i < instanceCount; i++) {
         storageProfile: {
             osDisk: {
                 createOption: "FromImage",
-                name: myvmName,
+                name: pulumi.interpolate`${nameprefix}-vm-disk-${i}-${suffix.result}`,
             },
             imageReference: {
                 publisher: "canonical",
@@ -148,14 +148,12 @@ const iotCentralApp = new iotcentral.App(`${nameprefix}-iotapp`, {
     displayName: "My IoT Central App",
     location: lz.resourceGroup.location,
     resourceGroupName: lz.resourceGroup.name,
-    resourceName: `${nameprefix}-iotapp`,
-    //resourceName: "myiotappdev",
-    subdomain: `${nameprefix}-subdomain`,
-    //subdomain: "my-iotcentral-sub",
+    resourceName: pulumi.interpolate`${nameprefix}-iotapp-${suffix.result}`,
+    subdomain: pulumi.interpolate`${nameprefix}-subdomain-${suffix.result}`,
     sku: {
         name: "ST1",
     },
-},);
+},{ dependsOn: [security_rule1] });
 
 export const resource_group = lz.resourceGroup.name;
 export const network_cidr_block = lz.network.addressSpace;
