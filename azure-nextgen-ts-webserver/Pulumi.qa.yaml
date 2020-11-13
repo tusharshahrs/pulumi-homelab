@@ -3,4 +3,4 @@ config:
   demo-azure-nextgen-ts-webserver:location: eastus2
   demo-azure-nextgen-ts-webserver:nameprefix: demo
   demo-azure-nextgen-ts-webserver:osprofile_password:
-    secure: AAABAII7zF2l291cfzbtENWGs/KAhsTNNsbEdqQtKgieKpmqRVodJwbU14g=
+    secure: AAABAM+PK1sZuvL2BM7S/WVAcFDhgJuTg/Wx9UerxMHRcjxV/i2jFBrql1c=
