@@ -1,0 +1,3 @@
+config:
+  aws-eks-k8s-ts:aws_profile_name: pulumi-ce
+  aws:region: us-east-2
