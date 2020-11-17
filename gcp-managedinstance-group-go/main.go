@@ -105,7 +105,7 @@ func flareproxy(ctx *pulumi.Context) error {
 			Tags: pulumi.StringArray{
 				pulumi.String("https-server"),
 			},
-		})
+		}, pulumi.DeleteBeforeReplace(true))
 		if err != nil {
 			return err
 		}
@@ -133,7 +133,7 @@ func flareproxy(ctx *pulumi.Context) error {
 			Versions: compute.RegionInstanceGroupManagerVersionArray{compute.RegionInstanceGroupManagerVersionArgs{
 				InstanceTemplate: tpl.SelfLink,
 			}},
-		})
+		},pulumi.DeleteBeforeReplace(true))
 		if err != nil {
 			return err
 		}
