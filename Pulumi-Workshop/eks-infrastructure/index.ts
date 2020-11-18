@@ -1,7 +1,7 @@
 //import * as awsx from "@pulumi/awsx";
 import * as eks from "@pulumi/eks";
 import * as pulumi from "@pulumi/pulumi";
-import { Config, getStack,getProject, StackReference } from "@pulumi/pulumi";
+import { Config, getStack, getProject, StackReference } from "@pulumi/pulumi";
 import * as iam from "./iam";
 
 //const networkingStack = new StackReference(config.get("networkingStack"))
@@ -10,7 +10,9 @@ const networkingStack = new StackReference(config.require("networkingStack"));
 const vpc_id = networkingStack.getOutput("pulumi_vpc_id");
 const vpc_privatesubnetids = networkingStack.getOutput("pulumi_vpc_private_subnet_ids");
 const vpc_publicsubnetids = networkingStack.getOutput("pulumi_vpc_public_subnet_ids");
-const projectName = getProject()
+const projectName = getProject();
+const stackName = getStack();
+
 //const config = new pulumi.Config();
 //vpc = config.
 /* const vpc = new awsx.ec2.Vpc("shahteks-vpc", {
@@ -18,7 +20,8 @@ const projectName = getProject()
     numberOfNatGateways: 1,
 
 }); */
-const mytags = {"eks":"yes", "launched_by":"shaht","demo":"yes", "env":"dev"};
+const mytags = {"eks":"yes", "launched_by":"shaht","demo":"yes", "env":"dev", "projectName": projectName, "stackName": stackName};
+const my_name = "shaht-eks";
 
 const cluster = new eks.Cluster("shahteks", 
 {
@@ -32,39 +35,30 @@ const cluster = new eks.Cluster("shahteks",
     version: "1.18",
 });
 
-const autoscaling_tags = {"pulumi":"eks", "autoscaling":"yes","selfservice":"no", "team": "engineering", "partner":"marketing"}
+const autoscaling_tags = {"pulumi":"eks", "autoscaling":"yes","selfservice":"no", "team": "engineering", "partner":"marketing", "projectName": projectName, "stackName": stackName}
 // Create 3 IAM Roles and matching InstanceProfiles to use with the nodegroups.
-const roles = iam.createRoles(projectName, 3);
-const instanceProfiles = iam.createInstanceProfiles(projectName, roles);
+const roles = iam.createRoles(my_name, 3);
+const instanceProfiles = iam.createInstanceProfiles(my_name, roles);
 
-const ngstandard = new eks.NodeGroup(`${projectName}-ng`, {
+const ngstandard = new eks.NodeGroup(`${my_name}-ng`, {
     cluster: cluster,
     //instanceType: "t3a.medium",
     instanceType: "t3a.small",
     instanceProfile: instanceProfiles[0],
     desiredCapacity: 3,
     minSize: 2,
-    maxSize: 15,
-    spotPrice: "0.08",
+    maxSize: 10,
+    spotPrice: "0.07",
     labels: { "clusterType": "standard" },
     //kubeletExtraArgs: "--read-only-port 10255",
     encryptRootBockDevice: true,
     nodeRootVolumeSize: 10,
-    //autoScalingGroupTags: autoscaling_tags,
-    cloudFormationTags: autoscaling_tags,
+    autoScalingGroupTags: autoscaling_tags,
+    //cloudFormationTags: autoscaling_tags,
     
 
 });
-/* const ngstandard = eks.createNodeG(`${projectName}-ng`, {
-    cluster: cluster,
-    instanceTypes: "t3a.medium",
-    instance
 
-}); */
-
-//export const vpcId = vpc.id;
-//export const vpcprivatesubnets = vpc.privateSubnetIds;
-//export const vpcpublicsubnets = vpc.publicSubnetIds;
 export const vpcid = vpc_id;
 export const vpcprivatesubnets = vpc_privatesubnetids;
 export const vpcpublicsubnets = vpc_publicsubnetids;
