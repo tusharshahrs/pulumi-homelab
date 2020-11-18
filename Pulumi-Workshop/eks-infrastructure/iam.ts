@@ -10,7 +10,7 @@ const managedPolicyArns: string[] = [
 
 // Creates a role and attaches the EKS worker node IAM managed policies
 export function createRole(name: string): aws.iam.Role {
-    const role = new aws.iam.Role(name, {
+    const role = new aws.iam.Role(`${name}-iamrole`, {
         assumeRolePolicy: aws.iam.assumeRolePolicyForPrincipal({
             Service: "ec2.amazonaws.com",
         }),
