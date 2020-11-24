@@ -13,13 +13,6 @@ const vpc_publicsubnetids = networkingStack.getOutput("pulumi_vpc_public_subnet_
 const projectName = getProject();
 const stackName = getStack();
 
-//const config = new pulumi.Config();
-//vpc = config.
-/* const vpc = new awsx.ec2.Vpc("shahteks-vpc", {
-    numberOfAvailabilityZones: 3,
-    numberOfNatGateways: 1,
-
-}); */
 const mytags = {"eks":"yes", "launched_by":"shaht","demo":"yes", "env":"dev", "projectName": projectName, "stackName": stackName};
 const my_name = "shaht-eks";
 
@@ -30,7 +23,6 @@ const cluster = new eks.Cluster("shahteks",
     publicSubnetIds: vpc_publicsubnetids,
     minSize: 1,
     instanceType:"t3a.medium",
-    //instanceType: "t4g.medium",
     tags: mytags,
     version: "1.18",
 });
@@ -42,7 +34,6 @@ const instanceProfiles = iam.createInstanceProfiles(my_name, roles);
 
 const ngstandard = new eks.NodeGroup(`${my_name}-ng`, {
     cluster: cluster,
-    //instanceType: "t3a.medium",
     instanceType: "t3a.small",
     instanceProfile: instanceProfiles[0],
     desiredCapacity: 3,
@@ -54,9 +45,6 @@ const ngstandard = new eks.NodeGroup(`${my_name}-ng`, {
     encryptRootBockDevice: true,
     nodeRootVolumeSize: 10,
     autoScalingGroupTags: autoscaling_tags,
-    //cloudFormationTags: autoscaling_tags,
-    
-
 });
 
 export const vpcid = vpc_id;
