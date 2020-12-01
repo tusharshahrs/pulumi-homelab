@@ -1,0 +1,3 @@
+name: aws-acm-import-existing-ts
+runtime: nodejs
+description: A minimal AWS TypeScript Pulumi program
