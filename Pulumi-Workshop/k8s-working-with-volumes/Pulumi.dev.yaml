@@ -1,0 +1,3 @@
+config:
+  aws:region: us-east-2
+  k8s-working-with-volumes:eksclusterStack: shaht/eks-infrastructure/dev

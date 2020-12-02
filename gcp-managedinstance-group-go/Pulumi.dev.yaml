@@ -7,10 +7,10 @@ config:
   gcp-managedinstance-group-go:labels:
   - environment:staging
   - components:flareproxy
-  gcp-managedinstance-group-go:network: demo-c6d924b
+  gcp-managedinstance-group-go:network: demo-5206ceb
   gcp-managedinstance-group-go:version: v0.0.1
   gcp-managedinstance-group-go:regions:
     us-central1: 
-      subnet: demo-1-0c8c861
+      subnet: demo-0-ec12015
       #subnet: demo-0-997445c
       vmType: e2-micro
