@@ -76,7 +76,7 @@ const devNamespace = new k8s.core.v1.Namespace("devNamespace", {
 }); */
 
 
-const slowStorageClass = new k8s.storage.v1.StorageClass("slowStorageClass", {
+/* const slowStorageClass = new k8s.storage.v1.StorageClass("slowStorageClass", {
     kind: "StorageClass",
     apiVersion: "storage.k8s.io/v1",
     metadata: {
@@ -131,6 +131,73 @@ const class_podPod = new k8s.core.v1.Pod("class_podPod", {
                 "/bin/bash",
                 "-c",
                 "sleep 60m",
+            ],
+            volumeMounts: [{
+                mountPath: "/data",
+                name: "data",
+            }],
+        }],
+    },
+}, { provider: k8sProvider }); */
+
+
+
+
+const fastStorageClass = new k8s.storage.v1.StorageClass("fastStorageClass", {
+    kind: "StorageClass",
+    apiVersion: "storage.k8s.io/v1",
+    metadata: {
+        name: "fast",
+        annotations: {
+            "storageclass.kubernetes.io/is-default-class": "true",
+        },
+    },
+    provisioner: "kubernetes.io/aws-ebs",
+    parameters: {
+        type: "io2",
+        zones: "us-east-2a",
+        iopsPerGB: "10"
+    },
+    reclaimPolicy: "Retain",
+}, { provider: k8sProvider });
+
+const pv_ticketPersistentVolumeClaim = new k8s.core.v1.PersistentVolumeClaim("pv_ticketPersistentVolumeClaim", {
+    apiVersion: "v1",
+    kind: "PersistentVolumeClaim",
+    metadata: {
+        name: "pv-ticket",
+    },
+    spec: {
+        accessModes: ["ReadWriteOnce"],
+        storageClassName: "fast",
+        resources: {
+            requests: {
+                storage: "25Gi",
+            },
+        },
+    },
+}, { provider: k8sProvider });
+
+const class_podPod = new k8s.core.v1.Pod("class_podPod", {
+    apiVersion: "v1",
+    kind: "Pod",
+    metadata: {
+        name: "class-pod",
+    },
+    spec: {
+        volumes: [{
+            name: "data",
+            persistentVolumeClaim: {
+                claimName: "pv-ticket",
+            },
+        }],
+        containers: [{
+            name: "ubuntu-ctr",
+            image: "ubuntu:latest",
+            command: [
+                "/bin/bash",
+                "-c",
+                "sleep 1m",
             ],
             volumeMounts: [{
                 mountPath: "/data",
