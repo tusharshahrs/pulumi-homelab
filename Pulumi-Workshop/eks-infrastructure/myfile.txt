@@ -1,0 +1,596 @@
+Previewing update (dev)
+
+View Live: https://app.pulumi.com/shaht/eks-infrastructure/dev/previews/7191bda6-9fe0-40e2-bf0c-82ab40fbdbd3
+
+
+    pulumi:pulumi:Stack eks-infrastructure-dev  debug: Registering resource: t=pulumi:pulumi:Stack, name=eks-infrastructure-dev, custom=false, remote=false
+    pulumi:pulumi:Stack eks-infrastructure-dev  debug: RegisterResource RPC prepared: t=pulumi:pulumi:Stack, name=eks-infrastructure-dev
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=pulumi:pulumi:Stack, name=eks-infrastructure-dev
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:eks-infrastructure-dev[pulumi:pulumi:Stack]; err: null, resp: urn:pulumi:dev::eks-infrastructure::pulumi:pulumi:Stack::eks-infrastructure-dev,,,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Running program '/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure' in pwd '/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure' w/ args: 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Reading resource: id=shaht/crosswalk-vpc/eks-dev, t=pulumi:pulumi:StackReference, name=shaht/crosswalk-vpc/eks-dev
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=eks:index:Cluster, name=shahteks, custom=false, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=eks:index:ServiceRole, name=shahteks-eksRole, custom=false, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/role:Role, name=shahteks-eksRole-role, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-eksRole-4b490823, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-eksRole-90eb1c99, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/securityGroup:SecurityGroup, name=shahteks-eksClusterSecurityGroup, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shahteks-eksClusterInternetEgressRule, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:eks/cluster:Cluster, name=shahteks-eksCluster, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=pulumi:providers:kubernetes, name=shahteks-eks-k8s, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=pulumi-nodejs:dynamic:Resource, name=shahteks-vpc-cni, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=eks:index:ServiceRole, name=shahteks-instanceRole, custom=false, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/role:Role, name=shahteks-instanceRole-role, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-instanceRole-03516f97, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-instanceRole-e1b295bd, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-instanceRole-3eb088f2, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/instanceProfile:InstanceProfile, name=shahteks-instanceProfile, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=kubernetes:core/v1:ConfigMap, name=shahteks-nodeAccess, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/securityGroup:SecurityGroup, name=shahteks-nodeSecurityGroup, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shahteks-eksNodeIngressRule, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shahteks-eksNodeClusterIngressRule, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shahteks-eksExtApiServerClusterIngressRule, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shahteks-eksNodeInternetEgressRule, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shahteks-eksClusterIngressRule, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=pulumi-nodejs:dynamic:Resource, name=shahteks-cfnStackName, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Invoking function: tok=aws:index/getRegion:getRegion asynchronously
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/launchConfiguration:LaunchConfiguration, name=shahteks-nodeLaunchConfiguration, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:cloudformation/stack:Stack, name=shahteks-nodes, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=pulumi:providers:kubernetes, name=shahteks-provider, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/role:Role, name=shaht-eks-role-0-iamrole, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-0-policy-0, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-0-policy-1, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-0-policy-2, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/role:Role, name=shaht-eks-role-1-iamrole, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-1-policy-0, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-1-policy-1, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-1-policy-2, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/role:Role, name=shaht-eks-role-2-iamrole, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-2-policy-0, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-2-policy-1, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-2-policy-2, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/instanceProfile:InstanceProfile, name=shaht-eks-instanceProfile-0, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/instanceProfile:InstanceProfile, name=shaht-eks-instanceProfile-1, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:iam/instanceProfile:InstanceProfile, name=shaht-eks-instanceProfile-2, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=eks:index:NodeGroup, name=shaht-eks-ng, custom=false, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/securityGroup:SecurityGroup, name=shaht-eks-ng-nodeSecurityGroup, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shaht-eks-ng-eksNodeIngressRule, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shaht-eks-ng-eksNodeClusterIngressRule, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shaht-eks-ng-eksExtApiServerClusterIngressRule, custom=true, remote=false
+ +  eks:index:NodeGroup shaht-eks-ng create 
+ +  eks:index:Cluster shahteks create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shaht-eks-ng-eksNodeInternetEgressRule, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: AWS Auth provider used: "SharedCredentialsProvider"
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Trying to get account information via sts:GetCallerIdentity
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shaht-eks-ng-eksClusterIngressRule, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=pulumi-nodejs:dynamic:Resource, name=shaht-eks-ng-cfnStackName, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Invoking function: tok=aws:index/getRegion:getRegion asynchronously
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:ec2/launchConfiguration:LaunchConfiguration, name=shaht-eks-ng-nodeLaunchConfiguration, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Registering resource: t=aws:cloudformation/stack:Stack, name=shaht-eks-ng-nodes, custom=true, remote=false
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: , obj={}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: , obj={}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Invoking function: tok=aws:ssm/getParameter:getParameter asynchronously
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: , obj={"name":"/aws/service/eks/optimized-ami/1.18/amazon-linux-2/recommended/image_id"}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Found free variables: {"required":{},"optional":{}}
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/role:Role, name=shaht-eks-role-0-iamrole
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=eks:index:NodeGroup, name=shaht-eks-ng
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/role:Role, name=shaht-eks-role-2-iamrole
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/role:Role, name=shaht-eks-role-1-iamrole
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=eks:index:Cluster, name=shahteks
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: ReadResource RPC prepared: id=shaht/crosswalk-vpc/eks-dev, t=pulumi:pulumi:StackReference, name=shaht/crosswalk-vpc/eks-dev
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-ng[eks:index:NodeGroup]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:NodeGroup::shaht-eks-ng,,,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResourceOutputs RPC prepared: urn=urn:pulumi:dev::eks-infrastructure::eks:index:NodeGroup::shaht-eks-ng
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=pulumi-nodejs:dynamic:Resource, name=shaht-eks-ng-cfnStackName
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shahteks[eks:index:Cluster]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster::shahteks,,,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=eks:index:ServiceRole, name=shahteks-eksRole
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=eks:index:ServiceRole, name=shahteks-instanceRole
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=pulumi-nodejs:dynamic:Resource, name=shahteks-cfnStackName
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Trying to get account information via sts:GetCallerIdentity
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Reading SSM Parameter: {
+ +  aws:iam:Role shaht-eks-role-1-iamrole create 
+ +  eks:index:ServiceRole shahteks-eksRole create 
+ +  eks:index:ServiceRole shahteks-instanceRole create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create read pulumi:pulumi:StackReference shaht/crosswalk-vpc/eks-dev
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Invoke RPC finished: tok=aws:index/getRegion:getRegion; err: null, resp: description,,,US East (Ohio),endpoint,,,ec2.us-east-2.amazonaws.com,id,,,us-east-2,name,,,us-east-2,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Invoke RPC finished: tok=aws:index/getRegion:getRegion; err: null, resp: description,,,US East (Ohio),endpoint,,,ec2.us-east-2.amazonaws.com,id,,,us-east-2,name,,,us-east-2,
+ +  aws:iam:Role shaht-eks-role-0-iamrole create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResourceOutputs RPC finished: urn=urn:pulumi:dev::eks-infrastructure::eks:index:NodeGroup::shaht-eks-ng; err: null, resp: 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResourceOutputs RPC finished: urn=urn:pulumi:dev::eks-infrastructure::eks:index:NodeGroup::shaht-eks-ng; err: null, resp: 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shahteks-eksRole[eks:index:ServiceRole]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-eksRole,,,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/role:Role, name=shahteks-eksRole-role
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-role-1-iamrole[aws:iam/role:Role]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/role:Role::shaht-eks-role-1-iamrole,,__defaults,,,,,,,,forceDetachPolicies,,,maxSessionDuration,,,name,,,path,assumeRolePolicy,,,{"Statement":[{"Action":"sts:AssumeRole","Effect":"Allow","Principal":{"Service":"ec2.amazonaws.com"},"Sid":"AllowAssumeRole"}],"Version":"2012-10-17"},forceDetachPolicies,,,,false,maxSessionDuration,,3600,name,,,shaht-eks-role-1-iamrole-ad5e7d5,path,,,/,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shahteks-instanceRole[eks:index:ServiceRole]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-instanceRole,,,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/role:Role, name=shahteks-instanceRole-role
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/instanceProfile:InstanceProfile, name=shaht-eks-instanceProfile-1
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-1-policy-0
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-1-policy-1
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-1-policy-2
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-role-0-iamrole[aws:iam/role:Role]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/role:Role::shaht-eks-role-0-iamrole,,__defaults,,,,,,,,forceDetachPolicies,,,maxSessionDuration,,,name,,,path,assumeRolePolicy,,,{"Statement":[{"Action":"sts:AssumeRole","Effect":"Allow","Principal":{"Service":"ec2.amazonaws.com"},"Sid":"AllowAssumeRole"}],"Version":"2012-10-17"},forceDetachPolicies,,,,false,maxSessionDuration,,3600,name,,,shaht-eks-role-0-iamrole-773eb91,path,,,/,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/instanceProfile:InstanceProfile, name=shaht-eks-instanceProfile-0
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-0-policy-0
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-0-policy-1
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-0-policy-2
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create read pulumi:pulumi:StackReference shaht/crosswalk-vpc/eks-dev
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: ReadResource RPC finished: resource:shaht/crosswalk-vpc/eks-dev[pulumi:pulumi:StackReference]#...; err: null, resp: urn:pulumi:dev::eks-infrastructure::pulumi:pulumi:StackReference::shaht/crosswalk-vpc/eks-dev,name,,,shaht/crosswalk-vpc/eks-dev,outputs,,,,,,secretOutputNames,,,,,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:ec2/securityGroup:SecurityGroup, name=shahteks-eksClusterSecurityGroup
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create error: Running program '/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure' failed with an unhandled exception:
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: Invoke RPC finished: tok=aws:ssm/getParameter:getParameter; err: null, resp: arn,,,arn:aws:ssm:us-east-2:052848974346:parameter/aws/service/eks/optimized-ami/1.18/amazon-linux-2/recommended/image_id,id,,,/aws/service/eks/optimized-ami/1.18/amazon-linux-2/recommended/image_id,name,,,/aws/service/eks/optimized-ami/1.18/amazon-linux-2/recommended/image_id,type,,,String,value,,,ami-02cb7b96179d95fdc,version,,5,withDecryption,,,,true,
+ +  aws:iam:Role shaht-eks-role-2-iamrole create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-role-2-iamrole[aws:iam/role:Role]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/role:Role::shaht-eks-role-2-iamrole,,__defaults,,,,,,,,forceDetachPolicies,,,maxSessionDuration,,,name,,,path,assumeRolePolicy,,,{"Statement":[{"Action":"sts:AssumeRole","Effect":"Allow","Principal":{"Service":"ec2.amazonaws.com"},"Sid":"AllowAssumeRole"}],"Version":"2012-10-17"},forceDetachPolicies,,,,false,maxSessionDuration,,3600,name,,,shaht-eks-role-2-iamrole-6bd0db4,path,,,/,,
+ +  pulumi-nodejs:dynamic:Resource shahteks-cfnStackName create 
+ +  aws:iam:Role shahteks-eksRole-role create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/instanceProfile:InstanceProfile, name=shaht-eks-instanceProfile-2
+ +  aws:iam:RolePolicyAttachment shaht-eks-role-1-policy-1 create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-2-policy-1
+ +  pulumi-nodejs:dynamic:Resource shaht-eks-ng-cfnStackName create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-2-policy-0
+ +  aws:iam:Role shahteks-instanceRole-role create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-2-policy-2
+ +  aws:iam:RolePolicyAttachment shaht-eks-role-1-policy-0 create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shahteks-cfnStackName[pulumi-nodejs:dynamic:Resource]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$pulumi-nodejs:dynamic:Resource::shahteks-cfnStackName,,__provider,,,exports.handler = __f0;
+ +  aws:iam:InstanceProfile shaht-eks-instanceProfile-1 create 
+ +  aws:iam:RolePolicyAttachment shaht-eks-role-1-policy-2 create 
+ +  aws:iam:RolePolicyAttachment shaht-eks-role-0-policy-1 create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shahteks-eksRole-role[aws:iam/role:Role]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::shahteks-eksRole-role,,__defaults,,,,,,,,forceDetachPolicies,,,maxSessionDuration,,,name,,,path,assumeRolePolicy,,,{"Version":"2012-10-17","Statement":[{"Action":["sts:AssumeRole"],"Effect":"Allow","Principal":{"Service":["eks.amazonaws.com"]}}]},description,,,Allows EKS to manage clusters on your behalf.,forceDetachPolicies,,,,false,maxSessionDuration,,3600,name,,,shahteks-eksRole-role-62dd993,path,,,/,,
+ +  aws:iam:RolePolicyAttachment shaht-eks-role-0-policy-2 create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-eksRole-4b490823
+ +  aws:iam:InstanceProfile shaht-eks-instanceProfile-0 create 
+ +  aws:iam:RolePolicyAttachment shaht-eks-role-0-policy-0 create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-eksRole-90eb1c99
+ +  aws:ec2:SecurityGroup shahteks-eksClusterSecurityGroup create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-role-1-policy-1[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-1-policy-1,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  aws:iam:RolePolicyAttachment shaht-eks-role-2-policy-2 create 
+ +  aws:iam:RolePolicyAttachment shaht-eks-role-2-policy-0 create 
+ +  aws:iam:RolePolicyAttachment shaht-eks-role-2-policy-1 create 
+ +  aws:iam:InstanceProfile shaht-eks-instanceProfile-2 create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-ng-cfnStackName[pulumi-nodejs:dynamic:Resource]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:NodeGroup$pulumi-nodejs:dynamic:Resource::shaht-eks-ng-cfnStackName,,__provider,,,exports.handler = __f0;
+ +  aws:iam:RolePolicyAttachment shahteks-eksRole-4b490823 create 
+ +  aws:iam:RolePolicyAttachment shahteks-eksRole-90eb1c99 create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shahteks-instanceRole-role[aws:iam/role:Role]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::shahteks-instanceRole-role,,__defaults,,,,,,,,forceDetachPolicies,,,maxSessionDuration,,,name,,,path,assumeRolePolicy,,,{"Version":"2012-10-17","Statement":[{"Action":["sts:AssumeRole"],"Effect":"Allow","Principal":{"Service":["ec2.amazonaws.com"]}}]},forceDetachPolicies,,,,false,maxSessionDuration,,3600,name,,,shahteks-instanceRole-role-43e3dce,path,,,/,,
+ +  aws:iam:RolePolicyAttachment shahteks-instanceRole-03516f97 create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-instanceRole-03516f97
+ +  aws:iam:RolePolicyAttachment shahteks-instanceRole-3eb088f2 create 
+ +  aws:iam:RolePolicyAttachment shahteks-instanceRole-e1b295bd create 
+ +  aws:ec2:SecurityGroupRule shahteks-eksClusterInternetEgressRule create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create unhandled rejection: CONTEXT(279): resource:shahteks-eksCluster[aws:eks/cluster:Cluster]
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create STACK_TRACE:
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create Error: 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create     at Object.debuggablePromise (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/pulumi/runtime/debuggable.js:69:75)
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create     at Object.registerResource (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/pulumi/runtime/resource.js:132:18)
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create     at new Resource (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/pulumi/resource.js:211:24)
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create     at new CustomResource (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/pulumi/resource.js:303:9)
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create     at new Cluster (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/eks/cluster.ts:205:9)
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create     at createCore (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/cluster.ts:445:24)
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create     at new Cluster (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/cluster.ts:1320:22)
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create     at Object.<anonymous> (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/index.ts:19:17)
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create     at Module._compile (node:internal/modules/cjs/loader:1102:14)
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create     at Module.m._compile (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/ts-node/src/index.ts:439:23)
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-instanceRole-e1b295bd
+ +  aws:iam:InstanceProfile shahteks-instanceProfile create 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-instanceRole-3eb088f2
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-role-1-policy-0[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-1-policy-0,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-instanceProfile-1[aws:iam/instanceProfile:InstanceProfile]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/instanceProfile:InstanceProfile::shaht-eks-instanceProfile-1,,__defaults,,,,,,,,name,,,path,name,,,shaht-eks-instanceProfile-1-af5dbbf,path,,,/,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-role-1-policy-2[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-1-policy-2,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-role-0-policy-1[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-0-policy-1,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-role-0-policy-2[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-0-policy-2,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-instanceProfile-0[aws:iam/instanceProfile:InstanceProfile]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/instanceProfile:InstanceProfile::shaht-eks-instanceProfile-0,,__defaults,,,,,,,,name,,,path,name,,,shaht-eks-instanceProfile-0-e061969,path,,,/,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-role-0-policy-0[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-0-policy-0,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shahteks-eksClusterSecurityGroup[aws:ec2/securityGroup:SecurityGroup]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::shahteks-eksClusterSecurityGroup,,__defaults,,,,,,,,name,description,,,Managed by Pulumi,name,,,shahteks-eksClusterSecurityGroup-b8cbc82,revokeRulesOnDelete,,,,true,tags,,,,,Name,,,shahteks-eksClusterSecurityGroup,__defaults,,,,,,,demo,,,yes,eks,,,yes,env,,,dev,launched_by,,,shaht,projectName,,,eks-infrastructure,stackName,,,dev,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shahteks-eksClusterInternetEgressRule
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-role-2-policy-2[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-2-policy-2,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-role-2-policy-0[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-2-policy-0,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-role-2-policy-1[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-2-policy-1,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shaht-eks-instanceProfile-2[aws:iam/instanceProfile:InstanceProfile]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/instanceProfile:InstanceProfile::shaht-eks-instanceProfile-2,,__defaults,,,,,,,,name,,,path,name,,,shaht-eks-instanceProfile-2-389f48f,path,,,/,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shahteks-eksRole-4b490823[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::shahteks-eksRole-4b490823,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKSClusterPolicy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shahteks-eksRole-90eb1c99[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::shahteks-eksRole-90eb1c99,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKSServicePolicy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResourceOutputs RPC prepared: urn=urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-eksRole
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shahteks-instanceRole-03516f97[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::shahteks-instanceRole-03516f97,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shahteks-instanceRole-3eb088f2[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::shahteks-instanceRole-3eb088f2,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shahteks-instanceRole-e1b295bd[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::shahteks-instanceRole-e1b295bd,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResourceOutputs RPC prepared: urn=urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-instanceRole
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC prepared: t=aws:iam/instanceProfile:InstanceProfile, name=shahteks-instanceProfile
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shahteks-eksClusterInternetEgressRule[aws:ec2/securityGroupRule:SecurityGroupRule]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$aws:ec2/securityGroupRule:SecurityGroupRule::shahteks-eksClusterInternetEgressRule,,__defaults,,,,,,,,self,cidrBlocks,,,,,,,,0.0.0.0/0,description,,,Allow internet access.,fromPort,,0,protocol,,,-1,securityGroupId,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,self,,,,false,toPort,,0,type,,,egress,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResourceOutputs RPC finished: urn=urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-eksRole; err: null, resp: 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResourceOutputs RPC finished: urn=urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-eksRole; err: null, resp: 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResourceOutputs RPC finished: urn=urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-instanceRole; err: null, resp: 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResourceOutputs RPC finished: urn=urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-instanceRole; err: null, resp: 
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create debug: RegisterResource RPC finished: resource:shahteks-instanceProfile[aws:iam/instanceProfile:InstanceProfile]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$aws:iam/instanceProfile:InstanceProfile::shahteks-instanceProfile,,__defaults,,,,,,,,name,,,path,name,,,shahteks-instanceProfile-4e2cdc3,path,,,/,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ +  pulumi:pulumi:Stack eks-infrastructure-dev create 1 error; 13 messages; 168 debugs
+ 
+Diagnostics:
+  pulumi:pulumi:Stack (eks-infrastructure-dev):
+    debug: Registering resource: t=pulumi:pulumi:Stack, name=eks-infrastructure-dev, custom=false, remote=false
+    debug: RegisterResource RPC prepared: t=pulumi:pulumi:Stack, name=eks-infrastructure-dev
+    debug: RegisterResource RPC finished: resource:eks-infrastructure-dev[pulumi:pulumi:Stack]; err: null, resp: urn:pulumi:dev::eks-infrastructure::pulumi:pulumi:Stack::eks-infrastructure-dev,,,,
+    debug: Running program '/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure' in pwd '/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure' w/ args: 
+    debug: Reading resource: id=shaht/crosswalk-vpc/eks-dev, t=pulumi:pulumi:StackReference, name=shaht/crosswalk-vpc/eks-dev
+    debug: Registering resource: t=eks:index:Cluster, name=shahteks, custom=false, remote=false
+    debug: Registering resource: t=eks:index:ServiceRole, name=shahteks-eksRole, custom=false, remote=false
+    debug: Registering resource: t=aws:iam/role:Role, name=shahteks-eksRole-role, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-eksRole-4b490823, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-eksRole-90eb1c99, custom=true, remote=false
+    debug: Registering resource: t=aws:ec2/securityGroup:SecurityGroup, name=shahteks-eksClusterSecurityGroup, custom=true, remote=false
+    debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shahteks-eksClusterInternetEgressRule, custom=true, remote=false
+    debug: Registering resource: t=aws:eks/cluster:Cluster, name=shahteks-eksCluster, custom=true, remote=false
+    debug: Registering resource: t=pulumi:providers:kubernetes, name=shahteks-eks-k8s, custom=true, remote=false
+    debug: Registering resource: t=pulumi-nodejs:dynamic:Resource, name=shahteks-vpc-cni, custom=true, remote=false
+    debug: Registering resource: t=eks:index:ServiceRole, name=shahteks-instanceRole, custom=false, remote=false
+    debug: Registering resource: t=aws:iam/role:Role, name=shahteks-instanceRole-role, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-instanceRole-03516f97, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-instanceRole-e1b295bd, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-instanceRole-3eb088f2, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/instanceProfile:InstanceProfile, name=shahteks-instanceProfile, custom=true, remote=false
+    debug: Registering resource: t=kubernetes:core/v1:ConfigMap, name=shahteks-nodeAccess, custom=true, remote=false
+    debug: Registering resource: t=aws:ec2/securityGroup:SecurityGroup, name=shahteks-nodeSecurityGroup, custom=true, remote=false
+    debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shahteks-eksNodeIngressRule, custom=true, remote=false
+    debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shahteks-eksNodeClusterIngressRule, custom=true, remote=false
+    debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shahteks-eksExtApiServerClusterIngressRule, custom=true, remote=false
+    debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shahteks-eksNodeInternetEgressRule, custom=true, remote=false
+    debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shahteks-eksClusterIngressRule, custom=true, remote=false
+    debug: Registering resource: t=pulumi-nodejs:dynamic:Resource, name=shahteks-cfnStackName, custom=true, remote=false
+    debug: Invoking function: tok=aws:index/getRegion:getRegion asynchronously
+    debug: Registering resource: t=aws:ec2/launchConfiguration:LaunchConfiguration, name=shahteks-nodeLaunchConfiguration, custom=true, remote=false
+    debug: Registering resource: t=aws:cloudformation/stack:Stack, name=shahteks-nodes, custom=true, remote=false
+    debug: Registering resource: t=pulumi:providers:kubernetes, name=shahteks-provider, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/role:Role, name=shaht-eks-role-0-iamrole, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-0-policy-0, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-0-policy-1, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-0-policy-2, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/role:Role, name=shaht-eks-role-1-iamrole, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-1-policy-0, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-1-policy-1, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-1-policy-2, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/role:Role, name=shaht-eks-role-2-iamrole, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-2-policy-0, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-2-policy-1, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-2-policy-2, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/instanceProfile:InstanceProfile, name=shaht-eks-instanceProfile-0, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/instanceProfile:InstanceProfile, name=shaht-eks-instanceProfile-1, custom=true, remote=false
+    debug: Registering resource: t=aws:iam/instanceProfile:InstanceProfile, name=shaht-eks-instanceProfile-2, custom=true, remote=false
+    debug: Registering resource: t=eks:index:NodeGroup, name=shaht-eks-ng, custom=false, remote=false
+    debug: Registering resource: t=aws:ec2/securityGroup:SecurityGroup, name=shaht-eks-ng-nodeSecurityGroup, custom=true, remote=false
+    debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shaht-eks-ng-eksNodeIngressRule, custom=true, remote=false
+    debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shaht-eks-ng-eksNodeClusterIngressRule, custom=true, remote=false
+    debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shaht-eks-ng-eksExtApiServerClusterIngressRule, custom=true, remote=false
+    debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shaht-eks-ng-eksNodeInternetEgressRule, custom=true, remote=false
+    debug: AWS Auth provider used: "SharedCredentialsProvider"
+    debug: Trying to get account information via sts:GetCallerIdentity
+    debug: Registering resource: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shaht-eks-ng-eksClusterIngressRule, custom=true, remote=false
+    debug: Registering resource: t=pulumi-nodejs:dynamic:Resource, name=shaht-eks-ng-cfnStackName, custom=true, remote=false
+    debug: Invoking function: tok=aws:index/getRegion:getRegion asynchronously
+    debug: Registering resource: t=aws:ec2/launchConfiguration:LaunchConfiguration, name=shaht-eks-ng-nodeLaunchConfiguration, custom=true, remote=false
+    debug: Registering resource: t=aws:cloudformation/stack:Stack, name=shaht-eks-ng-nodes, custom=true, remote=false
+    debug: , obj={}
+    debug: , obj={}
+    debug: Invoking function: tok=aws:ssm/getParameter:getParameter asynchronously
+    debug: , obj={"name":"/aws/service/eks/optimized-ami/1.18/amazon-linux-2/recommended/image_id"}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: Found free variables: {"required":{},"optional":{}}
+    debug: RegisterResource RPC prepared: t=aws:iam/role:Role, name=shaht-eks-role-0-iamrole
+    debug: RegisterResource RPC prepared: t=eks:index:NodeGroup, name=shaht-eks-ng
+    debug: RegisterResource RPC prepared: t=aws:iam/role:Role, name=shaht-eks-role-2-iamrole
+    debug: RegisterResource RPC prepared: t=aws:iam/role:Role, name=shaht-eks-role-1-iamrole
+    debug: RegisterResource RPC prepared: t=eks:index:Cluster, name=shahteks
+    debug: ReadResource RPC prepared: id=shaht/crosswalk-vpc/eks-dev, t=pulumi:pulumi:StackReference, name=shaht/crosswalk-vpc/eks-dev
+    debug: RegisterResource RPC finished: resource:shaht-eks-ng[eks:index:NodeGroup]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:NodeGroup::shaht-eks-ng,,,,
+    debug: RegisterResourceOutputs RPC prepared: urn=urn:pulumi:dev::eks-infrastructure::eks:index:NodeGroup::shaht-eks-ng
+    debug: RegisterResource RPC prepared: t=pulumi-nodejs:dynamic:Resource, name=shaht-eks-ng-cfnStackName
+    debug: RegisterResource RPC finished: resource:shahteks[eks:index:Cluster]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster::shahteks,,,,
+    debug: RegisterResource RPC prepared: t=eks:index:ServiceRole, name=shahteks-eksRole
+    debug: RegisterResource RPC prepared: t=eks:index:ServiceRole, name=shahteks-instanceRole
+    debug: RegisterResource RPC prepared: t=pulumi-nodejs:dynamic:Resource, name=shahteks-cfnStackName
+    debug: Trying to get account information via sts:GetCallerIdentity
+    debug: Reading SSM Parameter: {
+    debug: Invoke RPC finished: tok=aws:index/getRegion:getRegion; err: null, resp: description,,,US East (Ohio),endpoint,,,ec2.us-east-2.amazonaws.com,id,,,us-east-2,name,,,us-east-2,
+    debug: Invoke RPC finished: tok=aws:index/getRegion:getRegion; err: null, resp: description,,,US East (Ohio),endpoint,,,ec2.us-east-2.amazonaws.com,id,,,us-east-2,name,,,us-east-2,
+    debug: RegisterResourceOutputs RPC finished: urn=urn:pulumi:dev::eks-infrastructure::eks:index:NodeGroup::shaht-eks-ng; err: null, resp: 
+    debug: RegisterResourceOutputs RPC finished: urn=urn:pulumi:dev::eks-infrastructure::eks:index:NodeGroup::shaht-eks-ng; err: null, resp: 
+    debug: RegisterResource RPC finished: resource:shahteks-eksRole[eks:index:ServiceRole]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-eksRole,,,,
+    debug: RegisterResource RPC prepared: t=aws:iam/role:Role, name=shahteks-eksRole-role
+    debug: RegisterResource RPC finished: resource:shaht-eks-role-1-iamrole[aws:iam/role:Role]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/role:Role::shaht-eks-role-1-iamrole,,__defaults,,,,,,,,forceDetachPolicies,,,maxSessionDuration,,,name,,,path,assumeRolePolicy,,,{"Statement":[{"Action":"sts:AssumeRole","Effect":"Allow","Principal":{"Service":"ec2.amazonaws.com"},"Sid":"AllowAssumeRole"}],"Version":"2012-10-17"},forceDetachPolicies,,,,false,maxSessionDuration,,3600,name,,,shaht-eks-role-1-iamrole-ad5e7d5,path,,,/,,
+    debug: RegisterResource RPC finished: resource:shahteks-instanceRole[eks:index:ServiceRole]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-instanceRole,,,,
+    debug: RegisterResource RPC prepared: t=aws:iam/role:Role, name=shahteks-instanceRole-role
+    debug: RegisterResource RPC prepared: t=aws:iam/instanceProfile:InstanceProfile, name=shaht-eks-instanceProfile-1
+    debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-1-policy-0
+    debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-1-policy-1
+    debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-1-policy-2
+    debug: RegisterResource RPC finished: resource:shaht-eks-role-0-iamrole[aws:iam/role:Role]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/role:Role::shaht-eks-role-0-iamrole,,__defaults,,,,,,,,forceDetachPolicies,,,maxSessionDuration,,,name,,,path,assumeRolePolicy,,,{"Statement":[{"Action":"sts:AssumeRole","Effect":"Allow","Principal":{"Service":"ec2.amazonaws.com"},"Sid":"AllowAssumeRole"}],"Version":"2012-10-17"},forceDetachPolicies,,,,false,maxSessionDuration,,3600,name,,,shaht-eks-role-0-iamrole-773eb91,path,,,/,,
+    debug: RegisterResource RPC prepared: t=aws:iam/instanceProfile:InstanceProfile, name=shaht-eks-instanceProfile-0
+    debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-0-policy-0
+    debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-0-policy-1
+    debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-0-policy-2
+    debug: ReadResource RPC finished: resource:shaht/crosswalk-vpc/eks-dev[pulumi:pulumi:StackReference]#...; err: null, resp: urn:pulumi:dev::eks-infrastructure::pulumi:pulumi:StackReference::shaht/crosswalk-vpc/eks-dev,name,,,shaht/crosswalk-vpc/eks-dev,outputs,,,,,,secretOutputNames,,,,,,
+    debug: RegisterResource RPC prepared: t=aws:ec2/securityGroup:SecurityGroup, name=shahteks-eksClusterSecurityGroup
+    error: Running program '/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure' failed with an unhandled exception:
+    TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))
+        at /Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/cluster.ts:382:13
+        at /Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/pulumi/output.js:249:35
+        at Generator.next (<anonymous>)
+        at /Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/pulumi/output.js:21:71
+        at new Promise (<anonymous>)
+        at __awaiter (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/pulumi/output.js:17:12)
+        at applyHelperAsync (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/pulumi/output.js:228:12)
+        at /Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/pulumi/output.js:182:65
+        at processTicksAndRejections (node:internal/process/task_queues:93:5)
+    debug: Invoke RPC finished: tok=aws:ssm/getParameter:getParameter; err: null, resp: arn,,,arn:aws:ssm:us-east-2:052848974346:parameter/aws/service/eks/optimized-ami/1.18/amazon-linux-2/recommended/image_id,id,,,/aws/service/eks/optimized-ami/1.18/amazon-linux-2/recommended/image_id,name,,,/aws/service/eks/optimized-ami/1.18/amazon-linux-2/recommended/image_id,type,,,String,value,,,ami-02cb7b96179d95fdc,version,,5,withDecryption,,,,true,
+    debug: RegisterResource RPC finished: resource:shaht-eks-role-2-iamrole[aws:iam/role:Role]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/role:Role::shaht-eks-role-2-iamrole,,__defaults,,,,,,,,forceDetachPolicies,,,maxSessionDuration,,,name,,,path,assumeRolePolicy,,,{"Statement":[{"Action":"sts:AssumeRole","Effect":"Allow","Principal":{"Service":"ec2.amazonaws.com"},"Sid":"AllowAssumeRole"}],"Version":"2012-10-17"},forceDetachPolicies,,,,false,maxSessionDuration,,3600,name,,,shaht-eks-role-2-iamrole-6bd0db4,path,,,/,,
+    debug: RegisterResource RPC prepared: t=aws:iam/instanceProfile:InstanceProfile, name=shaht-eks-instanceProfile-2
+    debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-2-policy-1
+    debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-2-policy-0
+    debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shaht-eks-role-2-policy-2
+    debug: RegisterResource RPC finished: resource:shahteks-cfnStackName[pulumi-nodejs:dynamic:Resource]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$pulumi-nodejs:dynamic:Resource::shahteks-cfnStackName,,__provider,,,exports.handler = __f0;
+    
+    var __provider = {check: __f1, diff: __f2, create: __f3, update: __f5, read: __f6, delete: __f7};
+    
+    function __f1(__0, __1) {
+      return (function() {
+        with({  }) {
+    
+    return (olds, news) => Promise.resolve({ inputs: news, failedChecks: [] });
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    
+    function __f2(__0, __1, __2) {
+      return (function() {
+        with({  }) {
+    
+    return (id, olds, news) => Promise.resolve({});
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    
+    function __f4(__0) {
+      return (function() {
+        with({ crypto: require("crypto") }) {
+    
+    return n => `${n}-${crypto.randomBytes(4).toString("hex")}`;
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    
+    function __f3(__0) {
+      return (function() {
+        with({ name: "shahteks-cfnStackName", func: __f4 }) {
+    
+    return (inputs) => Promise.resolve({
+                    id: name,
+                    outs: { output: func(inputs.input) },
+                });
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    
+    function __f5(__0, __1, __2) {
+      return (function() {
+        with({ func: __f4 }) {
+    
+    return (id, olds, news) => Promise.resolve({
+                    outs: { output: func(news.input) },
+                });
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    
+    function __f6(__0, __1) {
+      return (function() {
+        with({  }) {
+    
+    return (id, state) => Promise.resolve({ id: id, props: state });
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    
+    function __f7(__0, __1) {
+      return (function() {
+        with({  }) {
+    
+    return (id, props) => Promise.resolve();
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    
+    function __f0() {
+      return (function() {
+        with({ provider: __provider }) {
+    
+    return () => provider;
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    ,input,,,shahteks,,
+    debug: RegisterResource RPC finished: resource:shahteks-eksRole-role[aws:iam/role:Role]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::shahteks-eksRole-role,,__defaults,,,,,,,,forceDetachPolicies,,,maxSessionDuration,,,name,,,path,assumeRolePolicy,,,{"Version":"2012-10-17","Statement":[{"Action":["sts:AssumeRole"],"Effect":"Allow","Principal":{"Service":["eks.amazonaws.com"]}}]},description,,,Allows EKS to manage clusters on your behalf.,forceDetachPolicies,,,,false,maxSessionDuration,,3600,name,,,shahteks-eksRole-role-62dd993,path,,,/,,
+    debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-eksRole-4b490823
+    debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-eksRole-90eb1c99
+    debug: RegisterResource RPC finished: resource:shaht-eks-role-1-policy-1[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-1-policy-1,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResource RPC finished: resource:shaht-eks-ng-cfnStackName[pulumi-nodejs:dynamic:Resource]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:NodeGroup$pulumi-nodejs:dynamic:Resource::shaht-eks-ng-cfnStackName,,__provider,,,exports.handler = __f0;
+    
+    var __provider = {check: __f1, diff: __f2, create: __f3, update: __f5, read: __f6, delete: __f7};
+    
+    function __f1(__0, __1) {
+      return (function() {
+        with({  }) {
+    
+    return (olds, news) => Promise.resolve({ inputs: news, failedChecks: [] });
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    
+    function __f2(__0, __1, __2) {
+      return (function() {
+        with({  }) {
+    
+    return (id, olds, news) => Promise.resolve({});
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    
+    function __f4(__0) {
+      return (function() {
+        with({ crypto: require("crypto") }) {
+    
+    return n => `${n}-${crypto.randomBytes(4).toString("hex")}`;
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    
+    function __f3(__0) {
+      return (function() {
+        with({ name: "shaht-eks-ng-cfnStackName", func: __f4 }) {
+    
+    return (inputs) => Promise.resolve({
+                    id: name,
+                    outs: { output: func(inputs.input) },
+                });
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    
+    function __f5(__0, __1, __2) {
+      return (function() {
+        with({ func: __f4 }) {
+    
+    return (id, olds, news) => Promise.resolve({
+                    outs: { output: func(news.input) },
+                });
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    
+    function __f6(__0, __1) {
+      return (function() {
+        with({  }) {
+    
+    return (id, state) => Promise.resolve({ id: id, props: state });
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    
+    function __f7(__0, __1) {
+      return (function() {
+        with({  }) {
+    
+    return (id, props) => Promise.resolve();
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    
+    function __f0() {
+      return (function() {
+        with({ provider: __provider }) {
+    
+    return () => provider;
+    
+        }
+      }).apply(undefined, undefined).apply(this, arguments);
+    }
+    ,input,,,shaht-eks-ng,,
+    debug: RegisterResource RPC finished: resource:shahteks-instanceRole-role[aws:iam/role:Role]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::shahteks-instanceRole-role,,__defaults,,,,,,,,forceDetachPolicies,,,maxSessionDuration,,,name,,,path,assumeRolePolicy,,,{"Version":"2012-10-17","Statement":[{"Action":["sts:AssumeRole"],"Effect":"Allow","Principal":{"Service":["ec2.amazonaws.com"]}}]},forceDetachPolicies,,,,false,maxSessionDuration,,3600,name,,,shahteks-instanceRole-role-43e3dce,path,,,/,,
+    debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-instanceRole-03516f97
+    debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-instanceRole-e1b295bd
+    debug: RegisterResource RPC prepared: t=aws:iam/rolePolicyAttachment:RolePolicyAttachment, name=shahteks-instanceRole-3eb088f2
+    debug: RegisterResource RPC finished: resource:shaht-eks-role-1-policy-0[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-1-policy-0,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResource RPC finished: resource:shaht-eks-instanceProfile-1[aws:iam/instanceProfile:InstanceProfile]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/instanceProfile:InstanceProfile::shaht-eks-instanceProfile-1,,__defaults,,,,,,,,name,,,path,name,,,shaht-eks-instanceProfile-1-af5dbbf,path,,,/,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResource RPC finished: resource:shaht-eks-role-1-policy-2[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-1-policy-2,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResource RPC finished: resource:shaht-eks-role-0-policy-1[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-0-policy-1,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResource RPC finished: resource:shaht-eks-role-0-policy-2[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-0-policy-2,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResource RPC finished: resource:shaht-eks-instanceProfile-0[aws:iam/instanceProfile:InstanceProfile]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/instanceProfile:InstanceProfile::shaht-eks-instanceProfile-0,,__defaults,,,,,,,,name,,,path,name,,,shaht-eks-instanceProfile-0-e061969,path,,,/,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResource RPC finished: resource:shaht-eks-role-0-policy-0[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-0-policy-0,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResource RPC finished: resource:shahteks-eksClusterSecurityGroup[aws:ec2/securityGroup:SecurityGroup]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::shahteks-eksClusterSecurityGroup,,__defaults,,,,,,,,name,description,,,Managed by Pulumi,name,,,shahteks-eksClusterSecurityGroup-b8cbc82,revokeRulesOnDelete,,,,true,tags,,,,,Name,,,shahteks-eksClusterSecurityGroup,__defaults,,,,,,,demo,,,yes,eks,,,yes,env,,,dev,launched_by,,,shaht,projectName,,,eks-infrastructure,stackName,,,dev,,
+    debug: RegisterResource RPC prepared: t=aws:ec2/securityGroupRule:SecurityGroupRule, name=shahteks-eksClusterInternetEgressRule
+    debug: RegisterResource RPC finished: resource:shaht-eks-role-2-policy-2[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-2-policy-2,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResource RPC finished: resource:shaht-eks-role-2-policy-0[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-2-policy-0,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResource RPC finished: resource:shaht-eks-role-2-policy-1[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/rolePolicyAttachment:RolePolicyAttachment::shaht-eks-role-2-policy-1,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResource RPC finished: resource:shaht-eks-instanceProfile-2[aws:iam/instanceProfile:InstanceProfile]; err: null, resp: urn:pulumi:dev::eks-infrastructure::aws:iam/instanceProfile:InstanceProfile::shaht-eks-instanceProfile-2,,__defaults,,,,,,,,name,,,path,name,,,shaht-eks-instanceProfile-2-389f48f,path,,,/,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResource RPC finished: resource:shahteks-eksRole-4b490823[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::shahteks-eksRole-4b490823,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKSClusterPolicy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResource RPC finished: resource:shahteks-eksRole-90eb1c99[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::shahteks-eksRole-90eb1c99,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKSServicePolicy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResourceOutputs RPC prepared: urn=urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-eksRole
+    debug: RegisterResource RPC finished: resource:shahteks-instanceRole-03516f97[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::shahteks-instanceRole-03516f97,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResource RPC finished: resource:shahteks-instanceRole-3eb088f2[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::shahteks-instanceRole-3eb088f2,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResource RPC finished: resource:shahteks-instanceRole-e1b295bd[aws:iam/rolePolicyAttachment:RolePolicyAttachment]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::shahteks-instanceRole-e1b295bd,,__defaults,,,,,,,policyArn,,,arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+    debug: RegisterResourceOutputs RPC prepared: urn=urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-instanceRole
+    debug: RegisterResource RPC prepared: t=aws:iam/instanceProfile:InstanceProfile, name=shahteks-instanceProfile
+    debug: RegisterResource RPC finished: resource:shahteks-eksClusterInternetEgressRule[aws:ec2/securityGroupRule:SecurityGroupRule]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$aws:ec2/securityGroupRule:SecurityGroupRule::shahteks-eksClusterInternetEgressRule,,__defaults,,,,,,,,self,cidrBlocks,,,,,,,,0.0.0.0/0,description,,,Allow internet access.,fromPort,,0,protocol,,,-1,securityGroupId,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,self,,,,false,toPort,,0,type,,,egress,,
+    debug: RegisterResourceOutputs RPC finished: urn=urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-eksRole; err: null, resp: 
+    debug: RegisterResourceOutputs RPC finished: urn=urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-eksRole; err: null, resp: 
+    debug: RegisterResourceOutputs RPC finished: urn=urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-instanceRole; err: null, resp: 
+    debug: RegisterResourceOutputs RPC finished: urn=urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$eks:index:ServiceRole::shahteks-instanceRole; err: null, resp: 
+    debug: RegisterResource RPC finished: resource:shahteks-instanceProfile[aws:iam/instanceProfile:InstanceProfile]; err: null, resp: urn:pulumi:dev::eks-infrastructure::eks:index:Cluster$aws:iam/instanceProfile:InstanceProfile::shahteks-instanceProfile,,__defaults,,,,,,,,name,,,path,name,,,shahteks-instanceProfile-4e2cdc3,path,,,/,role,,,04da6b54-80e4-46f7-96ec-b56ff0331ba9,,
+ 
+    unhandled rejection: CONTEXT(279): resource:shahteks-eksCluster[aws:eks/cluster:Cluster]
+    STACK_TRACE:
+    Error:
+        at Object.debuggablePromise (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/pulumi/runtime/debuggable.js:69:75)
+        at Object.registerResource (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/pulumi/runtime/resource.js:132:18)
+        at new Resource (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/pulumi/resource.js:211:24)
+        at new CustomResource (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/pulumi/resource.js:303:9)
+        at new Cluster (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/eks/cluster.ts:205:9)
+        at createCore (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/cluster.ts:445:24)
+        at new Cluster (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/@pulumi/cluster.ts:1320:22)
+        at Object.<anonymous> (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/index.ts:19:17)
+        at Module._compile (node:internal/modules/cjs/loader:1102:14)
+        at Module.m._compile (/Users/tusharshah/projects/pulumi-homelab/Pulumi-Workshop/eks-infrastructure/node_modules/ts-node/src/index.ts:439:23)
+ 
+
