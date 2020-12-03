@@ -28,7 +28,7 @@ const pv1PersistentVolume = new k8s.core.v1.Pod("test_ebsPod", {
         volumes: [{
             name: "test-volume",
             awsElasticBlockStore: {
-                volumeID: "<volume id>",
+                volumeID: "vol-0dcc98d2a53263e17",
                 fsType: "ext4",
             },
         }],
@@ -36,7 +36,7 @@ const pv1PersistentVolume = new k8s.core.v1.Pod("test_ebsPod", {
 }, { provider: k8sProvider });
 
 
-const pv1PersistentVolume2 = new k8s.core.v1.PersistentVolume("pv1PersistentVolume", {
+/* const pv1PersistentVolume2 = new k8s.core.v1.PersistentVolume("pv1PersistentVolume", {
     apiVersion: "v1",
     kind: "PersistentVolume",
     metadata: {
@@ -56,4 +56,21 @@ const pv1PersistentVolume2 = new k8s.core.v1.PersistentVolume("pv1PersistentVolu
             volumeID: "vol-0dcc98d2a53263e17",
         },
     },
-}, { provider: k8sProvider });
+}, { provider: k8sProvider }); */
+
+const pvc1PersistentVolumeClaim = new k8s.core.v1.PersistentVolumeClaim("pvc1PersistentVolumeClaim", {
+    apiVersion: "v1",
+    kind: "PersistentVolumeClaim",
+    metadata: {
+        name: "pvc1",
+    },
+    spec: {
+        accessModes: ["ReadWriteOnce"],
+        storageClassName: "test-volume",
+        resources: {
+            requests: {
+                storage: "10Gi",
+            },
+        },
+    },
+});
