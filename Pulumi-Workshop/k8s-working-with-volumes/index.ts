@@ -10,7 +10,7 @@ const devNamespace = new k8s.core.v1.Namespace("devNamespace", {
     },
 }, { provider: k8sProvider });
 
-const pv1PersistentVolume = new k8s.core.v1.Pod("test_ebsPod", {
+/* const pv1PersistentVolume = new k8s.core.v1.Pod("test_ebsPod", {
     apiVersion: "v1",
     kind: "Pod",
     metadata: {
@@ -33,7 +33,7 @@ const pv1PersistentVolume = new k8s.core.v1.Pod("test_ebsPod", {
             },
         }],
     },
-}, { provider: k8sProvider });
+}, { provider: k8sProvider }); */
 
 
 /* const pv1PersistentVolume2 = new k8s.core.v1.PersistentVolume("pv1PersistentVolume", {
@@ -58,7 +58,7 @@ const pv1PersistentVolume = new k8s.core.v1.Pod("test_ebsPod", {
     },
 }, { provider: k8sProvider }); */
 
-const pvc1PersistentVolumeClaim = new k8s.core.v1.PersistentVolumeClaim("pvc1PersistentVolumeClaim", {
+/* const pvc1PersistentVolumeClaim = new k8s.core.v1.PersistentVolumeClaim("pvc1PersistentVolumeClaim", {
     apiVersion: "v1",
     kind: "PersistentVolumeClaim",
     metadata: {
@@ -73,4 +73,69 @@ const pvc1PersistentVolumeClaim = new k8s.core.v1.PersistentVolumeClaim("pvc1Per
             },
         },
     },
-});
+}); */
+
+
+const slowStorageClass = new k8s.storage.v1.StorageClass("slowStorageClass", {
+    kind: "StorageClass",
+    apiVersion: "storage.k8s.io/v1",
+    metadata: {
+        name: "slow",
+        annotations: {
+            "storageclass.kubernetes.io/is-default-class": "true",
+        },
+    },
+    provisioner: "kubernetes.io/aws-ebs",
+    parameters: {
+        type: "gp2",
+        zones: "us-east-2a",
+        iopsPerGB: "10"
+    },
+    reclaimPolicy: "Retain",
+}, { provider: k8sProvider });
+
+const pv_ticketPersistentVolumeClaim = new k8s.core.v1.PersistentVolumeClaim("pv_ticketPersistentVolumeClaim", {
+    apiVersion: "v1",
+    kind: "PersistentVolumeClaim",
+    metadata: {
+        name: "pv-ticket",
+    },
+    spec: {
+        accessModes: ["ReadWriteOnce"],
+        storageClassName: "slow",
+        resources: {
+            requests: {
+                storage: "25Gi",
+            },
+        },
+    },
+}, { provider: k8sProvider });
+
+const class_podPod = new k8s.core.v1.Pod("class_podPod", {
+    apiVersion: "v1",
+    kind: "Pod",
+    metadata: {
+        name: "class-pod",
+    },
+    spec: {
+        volumes: [{
+            name: "data",
+            persistentVolumeClaim: {
+                claimName: "pv-ticket",
+            },
+        }],
+        containers: [{
+            name: "ubuntu-ctr",
+            image: "ubuntu:latest",
+            command: [
+                "/bin/bash",
+                "-c",
+                "sleep 60m",
+            ],
+            volumeMounts: [{
+                mountPath: "/data",
+                name: "data",
+            }],
+        }],
+    },
+}, { provider: k8sProvider });
