@@ -6,7 +6,7 @@ from pulumi_gcp import (
     projects,
     pubsub,
     storage,
-    serviceAccount,
+    serviceaccount,
 )
 import base64
 
@@ -28,7 +28,7 @@ class Project(ComponentResource):
 
     number: Output[str]
 
-    project_owner_service_account: pulumi_gcp.serviceAccount.Account
+    project_owner_service_account: pulumi_gcp.serviceaccount.Account
 
     def __init__(self, name: str, args: ProjectArgs, opts: ResourceOptions = None):
 
@@ -50,13 +50,13 @@ class Project(ComponentResource):
             org_id=organization.org_id,
         )
 
-        self.project_owner_service_account = serviceAccount.Account(
+        self.project_owner_service_account = serviceaccount.Account(
             resource_name=f"{args.project_name}-project-owner-service-account",
             account_id="projectowner",
             project=ephemeral_project.project_id,
         )
 
-        project_owner_service_account_key = serviceAccount.Key(
+        project_owner_service_account_key = serviceaccount.Key(
             resource_name=f"{args.project_name}-project-owner-service-account-key",
             service_account_id=self.project_owner_service_account.name,
         )
@@ -66,7 +66,7 @@ class Project(ComponentResource):
             project=ephemeral_project.project_id,
             role="roles/owner",
             member=self.project_owner_service_account.email.apply(
-                lambda service_account_email: f"serviceAccount:{service_account_email}"
+                lambda service_account_email: f"serviceaccount:{service_account_email}"
             ),
         )
 

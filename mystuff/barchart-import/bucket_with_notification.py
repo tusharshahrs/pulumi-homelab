@@ -9,7 +9,7 @@ from pulumi_gcp import (
     projects,
     pubsub,
     storage,
-    serviceAccount,
+    serviceaccount,
 )
 
 
@@ -66,7 +66,7 @@ class BucketWithNotification(ComponentResource):
                 f"{name}-default-project-service-account-topic-iam-binding",
                 topic=self.topic.id,
                 role="roles/pubsub.publisher",
-                members=[f"serviceAccount:{gcs_account.email_address}"],
+                members=[f"serviceaccount:{gcs_account.email_address}"],
                 opts=opts,
             )
         )

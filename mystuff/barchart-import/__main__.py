@@ -10,7 +10,8 @@ from pulumi_gcp import (
     projects,
     pubsub,
     storage,
-    serviceAccount,
+    #serviceAccount,
+    serviceaccount,
 )
 import base64
 
@@ -36,7 +37,7 @@ ephemeral_project = ephemeral_project.Project(
     ephemeral_project.ProjectArgs(
         project_name=project_name,
         #root_project_name="unusual-option-activity-qaroot",
-        root_project_name="pulumi.com",
+        root_project_name="pulumi-ce-team",
         organization_name=organization_name,
     ),
 )
@@ -46,7 +47,7 @@ project_owner_serviceaccount_iam_storage_admin = projects.IAMMember(
     project=ephemeral_project.new_project_id,
     role="roles/storage.admin",
     member=ephemeral_project.project_owner_service_account.email.apply(
-        lambda service_account_email: f"serviceAccount:{service_account_email}"
+        lambda service_account_email: f"serviceaccount:{service_account_email}"
     ),
 )
 
@@ -85,7 +86,7 @@ bucket_with_pubsubnotification = bucket_with_notification.BucketWithNotification
 
 
 cloudRunServiceAccountSimpleName = ephemeral_project.number.apply(
-    lambda project_number: f"serviceAccount:service-{project_number}@serverless-robot-prod.iam.gserviceaccount.com"
+    lambda project_number: f"serviceaccount:service-{project_number}@serverless-robot-prod.iam.gserviceaccount.com"
 )
 
 bucketPolicy = storage.BucketIAMMember(
@@ -144,7 +145,7 @@ pubsub_editor_iam_binding = projects.IAMMember(
     project=ephemeral_project.new_project_id,
     role="roles/pubsub.editor",
     member=ephemeral_project.project_owner_service_account.email.apply(
-        lambda service_account_email: f"serviceAccount:{service_account_email}"
+        lambda service_account_email: f"serviceaccount:{service_account_email}"
     ),
     opts=ResourceOptions(provider=ephemeral_project_provider),
 )
