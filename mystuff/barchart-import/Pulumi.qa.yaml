@@ -1,0 +1,12 @@
+config:
+  barchart-import:barchart_email_address: tushar@pulumi-ce-team.iam.gserviceaccount.com
+  barchart-import:barchart_password:
+    secure: AAABALSesqBBwtYGv0WQgfwZ4v9/4zeGKY5CWJBQTKtTuhHAco+b
+  barchart-import:barchart_username: mikelowery
+  barchart-import:billing_account: 0123456-789123-456789
+  barchart-import:branch_name: johnsmith
+  barchart-import:cloud_run_image: gcr.io/cloudrun/hello
+  barchart-import:organization_name: "248032716856"
+  barchart-import:registry_bucketname: shaht
+  gcp:project: pulumi-ce-team
+  gcp:region: us-central1
