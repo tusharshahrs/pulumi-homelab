@@ -1,11 +1,5 @@
 {
-    "name": "kafka",
-    "devDependencies": {
-        "@types/node": "^10.0.0"
-    },
-    "dependencies": {
-        "@pulumi/aws": "^3.12.2",
-        "@pulumi/awsx": "^0.22.0",
-        "@pulumi/pulumi": "^2.0.0"
-    }
+  "dependencies": {
+    "@pulumi/aws": "^3.19.0"
+  }
 }
