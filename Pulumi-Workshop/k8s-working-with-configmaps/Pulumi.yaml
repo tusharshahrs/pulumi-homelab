@@ -1,0 +1,3 @@
+name: k8s-working-with-configmaps
+runtime: nodejs
+description: A minimal AWS TypeScript Pulumi program

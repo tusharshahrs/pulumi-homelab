@@ -1,0 +1,16 @@
+config:
+  gcp-managedinstance-group-go:cacheAddr: grpcs://cache.stage.shaht:443
+  gcp-managedinstance-group-go:gcsReleasesUrl: gs://shaht/releases
+  gcp-managedinstance-group-go:hostname: proxy.staging.1.pulumi.com
+  gcp:project: pulumi-ce-team
+  gcp:zone: us-central1-a
+  gcp-managedinstance-group-go:labels:
+  - environment:staging
+  - components:flareproxy
+  gcp-managedinstance-group-go:network: demo-5206ceb
+  gcp-managedinstance-group-go:version: v0.0.1
+  gcp-managedinstance-group-go:regions:
+    us-central1: 
+      subnet: demo-0-ec12015
+      #subnet: demo-0-997445c
+      vmType: e2-micro

@@ -50,7 +50,7 @@ const testStream = new aws.kinesis.FirehoseDeliveryStream("kafka-testStream", {
 });
 const msk = new aws.msk.Cluster("kafka-msk", {
     clusterName: "kafka-msk",
-    kafkaVersion: "2.3.1",
+    kafkaVersion: "2.6.0",
     numberOfBrokerNodes: 3,
     brokerNodeGroupInfo: {
         //instanceType: "kafka.m5.large",

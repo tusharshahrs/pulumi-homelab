@@ -1,0 +1,13 @@
+*.pyc
+venv/
+*.csv
+*.log
+.env
+.coverage
+Pulumi*.yaml
+*egg
+barchart_import.egg-info
+some-temp-file
+unopac-dev-master-key.json
+
+!fixtures/*.csv
