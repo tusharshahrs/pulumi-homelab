@@ -170,6 +170,17 @@ const go_demo_5DbStatefulSet = new k8s.apps.v1.StatefulSet("go_demo_5DbStatefulS
                                 value: "db",
                             },
                         ],
+                        resources: {
+                            limits: {
+                                memory: "100Mi",
+                                cpu: "0.2",
+                            },
+                            requests: {
+                                memory: "50Mi",
+                                cpu: "0.1",
+                            },
+                        },
+                        
                     },
                 ],
             },
@@ -230,7 +241,7 @@ const go_demo_5ApiDeployment = new k8s.apps.v1.Deployment("go_demo_5ApiDeploymen
             spec: {
                 containers: [{
                     name: "api",
-                    image: "vfarcic/go-demo-5",
+                    image: "vfarcic/go-demo-5:2.5",
                     env: [{
                         name: "DB",
                         value: "db",
@@ -295,6 +306,43 @@ const go_demo_5ApiHorizontalPodAutoscaler = new k8s.autoscaling.v2beta1.Horizont
             name: "api",
         },
         minReplicas: 2,
+        maxReplicas: 5,
+        metrics: [
+            {
+                type: "Resource",
+                resource: {
+                    name: "cpu",
+                    targetAverageUtilization: 80,
+                },
+            },
+            {
+                type: "Resource",
+                resource: {
+                    name: "memory",
+                    targetAverageUtilization: 80,
+                    //targetAverageUtilization: 10,
+                },
+            },
+        ],
+    },
+}, { provider: k8sProvider });
+
+const go_demo_5DbHorizontalPodAutoscaler = new k8s.autoscaling.v2beta1.HorizontalPodAutoscaler("go_demo_5DbHorizontalPodAutoscaler", {
+     //const go_demo_5DbHorizontalPodAutoscaler = new k8s.autoscaling.v1.HorizontalPodAutoscaler("go_demo_5DbHorizontalPodAutoscaler", {
+    apiVersion: "autoscaling/v2beta1",
+    //apiVersion: "autoscaling/v1",
+    kind: "HorizontalPodAutoscaler",
+    metadata: {
+        name: "db",
+        namespace: "go-demo-5",
+    },
+    spec: {
+        scaleTargetRef: {
+            apiVersion: "apps/v1",
+            kind: "StatefulSet",
+            name: "db",
+        },
+        minReplicas: 3,
         maxReplicas: 5,
         metrics: [
             {
