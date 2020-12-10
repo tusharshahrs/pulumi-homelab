@@ -1,0 +1,10 @@
+{
+    "name": "02-serverless-azurenextgen",
+    "devDependencies": {
+        "@types/node": "^10.0.0"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^2.0.0",
+        "@pulumi/azure-nextgen": "^0.2.0"
+    }
+}
