@@ -22,8 +22,10 @@ const cluster = new eks.Cluster("shahteks",
     privateSubnetIds: vpc_privatesubnetids,
     publicSubnetIds: vpc_publicsubnetids,
     minSize: 1,
-    instanceType:"t3a.medium",
+    instanceType:"t3a.small",
     tags: mytags,
+    nodeRootVolumeSize: 10,
+    encryptRootBockDevice: true,
     version: "1.18",
 });
 
@@ -34,12 +36,12 @@ const instanceProfiles = iam.createInstanceProfiles(my_name, roles);
 
 const ngstandard = new eks.NodeGroup(`${my_name}-ng`, {
     cluster: cluster,
-    instanceType: "t3a.small",
+    instanceType: "t3a.micro",
     instanceProfile: instanceProfiles[0],
-    desiredCapacity: 3,
+    desiredCapacity: 4,
     minSize: 2,
-    maxSize: 10,
-    spotPrice: "0.07",
+    maxSize: 8,
+    spotPrice: "0.05",
     labels: { "clusterType": "standard" },
     //kubeletExtraArgs: "--read-only-port 10255",
     encryptRootBockDevice: true,
