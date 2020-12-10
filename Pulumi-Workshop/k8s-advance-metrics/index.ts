@@ -280,3 +280,37 @@ const go_demo_5ApiService = new k8s.core.v1.Service("go_demo_5ApiService", {
         },
     },
 }, { provider: k8sProvider });
+
+const go_demo_5ApiHorizontalPodAutoscaler = new k8s.autoscaling.v2beta1.HorizontalPodAutoscaler("go_demo_5ApiHorizontalPodAutoscaler", {
+    apiVersion: "autoscaling/v2beta1",
+    kind: "HorizontalPodAutoscaler",
+    metadata: {
+        name: "api",
+        namespace: "go-demo-5",
+    },
+    spec: {
+        scaleTargetRef: {
+            apiVersion: "apps/v1",
+            kind: "Deployment",
+            name: "api",
+        },
+        minReplicas: 2,
+        maxReplicas: 5,
+        metrics: [
+            {
+                type: "Resource",
+                resource: {
+                    name: "cpu",
+                    targetAverageUtilization: 80,
+                },
+            },
+            {
+                type: "Resource",
+                resource: {
+                    name: "memory",
+                    targetAverageUtilization: 80,
+                },
+            },
+        ],
+    },
+}, { provider: k8sProvider });
