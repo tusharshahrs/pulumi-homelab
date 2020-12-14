@@ -1,0 +1,4 @@
+config:
+  aws:region: eu-west-2
+  k8s-aws-cluster:identityStackRef: shaht/k8s-aws-identity/dev
+  k8s-aws-cluster:infraStackRef: shaht/k8s-aws-infra/dev
