@@ -1,0 +1,5 @@
+config:
+  aws:region: eu-west-2
+  k8s-apps-deploy-wordpress:clusterStackRef: shaht/k8s-aws-cluster/dev
+  k8s-apps-deploy-wordpress:identityStackRef: shaht/k8s-aws-identity/dev
+  k8s-apps-deploy-wordpress:infraStackRef: shaht/k8s-aws-infra/dev

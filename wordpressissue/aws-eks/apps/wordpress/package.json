@@ -1,0 +1,15 @@
+{
+    "name": "k8s-aws-apps-deploy-container",
+    "devDependencies": {
+        "typescript": "^3.0.0",
+        "@types/node": "latest"
+    },
+    "dependencies": {
+        "@pulumi/aws": "^3.19.0",
+        "@pulumi/awsx": "^0.22.0",
+        "@pulumi/docker": "latest",
+        "@pulumi/kubernetes": "^2.7.4",
+        "@pulumi/kubernetesx": "^0.1.0",
+        "@pulumi/pulumi": "^2.15.5"
+    }
+}
