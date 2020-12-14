@@ -1,0 +1,11 @@
+{
+    "name": "wordpress",
+    "devDependencies": {
+        "@types/node": "^8.0.0"
+    },
+    "dependencies": {
+        "@pulumi/eks": "^0.20.0",
+        "@pulumi/kubernetes": "^2.7.4",
+        "@pulumi/pulumi": "^2.15.5"
+    }
+}
