@@ -14,16 +14,10 @@
 
 import * as awsx from "@pulumi/awsx";
 import * as k8s from "@pulumi/kubernetes";
+import { Secret } from "@pulumi/kubernetes/core/v1";
 import * as pulumi from "@pulumi/pulumi";
 import * as random from "@pulumi/random";
 import { config } from "./config";
-
-const mydbpassword = new random.RandomPassword("wordpresspwd", {
-    length: 10,
-    special: false,
-    upper: true,
-    number: true,
-});
 
 // Create a k8s provider.
 const provider = new k8s.Provider("provider", {
@@ -31,27 +25,70 @@ const provider = new k8s.Provider("provider", {
     //namespace: config.appsNamespaceName
 });
 
+// Creates a random password for wordpressPassword
+const mydbpassword = new random.RandomPassword("wordpresspassword", {
+    length: 10,
+    special: false,
+    upper: true,
+    lower: true,
+    number: false,
+},);
+
+// wordpressPassword
+export const mywordpressPassword_value = pulumi.secret(mydbpassword.result);
+
+// Creates a random password for mariadb.auth.rootPassword
+const mariadbRootPassword = new random.RandomPassword("mariadbrootpwd", {
+    length: 10,
+    special: false,
+    lower: true,
+    upper: true,
+    number: false,
+},);
+
+// mariadbauthrootPassword
+export const mariadbauthRootPassword_value = pulumi.secret(mariadbRootPassword.result);
+
+// Creates a random password for mariadb.auth.password
+const mariadbpassword = new random.RandomPassword("mariadbpassword", {
+    length: 10,
+    special: false,
+    upper: true,
+    lower: true,
+    number: false,
+},);
+
+// mariadb.auth.password.  This is NOT root
+export const mariadbauthPassword_value= pulumi.secret(mariadbpassword.result);
+
 // Deploy the latest version of the stable/wordpress chart.
+// The Values are from here:  https://artifacthub.io/packages/helm/bitnami/wordpress
 const chartId = "wpdev";
-const chartName = "wordpress" ;
+const chartName = "wordpress";
 const wordpress = new k8s.helm.v3.Chart(chartId, {
     namespace: config.appSvcsNamespaceName,
     chart: chartName,
-    version: "10.0.3",
+    version: "10.1.1",
     fetchOpts: {
         repo: "https://charts.bitnami.com/bitnami/",
     },
-    values: {persistence: {enabled:true},
-             autoscaling: {enabled:true, minReplicas: 2},
-            metrics: {enabled: true},
+    values: {
+            persistence: {enabled:true},
+            replicaCount: 2,
+            allowOverrideNone: true,
+            autoscaling: {enabled:true, minReplicas: 2},
+            allowEmptyPassword: true,
+            htaccessPersistenceEnabled: true,
+            wordpressFirstName: "John",
+            wordpressLastName: "Smith",
+            ingress: { enabled: true},
+            readinessProbe: {enabled: false},
             wordpressScheme: "https",
-            wordpresspwd: `${mydbpassword}`,
-            mariadb: {architecture: "replication"},
-            //mariadb: {auth: {password: `${mydbpassword}`},}, 
-                      //primary: {persistence: {enabled: true}}
+            wordpresspwd:mydbpassword.result,
+            mariadb: {architecture: "replication", 
+                      auth: {rootPassword: mariadbRootPassword.result, password: mariadbpassword.result}, 
+                      primary: {persistence: {enabled: true}}}, 
         } 
-            //mariadb: {primary: {persistence: {enabled: true}}},},
-            //mariadb: {primary: {persistence: {enabled: true}}},}
 /*         transformations: [
         (obj: any) => {
             // Do transformations on the YAML to set the namespace
@@ -65,8 +102,6 @@ const wordpress = new k8s.helm.v3.Chart(chartId, {
 
 // Export the public IP for WordPress.
 // Get the status field from the wordpress service, and then grab a reference to the ingress field.
-//const frontend = wordpress.getResourceProperty("v1/Service", "app-svcs-chxunxlp/wpdev-wordpress","status");
-//export const frontend = config.appSvcsNamespaceName.apply(v => wordpress.getResourceProperty("v1/Service", `${v}/wpdev-wordpress`,"status"))
 export const frontend = config.appSvcsNamespaceName.apply(v => wordpress.getResourceProperty("v1/Service", `${v}/${chartId}-${chartName}`,"status"))
 const ingress = frontend.loadBalancer.ingress[0];
 // Export the public IP for Wordpress.
