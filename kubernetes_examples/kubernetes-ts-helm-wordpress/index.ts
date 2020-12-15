@@ -64,7 +64,7 @@ const wordpressns = new k8s.core.v1.Namespace("wordpress-Namespace", {
 // Deploy the bitnami/wordpress chart.
  const wordpress = new k8s.helm.v3.Chart("wpdev", {
     namespace: wordpressns.metadata.name,
-    version: "9.6.0",
+    version: "10.1.1",
     chart: "wordpress",
     fetchOpts: {
         repo: "https://charts.bitnami.com/bitnami",
@@ -79,19 +79,7 @@ const wordpressns = new k8s.core.v1.Namespace("wordpress-Namespace", {
         wordpressFirstName: "John",
         wordpressLastName: "Smith",
         wordpressScheme: "https",
-        //livenessProbeHeaders:  { "X-Forwarded-Proto": "https" },
-        //readinessProbeHeaders: { "X-Forwarded-Proto": "https" },
-        //customLivenessProbe: { httpGet: { path: "/wp-login.php", port: 8080, scheme: "HTTPS"}, initialDelaySeconds: 5, timeoutSeconds: 3},
-        //customReadinessProbe: { httpGet: { path: "/wp-login.php", port: 8080, scheme: "HTTPS"}, initialDelaySeconds: 15, timeoutSeconds: 10},
-        //customLivenessProbe: { httpGet: { path: "/", port: 8080, scheme: "HTTPS"}, initialDelaySeconds: 5, timeoutSeconds: 3},
-        //customReadinessProbe: { httpGet: { path: "/wp-login.php",port: 8080, scheme: "HTTPS"}, initialDelaySeconds: 15, timeoutSeconds: 15},
-        //livenessProbeHeaders: { httpGet: { path: "/healthz",port: "http", scheme: "HTTPS", periodSeconds: 10, initialDelaySeconds: 5, timeoutSeconds: 1,failureThreshold: 3}},
-        //readinessProbeHeaders: { httpGet: { path: "/healthz",port: "http", scheme: "HTTPS", periodSeconds: 10, initialDelaySeconds: 5, timeoutSeconds: 1,failureThreshold: 3}},
-        //customLivenessProbe: { httpGet: { path: "/healthz",port: "http", scheme: "HTTPS", periodSeconds: 10, initialDelaySeconds: 5, timeoutSeconds: 1,failureThreshold: 3}},
-        //customReadinessProbe: { httpGet: { path: "/healthz",port: "http", scheme: "HTTPS", periodSeconds: 10, initialDelaySeconds: 5, timeoutSeconds: 1,failureThreshold: 3}},
-        //customLivenessProbe: { httpGet: { path: "/healthz",port: "https", scheme: "HTTPS", periodSeconds: 10, initialDelaySeconds: 5, timeoutSeconds: 1,failureThreshold: 3}},
-        customReadinessProbe: { httpGet: { path: "/healthz",port: "https", scheme: "HTTPS", periodSeconds: 10, initialDelaySeconds: 5, timeoutSeconds: 1,failureThreshold: 3}},
-
+        readinessProbe: {enabled: false},
         wordpresspwd:mydbpassword.result,
         mariadb: {architecture: "replication", 
                   auth: {rootPassword: mariadbRootPassword.result, password: mariadbpassword.result}, 
@@ -105,4 +93,5 @@ const frontend = wordpress.getResourceProperty("v1/Service", "wordpress-ns/wpdev
 const ingress = frontend.loadBalancer.ingress[0];
 // Export the public IP for Wordpress.
 // Depending on the k8s cluster, this value may be an IP address or a hostname.
-export const frontendIp = ingress.apply(x => x.ip ?? x.hostname);
+//export const frontendIp = ingress.apply(x => x.ip ?? x.hostname);
+export const frontendIp =  pulumi.interpolate`https://${ingress.hostname}`;
