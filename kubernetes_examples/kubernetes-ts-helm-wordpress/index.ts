@@ -89,7 +89,7 @@ const wordpressns = new k8s.core.v1.Namespace("wordpress-Namespace", {
         //readinessProbeHeaders: { httpGet: { path: "/healthz",port: "http", scheme: "HTTPS", periodSeconds: 10, initialDelaySeconds: 5, timeoutSeconds: 1,failureThreshold: 3}},
         //customLivenessProbe: { httpGet: { path: "/healthz",port: "http", scheme: "HTTPS", periodSeconds: 10, initialDelaySeconds: 5, timeoutSeconds: 1,failureThreshold: 3}},
         //customReadinessProbe: { httpGet: { path: "/healthz",port: "http", scheme: "HTTPS", periodSeconds: 10, initialDelaySeconds: 5, timeoutSeconds: 1,failureThreshold: 3}},
-        customLivenessProbe: { httpGet: { path: "/healthz",port: "https", scheme: "HTTPS", periodSeconds: 10, initialDelaySeconds: 5, timeoutSeconds: 1,failureThreshold: 3}},
+        //customLivenessProbe: { httpGet: { path: "/healthz",port: "https", scheme: "HTTPS", periodSeconds: 10, initialDelaySeconds: 5, timeoutSeconds: 1,failureThreshold: 3}},
         customReadinessProbe: { httpGet: { path: "/healthz",port: "https", scheme: "HTTPS", periodSeconds: 10, initialDelaySeconds: 5, timeoutSeconds: 1,failureThreshold: 3}},
 
         wordpresspwd:mydbpassword.result,
