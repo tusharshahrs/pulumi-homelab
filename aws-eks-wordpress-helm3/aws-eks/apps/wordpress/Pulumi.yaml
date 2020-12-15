@@ -1,0 +1,3 @@
+name: k8s-apps-deploy-wordpress
+description: Build and push image to private registry and create a Deployment from it.
+runtime: nodejs

@@ -1,10 +1,11 @@
 {
-    "name": "wordpress",
+    "name": "k8s-aws-apps-svcs",
     "devDependencies": {
-        "@types/node": "^8.0.0"
+        "typescript": "^3.0.0",
+        "@types/node": "latest"
     },
     "dependencies": {
-        "@pulumi/eks": "^0.20.0",
+        "@pulumi/aws": "^3.19.3",
         "@pulumi/kubernetes": "^2.7.4",
         "@pulumi/pulumi": "^2.15.5",
         "@pulumi/random": "^2.4.4"
