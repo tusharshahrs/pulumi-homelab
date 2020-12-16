@@ -63,6 +63,7 @@ export const mariadbauthPassword_value= pulumi.secret(mariadbpassword.result);
 
 // Deploy the latest version of the stable/wordpress chart.
 // The Values are from here:  https://artifacthub.io/packages/helm/bitnami/wordpress
+// The readinessprobe values are from here: https://github.com/bitnami/charts/blob/master/bitnami/wordpress/values.yaml.  Updated for ssl
 const chartId = "wpdev";
 const chartName = "wordpress";
 const wordpress = new k8s.helm.v3.Chart(chartId, {
@@ -82,7 +83,8 @@ const wordpress = new k8s.helm.v3.Chart(chartId, {
             wordpressFirstName: "John",
             wordpressLastName: "Smith",
             ingress: { enabled: true},
-            readinessProbe: {enabled: false},
+            readinessProbe: {enabled: true, initialDelaySeconds:30, periodSeconds: 10, timeoutSeconds: 5, failureThreshold: 6, successThreshold: 1, httpGet: {path: "/wp-login.php",port: "https", scheme: "HTTPS",}},
+            readinessProbeHeaders: { name: "X-Forwarded-Proto", value: "https"},
             wordpressScheme: "https",
             wordpresspwd:mydbpassword.result,
             mariadb: {architecture: "replication", 
