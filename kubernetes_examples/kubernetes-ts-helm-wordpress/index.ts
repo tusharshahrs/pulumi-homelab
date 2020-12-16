@@ -7,7 +7,7 @@ import * as pulumi from "@pulumi/pulumi";
 
 
 // Create an EKS cluster with the default configuration.
-const cluster = new eks.Cluster("shaht-my-cluster");
+const cluster = new eks.Cluster("shaht-my-cluster",);
 
 // Export the cluster's kubeconfig.
 export const kubeconfig = cluster.kubeconfig;
@@ -79,7 +79,8 @@ const wordpressns = new k8s.core.v1.Namespace("wordpress-Namespace", {
         wordpressFirstName: "John",
         wordpressLastName: "Smith",
         wordpressScheme: "https",
-        readinessProbe: {enabled: false},
+        readinessProbe: {enabled: true, initialDelaySeconds:30, periodSeconds: 10, timeoutSeconds: 5, failureThreshold: 6, successThreshold: 1, httpGet: {path: "/wp-login.php",port: "https", scheme: "HTTPS",}},
+        readinessProbeHeaders: { name: "X-Forwarded-Proto", value: "https"},
         wordpresspwd:mydbpassword.result,
         mariadb: {architecture: "replication", 
                   auth: {rootPassword: mariadbRootPassword.result, password: mariadbpassword.result}, 
