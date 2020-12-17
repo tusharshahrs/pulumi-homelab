@@ -1,3 +1,0 @@
-config:
-  azure:location: eastus2
-  iac-workshop:container: htmlprod

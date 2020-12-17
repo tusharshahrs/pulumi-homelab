@@ -1,3 +1,0 @@
-name: 03-telemetry
-runtime: nodejs
-description: A minimal Azure TypeScript Pulumi program
