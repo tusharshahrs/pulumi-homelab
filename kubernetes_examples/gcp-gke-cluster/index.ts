@@ -2,7 +2,7 @@ import * as k8s from "@pulumi/kubernetes";
 import * as pulumi from "@pulumi/pulumi";
 import * as gcp from "@pulumi/gcp";
 
-const name = "shahthello";
+const name = "shaht-cluster";
 
 const config = new pulumi.Config();
 export const masterVersion = config.get("masterVersion") ||
@@ -26,7 +26,7 @@ const nodePool = new gcp.container.NodePool(`primary-node-pool`, {
     autoscaling: {maxNodeCount: 9, minNodeCount: 3},
     management: {autoRepair: true},
     nodeConfig: {
-        preemptible: false,
+        preemptible: true,
         machineType: "n1-standard-1",
         oauthScopes: [
             "https://www.googleapis.com/auth/compute",

@@ -1,3 +1,0 @@
-name: 04-status
-runtime: nodejs
-description: A minimal Azure TypeScript Pulumi program
