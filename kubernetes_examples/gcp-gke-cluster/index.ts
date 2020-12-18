@@ -5,6 +5,8 @@ import * as gcp from "@pulumi/gcp";
 const name = "shaht-cluster";
 
 const config = new pulumi.Config();
+const clusterConfig = new pulumi.StackReference("shaht/gcp-py-network-component/dev");
+
 export const masterVersion = config.get("masterVersion") ||
     gcp.container.getEngineVersions().then(it => it.latestMasterVersion);
 
@@ -15,8 +17,14 @@ const cluster = new gcp.container.Cluster(name, {
     // node pool and immediately delete it.
     initialNodeCount: 1,
     removeDefaultNodePool: true,
-
+    //ipAllocationPolicy: ["10.0.0.0/25","10.0.0.128/25"],
     minMasterVersion: masterVersion,
+    network: clusterConfig.getOutput("network"),
+    subnetwork: clusterConfig.getOutput("subnets_names_string"),
+    //subnetwork: clusterConfig.getOutput("subnets_cidr_blocks_string"),
+    ipAllocationPolicy: {
+      clusterIpv4CidrBlock: clusterConfig.getOutput("10.0.0.0/25"),
+    },
 });
 
 const nodePool = new gcp.container.NodePool(`primary-node-pool`, {
