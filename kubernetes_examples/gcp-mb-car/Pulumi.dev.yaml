@@ -1,0 +1,2 @@
+config:
+  gcp-mb-car:clusterStackRef: shaht/gke-kubernetes-cluster-hello/gke-cluster-dev-ts
