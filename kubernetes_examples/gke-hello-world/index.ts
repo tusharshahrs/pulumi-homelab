@@ -2,54 +2,25 @@ import * as k8s from "@pulumi/kubernetes";
 import * as pulumi from "@pulumi/pulumi";
 import * as gcp from "@pulumi/gcp";
 
-const name = "shaht-cluster";
-
-const config = new pulumi.Config();
-const clusterConfig = new pulumi.StackReference("shaht/gcp-py-network-component/dev");
-
-export const masterVersion = config.get("masterVersion") ||
-    gcp.container.getEngineVersions().then(it => it.latestMasterVersion);
+const name = "shaht-helloworld";
 
 // Create a GKE cluster
+const engineVersion = gcp.container.getEngineVersions().then(v => v.latestMasterVersion);
 const cluster = new gcp.container.Cluster(name, {
-    // We can't create a cluster with no node pool defined, but we want to only use
-    // separately managed node pools. So we create the smallest possible default
-    // node pool and immediately delete it.
-    initialNodeCount: 1,
-    removeDefaultNodePool: true,
-    //ipAllocationPolicy: ["10.0.0.0/25","10.0.0.128/25"],
-    minMasterVersion: masterVersion,
-    network: clusterConfig.getOutput("network"),
-    subnetwork: clusterConfig.getOutput("subnets_names_string"),
-    //subnetwork: clusterConfig.getOutput("subnets_cidr_blocks_string"),
-    ipAllocationPolicy: {
-      clusterIpv4CidrBlock: clusterConfig.getOutput("10.0.0.0/25"),
-    },
-});
-
-const nodePool = new gcp.container.NodePool(`primary-node-pool`, {
-    cluster: cluster.name,
-    initialNodeCount: 3,
-    location: cluster.location,
-    autoscaling: {maxNodeCount: 9, minNodeCount: 3},
-    management: {autoRepair: true},
+    initialNodeCount: 2,
+    minMasterVersion: engineVersion,
+    nodeVersion: engineVersion,
     nodeConfig: {
-        preemptible: true,
         machineType: "n1-standard-1",
         oauthScopes: [
             "https://www.googleapis.com/auth/compute",
             "https://www.googleapis.com/auth/devstorage.read_only",
             "https://www.googleapis.com/auth/logging.write",
-            "https://www.googleapis.com/auth/monitoring",
+            "https://www.googleapis.com/auth/monitoring"
         ],
     },
-    version: masterVersion,
+});
 
-  },
-
-  {
-    dependsOn: [cluster],
-  });
 // Export the Cluster name
 export const clusterName = cluster.name;
 
