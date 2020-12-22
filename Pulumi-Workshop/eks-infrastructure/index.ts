@@ -13,7 +13,7 @@ const vpc_publicsubnetids = networkingStack.getOutput("pulumi_vpc_public_subnet_
 const projectName = getProject();
 const stackName = getStack();
 
-const mytags = {"eks":"yes", "launched_by":"shaht","demo":"yes", "env":"dev", "projectName": projectName, "stackName": stackName};
+const mytags = {"eks":"yes", "launched_by":"shaht","demo":"yes", "env":"dev", "projectName": projectName, "stackName": stackName,};
 const my_name = "shaht-eks";
 
 const cluster = new eks.Cluster("shahteks", 
@@ -29,16 +29,16 @@ const cluster = new eks.Cluster("shahteks",
     version: "1.18",
 });
 
-const autoscaling_tags = {"pulumi":"eks", "autoscaling":"yes","selfservice":"no", "team": "engineering", "partner":"marketing", "projectName": projectName, "stackName": stackName}
+const autoscaling_tags = {"pulumi":"eks", "autoscaling":"yes","selfservice":"no", "team": "engineering", "partner":"marketing", "projectName": projectName, "stackName": stackName,}
 // Create 3 IAM Roles and matching InstanceProfiles to use with the nodegroups.
 const roles = iam.createRoles(my_name, 3);
 const instanceProfiles = iam.createInstanceProfiles(my_name, roles);
 
 const ngstandard = new eks.NodeGroup(`${my_name}-ng`, {
     cluster: cluster,
-    instanceType: "t3a.micro",
+    instanceType: "t3a.medium",
     instanceProfile: instanceProfiles[0],
-    desiredCapacity: 4,
+    desiredCapacity: 3,
     minSize: 2,
     maxSize: 8,
     spotPrice: "0.05",

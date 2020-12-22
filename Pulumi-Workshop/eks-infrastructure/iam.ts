@@ -1,12 +1,20 @@
 import * as aws from "@pulumi/aws";
-import * as pulumi from "@pulumi/pulumi";
 import * as iam from "./iam";
+import * as pulumi from "@pulumi/pulumi";
+import { StackReference } from "@pulumi/pulumi";
+import { lambda } from "@pulumi/aws/types/enums";
 
-const managedPolicyArns: string[] = [
+const config = new pulumi.Config();
+const autoscaleStack = new StackReference(config.require("autoscaleStack"));
+const iam_policy_eks_cluster_autoscale = autoscaleStack.getOutput("iam_policy_eks_cluster_autoscale_arn");
+
+let managedPolicyArns: string[] = [
     "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
     "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
     "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
 ];
+
+iam_policy_eks_cluster_autoscale.apply(iam_policy_eks_cluster_autoscale => managedPolicyArns.push(iam_policy_eks_cluster_autoscale));
 
 // Creates a role and attaches the EKS worker node IAM managed policies
 export function createRole(name: string): aws.iam.Role {
