@@ -1,3 +1,4 @@
 config:
   aws:region: us-east-2
+  eks-infrastructure:autoscaleStack: shaht/aws-eks-cluster-autoscaler-iam-ts/dev
   eks-infrastructure:networkingStack: shaht/crosswalk-vpc/eks-dev
