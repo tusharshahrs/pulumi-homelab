@@ -10,9 +10,10 @@ const metricsnamespace = new k8s.core.v1.Namespace("metrics-Namespace", {
     },
 }, { provider: k8sProvider });
 
-//https://github.com/bitnami/bitnami-docker-metrics-server
-//https://artifacthub.io/packages/helm/bitnami/metrics-server
-/* const metricsserver = new k8s.helm.v3.Chart(
+//URL of chart: https://github.com/bitnami/bitnami-docker-metrics-server
+//Helm Chart options:  https://artifacthub.io/packages/helm/bitnami/metrics-server
+// The values were picked from here: https://github.com/bitnami/charts/blob/master/bitnami/metrics-server/values.yaml
+ const metricsserver = new k8s.helm.v3.Chart(
     //"metrics-server-helmv3", 
     "metrics-server-helm3",
     {
@@ -21,7 +22,12 @@ const metricsnamespace = new k8s.core.v1.Namespace("metrics-Namespace", {
     fetchOpts: {
         repo: "https://charts.bitnami.com/bitnami",
     },
-}, { provider: k8sProvider }); */
+    values: {
+             rbac: {create: true},
+             apiService: {create: true},
+            },
+
+}, { provider: k8sProvider });
 
 const go_demo_5Namespace = new k8s.core.v1.Namespace("go_demo_5Namespace", {
     apiVersion: "v1",
