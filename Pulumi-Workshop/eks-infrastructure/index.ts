@@ -13,11 +13,13 @@ const vpc_publicsubnetids = networkingStack.getOutput("pulumi_vpc_public_subnet_
 const projectName = getProject();
 const stackName = getStack();
 
-const mytags = {"eks":"yes", "launched_by":"shaht","demo":"yes", "env":"dev", "projectName": projectName, "stackName": stackName,};
-const my_name = "shaht-eks";
+// Basic Tags
+const mytags = {"eks":"yes","clustertags":"yes" ,"launched_by":"shaht","demo":"yes", "env":"dev", "projectName": projectName, "stackName": stackName,};
+// eks cluster first part of name
+const my_name = `shaht-eks`;
 
 const cluster = new eks.Cluster("shahteks", 
-{
+{   
     vpcId: vpc_id,
     privateSubnetIds: vpc_privatesubnetids,
     publicSubnetIds: vpc_publicsubnetids,
@@ -29,7 +31,21 @@ const cluster = new eks.Cluster("shahteks",
     version: "1.18",
 });
 
-const autoscaling_tags = {"pulumi":"eks", "autoscaling":"yes","selfservice":"no", "team": "engineering", "partner":"marketing", "projectName": projectName, "stackName": stackName,}
+// Basic set of tags
+const autoscaling_tags = {"pulumi":"eks","nodegroup":"yes", "autoscaling":"yes","selfservice":"no", "team": "engineering", "partner":"marketing", "projectName": projectName, "stackName": stackName,}
+// Needed for cluster-autoscaler helm3 chart: https://artifacthub.io/packages/helm/cluster-autoscaler/cluster-autoscaler#auto-discovery
+const tag_cluster_autoscaler_enabled = {"k8s.io/cluster-autoscaler/enabled":"yes"};
+// Needed for cluster-autoscaler helm3 chart: https://artifacthub.io/packages/helm/cluster-autoscaler/cluster-autoscaler#auto-discovery
+const tag_cluster_autoscaler_eks_name = "k8s.io/cluster-autoscaler/" + `${cluster.eksCluster.name}`;
+const tag_cluster_autoscaler_autodiscovery =  {tag_cluster_autoscaler_eks_name:"yes"};
+
+// Combing all 3 tags into 1.
+export const cluster_autoscale_tags = {
+    ...autoscaling_tags,
+    ...tag_cluster_autoscaler_enabled,
+    ...tag_cluster_autoscaler_autodiscovery,
+};
+
 // Create 3 IAM Roles and matching InstanceProfiles to use with the nodegroups.
 const roles = iam.createRoles(my_name, 3);
 const instanceProfiles = iam.createInstanceProfiles(my_name, roles);
@@ -46,7 +62,8 @@ const ngstandard = new eks.NodeGroup(`${my_name}-ng`, {
     //kubeletExtraArgs: "--read-only-port 10255",
     encryptRootBockDevice: true,
     nodeRootVolumeSize: 10,
-    autoScalingGroupTags: autoscaling_tags,
+    //cloudFormationTags:autoscaling_tags,
+    autoScalingGroupTags: cluster_autoscale_tags,
 });
 
 export const vpcid = vpc_id;
@@ -63,3 +80,4 @@ export const k8sProvider = cluster.provider;
 //export const k8sProvider = pulumi.secret(cluster.provider);
 export const eks_nodegroups_autoScalingGroupName = ngstandard.autoScalingGroupName;
 export const eks_nodegroups_urn = ngstandard.urn;
+export const eks_nodegroup_tags = ngstandard.cfnStack.tags;
