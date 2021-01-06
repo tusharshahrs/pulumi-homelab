@@ -4,17 +4,38 @@ import * as pulumi from "@pulumi/pulumi";
 import { StackReference } from "@pulumi/pulumi";
 import { lambda } from "@pulumi/aws/types/enums";
 
-const config = new pulumi.Config();
-const autoscaleStack = new StackReference(config.require("autoscaleStack"));
-const iam_policy_eks_cluster_autoscale = autoscaleStack.getOutput("iam_policy_eks_cluster_autoscale_arn");
+// Creates a eks cluster autoscale policy json for cluster-autoscaler  helm3 chart
+const eks_cluster_autoscale_policy = `{
+	"Version": "2012-10-17",
+	"Statement": [{
+		"Effect": "Allow",
+		"Action": [
+			"autoscaling:DescribeAutoScalingGroups",
+			"autoscaling:DescribeAutoScalingInstances",
+			"autoscaling:DescribeLaunchConfigurations",
+			"autoscaling:DescribeTags",
+            "autoscaling:SetDesiredCapacity",
+            "autoscaling:TerminateInstanceInAutoScalingGroup",
+            "ec2:DescribeLaunchTemplateVersions"
+		],
+		"Resource": "*"
+	}]
+}`
+
+// Creates a eks cluster autoscale policy json
+// https://artifacthub.io/packages/helm/cluster-autoscaler/cluster-autoscaler#aws---iam
+const my_custom_policy = new aws.iam.Policy("eks_cluster_autoscale_policy", {
+    name: "EKSClusterAutoscalePolicy",
+    description: "EKS Cluster Autoscale Policy for cluster-autoscaler helm3 chart",
+    path: "/",
+    policy: `${eks_cluster_autoscale_policy}`,
+});
 
 let managedPolicyArns: string[] = [
     "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
     "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
     "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
 ];
-
-iam_policy_eks_cluster_autoscale.apply(iam_policy_eks_cluster_autoscale => managedPolicyArns.push(iam_policy_eks_cluster_autoscale));
 
 // Creates a role and attaches the EKS worker node IAM managed policies
 export function createRole(name: string): aws.iam.Role {
@@ -31,6 +52,11 @@ export function createRole(name: string): aws.iam.Role {
             { policyArn: policy, role: role },
         );
     }
+
+        // Adding Custom Policy
+    const rpa = new aws.iam.RolePolicyAttachment(`${name}-policy-${counter++}`,
+        { policyArn: my_custom_policy.arn, role: role },
+        { dependsOn: my_custom_policy });
 
     return role;
 }
