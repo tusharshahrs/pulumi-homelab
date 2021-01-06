@@ -21,7 +21,7 @@ const eks_cluster_autoscale_policy = `{
 // Creates a eks cluster autoscale policy json
 // https://artifacthub.io/packages/helm/cluster-autoscaler/cluster-autoscaler#aws---iam
 const my_custom_policy = new aws.iam.Policy("eks_cluster_autoscale_policy", {
-    name: "EKSClusterAutoscalePolicy",
+    name: "EKSClusterAutoscalePolicy_Tushar",
     description: "EKS Cluster Autoscale Policy for cluster-autoscaler helm3 chart",
     path: "/",
     policy: `${eks_cluster_autoscale_policy}`,
@@ -70,7 +70,7 @@ export function createRoles(name: string, quantity: number): aws.iam.Role[] {
 // Creates a collection of IAM instance profiles from the given roles.
 export function createInstanceProfiles(name: string, roles: aws.iam.Role[]): aws.iam.InstanceProfile[] {
     const profiles: aws.iam.InstanceProfile[] = [];
-
+    console.log("Roles Lenght: ", roles.length)
     for (let i = 0; i < roles.length; i++) {
         const role = roles[i];
         profiles.push(new aws.iam.InstanceProfile(`${name}-instanceProfile-${i}`, {role: role}));
