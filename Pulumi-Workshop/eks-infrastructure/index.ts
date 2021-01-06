@@ -18,6 +18,10 @@ const mytags = {"eks":"yes","clustertags":"yes" ,"launched_by":"shaht","demo":"y
 // eks cluster first part of name
 const my_name = `shaht-eks`;
 
+// Create 3 IAM Roles and matching InstanceProfiles to use with the nodegroups.
+const roles = iam.createRoles(my_name, 1);
+const instanceProfiles = iam.createInstanceProfiles(my_name, roles);
+
 const cluster = new eks.Cluster("shahteks", 
 {   
     vpcId: vpc_id,
@@ -25,10 +29,12 @@ const cluster = new eks.Cluster("shahteks",
     publicSubnetIds: vpc_publicsubnetids,
     minSize: 1,
     instanceType:"t3a.small",
+    instanceRole: roles[0],
     tags: mytags,
     nodeRootVolumeSize: 10,
     encryptRootBockDevice: true,
     version: "1.18",
+    enabledClusterLogTypes: ["api", "audit", "authenticator", "controllerManager", "scheduler"],
 });
 
 // Basic set of tags
@@ -42,13 +48,6 @@ export const tag_cluster_autoscaler_autodiscovery = tag_cluster_autoscaler_eks_n
     return JSON.parse(`{"${cluster_autoscaler_autodiscovery_tag}":"owned"}`);
 });
 
-// Combing all 3 tags into 1.
-/*export const cluster_autoscale_tags = {
-    ...autoscaling_tags,
-    ...tag_cluster_autoscaler_enabled,
-    ...tag_cluster_autoscaler_autodiscovery,
-};*/
-
 export const cluster_autoscale_tags = tag_cluster_autoscaler_autodiscovery.apply(tag_cluster_autoscaler_autodiscovery_updated_tag => {
     return {
     ...autoscaling_tags,
@@ -58,8 +57,8 @@ export const cluster_autoscale_tags = tag_cluster_autoscaler_autodiscovery.apply
 });
 
 // Create 3 IAM Roles and matching InstanceProfiles to use with the nodegroups.
-const roles = iam.createRoles(my_name, 1);
-const instanceProfiles = iam.createInstanceProfiles(my_name, roles);
+/* const roles = iam.createRoles(my_name, 1);
+const instanceProfiles = iam.createInstanceProfiles(my_name, roles); */
 
 const ngstandard = new eks.NodeGroup(`${my_name}-ng`, {
     cluster: cluster,
@@ -90,3 +89,4 @@ export const k8sProvider = cluster.provider;
 export const eks_nodegroups_autoScalingGroupName = ngstandard.autoScalingGroupName;
 export const eks_nodegroups_urn = ngstandard.urn;
 export const eks_nodegroup_tags = ngstandard.cfnStack.tags;
+export const iam_instanceProfiles = instanceProfiles[0];
