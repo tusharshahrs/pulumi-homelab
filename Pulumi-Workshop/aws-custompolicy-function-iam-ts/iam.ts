@@ -1,8 +1,5 @@
 import * as aws from "@pulumi/aws";
 import * as iam from "./iam";
-import * as pulumi from "@pulumi/pulumi";
-import { StackReference } from "@pulumi/pulumi";
-import { lambda } from "@pulumi/aws/types/enums";
 
 // Creates a eks cluster autoscale policy json for cluster-autoscaler  helm3 chart
 const eks_cluster_autoscale_policy = `{
@@ -15,8 +12,7 @@ const eks_cluster_autoscale_policy = `{
 			"autoscaling:DescribeLaunchConfigurations",
 			"autoscaling:DescribeTags",
             "autoscaling:SetDesiredCapacity",
-            "autoscaling:TerminateInstanceInAutoScalingGroup",
-            "ec2:DescribeLaunchTemplateVersions"
+            "autoscaling:TerminateInstanceInAutoScalingGroup"
 		],
 		"Resource": "*"
 	}]
@@ -25,7 +21,7 @@ const eks_cluster_autoscale_policy = `{
 // Creates a eks cluster autoscale policy json
 // https://artifacthub.io/packages/helm/cluster-autoscaler/cluster-autoscaler#aws---iam
 const my_custom_policy = new aws.iam.Policy("eks_cluster_autoscale_policy", {
-    name: "EKSClusterAutoscalePolicy",
+    name: "EKSClusterAutoscalePolicy_Tushar",
     description: "EKS Cluster Autoscale Policy for cluster-autoscaler helm3 chart",
     path: "/",
     policy: `${eks_cluster_autoscale_policy}`,
@@ -37,7 +33,6 @@ let managedPolicyArns: string[] = [
     "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
 ];
 
-// Creates a role and attaches the EKS worker node IAM managed policies
 export function createRole(name: string): aws.iam.Role {
     const role = new aws.iam.Role(`${name}-iamrole`, {
         assumeRolePolicy: aws.iam.assumeRolePolicyForPrincipal({
@@ -53,7 +48,7 @@ export function createRole(name: string): aws.iam.Role {
         );
     }
 
-        // Adding Custom Policy
+    // Adding Custom Policy
     const rpa = new aws.iam.RolePolicyAttachment(`${name}-policy-${counter++}`,
         { policyArn: my_custom_policy.arn, role: role },
         { dependsOn: my_custom_policy });
@@ -75,7 +70,7 @@ export function createRoles(name: string, quantity: number): aws.iam.Role[] {
 // Creates a collection of IAM instance profiles from the given roles.
 export function createInstanceProfiles(name: string, roles: aws.iam.Role[]): aws.iam.InstanceProfile[] {
     const profiles: aws.iam.InstanceProfile[] = [];
-
+    console.log("Roles Lenght: ", roles.length)
     for (let i = 0; i < roles.length; i++) {
         const role = roles[i];
         profiles.push(new aws.iam.InstanceProfile(`${name}-instanceProfile-${i}`, {role: role}));

@@ -1,6 +1,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as k8s from "@pulumi/kubernetes";
-import { eksStack, cluster,kubeconfig,k8sProvider,projectName,stackName, } from "./common";
+import { eksStack, eks_cluster_name,kubeconfig,k8sProvider,projectName,stackName, } from "./common";
 
 const metricsnamespace = new k8s.core.v1.Namespace("metrics-Namespace", {
     apiVersion: "v1",
@@ -10,26 +10,65 @@ const metricsnamespace = new k8s.core.v1.Namespace("metrics-Namespace", {
     },
 }, { provider: k8sProvider });
 
-//URL of chart: https://github.com/bitnami/bitnami-docker-metrics-server
-//Helm Chart options:  https://artifacthub.io/packages/helm/bitnami/metrics-server
+//URL of chart:  https://github.com/bitnami/bitnami-docker-metrics-server
+//Helm Chart options: https://artifacthub.io/packages/helm/bitnami/metrics-server
 // The values were picked from here: https://github.com/bitnami/charts/blob/master/bitnami/metrics-server/values.yaml
- const metricsserver = new k8s.helm.v3.Chart(
-    //"metrics-server-helmv3", 
-    "metrics-server-helm3",
-    {
-    version: "5.3.1",
+const metricsserver = new k8s.helm.v3.Chart("metricschart",  {
+    version: "5.3.3",
+    namespace: metricsnamespace.metadata.name,
     chart: "metrics-server",
     fetchOpts: {
         repo: "https://charts.bitnami.com/bitnami",
     },
-    values: {
-             rbac: {create: true},
-             apiService: {create: true},
+    values: { 
+              rbac: {create: true},
+              apiService: {create: true},
             },
-
 }, { provider: k8sProvider });
 
-const go_demo_5Namespace = new k8s.core.v1.Namespace("go_demo_5Namespace", {
+/* const clusterautoscalernamespace = new k8s.core.v1.Namespace("autoscaler-Namespace", {
+    apiVersion: "v1",
+    kind: "Namespace",
+    metadata: {
+        name: "autoscaler",
+    },
+}, { provider: k8sProvider }); */
+
+//export const tag_cluster_autoscaler_enabled_label = {"k8s.io/cluster-autoscaler/enabled":"true"};
+export const tag_cluster_autoscaler_enabled_label = '"k8s.io/cluster-autoscaler/enabled"';
+export const my_eks_cluster_name = eks_cluster_name;
+
+export const tag_cluster_autoscaler_eks_name = pulumi.interpolate`k8s.io/cluster-autoscaler/${eks_cluster_name}`;
+//export const tag_cluster_autoscaler_autodiscovery_label = tag_cluster_autoscaler_eks_name.apply(myeksname => {
+//    return JSON.parse(`{"${myeksname}":"owned"}`);
+//  });
+
+export const tag_cluster_autoscaler_autodiscovery_label = tag_cluster_autoscaler_eks_name.apply(myekspart => {
+    return JSON.stringify(`${myekspart}`);
+  });
+
+/*export const mytags = tag_cluster_autoscaler_autodiscovery_label.apply(mystuff => {
+    return {
+    ...tag_cluster_autoscaler_enabled_label,
+    ...mystuff,
+    }
+});*/
+
+const clusterautoscaler = new k8s.helm.v3.Chart("autoscale",  {
+    version: "9.3.0",
+    namespace: "kube-system",
+    chart: "cluster-autoscaler",
+    fetchOpts: {
+        repo: "https://kubernetes.github.io/autoscaler",
+    },
+     values: {
+              rbac: {create:true},
+              extraArgs: {"stderrthreshold":"info","skip-nodes-with-local-storage":false,"expander":"least-waste","balance-similar-node-groups":true,"skip-nodes-with-system-pods":false,},
+              autoDiscovery: {clusterName: eks_cluster_name, tags: [tag_cluster_autoscaler_enabled_label,tag_cluster_autoscaler_autodiscovery_label]},
+            },
+}, { provider: k8sProvider });
+
+/* const go_demo_5Namespace = new k8s.core.v1.Namespace("go_demo_5Namespace", {
     apiVersion: "v1",
     kind: "Namespace",
     metadata: {
@@ -367,4 +406,4 @@ const go_demo_5DbHorizontalPodAutoscaler = new k8s.autoscaling.v2beta1.Horizonta
             },
         ],
     },
-}, { provider: k8sProvider });
+}, { provider: k8sProvider }); */
