@@ -1,0 +1,3 @@
+config:
+  azure-nextgen-serverless:location: eastus2
+  azure-nextgen-serverless:name: shaht
