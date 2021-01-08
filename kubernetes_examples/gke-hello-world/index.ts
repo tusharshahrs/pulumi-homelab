@@ -6,10 +6,12 @@ const name = "shaht-helloworld";
 
 // Create a GKE cluster
 const engineVersion = gcp.container.getEngineVersions().then(v => v.latestMasterVersion);
+//https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1beta1/projects.locations.clusters#clustertelemetry
 const cluster = new gcp.container.Cluster(name, {
     initialNodeCount: 2,
     minMasterVersion: engineVersion,
     nodeVersion: engineVersion,
+    clusterTelemetry: {type: "SYSTEM_ONLY"},
     nodeConfig: {
         machineType: "n1-standard-1",
         oauthScopes: [
