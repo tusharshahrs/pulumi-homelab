@@ -18,7 +18,7 @@ const vpc = new awsx.ec2.Vpc("vpc-eks-matan",
     { subnets: [{ type: "public" },{ type: "private"}],
         cidrBlock: "10.20.0.0/16",
         //tags: [{ test:"matan" }]
-        tags: {"mytest":"matan"}
+        tags: {"test":"matan"}
     });
         
 const cluster = new eks.Cluster(`${name}`, {
@@ -34,7 +34,7 @@ const myInstanceProfile = new aws.iam.InstanceProfile("node-instanceprofile", {r
 
 const fixedNodeGroup = cluster.createNodeGroup("eks-matan-ng1", {
     
-    instanceType: "t2.medium",
+    instanceType: "t3a.medium",
     desiredCapacity: 1,
     minSize: 1,
     maxSize: 2,
@@ -44,9 +44,9 @@ const fixedNodeGroup = cluster.createNodeGroup("eks-matan-ng1", {
 
 const spotNodeGroup = new eks.NodeGroup("eks-matan-ng2", {
     cluster: cluster,
-    instanceType: "t2.medium",
+    instanceType: "t3a.medium",
     desiredCapacity: 1,
-    spotPrice: "1",
+    spotPrice: "0.05",
     minSize: 1,
     maxSize: 2,
     labels: {"preemptible": "true"},
