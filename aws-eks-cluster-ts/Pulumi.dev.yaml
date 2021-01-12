@@ -1,2 +1,3 @@
 config:
+  aws-eks-cluster-ts:cluster_name: shaht
   aws:region: us-east-2

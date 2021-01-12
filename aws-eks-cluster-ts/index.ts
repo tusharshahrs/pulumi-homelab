@@ -11,7 +11,9 @@ import * as awsx from "@pulumi/awsx";
 import * as eks from "@pulumi/eks";
 import * as kubernetes from "@pulumi/kubernetes";
 
-const name = "eks-matan";
+const config = new pulumi.Config();
+const name = config.get("cluster_name");
+//const name = "eks-matan";
 
 // Create an EKS cluster with non-default configuration
 const vpc = new awsx.ec2.Vpc("vpc-eks-matan",
