@@ -2,8 +2,10 @@ import * as pulumi from "@pulumi/pulumi";
 import * as resources from "@pulumi/azure-nextgen/resources/latest";
 import * as storage from "@pulumi/azure-nextgen/storage/latest";
 import * as web from "@pulumi/azure-nextgen/web/v20200601";
-
 import * as random from "@pulumi/random";
+
+// For Blob Storage 
+import * as azure from "@pulumi/azure";
 
 const config = new pulumi.Config();
 const myname = config.get("name");
@@ -40,7 +42,8 @@ const storageAccount = new storage.StorageAccount("storageaccount", {
 const plan = new web.AppServicePlan("appserviceplan", {
     resourceGroupName: resourceGroup.name,
     location: resourceGroup.location,
-    name: "consumption-plan",
+    //name: "consumption-plan",
+    name: pulumi.interpolate`${myname}-consumption-plan-${suffix.result}`,
     sku: {
         name: "Y1",
         tier: "Dynamic",
@@ -80,4 +83,21 @@ const app = new web.WebApp("functionapp", {
     }
 });
 
+
+// This is created for the blob.
+const blobContainer = new storage.BlobContainer("blobContainer", {
+    accountName: storageAccount.name,
+    resourceGroupName: resourceGroup.name,
+    containerName: pulumi.interpolate`${myname}-blobcontainer-${suffix.result}`,
+});
+
+const myblob = new azure.storage.Blob("blob", {
+    storageAccountName: storageAccount.name,
+    storageContainerName: blobContainer.name,
+    name: pulumi.interpolate`${myname}-blob-${suffix.result}`,
+    type: "Block",
+});
+
 export const endpoint = pulumi.interpolate`https://${app.defaultHostName}/api/hello`;
+export const blobContainer_name = blobContainer.name;
+export const blob_name = myblob.name;
