@@ -1,6 +1,6 @@
 ## Azure-Nextgen Serverless in TypeScript
 
-This uploads an index.html file to an azure blob storage.  The index file is located in www folder.
+This uploads an index.html file to an azure blob storage.  The index file is located in the www folder.
 
 ## Pre-Requisites
 
