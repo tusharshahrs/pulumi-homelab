@@ -5,7 +5,7 @@ import * as azure from "@pulumi/azure"; // For Blob Storage
 import * as random from "@pulumi/random";
 
 const config = new pulumi.Config();
-const myname = config.get("name") || "demo";
+const myname = config.get("name") || "demo2";
 const mylocation = config.get("location") || "westus";
 
 // This is needed because of there is no autonaming in azure-nextgen:
@@ -35,16 +35,13 @@ const storageAccount = new storage.StorageAccount("storageAccount", {
     kind: "StorageV2",
 });
 
-export const resourcegroup_name = resourceGroup.name;
-export const storage_account_name = storageAccount.name;
-
 // Creates BlobContainer.  This is a requirement for the storage blob.
 const blobContainer = new storage.BlobContainer("blobContainer", {
     accountName: storageAccount.name,
     resourceGroupName: resourceGroup.name,
     containerName: pulumi.interpolate`${myname}-blobcontainer-${suffix.result}`,
     publicAccess: "Blob",
-});
+}, {dependsOn: storageAccount});
 
 // This is old azure code(not azure next gen)
 const blobStorage = new azure.storage.Blob("blobStorage", {
@@ -53,10 +50,11 @@ const blobStorage = new azure.storage.Blob("blobStorage", {
     name: pulumi.interpolate`${myname}-blob-${suffix.result}`,
     type: "Block",
     source: new pulumi.asset.FileAsset(`./www/index.html`),
-    contentType: "text/html"
-    
+    contentType: "text/html",
 }, {dependsOn: blobContainer});
 
+export const resourcegroup_name = resourceGroup.name;
+export const storage_account_name = storageAccount.name;
 export const blobContainer_name = blobContainer.name;
 export const blobstorage_name = blobStorage.name;
 export const blobstorage_url = blobStorage.url;
