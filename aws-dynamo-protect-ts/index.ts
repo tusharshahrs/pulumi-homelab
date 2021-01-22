@@ -128,7 +128,7 @@ const basic_dynamodb_table = new aws.dynamodb.Table(
 
     writeCapacity: 5,
   },
-  { protect: true }
+  { protect: false }
 );
 
 export const kms_key_arn = kms_key.arn;
