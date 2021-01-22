@@ -63,10 +63,24 @@ const kms_key = new aws.kms.Key(`${myname}-kms-key`, {
   ),
 });
 
+const kms_key2 = new aws.kms.Key(`${myname}-kms2-key2`, {
+    deletionWindowInDays: 7,
+    description: "shaht2 kms2 key2 for testing2",
+    enableKeyRotation: true,
+    policy: kms_examplePolicyDocument.then(
+      (kms_examplePolicyDocument) => kms_examplePolicyDocument.json
+    ),
+  });
+
 const kms_alias = new aws.kms.Alias(`${myname}-kms-alias`, {
   name: `alias/${myname}kms`,
   targetKeyId: kms_key.keyId,
 });
+
+const kms_alias2 = new aws.kms.Alias(`${myname}-kms2-alias2`, {
+    name: `alias/${myname}kms2`,
+    targetKeyId: kms_key2.keyId,
+  });
 
 const basic_dynamodb_table = new aws.dynamodb.Table(
   `${myname}-dynamodb-table`,
@@ -85,7 +99,8 @@ const basic_dynamodb_table = new aws.dynamodb.Table(
         type: "N",
       },
     ],
-    serverSideEncryption: { enabled: true, kmsKeyArn: kms_alias.arn  },
+    //serverSideEncryption: { enabled: true, kmsKeyArn: kms_alias.arn  },
+    serverSideEncryption: { enabled: true, kmsKeyArn: kms_alias2.arn  },
     billingMode: "PROVISIONED",
     globalSecondaryIndexes: [
       {
