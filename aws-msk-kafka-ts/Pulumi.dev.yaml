@@ -1,0 +1,5 @@
+config:
+  aws-msk-kafka-ts:myipaddress:
+    secure: AAABAKaMSkNhDpJY0ymy4+ksFf5vY6FuDJWOoR1RL+U3Q2ycYMDCKeYyTBGmhgRM
+  aws-msk-kafka-ts:networkingStack: shaht/crosswalk-vpc/eks-dev
+  aws:region: us-east-2
