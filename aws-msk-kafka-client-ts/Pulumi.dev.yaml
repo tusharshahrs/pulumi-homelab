@@ -1,0 +1,4 @@
+config:
+  aws-msk-kafka-client-ts:mskStack: shaht/aws-msk-kafka-ts/dev
+  aws-msk-kafka-client-ts:networkingStack: shaht/crosswalk-vpc/eks-dev
+  aws:region: us-east-2
