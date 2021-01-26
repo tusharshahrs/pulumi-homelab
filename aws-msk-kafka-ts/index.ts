@@ -37,6 +37,7 @@ export const sg = new aws.ec2.SecurityGroup(`${my_name}-sg`,
             fromPort: 0,
             toPort: 0,
             self: true,
+            cidrBlocks: [`${myip}`],
             },
             {
             description: "my ssh rule for client server",
@@ -45,7 +46,15 @@ export const sg = new aws.ec2.SecurityGroup(`${my_name}-sg`,
             toPort: 22,
             self: false,
             cidrBlocks: [`${myip}`]
-            },  
+            },
+            /*{
+            description: "all ports for tushar shah",
+            protocol: "-1",
+            fromPort: 0,
+            toPort: 0,
+            self: false,
+            cidrBlocks: [`${myip}`]
+            },*/  
     ],
     tags: {"Name": `${my_name}-sg`}
 
