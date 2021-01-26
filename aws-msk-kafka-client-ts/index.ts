@@ -17,6 +17,9 @@ const myname = "shaht-mskclient";
 
 const kafkastack = new StackReference(config.require("mskStack"))
 const security_group_kafka = kafkastack.getOutput("security_group_id");
+const kafka_msk_cluster_arn = kafkastack.getOutput("msk_cluster_arn");
+
+const msk_cluster_arn = kafka_msk_cluster_arn.apply(kafka_msk_cluster_arn => kafka_msk_cluster_arn);
 //let msk_kafka_securitygroup: string[];
 //security_group_kafka.apply(security_group_kafka=>msk_kafka_securitygroup.push(security_group_kafka));
 let mysecurity_group =  security_group_kafka.apply(security_group_kafka => security_group_kafka);
@@ -74,3 +77,28 @@ const msk_client_server = new aws.ec2.SpotInstanceRequest(`${name}-msk-client`, 
 export const sshkey_urn = sshPrivateKey.urn;
 export const sshkey_privateKeyPem = sshPrivateKey.privateKeyPem;
 export const amiId_id = amiId;
+
+// MSK storage autoscaling: https://github.com/hashicorp/terraform-provider-aws/issues/15796
+//https://docs.aws.amazon.com/autoscaling/application/APIReference/API_RegisterScalableTarget.html
+const mskcluster_appautoscaling_target = new aws.appautoscaling.Target(`${name}-msk-autoscaling-target`, {
+    maxCapacity: 200,
+    minCapacity: 1,
+    resourceId: msk_cluster_arn,
+    scalableDimension: "kafka:broker-storage:VolumeSize",
+    serviceNamespace: "kafka",
+});
+
+// MSK storage autoscaling: https://github.com/hashicorp/terraform-provider-aws/issues/15796
+const mskcluster_appautoscaling_policy = new aws.appautoscaling.Policy(`${name}-msk-autoscaling-target`, {
+    policyType: "TargetTrackingScaling",
+    resourceId: mskcluster_appautoscaling_target.id,
+    scalableDimension: mskcluster_appautoscaling_target.scalableDimension,
+    serviceNamespace: mskcluster_appautoscaling_target.serviceNamespace,
+    targetTrackingScalingPolicyConfiguration: {
+        predefinedMetricSpecification: {
+            predefinedMetricType: "KafkaBrokerStorageUtilization",
+        },
+        targetValue: 10,
+    }
+});
+//msk_cluster_arn
