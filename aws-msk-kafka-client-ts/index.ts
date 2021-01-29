@@ -20,11 +20,9 @@ const security_group_kafka = kafkastack.getOutput("security_group_id");
 const kafka_msk_cluster_arn = kafkastack.getOutput("msk_cluster_arn");
 
 const msk_cluster_arn = kafka_msk_cluster_arn.apply(kafka_msk_cluster_arn => kafka_msk_cluster_arn);
-//let msk_kafka_securitygroup: string[];
-//security_group_kafka.apply(security_group_kafka=>msk_kafka_securitygroup.push(security_group_kafka));
 let mysecurity_group =  security_group_kafka.apply(security_group_kafka => security_group_kafka);
 
-export const sshPrivateKey = new tls.PrivateKey(`${myname}-privatekey`, {
+const sshPrivateKey = new tls.PrivateKey(`${myname}-privatekey`, {
     algorithm: "RSA",
     rsaBits: 4096,
 });
@@ -81,7 +79,7 @@ export const amiId_id = amiId;
 // MSK storage autoscaling: https://github.com/hashicorp/terraform-provider-aws/issues/15796
 //https://docs.aws.amazon.com/autoscaling/application/APIReference/API_RegisterScalableTarget.html
 const mskcluster_appautoscaling_target = new aws.appautoscaling.Target(`${name}-msk-autoscaling-target`, {
-    maxCapacity: 200,
+    maxCapacity: 1000,
     minCapacity: 1,
     resourceId: msk_cluster_arn,
     scalableDimension: "kafka:broker-storage:VolumeSize",
@@ -101,4 +99,21 @@ const mskcluster_appautoscaling_policy = new aws.appautoscaling.Policy(`${name}-
         targetValue: 10,
     }
 });
-//msk_cluster_arn
+
+export const mskcluster_appautoscaling_target_id = mskcluster_appautoscaling_target.id;
+export const mskcluster_appautoscaling_target_maxCapacity = mskcluster_appautoscaling_target.maxCapacity;
+export const mskcluster_appautoscaling_target_minCapacity = mskcluster_appautoscaling_target.minCapacity;
+export const mskcluster_appautoscaling_target_resourceId = mskcluster_appautoscaling_target.resourceId;
+export const mskcluster_appautoscaling_target_rolearn = mskcluster_appautoscaling_target.roleArn;
+export const mskcluster_appautoscaling_target_scalableDimension = mskcluster_appautoscaling_target.scalableDimension;
+export const mskcluster_appautoscaling_target_serviceNamespace = mskcluster_appautoscaling_target.serviceNamespace;
+export const mskcluster_appautoscaling_target_urn = mskcluster_appautoscaling_target.urn;
+export const mskcluster_appautoscaling_policy_name = mskcluster_appautoscaling_policy.name;
+export const mskcluster_appautoscaling_policy_id = mskcluster_appautoscaling_policy.id;
+export const mskcluster_appautoscaling_policy_arn = mskcluster_appautoscaling_policy.arn;
+export const mskcluster_appautoscaling_policy_policytype = mskcluster_appautoscaling_policy.policyType;
+export const mskcluster_appautoscaling_scalableDimension = mskcluster_appautoscaling_policy.scalableDimension;
+export const mskcluster_appautoscaling_policy_serviceNamespace = mskcluster_appautoscaling_policy.serviceNamespace;
+export const mskcluster_appautoscaling_policy_stepScalingPolicyConfiguration = mskcluster_appautoscaling_policy.stepScalingPolicyConfiguration;
+export const mskcluster_appautoscaling_policy_targetTrackingScalingPolicyConfiguration = mskcluster_appautoscaling_policy.targetTrackingScalingPolicyConfiguration;
+export const mskcluster_appautoscaling_policy_urn = mskcluster_appautoscaling_policy.urn;
