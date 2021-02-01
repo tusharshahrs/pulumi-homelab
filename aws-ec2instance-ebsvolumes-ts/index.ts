@@ -2,6 +2,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 import { Config, getStack, getProject, StackReference } from "@pulumi/pulumi";
 import * as tls from "@pulumi/tls";
+import { Volume } from "@pulumi/aws/ebs";
 
 const config = new pulumi.Config();
 const networkingStack = new StackReference(config.require("networkingStack"));
@@ -43,34 +44,35 @@ const myinstance = new aws.ec2.Instance(`${name}-server`, {
   instanceType: size,
   subnetId: subnetaz1,
   disableApiTermination: false,
-  rootBlockDevice: {encrypted: true},
+  getPasswordData: false,
+  keyName: mykeypair.keyName,
+  tags: {"Name": "tusharshah-dev13sqldb", "Patch Group": "Windows-Patching","t_app_eventlogseeder": "no","t_app_eventpublishing": "no","t_app_seeder": "no","t_deployment": "blue","t_env": "dev","t_pulumi": "TRUE"},
+  volumeTags: {"Name": "tusharshah-dev13sqldb", "Patch Group": "Windows-Patching","t_app_eventlogseeder": "no","t_app_eventpublishing": "no","t_app_seeder": "no","t_deployment": "blue","t_env": "dev","t_pulumi": "TRUE"},
+  rootBlockDevice:
+      {encrypted: true, deleteOnTermination: true, volumeSize:20},
+    
   ebsBlockDevices: [
     {
+      deleteOnTermination: true,
       deviceName: "xvdd",
       volumeSize: 10,
       encrypted: true,
-      tags: {"Name": "tushartest-xvdd", "mysize":"10"}
     },
     {
       deviceName: "xvde",
       volumeSize: 15,
       encrypted: true,
-      tags: {"Name": "tushartest-xvde", "size": "15"}
     },
-    /*{
-      deviceName: "xvdf",
-      volumeSize: 25,
-      encrypted: true,
-    },
-    {
-      deviceName: "xvdg",
-      volumeSize: 30,
-      encrypted: true,
-    },*/
+    
   ],
 });
 
-export const keypair_name = mykeypair.keyName; // same as export const keypair_id = mykeypair.id;
-export const keypair_arn = mykeypair.arn;
-export const keypair_finger = mykeypair.fingerprint;
-export const keypair_publicKey = mykeypair.publicKey;
+//export const keypair_name = mykeypair.keyName; // same as export const keypair_id = mykeypair.id;
+//export const keypair_arn = mykeypair.arn;
+//export const keypair_finger = mykeypair.fingerprint;
+//export const keypair_publicKey = mykeypair.publicKey;
+
+export const myinstance_name = myinstance.id;
+export const myinstance_vpcSecurityGroupIds = myinstance.vpcSecurityGroupIds;
+export const myinstance_subnetId = myinstance.subnetId;
+export const myinstance_instancetype = myinstance.instanceType;
