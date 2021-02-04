@@ -11,9 +11,11 @@ const cluster = new gcp.container.Cluster(name, {
     initialNodeCount: 2,
     minMasterVersion: engineVersion,
     nodeVersion: engineVersion,
-    clusterTelemetry: {type: "SYSTEM_ONLY"},
+    //https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1beta1/projects.locations.clusters#clustertelemetry
+    //clusterTelemetry: {type: "SYSTEM_ONLY"},
     nodeConfig: {
         machineType: "n1-standard-1",
+        preemptible: true,
         oauthScopes: [
             "https://www.googleapis.com/auth/compute",
             "https://www.googleapis.com/auth/devstorage.read_only",
