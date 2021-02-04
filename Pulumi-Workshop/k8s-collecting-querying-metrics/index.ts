@@ -14,7 +14,7 @@ const metricsnamespace = new k8s.core.v1.Namespace("metrics-Namespace", {
 //Helm Chart options: https://artifacthub.io/packages/helm/bitnami/metrics-server
 // The values were picked from here: https://github.com/bitnami/charts/blob/master/bitnami/metrics-server/values.yaml
 const metricsserver = new k8s.helm.v3.Chart("metricschart",  {
-    version: "5.4.0",
+    version: "5.5.0",
     namespace: metricsnamespace.metadata.name,
     chart: "metrics-server",
     fetchOpts: {
@@ -51,17 +51,17 @@ const clusterautoscaler = new k8s.helm.v3.Chart("autoscale",  {
 }, { provider: k8sProvider });
 
 //const lb_address = 
-const prometheus = new k8s.helm.v3.Chart("prometheusgrafana",  {
-    version: "13.2.1",
+const prometheus = new k8s.helm.v3.Chart("prometheus",  {
+    version: "13.2.0",
     namespace: metricsnamespace.metadata.name,
-    chart: "prometheus-community/prometheus",
+    chart: "prometheus",
     fetchOpts: {
         repo: "https://prometheus-community.github.io/helm-charts",
     },
-     values: {
-              server: {ingress: {enabled: true, hosts: "myip"}},
-              alertmanager: {ingress: { enabled: true, hosts: "myip2"}},
-            },
+     //values: {
+     //         server: {ingress: {enabled: true, hosts: "myip"}},
+     //         alertmanager: {ingress: { enabled: true, hosts: "myip2"}},
+     //       },
 }, { provider: k8sProvider });
 
 // Start of https://raw.githubusercontent.com/kubernetes/ingress-nginx/1cd17cd12c98563407ad03812aebac46ca4442f2/deploy/mandatory.yaml
