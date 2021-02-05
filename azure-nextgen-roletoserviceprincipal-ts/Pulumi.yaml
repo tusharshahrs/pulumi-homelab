@@ -1,0 +1,3 @@
+name: azure-nextgen-roletoserviceprincipal-ts
+runtime: nodejs
+description: A minimal Azure NextGen TypeScript Pulumi program
