@@ -50,20 +50,6 @@ const clusterautoscaler = new k8s.helm.v3.Chart("autoscale",  {
             },
 }, { provider: k8sProvider });
 
-//const lb_address = 
-const prometheus = new k8s.helm.v3.Chart("prometheus",  {
-    version: "13.2.0",
-    namespace: metricsnamespace.metadata.name,
-    chart: "prometheus",
-    fetchOpts: {
-        repo: "https://prometheus-community.github.io/helm-charts",
-    },
-     //values: {
-     //         server: {ingress: {enabled: true, hosts: "myip"}},
-     //         alertmanager: {ingress: { enabled: true, hosts: "myip2"}},
-     //       },
-}, { provider: k8sProvider });
-
 // Start of https://raw.githubusercontent.com/kubernetes/ingress-nginx/1cd17cd12c98563407ad03812aebac46ca4442f2/deploy/mandatory.yaml
 const ingress_nginxNamespace = new k8s.core.v1.Namespace("ingress_nginxNamespace", {
     apiVersion: "v1",
@@ -77,7 +63,8 @@ const ingress_nginxNamespace = new k8s.core.v1.Namespace("ingress_nginxNamespace
     },
 }, { provider: k8sProvider });
 
-/*
+// This was modified for Start of https://raw.githubusercontent.com/kubernetes/ingress-nginx/1cd17cd12c98563407ad03812aebac46ca4442f2/deploy/provider/aws/patch-configmap-l4.yaml
+// Added:  data: {"use-proxy-protocol": "true", },
 const ingress_nginxNginx_configurationConfigMap = new k8s.core.v1.ConfigMap("ingress_nginxNginx_configurationConfigMap", {
     kind: "ConfigMap",
     apiVersion: "v1",
@@ -89,8 +76,11 @@ const ingress_nginxNginx_configurationConfigMap = new k8s.core.v1.ConfigMap("ing
             "app.kubernetes.io/part-of": "ingress-nginx",
         },
     },
+    data: {
+        "use-proxy-protocol": "true",
+    },
 }, { provider: k8sProvider });
-*/
+// This was modified for End of https://raw.githubusercontent.com/kubernetes/ingress-nginx/1cd17cd12c98563407ad03812aebac46ca4442f2/deploy/provider/aws/patch-configmap-l4.yaml
 
 const ingress_nginxTcp_servicesConfigMap = new k8s.core.v1.ConfigMap("ingress_nginxTcp_servicesConfigMap", {
     kind: "ConfigMap",
@@ -393,6 +383,7 @@ const ingress_nginxNginx_ingress_controllerDeployment = new k8s.apps.v1.Deployme
 }, { provider: k8sProvider });
 // End of // Start of https://raw.githubusercontent.com/kubernetes/ingress-nginx/1cd17cd12c98563407ad03812aebac46ca4442f2/deploy/mandatory.yaml
 
+
 // Start of https://raw.githubusercontent.com/kubernetes/ingress-nginx/1cd17cd12c98563407ad03812aebac46ca4442f2/deploy/provider/aws/service-l4.yaml
 const ingress_nginxIngress_nginxService = new k8s.core.v1.Service("ingress_nginxIngress_nginxService", {
     kind: "Service",
@@ -431,20 +422,18 @@ const ingress_nginxIngress_nginxService = new k8s.core.v1.Service("ingress_nginx
 }, { provider: k8sProvider });
 // End of https://raw.githubusercontent.com/kubernetes/ingress-nginx/1cd17cd12c98563407ad03812aebac46ca4442f2/deploy/provider/aws/service-l4.yaml
 
-// Start of https://raw.githubusercontent.com/kubernetes/ingress-nginx/1cd17cd12c98563407ad03812aebac46ca4442f2/deploy/provider/aws/patch-configmap-l4.yaml
-const ingress_nginxNginx_configurationConfigMap = new k8s.core.v1.ConfigMap("ingress_nginxNginx_configurationConfigMap", {
-    kind: "ConfigMap",
-    apiVersion: "v1",
-    metadata: {
-        name: "nginx-configuration",
-        namespace: "ingress-nginx",
-        labels: {
-            "app.kubernetes.io/name": "ingress-nginx",
-            "app.kubernetes.io/part-of": "ingress-nginx",
-        },
+export let frontend_nginx_service_loadbalancer_hostname = ingress_nginxIngress_nginxService.status.loadBalancer.ingress[0].hostname;
+export let frontend_ip_string = pulumi.interpolate`dig +short "${frontend_nginx_service_loadbalancer_hostname} | tail -n 1"`
+
+/*const prometheus = new k8s.helm.v3.Chart("prometheus",  {
+    version: "13.2.1",
+    namespace: metricsnamespace.metadata.name,
+    chart: "prometheus",
+    fetchOpts: {
+        repo: "https://prometheus-community.github.io/helm-charts",
     },
-    data: {
-        "use-proxy-protocol": "true",
-    },
-}, { provider: k8sProvider });
-// End of https://raw.githubusercontent.com/kubernetes/ingress-nginx/1cd17cd12c98563407ad03812aebac46ca4442f2/deploy/provider/aws/patch-configmap-l4.yaml
+     values: {
+              //server: {ingress: {enabled: true, hosts: frontend_nginx_service_loadbalancer_hostname}},
+              //alertmanager: {ingress: { enabled: true, hosts: frontend_nginx_service_loadbalancer_hostname}},
+            },
+}, { provider: k8sProvider }); */
