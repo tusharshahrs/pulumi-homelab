@@ -422,10 +422,10 @@ const ingress_nginxIngress_nginxService = new k8s.core.v1.Service("ingress_nginx
 }, { provider: k8sProvider });
 // End of https://raw.githubusercontent.com/kubernetes/ingress-nginx/1cd17cd12c98563407ad03812aebac46ca4442f2/deploy/provider/aws/service-l4.yaml
 
-export let frontend_nginx_service_loadbalancer_hostname = ingress_nginxIngress_nginxService.status.loadBalancer.ingress[0].hostname;
-export let frontend_ip_string = pulumi.interpolate`dig +short "${frontend_nginx_service_loadbalancer_hostname} | tail -n 1"`
+export const frontend_nginx_service_loadbalancer_hostname = pulumi.interpolate`"${ingress_nginxIngress_nginxService.status.loadBalancer.ingress[0].hostname}"`;
+//export const frontend_ip_string = pulumi.interpolate`dig +short "${frontend_nginx_service_loadbalancer_hostname}" | tail -n 1`
 
-/*const prometheus = new k8s.helm.v3.Chart("prometheus",  {
+const prometheus = new k8s.helm.v3.Chart("prometheus",  {
     version: "13.2.1",
     namespace: metricsnamespace.metadata.name,
     chart: "prometheus",
@@ -433,7 +433,7 @@ export let frontend_ip_string = pulumi.interpolate`dig +short "${frontend_nginx_
         repo: "https://prometheus-community.github.io/helm-charts",
     },
      values: {
-              //server: {ingress: {enabled: true, hosts: frontend_nginx_service_loadbalancer_hostname}},
-              //alertmanager: {ingress: { enabled: true, hosts: frontend_nginx_service_loadbalancer_hostname}},
+              server: {ingress: {enabled: true, hosts: [frontend_nginx_service_loadbalancer_hostname]}},
+              alertmanager: {ingress: { enabled: true, hosts: [frontend_nginx_service_loadbalancer_hostname]}},
             },
-}, { provider: k8sProvider }); */
+}, { provider: k8sProvider });
