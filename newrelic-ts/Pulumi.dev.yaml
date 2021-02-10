@@ -1,6 +1,6 @@
 config:
   newrelic:accountId:
-    secure: AAABAMMLKPPhg7ezkH5fq92L3CTvYXRYAgoRbhrZ4ZYYgG6YDTvZ
+    secure: AAABAFg+KBlwmZv0G9u6xAmxl+1IqC3BK1A4g2IFqKWY/JlfTMBh
   newrelic:apiKey:
     secure: AAABADJ7730m/1o0G6fi59OS6yiSk88/YIoUbBNEcK6p1rtnGRcw3QcEzGBvsNizhGYDNThGJa7F8LtblwlHTg==
   newrelic:region: US
