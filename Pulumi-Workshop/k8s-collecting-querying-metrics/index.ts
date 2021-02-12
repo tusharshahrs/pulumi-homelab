@@ -1,6 +1,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as k8s from "@pulumi/kubernetes";
 import { eksStack, eks_cluster_name,kubeconfig,k8sProvider,projectName,stackName, } from "./common";
+import { version } from "process";
 
 const metricsnamespace = new k8s.core.v1.Namespace("metrics-Namespace", {
     apiVersion: "v1",
@@ -26,7 +27,6 @@ const metricsserver = new k8s.helm.v3.Chart("metricschart",  {
             },
 }, { provider: k8sProvider });
 
-//export const tag_cluster_autoscaler_enabled_label = {"k8s.io/cluster-autoscaler/enabled":"true"};
 export const tag_cluster_autoscaler_enabled_label = '"k8s.io/cluster-autoscaler/enabled"';
 export const my_eks_cluster_name = eks_cluster_name;
 
@@ -34,7 +34,6 @@ export const tag_cluster_autoscaler_eks_name = pulumi.interpolate`k8s.io/cluster
 export const tag_cluster_autoscaler_autodiscovery_label = tag_cluster_autoscaler_eks_name.apply(myekspart => {
     return JSON.stringify(`${myekspart}`);
   });
-
 
 const clusterautoscaler = new k8s.helm.v3.Chart("autoscale",  {
     version: "9.4.0",
@@ -50,6 +49,85 @@ const clusterautoscaler = new k8s.helm.v3.Chart("autoscale",  {
             },
 }, { provider: k8sProvider });
 
+const ingress_nginxNamespace = new k8s.core.v1.Namespace("nginx-Namespace", {
+    apiVersion: "v1",
+    kind: "Namespace",
+    metadata: {
+        name: "ingress-nginx",
+    },
+}, { provider: k8sProvider });
+
+//https://artifacthub.io/packages/helm/nginx/nginx-ingress
+const ingressnginx = new k8s.helm.v3.Chart("ingressnginx", {
+  namespace: ingress_nginxNamespace.metadata.name,
+  version: "0.8.0",
+  chart: "nginx-ingress",
+  fetchOpts: {
+    repo: "https://helm.nginx.com/stable",
+  },
+  values: {
+    prometheus: { create: true },
+    controller: {
+      replicaCount: 2,
+      service: {
+        annotations: {
+          //"service.beta.kubernetes.io/aws-load-balancer-type": "nlb",
+          //"service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled": 'true',
+          //"service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "tcp"
+          "service.beta.kubernetes.io/aws-load-balancer-backend-protocol":"http",
+          "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "https",
+          "service.beta.kubernetes.io/aws-load-balancer-type": "nlb",
+          "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled":"true",
+          "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout":"60",
+        },
+      },
+      config: {entries: {"proxy-protocol": true}},
+    },
+  },
+});
+
+// Values selected from: https://github.com/kubernetes/ingress-nginx/blob/master/charts/ingress-nginx/values.yaml
+/*const ingressnginx = new k8s.helm.v3.Chart("ingressnginx",  {
+    namespace: ingress_nginxNamespace.metadata.name,
+    version: "3.22.0",
+    chart: "ingress-nginx",
+    fetchOpts: {
+        repo: "https://kubernetes.github.io/ingress-nginx",
+    },
+    values: {
+            controller: {   
+                            // Deployment
+                            annotations: {"kubernetes.io/ingress.class":"nginx"},
+                            replicaCount: 2, 
+                            // Service needed for aws load balancers
+                            service: {annotations:  {
+                                                        //"service.beta.kubernetes.io/aws-load-balancer-proxy-protocol": "*",
+                                                        "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "http",
+                                                        "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "https",
+                                                        "service.beta.kubernetes.io/aws-load-balancer-type": "nlb",
+                                                        "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled":'true',
+                                                        "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout":'60',
+                                                    }
+                                    },
+                            admissionWebhooks: {enabled: true},
+                            defaultBackend: {enabled: true},
+                            // enabled for prometheus
+                            metrics: 
+                            {
+                                enabled: true,
+                                service: 
+                                    { annotations: {
+                                        "prometheus.io/scrape":"true",
+                                        "prometheus.io/port": "10254"
+                                    }}
+                                    
+                            }
+                        } 
+    }
+}, { dependsOn: clusterautoscaler, provider: k8sProvider });
+*/
+
+/*
 // Start of https://raw.githubusercontent.com/kubernetes/ingress-nginx/1cd17cd12c98563407ad03812aebac46ca4442f2/deploy/mandatory.yaml
 const ingress_nginxNamespace = new k8s.core.v1.Namespace("ingress_nginxNamespace", {
     apiVersion: "v1",
@@ -308,7 +386,7 @@ const ingress_nginxNginx_ingress_controllerDeployment = new k8s.apps.v1.Deployme
                 serviceAccountName: "nginx-ingress-serviceaccount",
                 containers: [{
                     name: "nginx-ingress-controller",
-                    image: "quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.24.1",
+                    image: "quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.25.1",
                     args: [
                         "/nginx-ingress-controller",
                         `--configmap=$(POD_NAMESPACE)/nginx-configuration`,
@@ -421,19 +499,30 @@ const ingress_nginxIngress_nginxService = new k8s.core.v1.Service("ingress_nginx
     },
 }, { provider: k8sProvider });
 // End of https://raw.githubusercontent.com/kubernetes/ingress-nginx/1cd17cd12c98563407ad03812aebac46ca4442f2/deploy/provider/aws/service-l4.yaml
-
-export const frontend_nginx_service_loadbalancer_hostname = pulumi.interpolate`"${ingress_nginxIngress_nginxService.status.loadBalancer.ingress[0].hostname}"`;
+*/
+/*
+//export const frontend_nginx_service_loadbalancer_hostname = pulumi.interpolate`"${ingress_nginxIngress_nginxService.status.loadBalancer.ingress[0].hostname}"`;
+export const frontend_nginx_service_loadbalancer_hostname = pulumi.interpolate`${ingress_nginxIngress_nginxService.status.loadBalancer.ingress[0].hostname}`;
 //export const frontend_ip_string = pulumi.interpolate`dig +short "${frontend_nginx_service_loadbalancer_hostname}" | tail -n 1`
+export const prom_addr=pulumi.interpolate`mon.${frontend_nginx_service_loadbalancer_hostname}.nip.io`;
+export const am_addr=pulumi.interpolate`alertmanager.${frontend_nginx_service_loadbalancer_hostname}.nip.io`;
+*/
 
-const prometheus = new k8s.helm.v3.Chart("prometheus",  {
-    version: "13.2.1",
+
+/*const prometheus = new k8s.helm.v3.Chart("prometheus",  {
+    version: "13.3.1",
     namespace: metricsnamespace.metadata.name,
     chart: "prometheus",
     fetchOpts: {
         repo: "https://prometheus-community.github.io/helm-charts",
     },
      values: {
-              server: {ingress: {enabled: true, hosts: [frontend_nginx_service_loadbalancer_hostname]}},
-              alertmanager: {ingress: { enabled: true, hosts: [frontend_nginx_service_loadbalancer_hostname]}},
+              //server: {ingress: {enabled: true, hosts: [frontend_nginx_service_loadbalancer_hostname]}},
+              server: {ingress: {enabled: true, hosts: [prom_addr]}},
+              //alertmanager: {ingress: { enabled: true, hosts: [frontend_nginx_service_loadbalancer_hostname]}},
+              alertmanager: {ingress: { enabled: true, hosts: [am_addr]}},
             },
-}, { provider: k8sProvider });
+}, { provider: k8sProvider });*/
+
+//export const prom_config = pulumi.interpolate`http://${prom_addr}/config`;
+//export const prom_targets = pulumi.interpolate`http://${prom_addr}/target`;
