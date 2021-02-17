@@ -11,11 +11,11 @@ const metricsnamespace = new k8s.core.v1.Namespace("metrics-Namespace", {
     },
 }, { provider: k8sProvider });
 
-//URL of chart:  https://github.com/bitnami/bitnami-docker-metrics-server
-//Helm Chart options: https://artifacthub.io/packages/helm/bitnami/metrics-server
+// URL of chart:  https://github.com/bitnami/bitnami-docker-metrics-server
+// Helm Chart options: https://artifacthub.io/packages/helm/bitnami/metrics-server
 // The values were picked from here: https://github.com/bitnami/charts/blob/master/bitnami/metrics-server/values.yaml
 const metricsserver = new k8s.helm.v3.Chart("metricschart",  {
-    version: "5.5.0",
+    version: "5.5.1",
     namespace: metricsnamespace.metadata.name,
     chart: "metrics-server",
     fetchOpts: {
@@ -35,6 +35,10 @@ export const tag_cluster_autoscaler_autodiscovery_label = tag_cluster_autoscaler
     return JSON.stringify(`${myekspart}`);
   });
 
+// helm3 chart: https://artifacthub.io/packages/helm/cluster-autoscaler/cluster-autoscaler
+// https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md
+// autodiscovery: https://artifacthub.io/packages/helm/cluster-autoscaler/cluster-autoscaler#aws---using-auto-discovery-of-tagged-instance-groups
+// extra args: https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html
 const clusterautoscaler = new k8s.helm.v3.Chart("autoscale",  {
     version: "9.4.0",
     namespace: "kube-system",
@@ -49,7 +53,31 @@ const clusterautoscaler = new k8s.helm.v3.Chart("autoscale",  {
             },
 }, { provider: k8sProvider });
 
-const ingress_nginxNamespace = new k8s.core.v1.Namespace("nginx-Namespace", {
+const nginxnamespace = new k8s.core.v1.Namespace("nginx-Namespace", {
+    apiVersion: "v1",
+    kind: "Namespace",
+    metadata: {
+        name: "nginx",
+    },
+}, { provider: k8sProvider });
+
+// https://artifacthub.io/packages/helm/bitnami/nginx
+// chart options: https://github.com/bitnami/charts/tree/master/bitnami/nginx
+// values.yaml: https://github.com/bitnami/charts/blob/master/bitnami/nginx/values.yaml
+const nginxserver = new k8s.helm.v3.Chart("nginxchart",  {
+    version: "8.5.4",
+    namespace: nginxnamespace.metadata.name,
+    chart: "nginx",
+    fetchOpts: {
+        repo: "https://charts.bitnami.com/bitnami",
+    },
+     values: {
+              containerPorts: {https: 8443},
+              autoscaling: {enabled: true, minReplicas: 1, maxReplicas: 5},
+            },
+}, { provider: k8sProvider });
+
+const ingressnginxnamespace = new k8s.core.v1.Namespace("ingressnginx-Namespace", {
     apiVersion: "v1",
     kind: "Namespace",
     metadata: {
@@ -59,36 +87,42 @@ const ingress_nginxNamespace = new k8s.core.v1.Namespace("nginx-Namespace", {
 
 //https://artifacthub.io/packages/helm/nginx/nginx-ingress
 const ingressnginx = new k8s.helm.v3.Chart("ingressnginx", {
-  namespace: ingress_nginxNamespace.metadata.name,
+  namespace: ingressnginxnamespace.metadata.name,
   version: "0.8.0",
   chart: "nginx-ingress",
   fetchOpts: {
     repo: "https://helm.nginx.com/stable",
   },
   values: {
+    //serviceaccount: { name: "nginx-ingress"},
     prometheus: { create: true },
     controller: {
-      replicaCount: 2,
+      defaultTLS: { cert: {}, key: {}},
+      config: {
+          name: "nginx-config", 
+          //annotations: {"proxy-protocol":"True","real-ip-header":"proxy-protocol","set-real-ip-from":"0.0.0.0/0"},
+          //entries: ["nginx-ingress"],
+          },
+      ServiceAccount: { name: "nginx-ingress"},
+      replicaCount: 1,
       service: {
-        annotations: {
-          //"service.beta.kubernetes.io/aws-load-balancer-type": "nlb",
-          //"service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled": 'true',
-          //"service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "tcp"
+        annotations: {            
+          //"service.beta.kubernetes.io/aws-load-balancer-proxy-protocol": "*",
           "service.beta.kubernetes.io/aws-load-balancer-backend-protocol":"http",
           "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "https",
-          "service.beta.kubernetes.io/aws-load-balancer-type": "nlb",
           "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled":"true",
           "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout":"60",
         },
       },
-      config: {entries: {"proxy-protocol": true}},
+      //config: {entries: {"proxy-protocol": true, "real-ip-header":"proxy-protocol", "set-real-ip-from": "0.0.0.0/0"}},
     },
   },
 });
 
+
 // Values selected from: https://github.com/kubernetes/ingress-nginx/blob/master/charts/ingress-nginx/values.yaml
 /*const ingressnginx = new k8s.helm.v3.Chart("ingressnginx",  {
-    namespace: ingress_nginxNamespace.metadata.name,
+    namespace: ingressnginxnamespace.metadata.name,
     version: "3.22.0",
     chart: "ingress-nginx",
     fetchOpts: {
@@ -98,19 +132,19 @@ const ingressnginx = new k8s.helm.v3.Chart("ingressnginx", {
             controller: {   
                             // Deployment
                             annotations: {"kubernetes.io/ingress.class":"nginx"},
-                            replicaCount: 2, 
+                            //replicaCount: 2, 
                             // Service needed for aws load balancers
                             service: {annotations:  {
                                                         //"service.beta.kubernetes.io/aws-load-balancer-proxy-protocol": "*",
                                                         "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "http",
                                                         "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "https",
-                                                        "service.beta.kubernetes.io/aws-load-balancer-type": "nlb",
-                                                        "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled":'true',
-                                                        "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout":'60',
+                                                        //"service.beta.kubernetes.io/aws-load-balancer-type": "nlb",
+                                                        //"service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled":'true',
+                                                        "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout":'3600',
                                                     }
                                     },
-                            admissionWebhooks: {enabled: true},
-                            defaultBackend: {enabled: true},
+                            //admissionWebhooks: {enabled: false},
+                            //defaultBackend: {enabled: true},
                             // enabled for prometheus
                             metrics: 
                             {
