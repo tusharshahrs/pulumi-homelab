@@ -41,9 +41,22 @@ const amiId = aws.getAmi({
 const name = "shaht-ks-knode"
 const size = "t3a.micro";
 
-const requiredMachines = 3;
-const ebsvolumeSize = 40;
+const requiredMachines = 2;
+const ebsvolumeSize = 20;
 const ebsvolumetype = "gp2";
+
+// Creates a private zone
+const privatezone = new aws.route53.Zone("private_zone", {
+  vpcs: [
+    {
+      vpcId: vpc_id,
+    },
+  ],
+  comment: "Internal name resolution of tusharshah.com",
+  forceDestroy: true,
+  name: "tusharshah.com",
+  tags: { "Billing": "mydevops","pulumi":"yes", "typescript":"yes","gui":"no","private":"yes"}
+});
 
 for (let i = 1; i < requiredMachines + 1; i++) {
 
@@ -51,6 +64,7 @@ for (let i = 1; i < requiredMachines + 1; i++) {
       ami: amiId,
       instanceType: size,
       subnetId: subnetaz1,
+      
       keyName: mykeypair.keyName,
       tags: {
         Name: `${name}-server-${i}`,
@@ -61,7 +75,7 @@ for (let i = 1; i < requiredMachines + 1; i++) {
       rootBlockDevice: {
         encrypted: true,
         deleteOnTermination: true,
-        volumeSize: 20,
+        volumeSize: 10,
       },
       ebsBlockDevices:[{
         deviceName: "/dev/sda1",
@@ -76,5 +90,14 @@ for (let i = 1; i < requiredMachines + 1; i++) {
             "pulumi:Stack": stackName,
           },
         }],
-    });
+    }, {dependsOn: privatezone});
+
+
+  const instanceDNSRecord = new aws.route53.Record(`DNS A record for ${name}-${i}`, {
+      zoneId: privatezone.id,
+      name: pulumi.interpolate`${name}-${i}.${privatezone.name}`,
+      type: "A",
+      ttl: 300,
+      records: [myinstance.publicIp]
+  },{parent: privatezone, dependsOn: myinstance});
 }
