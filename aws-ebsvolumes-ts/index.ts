@@ -90,14 +90,14 @@ for (let i = 1; i < requiredMachines + 1; i++) {
             "pulumi:Stack": stackName,
           },
         }],
-    }, {dependsOn: privatezone});
+    });
 
-
+  // Creating an A Record in route53
   const instanceDNSRecord = new aws.route53.Record(`DNS A record for ${name}-${i}`, {
       zoneId: privatezone.id,
       name: pulumi.interpolate`${name}-${i}.${privatezone.name}`,
       type: "A",
       ttl: 300,
-      records: [myinstance.publicIp]
-  },{parent: privatezone, dependsOn: myinstance});
+      records: [myinstance.privateIp]
+  });
 }
