@@ -113,6 +113,7 @@ const nginxserver = new k8s.helm.v3.Chart("nginxchart",  {
 });
 */
 
+// Converted from: https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/aws/deploy.yaml
 const ingress_nginxNamespace = new k8s.core.v1.Namespace("ingress_nginxNamespace", {
     apiVersion: "v1",
     kind: "Namespace",
@@ -991,17 +992,15 @@ const ingress_nginxIngress_nginx_admission_patchJob = new k8s.batch.v1.Job("ingr
 }, { dependsOn: clusterautoscaler, provider: k8sProvider });
 */
 
-/*
+
 //export const frontend_nginx_service_loadbalancer_hostname = pulumi.interpolate`"${ingress_nginxIngress_nginxService.status.loadBalancer.ingress[0].hostname}"`;
-export const frontend_nginx_service_loadbalancer_hostname = pulumi.interpolate`${ingress_nginxIngress_nginxService.status.loadBalancer.ingress[0].hostname}`;
+export const frontend_nginx_service_loadbalancer_hostname = pulumi.interpolate`${ingress_nginxIngress_nginx_controllerService.status.loadBalancer.ingress[0].hostname}`;
 //export const frontend_ip_string = pulumi.interpolate`dig +short "${frontend_nginx_service_loadbalancer_hostname}" | tail -n 1`
 export const prom_addr=pulumi.interpolate`mon.${frontend_nginx_service_loadbalancer_hostname}.nip.io`;
 export const am_addr=pulumi.interpolate`alertmanager.${frontend_nginx_service_loadbalancer_hostname}.nip.io`;
-*/
-
 
 /*const prometheus = new k8s.helm.v3.Chart("prometheus",  {
-    version: "13.3.1",
+    version: "13.3.2",
     namespace: metricsnamespace.metadata.name,
     chart: "prometheus",
     fetchOpts: {
