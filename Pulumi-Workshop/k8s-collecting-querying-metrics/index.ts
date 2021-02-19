@@ -113,6 +113,7 @@ const nginxserver = new k8s.helm.v3.Chart("nginxchart",  {
 });
 */
 
+// https://kubernetes.github.io/ingress-nginx/deploy/#aws
 // Converted from: https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/aws/deploy.yaml
 const ingress_nginxNamespace = new k8s.core.v1.Namespace("ingress_nginxNamespace", {
     apiVersion: "v1",
@@ -999,6 +1000,37 @@ export const frontend_nginx_service_loadbalancer_hostname = pulumi.interpolate`$
 export const prom_addr=pulumi.interpolate`mon.${frontend_nginx_service_loadbalancer_hostname}.nip.io`;
 export const am_addr=pulumi.interpolate`alertmanager.${frontend_nginx_service_loadbalancer_hostname}.nip.io`;
 
+// installing this first before prometheus
+const kubestatemetrics = new k8s.helm.v3.Chart("kubestatemetrics",  {
+    version: "1.2.1",
+    namespace: metricsnamespace.metadata.name,
+    chart: "kube-state-metrics",
+    fetchOpts: {
+        repo: "https://charts.bitnami.com/bitnami",
+    }, 
+
+}, { provider: k8sProvider });
+
+const prometheus = new k8s.helm.v3.Chart("prometheus",  {
+    version: "13.3.2",
+    namespace: metricsnamespace.metadata.name,
+    chart: "prometheus",
+    fetchOpts: {
+        repo: "https://prometheus-community.github.io/helm-charts",
+    },
+}, { provider: k8sProvider });
+
+
+/*const kubeprometheusstack = new k8s.helm.v3.Chart("kubeprometheusstack",  {
+    version: "13.10.0",
+    namespace: metricsnamespace.metadata.name,
+    chart: "kube-prometheus-stack",
+    fetchOpts: {
+        repo: "https://prometheus-community.github.io/helm-charts",
+    }, 
+
+}, { provider: k8sProvider });*/
+
 /*const prometheus = new k8s.helm.v3.Chart("prometheus",  {
     version: "13.3.2",
     namespace: metricsnamespace.metadata.name,
@@ -1007,12 +1039,51 @@ export const am_addr=pulumi.interpolate`alertmanager.${frontend_nginx_service_lo
         repo: "https://prometheus-community.github.io/helm-charts",
     },
      values: {
-              //server: {ingress: {enabled: true, hosts: [frontend_nginx_service_loadbalancer_hostname]}},
-              server: {ingress: {enabled: true, hosts: [prom_addr]}},
-              //alertmanager: {ingress: { enabled: true, hosts: [frontend_nginx_service_loadbalancer_hostname]}},
-              alertmanager: {ingress: { enabled: true, hosts: [am_addr]}},
+              server: {
+                       ingress: 
+                            { enabled: true, 
+                              hosts: [prom_addr], 
+                              annotations: {
+                                              "kubernetes.io/ingress.class": "nginx",
+                                              "kubernetes.io/tls-acme": "true",
+                                            "ingress.kubernetes.io/ssl-redirect":"false", 
+                                            "nginx.ingress.kubernetes.io/ssl-redirect": "false"
+                                           }
+                            },
+                       resources: { 
+                                   limits: {cpu: "10m", memory: "50Mi"},
+                                   requests: { cpu: "10m", memory: "50Mi"}
+                                  }
+                       
+                      },
+              alertmanager: {
+                        ingress: { 
+                                  enabled: true, hosts: [am_addr]},
+                                  annotations: {
+                                                "ingress.kubernetes.io/ssl-redirect":"false",
+                                                "nginx.ingress.kubernetes.io/ssl-redirect":"false"
+                                               }
+                                 },
+                        resources: { 
+                                    limits:   {cpu: "10m", memory: "20Mi"},
+                                    requests: { cpu: "5m", memory: "10Mi"}
+                                   },
+              nodeExporter: { 
+                resources: { 
+                    limits:   {cpu: "10m", memory: "20Mi"},
+                    requests: { cpu: "5m", memory: "10Mi"}
+                   },
+              },
+              pushgateway: {
+                resources: { 
+                    limits:   {cpu: "10m", memory: "20Mi"},
+                    requests: { cpu: "5m", memory: "10Mi"}
+                   },
+              },
+              //kubeStateMetrics
             },
-}, { provider: k8sProvider });*/
+}, { provider: k8sProvider });
+*/
 
 //export const prom_config = pulumi.interpolate`http://${prom_addr}/config`;
 //export const prom_targets = pulumi.interpolate`http://${prom_addr}/target`;
