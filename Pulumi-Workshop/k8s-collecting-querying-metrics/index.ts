@@ -1020,14 +1020,38 @@ const prometheus = new k8s.helm.v3.Chart("prometheus",  {
     },
 }, { provider: k8sProvider });
 
+const certmanageramespace = new k8s.core.v1.Namespace("certmanager-Namespace", {
+    apiVersion: "v1",
+    kind: "Namespace",
+    metadata: {
+        name: "certmanager",
+    },
+}, { provider: k8sProvider });
 
+// Have not installed this: https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.crds.yaml
+/*const certmanager = new k8s.helm.v3.Chart("certmanager",  {
+    version: "1.2.0",
+    chart: "cert-manager",
+    namespace: certmanageramespace.metadata.name,
+    fetchOpts: {
+        repo: "https://charts.jetstack.io",
+    },
+}, { provider: k8sProvider });*/
+
+// Made this change prometheusOperator.tlsProxy.enabled=false
+// as per https://github.com/helm/charts/issues/19147
+// Helm3 chart values: https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
 /*const kubeprometheusstack = new k8s.helm.v3.Chart("kubeprometheusstack",  {
     version: "13.10.0",
     namespace: metricsnamespace.metadata.name,
     chart: "kube-prometheus-stack",
     fetchOpts: {
         repo: "https://prometheus-community.github.io/helm-charts",
-    }, 
+    },
+    values: { 
+                admissionWebhooks: { enabled: false}, 
+                prometheusOperator: { tls: {enabled: false}}
+            },
 
 }, { provider: k8sProvider });*/
 
