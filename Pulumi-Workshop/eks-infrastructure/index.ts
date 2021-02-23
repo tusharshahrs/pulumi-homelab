@@ -56,10 +56,6 @@ export const cluster_autoscale_tags = tag_cluster_autoscaler_autodiscovery.apply
     }
 });
 
-// Create 3 IAM Roles and matching InstanceProfiles to use with the nodegroups.
-/* const roles = iam.createRoles(my_name, 1);
-const instanceProfiles = iam.createInstanceProfiles(my_name, roles); */
-
 const ngstandard = new eks.NodeGroup(`${my_name}-ng`, {
     cluster: cluster,
     instanceType: "t3a.small",
@@ -67,7 +63,7 @@ const ngstandard = new eks.NodeGroup(`${my_name}-ng`, {
     desiredCapacity: 3,
     minSize: 2,
     maxSize: 8,
-    spotPrice: "0.05",
+    spotPrice: "0.04",
     labels: { "clusterType": "standard" },
     //kubeletExtraArgs: "--read-only-port 10255",
     encryptRootBockDevice: true,
