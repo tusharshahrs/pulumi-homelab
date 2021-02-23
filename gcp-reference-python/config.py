@@ -1,7 +1,5 @@
 import pulumi
 
-config = pulumi.Config()
-
 project = pulumi.get_project()
 
 def getResourceName(resourceName=""):

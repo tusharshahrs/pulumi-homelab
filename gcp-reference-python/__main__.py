@@ -12,7 +12,10 @@ commonTags = {
     "stack": stackName,
 }
 # Create a GCP resource (Storage Bucket)
-bucket = storage.Bucket(getResourceName())
+#bucket = storage.Bucket(getResourceName())
+# gcp-reference-python-b9499e9
+bucket = storage.Bucket(getResourceName("mybucket"))
+# gcp-reference-python-mybucket-7af853b
 
 # Export the DNS name of the bucket
 pulumi.export('bucket_id', bucket.id)
