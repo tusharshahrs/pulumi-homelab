@@ -17,7 +17,7 @@ We are going to use [Pulumi Service backend](https://www.pulumi.com/docs/intro/c
 
 ## Running the Example
 
-Clone [the examples repo](https://github.com/pulumi/tusharshahrs/) and `cd` into it.
+Clone [the examples repo](https://github.com/pulumi-homelab/tusharshahrs/) and `cd aws-cloudformation/aws-cloudformation-py`.
 
 1. Initialize a new stack called: `dev` via [pulumi stack init](https://www.pulumi.com/docs/reference/cli/pulumi_stack_init/).
     ```

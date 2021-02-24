@@ -19,7 +19,7 @@ We are going to use [Pulumi Service backend](https://www.pulumi.com/docs/intro/c
 
 ## Running the Example
 
-Clone [the examples repo](https://github.com/pulumi/tusharshahrs/) and `cd` into it.
+Clone [the examples repo](https://github.com/pulumi-homelab/tusharshahrs/) and `cd` into it(steps below).
 
 1. `cd aws-cloudformation-py` directory for usage information.
 2. `cd aws-cloudformation-stack-to-pulumi-subnets-py` directory for usage information.
