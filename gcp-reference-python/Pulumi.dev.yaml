@@ -1,2 +1,4 @@
 config:
-  gcp:project: ""
+  gcp-reference-python:subnet_cidr_blocks: '["10.0.0.0/25","10.0.0.128/26","10.0.0.192/26"]'
+  gcp:project: pulumi-ce-team
+  gcp:region: us-central1

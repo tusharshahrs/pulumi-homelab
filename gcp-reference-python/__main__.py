@@ -2,7 +2,7 @@
 
 import pulumi
 from pulumi_gcp import storage
-from config import project, getResourceName
+from config import project, getResourceName, subnet_cidr_blocks
 
 projectName =  pulumi.get_project()
 stackName = pulumi.get_stack()
