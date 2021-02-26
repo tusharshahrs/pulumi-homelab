@@ -7,19 +7,19 @@ class VpcArgs:
 
 class Vpc(ComponentResource):
     def __init__(self, name: str, args: VpcArgs, opts: ResourceOptions = None):
-        super().__init__("component:x:Network", name, {}, opts)
+        super().__init__("component:x:VPC", name, {}, opts)
         child_opts = ResourceOptions(parent=self)
         
         self.network = compute.Network(name,auto_create_subnetworks=False, opts=ResourceOptions(parent=self))
         self.subnets = []
 
         for i, ip_cidr_range in enumerate(args.subnet_cidr_blocks):
-            subnet = compute.Subnetwork(f"{name}-{i}", 
+            subnet = compute.Subnetwork(f"{name}-subnet-{i}", 
                                         network=self.network.self_link, 
                                         ip_cidr_range=ip_cidr_range, 
                                         opts=ResourceOptions(parent=self.network)
                                        )
-            self.subnets = subnet
+            self.subnets.append(subnet)
         
         self.router = compute.Router(name, 
                                      network=self.network.self_link, 
