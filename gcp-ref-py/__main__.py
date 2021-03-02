@@ -1,6 +1,7 @@
 """A Google Cloud Python Pulumi program"""
 
 import pulumi
+from pulumi import ResourceOptions, Output
 from pulumi_gcp import storage, bigtable
 from config import getResourceName, subnet_cidr_blocks, project
 import network
@@ -21,7 +22,7 @@ commonTags = {
 # With no getresourcename
 #bucket = storage.Bucket('shaht-my-bucket', labels=commonTags)
 # Expected output: gs://shaht-my-bucket-7477081
-myname = "ce-demo"
+myname = "demo"
 
 bucket = storage.Bucket(getResourceName(f"{myname}-bucket"), labels=commonTags)
 # Expected output:  gs://gcp-reference-architecture-py-shaht-my-bucket-b89e42f
@@ -52,33 +53,27 @@ mydatastore = datastore.DataStoreIndex(getResourceName("shaht-datastore"),
 ]
 ) """
 
-
-zonelocations = random.RandomShuffle(f"{myname}-bigtable-zonelocations",
-    inputs=[
-        "a",
-        "b",
-        "c",
-    ],
-    result_count=1)
-
-myzoneletter = zonelocations.results
-
-mybigtableinstance = bigtable.Instance(getResourceName(f"{myname}-bigtable"),
+# Big table requires the zone location
+myzoneletter = "b"
+#https://cloud.google.com/bigtable/docs/locations
+mybigtableinstance = bigtable.Instance(getResourceName(f"{myname}-bigtab"),
     clusters=[bigtable.InstanceClusterArgs(
         cluster_id=f"{myname}-instance-cluster",
         num_nodes=1,
         zone=f"us-central1-{myzoneletter}",
         storage_type="HDD",
     )],
+    deletion_protection=False,
     labels={"team": "ce-team",
             "gui": "no",
             "pulumi": "yes",
-            "env": "dev",}
+            "env": "dev",},
 )
 
-mybigtable = bigtable.Table(f"{myname}-table",
+mybigtable = bigtable.Table(getResourceName(f"{myname}-table"),
  instance_name=mybigtableinstance.id,
  split_keys=["area_code", "zip_code","city"],
+ opts=ResourceOptions(parent=mybigtableinstance)
 )
 
 #  Creating subnet and cidr block outputs
@@ -98,12 +93,15 @@ my_subnet_cidrs_blocks.append(mynetwork.subnets[2].ip_cidr_range.apply(lambda su
 pulumi.export('bucket_name', bucket.url)
 
 # Export the vpc information
-pulumi.export('vpc_name', mynetwork.network.name)
-pulumi.export('network_project', mynetwork.network.project)
+pulumi.export('network_vpc_name', mynetwork.network.name)
 # Export the subnet names and cidr blocks
-pulumi.export('subnets_names',my_subnet_names)
-pulumi.export('subnets_cidr_blocks',my_subnet_cidrs_blocks)
+pulumi.export('network_subnets_names',my_subnet_names)
+pulumi.export('network_subnets_cidr_blocks',my_subnet_cidrs_blocks)
 
+# Export the Table
+pulumi.export('bigtable_table_name',mybigtable.name)
+pulumi.export('bigtable_table_split_keys',mybigtable.split_keys)
+pulumi.export('bigtable_instance_name',mybigtable.instance_name)
 # Export the app engine
 #pulumi.export("app_engine_name", myappengine.name)
 # Export the Datastore Index

@@ -1,4 +1,4 @@
-name: gcp-reference-architecture-py
+name: gcp-ref-py
 runtime:
   name: python
   options:
