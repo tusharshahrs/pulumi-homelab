@@ -1,0 +1,12 @@
+{
+    "name": "aws-eks-cluster-aws-loadbalancer-controller",
+    "devDependencies": {
+        "@types/node": "^10.0.0"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^2.20.0",
+        "@pulumi/aws": "^3.25.1",
+        "@pulumi/kubernetes": "^2.8.0",
+        "@pulumi/awsx": "^0.24.0"
+    }
+}
