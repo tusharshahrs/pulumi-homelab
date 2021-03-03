@@ -54,6 +54,30 @@ const clusterautoscaler = new k8s.helm.v3.Chart("autoscale",  {
             },
 }, { provider: k8sProvider });
 
+/*const nginxnamespace = new k8s.core.v1.Namespace("nginx-Namespace", {
+    apiVersion: "v1",
+    kind: "Namespace",
+    metadata: {
+        name: "nginx",
+    },
+}, { provider: k8sProvider });
+
+// https://artifacthub.io/packages/helm/bitnami/nginx
+// chart options: https://github.com/bitnami/charts/tree/master/bitnami/nginx
+// values.yaml: https://github.com/bitnami/charts/blob/master/bitnami/nginx/values.yaml
+const nginxserver = new k8s.helm.v3.Chart("nginxchart",  {
+    version: "8.5.5",
+    namespace: nginxnamespace.metadata.name,
+    chart: "nginx",
+    fetchOpts: {
+        repo: "https://charts.bitnami.com/bitnami",
+    },
+    values: {
+        //ingress: {enabled: true, certManager: true},
+    }
+}, { provider: k8sProvider });
+*/
+
 const ingressnginxnamespace = new k8s.core.v1.Namespace("ngxiningress-Namespace", {
     apiVersion: "v1",
     kind: "Namespace",
@@ -62,7 +86,7 @@ const ingressnginxnamespace = new k8s.core.v1.Namespace("ngxiningress-Namespace"
     },
 }, { provider: k8sProvider });
 
-
+// https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx
 const ingressnginx = new k8s.helm.v3.Chart("ingressnginx",  {
     namespace: ingressnginxnamespace.metadata.name,
     version: "3.23.0",
@@ -82,12 +106,10 @@ const ingressnginx = new k8s.helm.v3.Chart("ingressnginx",  {
                                                         "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout":'75',
                                                         "service.beta.kubernetes.io/aws-load-balancer-proxy-protocol": "*",
                                                         "service.beta.kubernetes.io/aws-load-balancer-internal": "0.0.0.0/0",
-                                                        //"service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout":'3600',
-                                                        //"service.beta.kubernetes.io/aws-load-balancer-ssl-negotiation-policy": "ELBSecurityPolicy-TLS-1-2-2017-01",
-
+                                                        "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled":true,
                                                     }
                                     },
-                            //admissionWebhooks: {port: 443},
+                            //admissionWebhooks: {port: 443}, 
                             defaultBackend: {enabled: true},
                             // enabled for prometheus
                             metrics: 
@@ -104,7 +126,7 @@ const ingressnginx = new k8s.helm.v3.Chart("ingressnginx",  {
     }
 }, { provider: k8sProvider });
 
-/*
+//https://artifacthub.io/packages/helm/aws/aws-load-balancer-controller
 const awsloadbalancercontroller = new k8s.helm.v3.Chart("awslbcontroller",  {
     version: "1.1.5",
     namespace: "kube-system",
@@ -118,4 +140,3 @@ const awsloadbalancercontroller = new k8s.helm.v3.Chart("awslbcontroller",  {
               vpcId: vpc_id,
             },
 }, { provider: k8sProvider });
-*/
