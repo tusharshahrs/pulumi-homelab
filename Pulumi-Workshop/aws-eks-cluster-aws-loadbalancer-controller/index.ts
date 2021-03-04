@@ -54,30 +54,6 @@ const clusterautoscaler = new k8s.helm.v3.Chart("autoscale",  {
             },
 }, { provider: k8sProvider });
 
-/*const nginxnamespace = new k8s.core.v1.Namespace("nginx-Namespace", {
-    apiVersion: "v1",
-    kind: "Namespace",
-    metadata: {
-        name: "nginx",
-    },
-}, { provider: k8sProvider });
-
-// https://artifacthub.io/packages/helm/bitnami/nginx
-// chart options: https://github.com/bitnami/charts/tree/master/bitnami/nginx
-// values.yaml: https://github.com/bitnami/charts/blob/master/bitnami/nginx/values.yaml
-const nginxserver = new k8s.helm.v3.Chart("nginxchart",  {
-    version: "8.5.5",
-    namespace: nginxnamespace.metadata.name,
-    chart: "nginx",
-    fetchOpts: {
-        repo: "https://charts.bitnami.com/bitnami",
-    },
-    values: {
-        //ingress: {enabled: true, certManager: true},
-    }
-}, { provider: k8sProvider });
-*/
-
 const ingressnginxnamespace = new k8s.core.v1.Namespace("ngxiningress-Namespace", {
     apiVersion: "v1",
     kind: "Namespace",
@@ -87,6 +63,8 @@ const ingressnginxnamespace = new k8s.core.v1.Namespace("ngxiningress-Namespace"
 }, { provider: k8sProvider });
 
 // https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx
+// annotations: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/service/annotations/
+
 const ingressnginx = new k8s.helm.v3.Chart("ingressnginx",  {
     namespace: ingressnginxnamespace.metadata.name,
     version: "3.23.0",
@@ -127,6 +105,7 @@ const ingressnginx = new k8s.helm.v3.Chart("ingressnginx",  {
 }, { provider: k8sProvider });
 
 //https://artifacthub.io/packages/helm/aws/aws-load-balancer-controller
+// Pod annotations from here: https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html  look at Considerations
 const awsloadbalancercontroller = new k8s.helm.v3.Chart("awslbcontroller",  {
     version: "1.1.5",
     namespace: "kube-system",
@@ -138,5 +117,6 @@ const awsloadbalancercontroller = new k8s.helm.v3.Chart("awslbcontroller",  {
               clusterName: eks_cluster_name,
               region: region,
               vpcId: vpc_id,
+              podAnnotations: {"kubernetes.io/ingress.class": "alb"}
             },
 }, { provider: k8sProvider });
