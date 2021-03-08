@@ -47,7 +47,8 @@ sample_subnet = aws.ec2.Subnet("sampleSubnet",
     vpc_id=sample_vpc.id,
     cidr_block="10.1.1.0/24")
 sample_compute_environment = aws.batch.ComputeEnvironment("sampleComputeEnvironment",
-    compute_environment_name="sample",
+    #compute_environment_name="sample",
+    compute_environment_name_prefix = "mystack_compute_env-",
     compute_resources=aws.batch.ComputeEnvironmentComputeResourcesArgs(
         instance_role=ecs_instance_role_instance_profile.arn,
         instance_types=["c4.large"],
@@ -59,4 +60,7 @@ sample_compute_environment = aws.batch.ComputeEnvironment("sampleComputeEnvironm
     ),
     service_role=aws_batch_service_role_role.arn,
     type="MANAGED",
-    opts=pulumi.ResourceOptions(depends_on=[aws_batch_service_role_role_policy_attachment], delete_before_replace=True) )
+    #opts=pulumi.ResourceOptions(depends_on=[aws_batch_service_role_role_policy_attachment], delete_before_replace=True) )
+    opts=pulumi.ResourceOptions(depends_on=[aws_batch_service_role_role_policy_attachment]) )
+
+pulumi.export("Batch_name", sample_compute_environment.id)
