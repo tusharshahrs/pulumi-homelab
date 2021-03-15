@@ -54,20 +54,58 @@ mydatastore = datastore.DataStoreIndex(getResourceName("shaht-datastore"),
 ) """
 
 # Big table requires the zone location
-myzoneletter = "b"
+# https://cloud.google.com/bigtable/docs/locations
+# Need two zones
+zone_letter1 = "b"
+zone_letter2 = "c"
+myregion = "us-central1"
+zone1 = f"{myregion}-{zone_letter1}"
+zone2 = f"{myregion}-{zone_letter2}"
+# Two zones
+pulumi.export("big_table_cluster1_zone", zone1)
+pulumi.export("big_table_cluster2_zone", zone2)
+
+myrandom = random.RandomString("random",
+    length=4,
+    lower=True,
+    upper=False,
+    min_numeric=2,
+    special=False)
+
+suffix = myrandom.result
+pulumi.export("suffix",suffix)
+
+clustername1 = Output.concat(myname,"-cluster-",zone_letter1,"-",suffix)
+clustername2 = Output.concat(myname,"-cluster-",zone_letter2,"-",suffix)
+
 #https://cloud.google.com/bigtable/docs/locations
-mybigtableinstance = bigtable.Instance(getResourceName(f"{myname}-bigtab"),
-    clusters=[bigtable.InstanceClusterArgs(
-        cluster_id=f"{myname}-instance-cluster",
+# Big table naming issue:  https://github.com/GoogleCloudPlatform/k8s-config-connector/issues/174
+# This means you have to pass in a random cluster id.
+mybigtableinstance = bigtable.Instance(getResourceName(f"{myname}-bigtb"),
+    clusters=[
+    bigtable.InstanceClusterArgs(
+        cluster_id=clustername1,
         num_nodes=1,
-        zone=f"us-central1-{myzoneletter}",
+        zone=f"{zone1}",
         storage_type="HDD",
-    )],
+    ),
+    bigtable.InstanceClusterArgs(
+        cluster_id=clustername2,
+        num_nodes=1,
+        zone=f"{zone2}",
+        storage_type="HDD",
+    )
+    
+    ],
     deletion_protection=False,
-    labels={"team": "ce-team",
-            "gui": "no",
-            "pulumi": "yes",
-            "env": "dev",},
+    labels={
+        "team": "ce-team",
+        "gui_setup": "no",
+        "pulumi": "yes",
+        "env": "dev",
+        "highly_available" :"yes",
+        "multi_clustered": "yes",
+        }
 )
 
 mybigtable = bigtable.Table(getResourceName(f"{myname}-table"),
@@ -98,12 +136,10 @@ pulumi.export('network_vpc_name', mynetwork.network.name)
 pulumi.export('network_subnets_names',my_subnet_names)
 pulumi.export('network_subnets_cidr_blocks',my_subnet_cidrs_blocks)
 
+# Export BigTable Instance
+pulumi.export('bigtable_table_instance_name',mybigtableinstance.name)
+#pulumi.export('bigtable_table_instance_cluster',mybigtableinstance.clusters.name)
 # Export the Table
 pulumi.export('bigtable_table_name',mybigtable.name)
 pulumi.export('bigtable_table_split_keys',mybigtable.split_keys)
 pulumi.export('bigtable_instance_name',mybigtable.instance_name)
-# Export the app engine
-#pulumi.export("app_engine_name", myappengine.name)
-# Export the Datastore Index
-#pulumi.export("datastore_index", mydatastore.id)
-#pulumi.export("datastore_index2", mydatastore.index_id)
