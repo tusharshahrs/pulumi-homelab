@@ -1,0 +1,6 @@
+config:
+  azuread:environment: public
+  azuread:subscriptionId:
+    secure: AAABAG8tF5LT+6vAAKaenl1kK4l8gkH+Xm4+7PF6/M+WE2PZ5Zy1P/U7kfYrgocS27qy2FkSR1ARf7AwloOASyaUnGk=
+  azuread:tenantId:
+    secure: AAABAPYbufWIF9JSehRXPh2/cLrBGsKyRapbtkoYH2UDgFvNFZGRt+LRFQhwoRNljezf8avuvmdeRYSupoVFefBzV10=
