@@ -1,7 +1,8 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as resources from "@pulumi/azure-native/resources";
 import * as network from "@pulumi/azure-native/network";
-import * as cache from "@pulumi/azure-native/cache";
+//import * as cache from "@pulumi/azure-native/cache";
+import * as cache from "@pulumi/azure-native/cache/v20200601";
 
 // Create an Azure Resource Group
 const resourceGroup1 = new resources.ResourceGroup("rg-redis-1_");
@@ -69,7 +70,10 @@ export const vnetpeering_name1 = vnetpeering1.name;
 export const vnet_peering_state1 = vnetpeering1.provisioningState;
 export const vnetpeering_name2 = vnetpeering2.name;
 export const vnet_peering_state2 = vnetpeering2.provisioningState;
-/*const redis1 = new cache.Redis("redis-1", {
+
+// https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.management.redis.models.sku?view=azure-dotnet
+// https://github.com/pulumi/pulumi-azure-native/issues/641
+const redis1 = new cache.Redis("redis-1", {
     enableNonSslPort: true,
     resourceGroupName: resourceGroup1.name,
     location: resourceGroup1.location,
@@ -79,11 +83,12 @@ export const vnet_peering_state2 = vnetpeering2.provisioningState;
     sku: {
         capacity: 1,
         name: "Premium",
+        family: "P",
     },
     subnetId: subnet1.id,
 });
 
-/*const redis2 = new cache.Redis("redis-2", {
+const redis2 = new cache.Redis("redis-2", {
     enableNonSslPort: true,
     resourceGroupName: resourceGroup2.name,
     location: resourceGroup2.location,
@@ -93,29 +98,30 @@ export const vnet_peering_state2 = vnetpeering2.provisioningState;
     sku: {
         capacity: 1,
         name: "Premium",
+        family: "P",
     },
     subnetId: subnet2.id,
-});*/
-
-/*const redis2_linkedServer = new cache.LinkedServer("redis-linkedserver", {
-    linkedRedisCacheId: redis1.id,
-    linkedRedisCacheLocation: resourceGroup1.location,
-    linkedServerName: redis1.name,
-    name: "cache2",
-    resourceGroupName: resourceGroup2.name,
-    serverRole: "Secondary",
 });
-*/
+
+const redis2_linkedServer = new cache.LinkedServer("redis-linkedserver", {
+    linkedRedisCacheId: redis2.id,
+    linkedRedisCacheLocation: resourceGroup2.location,
+    linkedServerName: redis2.name,
+    name: redis1.name,
+    resourceGroupName: resourceGroup1.name,
+    serverRole: "Secondary",
+},{dependsOn: [redis1, redis2]});
 
 export const resourceGroup1_name = resourceGroup1.name;
 export const resourceGroup2_name = resourceGroup2.name;
 export const vnet1_name = vnet1.name;
 export const vnet2_name = vnet2.name;
-export const vnet1_id = vnet1.id;
-export const vnet2_id = vnet2.id;
+//export const vnet1_id = vnet1.id;
+//export const vnet2_id = vnet2.id;
 export const subnet1_name = subnet1.name;
 export const subnet2_name = subnet2.name;
-export const subnet1_id = subnet1.id;
-export const subnet2_id = subnet2.id;
-//export const redis1_name = redis1.name;
-//export const redis2_linkedserver_name = redis2_linkedServer.name;
+//export const subnet1_id = subnet1.id;
+//export const subnet2_id = subnet2.id;
+export const redis1_name = redis1.name;
+export const redis2_name = redis2.name;
+export const redis2_linkedserver_name = redis2_linkedServer.name;
