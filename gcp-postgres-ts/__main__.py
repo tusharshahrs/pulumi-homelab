@@ -123,29 +123,32 @@ postgres_grant = postgres.Grant("postgres-grant",
 """
 
 # CREATE TABLE users (id uuid, email varchar(255), api_key varchar(255);
-creation_script = """
-    CREATE TABLE userstable (
-        id serial PRIMARY KEY,
-        email VARCHAR ( 255 ) UNIQUE NOT NULL,
-        api_key VARCHAR ( 255 ) NOT NULL
-        created_on TIMESTAMP NOT NULL,
-        last_login TIMESTAMP 
-    )
-    INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (0,0);
-    INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (1,0);
-    INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (2,0);
-    INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (3,0);
-    INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (4,0);
+def create_tables():
+    creation_script = """
+        CREATE TABLE userstable (
+            id serial PRIMARY KEY,
+            email VARCHAR ( 255 ) UNIQUE NOT NULL,
+            api_key VARCHAR ( 255 ) NOT NULL
+            created_on TIMESTAMP NOT NULL,
+            last_login TIMESTAMP 
+        )
+        INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (0,0);
+        INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (1,0);
+        INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (2,0);
+        INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (3,0);
+        INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (4,0);
     """
 
 # DELETE TABLE users
 deletion_script = "DROP TABLE userstable CASCADE"
 
 myvote_tables = postgres.Schema("pulumischema",
-                name= "usertable",
+                #if_not_exists = True,
+                name = create_tables(),
                 opts=pulumi.ResourceOptions(provider=postgres_provider)
                 )
 
+create_tables()
 """pulumi.export("PostgresSQL Database:", mydatabase.name)
 pulumi.export("PostgresSQL User:    ", users.name)
 pulumi.export("PostgresSQL User:    ", users.password)
@@ -160,5 +163,6 @@ pulumi.export("Postgres_Database", mydatabase.name)
 """
 
 pulumi.export("PostgresSQL_Instance", myinstance.name)
-pulumi.export("Postgres_Provider_Id", postgres_provider.id)
 pulumi.export("Postgres_Database", mydatabase.name)
+#pulumi.export("Postgres_Provider_Id", postgres_provider.id)
+pulumi.export("Postgres_Database_schema", myvote_tables.id)
