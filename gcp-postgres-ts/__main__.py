@@ -116,15 +116,15 @@ deletion_script = "DROP TABLE userstable CASCADE"
 
 # https://www.pulumi.com/docs/reference/pkg/postgresql/schema/
 myvote_tables = postgres.Schema("pulumischema",
+                database=mydatabase.name,
                 if_not_exists = True,
-                name = create_tables(),
+                name = "usertable",
+                owner=postgres_provider.username,
                 opts=pulumi.ResourceOptions(provider=postgres_provider)
                 )
-
-create_tables()
-
 
 pulumi.export("PostgresSQL_Instance", myinstance.name)
 pulumi.export("Postgres_Database", mydatabase.name)
 pulumi.export("Postgres_Database_schema", myvote_tables.id)
-pulumi.export("Postgres_Users", users.name)  
+pulumi.export("Postgres_Users", users.name)
+pulumi.export("Postgres_Users_Password", users.password)
