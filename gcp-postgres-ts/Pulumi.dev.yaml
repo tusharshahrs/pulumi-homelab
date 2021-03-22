@@ -1,0 +1,6 @@
+config:
+  gcp-postgres-ts:myip:
+    secure: AAABAB85JibLzd7UxTe/47ZsGuJ+j+9qenuFWStLmuPtTDvBGn6JSAiY8Zx8Kr/V
+  gcp-postgres-ts:subnet_cidr_blocks: '["10.0.0.0/25","10.0.0.128/26","10.0.0.192/26"]'
+  gcp:project: pulumi-ce-team
+  gcp:region: us-central1
