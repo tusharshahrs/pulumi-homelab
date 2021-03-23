@@ -5,7 +5,7 @@ from pulumi_gcp import compute
 from pulumi import Config, get_project, Output
 import pulumi_gcp as gcp
 import pulumi_postgresql as postgres
-import pulumi_random as pulumirandom
+import pulumi_random as random
 import pg8000.native
 
 name = "shaht"
@@ -17,7 +17,7 @@ myregion = gcp.config.region
 #creates a random password
 # https://www.pulumi.com/docs/reference/pkg/random/
 # https://www.pulumi.com/docs/reference/pkg/random/randompassword/
-mypassword = pulumirandom.RandomPassword("randompassword",
+mypassword = random.RandomPassword("randompassword",
     length=12,
     special=False,
     lower = True,
@@ -106,6 +106,7 @@ myvote_tables = postgres.Schema("pulumischema",
                 opts=pulumi.ResourceOptions(provider=postgres_provider)
                 )
 
+# Table creation: https://github.com/tlocke/pg8000
 def mytablecreation(mytable_name):
     conn=pg8000.native.Connection(
         host='34.68.194.53',
