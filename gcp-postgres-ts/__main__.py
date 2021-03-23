@@ -2,15 +2,22 @@
 import pulumi
 from pulumi_gcp import sql
 from pulumi_gcp import compute
-from pulumi import Config
+from pulumi import Config, get_project
 import pulumi_gcp as gcp
 import pulumi_postgresql as postgres
 import pulumi_random as random
+#import tablecreate
+#import tabledelete
+import pg8000
 
 name = "shaht"
+myhash = random.RandomUuid("randomuuid")
+hash = myhash.result
 
 config=Config()
 myip = config.get("myip")
+myproject = get_project()
+myregion = gcp.config.region
 #creates a random password
 # https://www.pulumi.com/docs/reference/pkg/random/
 # https://www.pulumi.com/docs/reference/pkg/random/randompassword/
@@ -94,9 +101,17 @@ mydatabase = postgres.Database("pulumi-votes-database",
    opts=pulumi.ResourceOptions(provider=postgres_provider)
 )  
 
-# CREATE TABLE users (id uuid, email varchar(255), api_key varchar(255);
-def create_tables():
-    creation_script = """
+# https://www.pulumi.com/docs/reference/pkg/postgresql/schema/
+myvote_tables = postgres.Schema("pulumischema",
+                database=mydatabase.name,
+                if_not_exists = True,
+                owner=postgres_provider.username,
+                name = "usertable",
+                opts=pulumi.ResourceOptions(provider=postgres_provider)
+                )
+
+
+tablecreate_sequence = """
         CREATE TABLE userstable (
             id serial PRIMARY KEY,
             email VARCHAR ( 255 ) UNIQUE NOT NULL,
@@ -111,20 +126,26 @@ def create_tables():
         INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (4,0);
     """
 
-# DELETE TABLE users
-deletion_script = "DROP TABLE userstable CASCADE"
+def mytablecreation():
+    conn = pg8000.connect(
+        host=postgres_provider.host,
+        port=postgres_provider.port,
+        user=postgres_provider.username,
+        password=postgres_provider.password,
+        database=mydatabase.name
+    )
+    cursor = conn.cursor()
+    cursor.execute(tablecreate_sequence)
+    results = cursor.fetchall()
+    return jsonify(
+        hash=str(hash),
+        postgres=results
+    )
 
-# https://www.pulumi.com/docs/reference/pkg/postgresql/schema/
-myvote_tables = postgres.Schema("pulumischema",
-                database=mydatabase.name,
-                if_not_exists = True,
-                name = "usertable",
-                owner=postgres_provider.username,
-                opts=pulumi.ResourceOptions(provider=postgres_provider)
-                )
-
+mytablecreation
 pulumi.export("PostgresSQL_Instance", myinstance.name)
 pulumi.export("Postgres_Database", mydatabase.name)
 pulumi.export("Postgres_Database_schema", myvote_tables.id)
 pulumi.export("Postgres_Users", users.name)
 pulumi.export("Postgres_Users_Password", users.password)
+pulumi.export("Myregion", myregion)
