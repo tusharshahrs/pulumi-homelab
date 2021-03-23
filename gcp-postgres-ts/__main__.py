@@ -2,17 +2,13 @@
 import pulumi
 from pulumi_gcp import sql
 from pulumi_gcp import compute
-from pulumi import Config, get_project
+from pulumi import Config, get_project, Output
 import pulumi_gcp as gcp
 import pulumi_postgresql as postgres
-import pulumi_random as random
-#import tablecreate
-#import tabledelete
-import pg8000
+import pulumi_random as pulumirandom
+import pg8000.native
 
 name = "shaht"
-myhash = random.RandomUuid("randomuuid")
-hash = myhash.result
 
 config=Config()
 myip = config.get("myip")
@@ -21,7 +17,7 @@ myregion = gcp.config.region
 #creates a random password
 # https://www.pulumi.com/docs/reference/pkg/random/
 # https://www.pulumi.com/docs/reference/pkg/random/randompassword/
-mypassword = random.RandomPassword("randompassword",
+mypassword = pulumirandom.RandomPassword("randompassword",
     length=12,
     special=False,
     lower = True,
@@ -110,42 +106,49 @@ myvote_tables = postgres.Schema("pulumischema",
                 opts=pulumi.ResourceOptions(provider=postgres_provider)
                 )
 
-
-tablecreate_sequence = """
-        CREATE TABLE userstable (
-            id serial PRIMARY KEY,
-            email VARCHAR ( 255 ) UNIQUE NOT NULL,
-            api_key VARCHAR ( 255 ) NOT NULL
-            created_on TIMESTAMP NOT NULL,
-            last_login TIMESTAMP 
+def mytablecreation(mytable_name):
+    conn=pg8000.native.Connection(
+        host='34.68.194.53',
+        port=5432,
+        user='pulumiadmin',
+        password='KSs3wTu435kR',
+        database='pulumi-votes-database-c53f1ca'
         )
-        INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (0,0);
-        INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (1,0);
-        INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (2,0);
-        INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (3,0);
-        INSERT INTO userstable(id, email, api_key, created_on, last_login) VALUES (4,0);
-    """
 
-def mytablecreation():
-    conn = pg8000.connect(
-        host=postgres_provider.host,
-        port=postgres_provider.port,
-        user=postgres_provider.username,
-        password=postgres_provider.password,
-        database=mydatabase.name
-    )
-    cursor = conn.cursor()
-    cursor.execute(tablecreate_sequence)
-    results = cursor.fetchall()
-    return jsonify(
-        hash=str(hash),
-        postgres=results
-    )
+    create_first_part = "CREATE TABLE IF NOT EXISTS"
+    create_sql_querty = "(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)"
+    create_combined = f'{create_first_part} {mytable_name}{create_sql_querty}'
+    cursor=conn.run(create_combined)
 
-mytablecreation
+def mydroptable(table_to_drop):
+    conn=pg8000.native.Connection(
+        host='34.68.194.53',
+        port=5432,
+        user='pulumiadmin',
+        password='KSs3wTu435kR',
+        database='pulumi-votes-database-c53f1ca'
+        )
+    first_part_of_drop= "DROP TABLE IF EXISTS "
+    last_part_of_drop= ' CASCADE'
+    combinedstring = f'{first_part_of_drop} {table_to_drop} {last_part_of_drop}'
+    cursor=conn.run(combinedstring)
+
 pulumi.export("PostgresSQL_Instance", myinstance.name)
 pulumi.export("Postgres_Database", mydatabase.name)
 pulumi.export("Postgres_Database_schema", myvote_tables.id)
+pulumi.export("PostgresSQL_Instance_public_ip", postgres_provider.host)
 pulumi.export("Postgres_Users", users.name)
 pulumi.export("Postgres_Users_Password", users.password)
 pulumi.export("Myregion", myregion)
+
+create_table = "votertable"
+print("Creating Table start")
+creating_table = mytablecreation(create_table)
+print("Creating Table finished")
+
+"""drop_table = "tushar12"
+print("Dropping Table start")
+deleting_table = mydroptable(drop_table)
+print("Dropping Table finished")"""
+
+#CREATE TABLE IF NOT EXISTS usertable.shahtable(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)
