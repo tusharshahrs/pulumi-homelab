@@ -7,7 +7,7 @@ import pulumi_gcp as gcp # gcp https://www.pulumi.com/docs/reference/pkg/gcp/
 import pulumi_postgresql as postgres  # PostgresSQL Provider https://www.pulumi.com/docs/reference/pkg/postgresql/ https://github.com/pulumi/pulumi-postgresql
 import pulumi_random as random # Used for password generation https://www.pulumi.com/docs/reference/pkg/random/
 import pg8000.native           # Used for creating table https://github.com/tlocke/pg8000
-
+import json
 name = "shaht"
 
 config=Config()
@@ -105,8 +105,45 @@ myvote_tables = postgres.Schema("pulumischema",
                 opts=pulumi.ResourceOptions(provider=postgres_provider)
                 )
 
+        #host='34.68.194.53',
 # Table creation: https://github.com/tlocke/pg8000
+#f"host={args[0]}, port={args[1]}, user={args[2]}, password={args[3]}, database={args[4]}"
+        #host=args[0],
+        #port=args[1],
+        #user=args[2],
+        #password=args[3],
+        #database=args[4],
+
+async def mystuff(args, mytable_name):
+    print("Entered mystuff", args)
+    conn=pg8000.native.Connection(
+
+        host='34.68.194.53',
+        port=5432,
+        user='pulumiadmin',
+        password='KSs3wTu435kR',
+        database='pulumi-votes-database-c53f1ca'
+    )
+    print("mystuff_mytable", mytable_name)
+    print("mystuff_args", args)
+    create_first_part = "CREATE TABLE IF NOT EXISTS"
+    create_sql_querty = "(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)"
+    create_combined = f'{create_first_part} {mytable_name}{create_sql_querty}'
+    print("create_combined_sql_to_run",create_combined )
+    cursor=conn.run(create_combined)
+
 def mytablecreation(mytable_name):
+    print("Calling mytablecreation with:", mytable_name)
+    create_first_part = "CREATE TABLE IF NOT EXISTS"
+    create_sql_querty = "(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)"
+    create_combined = f'{create_first_part} {mytable_name}{create_sql_querty}'
+    print("create_combined_sql ", create_combined)
+    #conn2 = Output.all(postgres_provider.host,postgres_provider.port, postgres_provider.username,postgres_provider.password,myinstance.name).apply(lambda args: mystuff(args, mytable_name))
+    conn = Output.all(postgres_provider.host,postgres_provider.port, postgres_provider.username,postgres_provider.password,myinstance.name).apply(lambda args: pg8000.native.Connection(host=args[0],port=args[1], user=args[2], password=args[3],database=args[4]))
+    cursor=conn.apply(lambda myconn: myconn.run(create_combined))
+
+
+"""def mytablecreation(mytable_name):
     conn=pg8000.native.Connection(
         host='34.68.194.53',
         port=5432,
@@ -118,7 +155,7 @@ def mytablecreation(mytable_name):
     create_first_part = "CREATE TABLE IF NOT EXISTS"
     create_sql_querty = "(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)"
     create_combined = f'{create_first_part} {mytable_name}{create_sql_querty}'
-    cursor=conn.run(create_combined)
+    cursor=conn.run(create_combined)"""
 
 def mydroptable(table_to_drop):
     conn=pg8000.native.Connection(
@@ -143,10 +180,12 @@ pulumi.export("Postgres_SQL_User_Username", users.name)
 pulumi.export("Postgres_SQL_User_Password", users.password)
 pulumi.export("gcp_region", myregion)
 
-create_table = "votertable"
-print("Creating Table start")
+create_table = "tusharshah1"
+print("Creating Table start. First")
 creating_table = mytablecreation(create_table)
-print("Creating Table finished")
+
+#creating_table = Output.all(postgres_provider.host,postgres_provider.port, postgres_provider.username,postgres_provider.password,myinstance.name).apply(lambda args: mystuff(args, create_table))
+print("Creating Table finished.  Last Call")
 
 """drop_table = "mytable10"
 print("Dropping Table start")
