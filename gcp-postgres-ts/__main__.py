@@ -1,12 +1,12 @@
-"""A Google Cloud Python Pulumi program"""
+"""A Google Cloud Python Pulumi program that stands up PostgresSQL"""
 import pulumi
-from pulumi_gcp import sql
-from pulumi_gcp import compute
-from pulumi import Config, get_project, Output
-import pulumi_gcp as gcp
-import pulumi_postgresql as postgres
-import pulumi_random as random
-import pg8000.native
+from pulumi_gcp import sql, compute
+from pulumi import Config, get_project, Output # To read from pulumi config
+
+import pulumi_gcp as gcp # gcp https://www.pulumi.com/docs/reference/pkg/gcp/
+import pulumi_postgresql as postgres  # PostgresSQL Provider https://www.pulumi.com/docs/reference/pkg/postgresql/ https://github.com/pulumi/pulumi-postgresql
+import pulumi_random as random # Used for password generation https://www.pulumi.com/docs/reference/pkg/random/
+import pg8000.native           # Used for creating table https://github.com/tlocke/pg8000
 
 name = "shaht"
 
@@ -14,9 +14,8 @@ config=Config()
 myip = config.get("myip")
 myproject = get_project()
 myregion = gcp.config.region
-#creates a random password
-# https://www.pulumi.com/docs/reference/pkg/random/
-# https://www.pulumi.com/docs/reference/pkg/random/randompassword/
+
+# creates a random password https://www.pulumi.com/docs/reference/pkg/random/randompassword/
 mypassword = random.RandomPassword("randompassword",
     length=12,
     special=False,
@@ -134,20 +133,22 @@ def mydroptable(table_to_drop):
     combinedstring = f'{first_part_of_drop} {table_to_drop} {last_part_of_drop}'
     cursor=conn.run(combinedstring)
 
-pulumi.export("PostgresSQL_Instance", myinstance.name)
-pulumi.export("Postgres_Database", mydatabase.name)
-pulumi.export("Postgres_Database_schema", myvote_tables.id)
-pulumi.export("PostgresSQL_Instance_public_ip", postgres_provider.host)
-pulumi.export("Postgres_Users", users.name)
-pulumi.export("Postgres_Users_Password", users.password)
-pulumi.export("Myregion", myregion)
+pulumi.export("Postgres_SQL_Instance", myinstance.name)
+pulumi.export("Postgres_SQL_Database_Name", mydatabase.name)
+pulumi.export("Postgres_SQL_Database_Schema", myvote_tables.id)
+pulumi.export("Postgres_SQL_Instance_Public_Ip_Address", postgres_provider.host)
+pulumi.export("Postgres_SQL_Instance_Port", postgres_provider.port)
+
+pulumi.export("Postgres_SQL_User_Username", users.name)
+pulumi.export("Postgres_SQL_User_Password", users.password)
+pulumi.export("gcp_region", myregion)
 
 create_table = "votertable"
 print("Creating Table start")
 creating_table = mytablecreation(create_table)
 print("Creating Table finished")
 
-"""drop_table = "tushar12"
+"""drop_table = "mytable10"
 print("Dropping Table start")
 deleting_table = mydroptable(drop_table)
 print("Dropping Table finished")"""
