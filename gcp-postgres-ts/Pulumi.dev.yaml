@@ -1,6 +1,14 @@
 config:
   gcp-postgres-ts:myip:
-    secure: AAABAGC8+fkAkN6U/3YV8HuyNHM7PicYVgpmOMs5juxWORVRtpQuPVvPlnPdFLZD
+    secure: AAABAJ0lt37fzOaNQ/uuVeyztU4KvxSEOtNAHa4UzMw6xcYJNQffmSP9tffHPjnL
+  gcp-postgres-ts:postgres_database:
+    secure: AAABACq93NRf1gw6blCDthOJTBGwMkzqClNAXYSLGqLScuqtYCxebfDwaqbvBVfRze2VH0MBiEmMuxjz2w==
+  gcp-postgres-ts:postgres_sql_instance_public_ip_address:
+    secure: AAABAKXNb4/vK5bplNZrkv7QW5LR1bqAclavT1MIsGKFmPDNAwt2CqIHPcxHww==
+  gcp-postgres-ts:postgres_user:
+    secure: AAABAHYKH0X9JtmrjjwohhN/thXw5BczhqKczoKGywOC1GF96hhhc/g4hw==
+  gcp-postgres-ts:postgres_user_pwd:
+    secure: AAABAGJGhIXD60d0zoYdGAgpaxOj1Bf3iBGM6YhUkzhNOH2hgnQ/4qqePKM=
   gcp-postgres-ts:subnet_cidr_blocks: '["10.0.0.0/25","10.0.0.128/26","10.0.0.192/26"]'
   gcp:project: pulumi-ce-team
   gcp:region: us-central1

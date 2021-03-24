@@ -1,23 +1,26 @@
 """A Google Cloud Python Pulumi program that stands up PostgresSQL"""
 import pulumi
 from pulumi_gcp import sql, compute
-from pulumi import Config, get_project, Output # To read from pulumi config
+from pulumi import Config   # To read from pulumi config:   Setting and Getting Configuration Values https://www.pulumi.com/docs/intro/concepts/config/#setting-and-getting-configuration-values
+
 
 import pulumi_gcp as gcp # gcp https://www.pulumi.com/docs/reference/pkg/gcp/
 import pulumi_postgresql as postgres  # PostgresSQL Provider https://www.pulumi.com/docs/reference/pkg/postgresql/ https://github.com/pulumi/pulumi-postgresql
 import pulumi_random as random # Used for password generation https://www.pulumi.com/docs/reference/pkg/random/
 import pg8000.native           # Used for creating table https://github.com/tlocke/pg8000name = "shaht"
-import time
 
-config=Config()
+config=Config()  # To get Data from local config:  
 myip = config.get("myip")
+myregion = gcp.config.region
+name = "demo"
+
+# The following config values are set via: https://www.pulumi.com/docs/reference/cli/pulumi_config_set/
+# The following 4 inputs will be updated ONLY after the initial postgres sql database instance, database, and users have been created.
 postgres_sql_instance_public_ip_address=config.get("postgres_sql_instance_public_ip_address")
 postgres_user=config.get("postgres_user")
 postgres_database=config.get("postgres_database")
 postgres_user_pwd=config.get("postgres_user_pwd")
-myproject = get_project()
-myregion = gcp.config.region
-name = "shaht"
+#
 
 postgres_sql_instance_public_ip_address
 # creates a random password https://www.pulumi.com/docs/reference/pkg/random/randompassword/
@@ -101,15 +104,6 @@ mydatabase = postgres.Database("pulumi-votes-database",
    opts=pulumi.ResourceOptions(provider=postgres_provider)
 )  
 
-# https://www.pulumi.com/docs/reference/pkg/postgresql/schema/
-myvote_tables = postgres.Schema("pulumischema",
-                database=mydatabase.name,
-                if_not_exists = True,
-                owner=postgres_provider.username,
-                name = "usertable",
-                opts=pulumi.ResourceOptions(provider=postgres_provider)
-                )
-
 # Table creation: https://github.com/tlocke/pg8000
 def mytablecreation(mytable_name):
     print("Entered mytablecreation with:", mytable_name)
@@ -155,13 +149,14 @@ pulumi.export("Postgres_SQL_User_Username", users.name)
 pulumi.export("Postgres_SQL_User_Password", users.password)
 pulumi.export("gcp_region", myregion)
 
-create_table = "mytable1"
-creating_table = mytablecreation(create_table)
+create_table = "votertable"
+#creating_table = mytablecreation(create_table)
 
-create_table2 = "mytable2"
-creating_table = mytablecreation(create_table2)
+create_table = "location"
+#creating_table = mytablecreation(create_table)
 
-drop_table = "mytable2"
-deleting_table = mydroptable(drop_table)
+drop_table = "mytable"
+#deleting_table = mydroptable(drop_table)
 
-#CREATE TABLE IF NOT EXISTS usertable.shahtable(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)
+#CREATE TABLE IF NOT EXISTS usertable.votertable(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)
+#CREATE TABLE IF NOT EXISTS usertable.location(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)
