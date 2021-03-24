@@ -6,15 +6,20 @@ from pulumi import Config, get_project, Output # To read from pulumi config
 import pulumi_gcp as gcp # gcp https://www.pulumi.com/docs/reference/pkg/gcp/
 import pulumi_postgresql as postgres  # PostgresSQL Provider https://www.pulumi.com/docs/reference/pkg/postgresql/ https://github.com/pulumi/pulumi-postgresql
 import pulumi_random as random # Used for password generation https://www.pulumi.com/docs/reference/pkg/random/
-import pg8000.native           # Used for creating table https://github.com/tlocke/pg8000
-import json
-name = "shaht"
+import pg8000.native           # Used for creating table https://github.com/tlocke/pg8000name = "shaht"
+import time
 
 config=Config()
 myip = config.get("myip")
+postgres_sql_instance_public_ip_address=config.get("postgres_sql_instance_public_ip_address")
+postgres_user=config.get("postgres_user")
+postgres_database=config.get("postgres_database")
+postgres_user_pwd=config.get("postgres_user_pwd")
 myproject = get_project()
 myregion = gcp.config.region
+name = "shaht"
 
+postgres_sql_instance_public_ip_address
 # creates a random password https://www.pulumi.com/docs/reference/pkg/random/randompassword/
 mypassword = random.RandomPassword("randompassword",
     length=12,
@@ -105,69 +110,39 @@ myvote_tables = postgres.Schema("pulumischema",
                 opts=pulumi.ResourceOptions(provider=postgres_provider)
                 )
 
-        #host='34.68.194.53',
 # Table creation: https://github.com/tlocke/pg8000
-#f"host={args[0]}, port={args[1]}, user={args[2]}, password={args[3]}, database={args[4]}"
-        #host=args[0],
-        #port=args[1],
-        #user=args[2],
-        #password=args[3],
-        #database=args[4],
-
-async def mystuff(args, mytable_name):
-    print("Entered mystuff", args)
-    conn=pg8000.native.Connection(
-
-        host='34.68.194.53',
-        port=5432,
-        user='pulumiadmin',
-        password='KSs3wTu435kR',
-        database='pulumi-votes-database-c53f1ca'
-    )
-    print("mystuff_mytable", mytable_name)
-    print("mystuff_args", args)
-    create_first_part = "CREATE TABLE IF NOT EXISTS"
-    create_sql_querty = "(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)"
-    create_combined = f'{create_first_part} {mytable_name}{create_sql_querty}'
-    print("create_combined_sql_to_run",create_combined )
-    cursor=conn.run(create_combined)
-
 def mytablecreation(mytable_name):
-    print("Calling mytablecreation with:", mytable_name)
+    print("Entered mytablecreation with:", mytable_name)
     create_first_part = "CREATE TABLE IF NOT EXISTS"
     create_sql_querty = "(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)"
     create_combined = f'{create_first_part} {mytable_name}{create_sql_querty}'
-    print("create_combined_sql ", create_combined)
-    #conn2 = Output.all(postgres_provider.host,postgres_provider.port, postgres_provider.username,postgres_provider.password,myinstance.name).apply(lambda args: mystuff(args, mytable_name))
-    conn = Output.all(postgres_provider.host,postgres_provider.port, postgres_provider.username,postgres_provider.password,myinstance.name).apply(lambda args: pg8000.native.Connection(host=args[0],port=args[1], user=args[2], password=args[3],database=args[4]))
-    cursor=conn.apply(lambda myconn: myconn.run(create_combined))
-
-
-"""def mytablecreation(mytable_name):
-    conn=pg8000.native.Connection(
-        host='34.68.194.53',
+    print("mytablecreation create_combined_sql ", create_combined)
+    myconnection=pg8000.native.Connection(
+        host=postgres_sql_instance_public_ip_address,
         port=5432,
-        user='pulumiadmin',
-        password='KSs3wTu435kR',
-        database='pulumi-votes-database-c53f1ca'
-        )
-
-    create_first_part = "CREATE TABLE IF NOT EXISTS"
-    create_sql_querty = "(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)"
-    create_combined = f'{create_first_part} {mytable_name}{create_sql_querty}'
-    cursor=conn.run(create_combined)"""
+        user=postgres_user,
+        password=postgres_user_pwd,
+        database=postgres_database
+    )
+    print("mytablecreation starting")
+    cursor=myconnection.run(create_combined)
+    print("Table Created", cursor)
+    selectversion = 'SELECT version();'
+    cursor2=myconnection.run(selectversion)
+    print("SELECT Version:", cursor2)
 
 def mydroptable(table_to_drop):
-    conn=pg8000.native.Connection(
-        host='34.68.194.53',
-        port=5432,
-        user='pulumiadmin',
-        password='KSs3wTu435kR',
-        database='pulumi-votes-database-c53f1ca'
-        )
     first_part_of_drop= "DROP TABLE IF EXISTS "
     last_part_of_drop= ' CASCADE'
     combinedstring = f'{first_part_of_drop} {table_to_drop} {last_part_of_drop}'
+    conn=pg8000.native.Connection(
+        host=postgres_sql_instance_public_ip_address,
+        port=5432,
+        user=postgres_user,
+        password=postgres_user_pwd,
+        database=postgres_database
+        )
+    print("mydroptable delete_combined_sql ", combinedstring)
     cursor=conn.run(combinedstring)
 
 pulumi.export("Postgres_SQL_Instance", myinstance.name)
@@ -180,16 +155,13 @@ pulumi.export("Postgres_SQL_User_Username", users.name)
 pulumi.export("Postgres_SQL_User_Password", users.password)
 pulumi.export("gcp_region", myregion)
 
-create_table = "tusharshah1"
-print("Creating Table start. First")
+create_table = "mytable1"
 creating_table = mytablecreation(create_table)
 
-#creating_table = Output.all(postgres_provider.host,postgres_provider.port, postgres_provider.username,postgres_provider.password,myinstance.name).apply(lambda args: mystuff(args, create_table))
-print("Creating Table finished.  Last Call")
+create_table2 = "mytable2"
+creating_table = mytablecreation(create_table2)
 
-"""drop_table = "mytable10"
-print("Dropping Table start")
+drop_table = "mytable2"
 deleting_table = mydroptable(drop_table)
-print("Dropping Table finished")"""
 
 #CREATE TABLE IF NOT EXISTS usertable.shahtable(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)
