@@ -125,8 +125,8 @@ pulumi.export("gcp_region", myregion)
 # The creating_table  & deleting_table need to be commented out until after the 1st time
 # you run `pulumi up`. The calls have 2 ##'s below. See Readme
 create_table = "votertable"
-##creating_table = tablecreation(create_table)
+creating_table = tablecreation(create_table)
 create_table = "location"
-##creating_table = tablecreation(create_table)
+creating_table = tablecreation(create_table)
 drop_table = "mytable"
 ##deleting_table = droptable(drop_table)
