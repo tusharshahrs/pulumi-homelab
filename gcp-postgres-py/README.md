@@ -37,36 +37,110 @@
    ```
    
 1. Run `pulumi up` to preview and deploy changes: You must select `y` to continue
-```
-Previewing update (dev)
+    ```
+    Previewing update (dev)
 
-View Live: https://app.pulumi.com/shaht/gcp-postgres-py/dev/previews/17139a25-5e58-4f63-9b07-93095bcbc010
+    View Live: https://app.pulumi.com/shaht/gcp-postgres-py/dev/previews/17139a25-5e58-4f63-9b07-93095bcbc010
 
-     Type                            Name                   Plan       
- +   pulumi:pulumi:Stack             gcp-postgres-py-dev    create     
- +   ├─ random:index:RandomPassword  randompassword         create     
- +   ├─ gcp:sql:DatabaseInstance     pulumidbinstance       create     
- +   ├─ gcp:sql:User                 users                  create     
- +   ├─ pulumi:providers:postgresql  postgres-provider      create     
- +   └─ postgresql:index:Database    pulumi-votes-database  create     
- 
-Resources:
-    + 6 to create
+        Type                            Name                   Plan       
+    +   pulumi:pulumi:Stack             gcp-postgres-py-dev    create     
+    +   ├─ random:index:RandomPassword  randompassword         create     
+    +   ├─ gcp:sql:DatabaseInstance     pulumidbinstance       create     
+    +   ├─ gcp:sql:User                 users                  create     
+    +   ├─ pulumi:providers:postgresql  postgres-provider      create     
+    +   └─ postgresql:index:Database    pulumi-votes-database  create     
+    
+    Resources:
+        + 6 to create
 
-Do you want to perform this update?  [Use arrows to move, enter to select, type to filter]
-> yes
-  no
-  details
-```
-1. Table creation & Deletion configuration setup. We are using [pg8000](https://github.com/tlocke/pg8000) to create and delete tables. To avoid hard coding values in your file, you can pass them in as [secret](https://www.pulumi.com/docs/intro/concepts/secrets/#secrets) [configs](https://www.pulumi.com/docs/intro/concepts/config/#setting-and-getting-configuration-values)
-1. Run `pulumi up` to preview and deploy changes: You must select `y` to continue
-1. The following items need to be SET AFTER the 1st time `pulumi up` is run and the gcp sql instance has been created.  We need this information for to create the tables
+    Do you want to perform this update?  [Use arrows to move, enter to select, type to filter]
+    > yes
+      no
+      details
+
+    Updating (dev)
+
+    View Live: https://app.pulumi.com/shaht/gcp-postgres-py/dev/updates/1
+
+        Type                            Name                   Status      
+    +   pulumi:pulumi:Stack             gcp-postgres-py-dev    created     
+    +   ├─ random:index:RandomPassword  randompassword         created     
+    +   ├─ gcp:sql:DatabaseInstance     pulumidbinstance       created     
+    +   ├─ gcp:sql:User                 users                  created     
+    +   ├─ pulumi:providers:postgresql  postgres-provider      created     
+    +   └─ postgresql:index:Database    pulumi-votes-database  created     
+    
+    Outputs:
+        Postgres_SQL_Database_Name             : "pulumi-votes-database-3fbbce6"
+        Postgres_SQL_Instance                  : "pulumidbinstance-0668a3c"
+        Postgres_SQL_Instance_Port             : "5432"
+        Postgres_SQL_Instance_Public_Ip_Address: "35.193.129.156"
+        Postgres_SQL_User_Password             : "[secret]"
+        Postgres_SQL_User_Username             : "pulumiadmin"
+        gcp_region                             : "us-central1"
+        random_password                        : "[secret]"
+
+    Resources:
+        + 6 created
+
+    Duration: 14m0s  
+    ```
+1. View the [stack outputs](https://www.pulumi.com/docs/reference/cli/pulumi_stack_output/) via: `pulumi stack output`
+    ```
+    pulumi stack output
+    Current stack outputs (8):
+        OUTPUT                                   VALUE
+        Postgres_SQL_Database_Name               pulumi-votes-database-3fbbce6
+        Postgres_SQL_Instance                    pulumidbinstance-0668a3c
+        Postgres_SQL_Instance_Port               5432
+        Postgres_SQL_Instance_Public_Ip_Address  35.193.129.156
+        Postgres_SQL_User_Password               [secret]
+        Postgres_SQL_User_Username               pulumiadmin
+        gcp_region                               us-central1
+        random_password                          [secret]
+    ```
+1. Table creation & deletion configuration setup. We are using [pg8000](https://github.com/tlocke/pg8000) to create and delete tables. To avoid hard coding values in your file, you can pass them in as [secret](https://www.pulumi.com/docs/intro/concepts/secrets/#secrets) [configs](https://www.pulumi.com/docs/intro/concepts/config/#setting-and-getting-configuration-values)
+1. We will pass in the postgres instance, database, username, and password as config values set as secret.  The values of these are from the stack output above.
+We need to see the secret values so we can pass them in as secrets again.  To do that, type in `pulumi stack output --show-secrets`
+    ```
+    pulumi stack output --show-secrets
+    Current stack outputs (8):
+        OUTPUT                                   VALUE
+        Postgres_SQL_Database_Name               pulumi-votes-database-3fbbce6
+        Postgres_SQL_Instance_Public_Ip_Address  35.193.129.156
+        Postgres_SQL_User_Password               13LoRw9v0iQB
+        Postgres_SQL_User_Username               pulumiadmin
+    ```
+
+1. Set config values as secret via:  [pulumi config set](https://www.pulumi.com/docs/reference/cli/pulumi_config/)
    ```
-   $ pulumi config set postgres_database pulumi-votes-database-2a08d2a
-   $ pulumi config set postgres_sql_instance_public_ip_address 146.148.69.246 --secret
-   $ pulumi config set postgres_user pulumiadmin --secret
-   $ pulumi config set postgres_user_pwd AbcdefghijklopU --secret
+   $ pulumi config set postgres_sql_instance_public_ip_address 35.193.129.156 --secret
+   $ pulumi config set postgres_database pulumi-votes-database-3fbbce6 --secret
+   $ pulumi config set postgres_sql_user_username pulumiadmin --secret
+   $ pulumi config set postgres_user_pwd 13LoRw9v0iQB --secret
    ```
+1. View the config file to verify that the values are set as secret.
+   
+   `pulumi config`
+    ```
+    KEY                                      VALUE
+    gcp:project                              pulumi-ce-team
+    gcp:region                               us-central1
+    myip                                     [secret]
+    postgres_database                        [secret]
+    postgres_sql_instance_public_ip_address  [secret]
+    postgres_sql_user_username               [secret]
+    postgres_user_pwd                        [secret]
+    ```
+  1. Uncomment out the following to create the table. This is ~128. creating_table
+     Before:  
+     ```
+     ##creating_table = tablecreation(create_table)
+     ```
+     After:  
+     ```
+     creating_table = tablecreation(create_table)
+     ```
 
 ## Informational: reference to packages.
   - [pulumi](https://github.com/pulumi/pulumi)
