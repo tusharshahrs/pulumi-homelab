@@ -37,7 +37,27 @@
    ```
    
 1. Run `pulumi up` to preview and deploy changes: You must select `y` to continue
+```
+Previewing update (dev)
 
+View Live: https://app.pulumi.com/shaht/gcp-postgres-py/dev/previews/17139a25-5e58-4f63-9b07-93095bcbc010
+
+     Type                            Name                   Plan       
+ +   pulumi:pulumi:Stack             gcp-postgres-py-dev    create     
+ +   ├─ random:index:RandomPassword  randompassword         create     
+ +   ├─ gcp:sql:DatabaseInstance     pulumidbinstance       create     
+ +   ├─ gcp:sql:User                 users                  create     
+ +   ├─ pulumi:providers:postgresql  postgres-provider      create     
+ +   └─ postgresql:index:Database    pulumi-votes-database  create     
+ 
+Resources:
+    + 6 to create
+
+Do you want to perform this update?  [Use arrows to move, enter to select, type to filter]
+  yes
+> no
+  details
+```
 1. Table creation & Deletion configuration setup. We are using [pg8000](https://github.com/tlocke/pg8000) to create and delete tables. To avoid hard coding values in your file, you can pass them in as [secret](https://www.pulumi.com/docs/intro/concepts/secrets/#secrets) [configs](https://www.pulumi.com/docs/intro/concepts/config/#setting-and-getting-configuration-values)
 1. Run `pulumi up` to preview and deploy changes: You must select `y` to continue
 1. The following items need to be SET AFTER the 1st time `pulumi up` is run and the gcp sql instance has been created.  We need this information for to create the tables
