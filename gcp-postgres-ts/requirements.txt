@@ -1,5 +1,0 @@
-pulumi>=2.0.0,<3.0.0
-pulumi-gcp>=4.0.0,<5.0.0
-pulumi-random>=3.0.2,<4.0.0
-pulumi_postgresql>=2.7.2, <3.0.0
-pg8000>=1.17, <2.0.0
