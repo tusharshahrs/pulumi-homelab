@@ -54,8 +54,8 @@ Resources:
     + 6 to create
 
 Do you want to perform this update?  [Use arrows to move, enter to select, type to filter]
-  yes
-> no
+> yes
+  no
   details
 ```
 1. Table creation & Deletion configuration setup. We are using [pg8000](https://github.com/tlocke/pg8000) to create and delete tables. To avoid hard coding values in your file, you can pass them in as [secret](https://www.pulumi.com/docs/intro/concepts/secrets/#secrets) [configs](https://www.pulumi.com/docs/intro/concepts/config/#setting-and-getting-configuration-values)
