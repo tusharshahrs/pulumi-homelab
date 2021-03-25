@@ -209,7 +209,8 @@ We need to see the secret values so we can pass them in as secrets again.  To do
 
     Duration: 5s
     ```
-1.  There will no change in the infrastructure.  The table got created.  Screen shot example below after connecting with [pgadmin4](https://www.pgadmin.org/download/)    <img src="images/Tables_created_in_postgressql_in_gcp_in_python.png" alt = Table Created in Postgressql>
+1.  There will no change in the infrastructure.  You can validate via connecting with [pgadmin4](https://www.pgadmin.org/download/).    The tables got created.     
+<img src="images/Tables_created_in_postgressql_in_gcp_in_python.png" alt = Table Created in Postgressql>
 
 
 ## Reference: Information for the packages.
