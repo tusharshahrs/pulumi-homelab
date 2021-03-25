@@ -53,6 +53,13 @@ myinstance = sql.DatabaseInstance(
     deletion_protection=False,
 )
 
+# Creating a user on gcp
+# https://www.pulumi.com/docs/reference/pkg/gcp/sql/user/
+users = sql.User("users",
+    instance=myinstance.name,
+    name = "pulumiadmin",
+    password=mypassword.result)
+
 # Postgres https://www.pulumi.com/docs/reference/pkg/postgresql/
 # provider: https://www.pulumi.com/docs/reference/pkg/postgresql/provider/
 postgres_provider = postgres.Provider("postgres-provider",
@@ -78,10 +85,11 @@ def tablecreation(mytable_name):
     myconnection=pg8000.native.Connection(
         host=postgres_sql_instance_public_ip_address,
         port=5432,
-        user=postgres_user,
-        password=postgres_user_pwd,
-        database=postgressql_database_name
+        user=postgres_sql_user_username,
+        password=postgres_sql_user_password,
+        database=postgres_sql_database_name
     )
+
     print("tablecreation starting")
     cursor=myconnection.run(create_combined)
     print("Table Created", mytable_name)
@@ -96,9 +104,9 @@ def droptable(table_to_drop):
     conn=pg8000.native.Connection(
         host=postgres_sql_instance_public_ip_address,
         port=5432,
-        user=postgres_user,
-        password=postgres_user_pwd,
-        database=postgressql_database_name
+        user=postgres_sql_user_username,
+        password=postgres_sql_user_password,
+        database=postgres_sql_database_name
         )
     print("droptable delete_combined_sql ", combinedstring)
     cursor=conn.run(combinedstring)
@@ -108,7 +116,6 @@ def droptable(table_to_drop):
 pulumi.export("random_password", mypassword.result)
 pulumi.export("Postgres_SQL_Instance", myinstance.name)
 pulumi.export("Postgres_SQL_Database_Name", mydatabase.name)
-pulumi.export("Postgres_SQL_Database_Schema", myvote_tables.id)
 pulumi.export("Postgres_SQL_Instance_Public_Ip_Address", postgres_provider.host)
 pulumi.export("Postgres_SQL_Instance_Port", postgres_provider.port)
 pulumi.export("Postgres_SQL_User_Username", users.name)
