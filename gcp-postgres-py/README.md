@@ -115,9 +115,9 @@ We need to see the secret values so we can pass them in as secrets again.  To do
 1. Set config values as secret via:  [pulumi config set](https://www.pulumi.com/docs/reference/cli/pulumi_config/)
    ```
    $ pulumi config set postgres_sql_instance_public_ip_address 35.193.129.156 --secret
-   $ pulumi config set postgres_database pulumi-votes-database-3fbbce6 --secret
+   $ pulumi config set postgres_sql_database_name pulumi-votes-database-3fbbce6 --secret
    $ pulumi config set postgres_sql_user_username pulumiadmin --secret
-   $ pulumi config set postgres_user_pwd 13LoRw9v0iQB --secret
+   $ pulumi config set postgres_sql_user_password 13LoRw9v0iQB --secret
    ```
 1. View the config file to verify that the values are set as secret.
    
@@ -127,12 +127,13 @@ We need to see the secret values so we can pass them in as secrets again.  To do
     gcp:project                              pulumi-ce-team
     gcp:region                               us-central1
     myip                                     [secret]
-    postgres_database                        [secret]
+    postgres_sql_database_name               [secret]
     postgres_sql_instance_public_ip_address  [secret]
+    postgres_sql_user_password               [secret]
     postgres_sql_user_username               [secret]
     postgres_user_pwd                        [secret]
     ```
-  1. Uncomment out the following to create the table. This is ~128. creating_table
+  1. Uncomment out the following: `creating_table=` to create the table in `__main__.py`. This is ~128.
      Before:  
      ```
      ##creating_table = tablecreation(create_table)
@@ -141,8 +142,77 @@ We need to see the secret values so we can pass them in as secrets again.  To do
      ```
      creating_table = tablecreation(create_table)
      ```
+1. Run `pulumi up` and select `y`
+    ```
+    pulumi up
+    Previewing update (dev)
 
-## Informational: reference to packages.
+    View Live: https://app.pulumi.com/shaht/gcp-postgres-py/dev/previews/e735d94b-0fd4-4309-9a3a-2ba82e8935c9
+
+        Type                 Name                 Plan     Info
+        pulumi:pulumi:Stack  gcp-postgres-py-dev           12 messages
+    
+    Diagnostics:
+      pulumi:pulumi:Stack (gcp-postgres-py-dev):
+        tablecreation with: votertable
+        tablecreation create_combined_sql: CREATE TABLE IF NOT EXISTS votertable(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)
+        tablecreation starting
+        Table Created: votertable
+        SELECT Version: [['PostgreSQL 12.5 on x86_64-pc-linux-gnu, compiled by Debian clang version 10.0.1 , 64-bit']]
+        tablecreation with: regionals
+        tablecreation create_combined_sql: CREATE TABLE IF NOT EXISTS regionals(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)
+        tablecreation starting
+        Table Created: regionals
+        SELECT Version: [['PostgreSQL 12.5 on x86_64-pc-linux-gnu, compiled by Debian clang version 10.0.1 , 64-bit']]
+        droptable delete_combined_sql  DROP TABLE IF EXISTS  table2  CASCADE
+        droptable completed  []
+    
+
+    Do you want to perform this update?  [Use arrows to move, enter to select, type to filter]
+      yes
+    > no
+      details
+    Updating (dev)
+
+    View Live: https://app.pulumi.com/shaht/gcp-postgres-py/dev/updates/2
+
+        Type                 Name                 Status     Info
+        pulumi:pulumi:Stack  gcp-postgres-py-dev             12 messages
+    
+    Diagnostics:
+      pulumi:pulumi:Stack (gcp-postgres-py-dev):
+        tablecreation with: votertable
+        tablecreation create_combined_sql: CREATE TABLE IF NOT EXISTS votertable(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)
+        tablecreation starting
+        Table Created: votertable
+        SELECT Version: [['PostgreSQL 12.5 on x86_64-pc-linux-gnu, compiled by Debian clang version 10.0.1 , 64-bit']]
+        tablecreation with: regionals
+        tablecreation create_combined_sql: CREATE TABLE IF NOT EXISTS regionals(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)
+        tablecreation starting
+        Table Created: regionals
+        SELECT Version: [['PostgreSQL 12.5 on x86_64-pc-linux-gnu, compiled by Debian clang version 10.0.1 , 64-bit']]
+        droptable delete_combined_sql  DROP TABLE IF EXISTS  table2  CASCADE
+        droptable completed  []
+    
+    Outputs:
+        Postgres_SQL_Database_Name             : "[secret]"
+        Postgres_SQL_Instance                  : "pulumidbinstance-0668a3c"
+        Postgres_SQL_Instance_Port             : "5432"
+        Postgres_SQL_Instance_Public_Ip_Address: "[secret]"
+        Postgres_SQL_User_Password             : "[secret]"
+        Postgres_SQL_User_Username             : "[secret]"
+        gcp_region                             : "us-central1"
+        random_password                        : "[secret]"
+
+    Resources:
+        6 unchanged
+
+    Duration: 5s
+    ```
+1.  There will no change in the infrastructure.  The table got created.  Screen shot example below after connecting with [pgadmin4](https://www.pgadmin.org/download/)    <img src="images/Tables_created_in_postgressql_in_gcp_in_python.png" alt = Table Created in Postgressql>
+
+
+## Reference: Information for the packages.
   - [pulumi](https://github.com/pulumi/pulumi)
   - [gcp](https://www.pulumi.com/docs/reference/pkg/gcp/)
   - [postgressql](https://www.pulumi.com/docs/reference/pkg/postgresql/)
