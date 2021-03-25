@@ -77,11 +77,11 @@ mydatabase = postgres.Database("pulumi-votes-database",
 
 # Table creation/deletion is via pg8000 https://github.com/tlocke/pg8000
 def tablecreation(mytable_name):
-    print("Entered mytablecreation with:", mytable_name)
+    print("tablecreation with:", mytable_name)
     create_first_part = "CREATE TABLE IF NOT EXISTS"
     create_sql_querty = "(id serial PRIMARY KEY, email VARCHAR ( 255 ) UNIQUE NOT NULL, api_key VARCHAR ( 255 ) NOT NULL)"
     create_combined = f'{create_first_part} {mytable_name}{create_sql_querty}'
-    print("tablecreation create_combined_sql ", create_combined)
+    print("tablecreation create_combined_sql:", create_combined)
     myconnection=pg8000.native.Connection(
         host=postgres_sql_instance_public_ip_address,
         port=5432,
@@ -92,7 +92,7 @@ def tablecreation(mytable_name):
 
     print("tablecreation starting")
     cursor=myconnection.run(create_combined)
-    print("Table Created", mytable_name)
+    print("Table Created:", mytable_name)
     selectversion = 'SELECT version();'
     cursor2=myconnection.run(selectversion)
     print("SELECT Version:", cursor2)
@@ -124,9 +124,11 @@ pulumi.export("gcp_region", myregion)
 
 # The creating_table  & deleting_table need to be commented out until after the 1st time
 # you run `pulumi up`. The calls have 2 ##'s below. See Readme
-create_table = "votertable"
-creating_table = tablecreation(create_table)
-create_table = "location"
-creating_table = tablecreation(create_table)
-drop_table = "mytable"
-##deleting_table = droptable(drop_table)
+create_table1 = "votertable"
+#creating_table = tablecreation(create_table1)
+print("")
+create_table2 = "regionals"
+#creating_table = tablecreation(create_table2)
+print("")
+drop_table = "table2"
+#deleting_table = droptable(drop_table)
