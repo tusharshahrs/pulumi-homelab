@@ -1,0 +1,5 @@
+config:
+  gcp-postgres-py:myip:
+    secure: AAABAOheoqAoqQAJgFlJFh0r57HIs7Rm3/26bi6AG9emEG9TI2F+THtcNVRdMHub
+  gcp:project: pulumi-ce-team
+  gcp:region: us-central1
