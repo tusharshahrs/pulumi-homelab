@@ -1,4 +1,4 @@
-name: gcp-reference-python
+name: gcp-postgres-py
 runtime:
   name: python
   options:

@@ -1,0 +1,15 @@
+config:
+  gcp-postgres-py:myip:
+    secure: AAABAOheoqAoqQAJgFlJFh0r57HIs7Rm3/26bi6AG9emEG9TI2F+THtcNVRdMHub
+  gcp-postgres-py:postgres_sql_database_name:
+    secure: AAABAEsh3hLxWfgxoGzkdy17226hZT3ZjX5IDOXDQL2roZYcpQm8uQubIidXrIQ9OXyUJfWAxMETQc0oHw==
+  gcp-postgres-py:postgres_sql_instance_public_ip_address:
+    secure: AAABADjTNYRQThgp3eRnl7FGQTJ1hjCVkqMcdxY2qfZn1J7HVESzIz8nouhAvQ==
+  gcp-postgres-py:postgres_sql_user_password:
+    secure: AAABAKZ5kYCUUP/hL/zEzyl8FJqS6jm1SnZsWD0QfRR/xrCmVzUCPGolxjY=
+  gcp-postgres-py:postgres_sql_user_username:
+    secure: AAABACDBdbVQ9LS9hHXcc6SeKSG4lStqRzbBFRPS9Eblq1mBTihms+0FWQ==
+  gcp-postgres-py:postgres_user_pwd:
+    secure: AAABAKJOzoOD7xKfeVCI9ktylrHFZilk4g1cMQFRASZK06VWQUTm7Q0j4IY=
+  gcp:project: pulumi-ce-team
+  gcp:region: us-central1

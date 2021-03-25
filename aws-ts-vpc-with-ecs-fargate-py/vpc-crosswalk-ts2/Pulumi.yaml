@@ -1,0 +1,3 @@
+name: crosswalk-vpc2
+runtime: nodejs
+description: A well architected vpc built with crosswalk

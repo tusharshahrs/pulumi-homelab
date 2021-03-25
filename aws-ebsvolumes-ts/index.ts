@@ -42,7 +42,7 @@ const name = "shaht-ks-knode"
 const size = "t3a.micro";
 
 const requiredMachines = 2;
-const ebsvolumeSize = 20;
+const ebsvolumeSize = 15;
 const ebsvolumetype = "gp2";
 
 // Creates a private zone
@@ -76,6 +76,10 @@ for (let i = 1; i < requiredMachines + 1; i++) {
         encrypted: true,
         deleteOnTermination: true,
         volumeSize: 10,
+        volumeType: "gp2",
+        tags: {
+          Name: `${name}-server-${i}-rootblock`
+        }
       },
       ebsBlockDevices:[{
         deviceName: "/dev/sda1",

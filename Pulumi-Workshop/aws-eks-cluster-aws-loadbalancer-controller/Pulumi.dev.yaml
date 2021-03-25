@@ -1,0 +1,4 @@
+config:
+  aws-eks-cluster-aws-loadbalancer-controller:eksclusterStack: shaht/eks-infrastructure/dev2
+  aws-eks-cluster-aws-loadbalancer-controller:networkingStack: shaht/crosswalk-vpc2/k8s
+  aws:region: us-east-2

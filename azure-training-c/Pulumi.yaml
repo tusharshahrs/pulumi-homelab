@@ -1,0 +1,3 @@
+name: azure-training-c
+runtime: dotnet
+description: A minimal C# Pulumi program

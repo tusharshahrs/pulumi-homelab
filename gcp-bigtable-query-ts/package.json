@@ -1,0 +1,11 @@
+{
+    "name": "gcp-bigtable-query-ts",
+    "devDependencies": {
+        "@types/node": "^10.0.0"
+    },
+    "dependencies": {
+        "@google-cloud/bigtable": "^3.2.0",
+        "@pulumi/gcp": "^4.0.0",
+        "@pulumi/pulumi": "^2.0.0"
+    }
+}
