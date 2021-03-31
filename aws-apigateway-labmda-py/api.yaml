@@ -1,0 +1,16 @@
+swagger: "2.0"
+info:
+  version: "2021-03-29T15:07:58Z"
+  title: "marv"
+basePath: "/dev"
+schemes:
+  - "https"
+paths:
+  /test:
+    post:
+      responses: {}
+      x-amazon-apigateway-integration:
+        uri: "{{ api_airtable_invoke_arn }}"
+        httpMethod: "POST"
+        passthroughBehavior: "when_no_match"
+        type: "AWS_PROXY"
