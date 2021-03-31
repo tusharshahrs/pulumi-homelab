@@ -2,7 +2,7 @@
 
 import json
 import pulumi
-from pulumi_aws import iam, lambda_, apigateway, s3, kms
+from pulumi_aws import iam, lambda_, apigateway, s3
 from jinja2 import Environment, FileSystemLoader
 from pulumi import Output
 
@@ -38,38 +38,14 @@ api_lambda_role_policy = iam.RolePolicy('shaht-lambda-api-iam-policy',
     })
 )
 
-
-# KMS
-"""mykey = kms.Key("shaht-mykey",
-    description="This key is used to encrypt bucket objects",
-    deletion_window_in_days=7)"""
-
 ######### LAYERS ###########
  
-"""artifacts_bucket = s3.Bucket('artifacts',server_side_encryption_configuration=s3.BucketServerSideEncryptionConfigurationArgs(
-    rule=s3.BucketServerSideEncryptionConfigurationRuleArgs(
-        apply_server_side_encryption_by_default=s3.BucketServerSideEncryptionConfigurationRuleApplyServerSideEncryptionByDefaultArgs(
-            kms_master_key_id=mykey.arn,
-            sse_algorithm="aws:kms",
-        ),
-    ),
-))"""
-
 artifacts_bucket = s3.Bucket('artifacts')
 # Upload ffmpeg library to bucket
 api_airtable_layer_zip = s3.BucketObject('hello',
     bucket=artifacts_bucket.id,
-    #server_side_encryption="aws:kms",
     source=pulumi.FileAsset("./step_hello/hello.py")
 )
-
-"""api_airtable_layer = lambda_.LayerVersion('api-airtable-layer',
-    s3_bucket=artifacts_bucket.id,
-    s3_key=api_airtable_layer_zip.key,
-    #layer_name='api-airtable-layer',
-    compatible_runtimes=['python3.8'],
-)"""
-
 
 ######## LAMBDAS ###########
 api_airtable = lambda_.Function('api-airtable',
@@ -114,15 +90,10 @@ paths:
        
 final_output = Output.concat(f'{first_part}', api_airtable.invoke_arn)
 api_gateway = apigateway.RestApi('api-gateway',
-    #body=openapi_spec_template.render({'api_airtable_invoke_arn': api_airtable.invoke_arn}),
-    #below works
-    ##body=openapi_spec_template.render({'api_airtable_invoke_arn': "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:052848974346:function:api-airtable-65ef00c/invocations"}),
     body=final_output,
     api_key_source='HEADER',
     description="This is the hello python apigateway with lambda integration",
-    #opts=pulumi.ResourceOptions(depends_on=[api_airtable])
 )
-
 
 api_gateway_deployment = apigateway.Deployment('api-gateway-deployment',
     rest_api=api_gateway.id,
