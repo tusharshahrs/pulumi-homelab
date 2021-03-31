@@ -35,6 +35,41 @@ bucket = storage.Bucket(getResourceName(f"{myname}-bucket"), labels=commonTags)
 #mynetwork = network.Vpc(getResourceName(), network.VpcArgs(subnet_cidr_blocks=subnet_cidr_blocks,))
 mynetwork = network.Vpc(getResourceName(f"{myname}-vpc"), network.VpcArgs(subnet_cidr_blocks=subnet_cidr_blocks,))
 mydatabase = postgres.Database(getResourceName(f"{myname}-database"), postgres.DbArgs(private_network=mynetwork.id))
+
+#  Creating subnet and cidr block outputs
+my_subnet_names = []
+my_subnet_cidrs_blocks = []
+
+my_subnet_names.append(mynetwork.subnets[0].name.apply(lambda subnet: subnet))
+my_subnet_names.append(mynetwork.subnets[1].name.apply(lambda subnet: subnet))
+my_subnet_names.append(mynetwork.subnets[2].name.apply(lambda subnet: subnet))
+
+my_subnet_cidrs_blocks.append(mynetwork.subnets[0].ip_cidr_range.apply(lambda subnet: subnet))
+my_subnet_cidrs_blocks.append(mynetwork.subnets[1].ip_cidr_range.apply(lambda subnet: subnet))
+my_subnet_cidrs_blocks.append(mynetwork.subnets[2].ip_cidr_range.apply(lambda subnet: subnet))
+
+
+# Export the DNS name of the bucket
+pulumi.export('bucket_name', bucket.url)
+
+# Export the vpc information
+pulumi.export('network_vpc_name', mynetwork.network.name)
+# Export the subnet names and cidr blocks
+pulumi.export('network_subnets_names',my_subnet_names)
+pulumi.export('network_subnets_cidr_blocks',my_subnet_cidrs_blocks)
+pulumi.export('database_instance', mydatabase.sql.name)
+pulumi.export('database_user', mydatabase.users.name)
+pulumi.export('database_user_password', mydatabase.users.password)
+pulumi.export('database_name', mydatabase.database.name)
+
+# Export BigTable Instance
+##pulumi.export('bigtable_table_instance_name',mybigtableinstance.name)
+#pulumi.export('bigtable_table_instance_cluster',mybigtableinstance.clusters.name)
+# Export the Table
+##pulumi.export('bigtable_table_name',mybigtable.name)
+##pulumi.export('bigtable_table_split_keys',mybigtable.split_keys)
+##pulumi.export('bigtable_instance_name',mybigtable.instance_name)
+
 # Required for datastore
 """ myappengine = appengine.Application(getResourceName("shahtappengine"),
                                     location_id="us-central",
@@ -116,36 +151,3 @@ mybigtable = bigtable.Table(getResourceName(f"{myname}-table"),
  opts=ResourceOptions(parent=mybigtableinstance)
 )
 """
-
-#  Creating subnet and cidr block outputs
-my_subnet_names = []
-my_subnet_cidrs_blocks = []
-
-my_subnet_names.append(mynetwork.subnets[0].name.apply(lambda subnet: subnet))
-my_subnet_names.append(mynetwork.subnets[1].name.apply(lambda subnet: subnet))
-my_subnet_names.append(mynetwork.subnets[2].name.apply(lambda subnet: subnet))
-
-my_subnet_cidrs_blocks.append(mynetwork.subnets[0].ip_cidr_range.apply(lambda subnet: subnet))
-my_subnet_cidrs_blocks.append(mynetwork.subnets[1].ip_cidr_range.apply(lambda subnet: subnet))
-my_subnet_cidrs_blocks.append(mynetwork.subnets[2].ip_cidr_range.apply(lambda subnet: subnet))
-
-
-# Export the DNS name of the bucket
-pulumi.export('bucket_name', bucket.url)
-
-# Export the vpc information
-pulumi.export('network_vpc_name', mynetwork.network.name)
-# Export the subnet names and cidr blocks
-pulumi.export('network_subnets_names',my_subnet_names)
-pulumi.export('network_subnets_cidr_blocks',my_subnet_cidrs_blocks)
-pulumi.export('database_instance', mydatabase.sql.name)
-pulumi.export('database_user', mydatabase.users.name)
-pulumi.export('database_user_password', mydatabase.users.password)
-pulumi.export('database_name', mydatabase.database.name)
-# Export BigTable Instance
-##pulumi.export('bigtable_table_instance_name',mybigtableinstance.name)
-#pulumi.export('bigtable_table_instance_cluster',mybigtableinstance.clusters.name)
-# Export the Table
-##pulumi.export('bigtable_table_name',mybigtable.name)
-##pulumi.export('bigtable_table_split_keys',mybigtable.split_keys)
-##pulumi.export('bigtable_instance_name',mybigtable.instance_name)
