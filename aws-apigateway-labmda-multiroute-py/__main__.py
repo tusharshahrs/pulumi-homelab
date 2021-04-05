@@ -80,6 +80,7 @@ basePath: "/dev"
 schemes:
   - "https"
 paths:"""
+
 # Route 1 start
 route_1 = """
   /test:
@@ -90,8 +91,6 @@ route_1 = """
         passthroughBehavior: "when_no_match"
         type: "AWS_PROXY"
         uri: """
-
-# The lambda invocation arn wil be passed in seperately
 
 # Route 2 start
 route_2 = """
@@ -104,6 +103,7 @@ route_2 = """
         type: "AWS_PROXY"
         uri: """
 
+# Route 3 start
 route_3 = """
   /prod:
     post:
@@ -114,6 +114,9 @@ route_3 = """
         type: "AWS_PROXY"
         uri: """
 
+# We are creating the body via apply & concat: https://www.pulumi.com/docs/intro/concepts/inputs-outputs/#outputs-and-strings
+# invoke_arn: https://www.pulumi.com/docs/reference/pkg/aws/lambda/function/#invoke_arn_python
+# You can pass in any # of lambda functions on 1 api gateway with this solution
 fullbody=Output.concat(f'{first_part_swagger_openapi}', f'{route_1}',api_airtable.invoke_arn, f'{route_2}',api_airtable.invoke_arn,f'{route_3}',api_airtable.invoke_arn)
 
 pulumi.export("fullbody", fullbody)
