@@ -65,8 +65,8 @@ api_lambda_permission = lambda_.Permission('api-lambda-permission',
     principal="apigateway.amazonaws.com",
     function=api_airtable.name)
 
-env = Environment(loader=FileSystemLoader('./'), trim_blocks=True, lstrip_blocks=True)
-openapi_spec_template = env.get_template('api.yaml')
+#env = Environment(loader=FileSystemLoader('./'), trim_blocks=True, lstrip_blocks=True)
+#openapi_spec_template = env.get_template('api.yaml')
 
 marv_api_key = apigateway.ApiKey('marv-internal')
 
@@ -126,3 +126,38 @@ api_gateway = apigateway.RestApi(
     body = fullbody,
     description="This is the hello python apigateway with lambda integration",
 )
+
+api_gateway_deployment = apigateway.Deployment('api-gateway-deployment',
+    rest_api=api_gateway.id,
+    description="This is the apigateway deployment",
+    opts=pulumi.ResourceOptions(depends_on=[api_gateway])
+)
+ 
+api_gateway_stage = apigateway.Stage('api-gateway-stage',
+    stage_name='dev',
+    rest_api=api_gateway.id,
+    deployment=api_gateway_deployment.id,
+    description="This is the apigateway stage",
+    opts=pulumi.ResourceOptions(depends_on=[api_gateway])
+)
+
+# Exports
+# Lambda Roles   id and arn
+pulumi.export("api_lambda_role_id", api_lambda_role.id)
+pulumi.export("api_lambda_role_arn", api_lambda_role.arn)
+# Lambda policy name and id
+pulumi.export("api_lambda_role_policy_name", api_lambda_role_policy.name)
+pulumi.export("api_lambda_role_policy_id", api_lambda_role_policy.id)
+# Export the name of the s3 bucket
+pulumi.export('s3_bucket_name', artifacts_bucket.id)
+# Export the name of the object in the s3 bucket
+pulumi.export('api_airtable_layer_zip_id__s3_object', api_airtable_layer_zip.id)
+
+pulumi.export('lambda_function_api_airtable_id', api_airtable.id)
+pulumi.export('lambda_function_api_airtable_name', api_airtable.name)
+pulumi.export('lambda_permission_api_lambda_permission_name', api_lambda_permission.id)
+pulumi.export('apigateway_apikey_marv_api_key_name', marv_api_key.name)
+pulumi.export('apigateway_apikey_marv_api_key_id', marv_api_key.id)
+pulumi.export('lambda_function_api_airtable.invoke_arn', api_airtable.invoke_arn)
+pulumi.export('api_gateway_deployment_name',api_gateway_deployment.id)
+pulumi.export('api_gateway_stage_name',api_gateway_stage.id)
