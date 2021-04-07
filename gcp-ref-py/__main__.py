@@ -73,6 +73,6 @@ pulumi.export('database_user_password', mydatabase.users.password)
 pulumi.export('database_name', mydatabase.database.name)
 
 pulumi.export('function_bucket_name', myfunction.bucket.name)
-pulumi.export('function_bucket_object_name', myfunction.bucket_object.name)
+#pulumi.export('function_bucket_object_name', myfunction.bucket_object.name)
 pulumi.export('function_name', myfunction.function.name)
-pulumi.export('function_invoke_name', myfunction.invoker.id)
+pulumi.export('function_trigger_url', myfunction.function.https_trigger_url)
