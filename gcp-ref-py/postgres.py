@@ -13,6 +13,7 @@ class DbArgs:
                  backup_configuration_point_in_time_recovery_enabled=True,
                  deletion_protection=False,
                  private_network = None,
+                 tags = None,
                  disk_size = 20):
 
         self.database_version = database_version
@@ -24,6 +25,7 @@ class DbArgs:
         self.deletion_protection=deletion_protection
         self.private_network=private_network
         self.disk_size=disk_size
+        self.tags = tags
 
 class Database(ComponentResource):
     def __init__(self,
@@ -41,6 +43,7 @@ class Database(ComponentResource):
                 availability_type = args.availability_type,
                 disk_size=args.disk_size,
                 ip_configuration=args.private_network,
+                user_labels = args.tags,
                 backup_configuration = { "enabled":args.backup_configuration_enabled,
                                      "point_in_time_recovery_enabled": args.backup_configuration_point_in_time_recovery_enabled
                                    },
@@ -63,13 +66,13 @@ class Database(ComponentResource):
             instance=self.sql.id,
             name="pulumiadmin",
             password=mypassword.result,
-            opts=ResourceOptions(parent=self))
+            opts=ResourceOptions(parent=self.sql))
 
         database_name = f'{name}-pulumidb'
         self.database = sql.Database(database_name,
             instance = self.sql.id,
             charset="UTF8",
-            opts=ResourceOptions(parent=self)
+            opts=ResourceOptions(parent=self.sql)
         )
         
         self.register_outputs({})
