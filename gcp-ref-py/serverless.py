@@ -1,5 +1,5 @@
 import pulumi
-from pulumi import ComponentResource, ResourceOptions, export, asset
+from pulumi import ComponentResource, ResourceOptions, asset
 from pulumi_gcp import storage, cloudfunctions
 
 class FuncArgs:
