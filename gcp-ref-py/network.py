@@ -7,8 +7,8 @@ class VpcArgs:
 
 class Vpc(ComponentResource):
     def __init__(self, name: str, args: VpcArgs, opts: ResourceOptions = None):
-        super().__init__("component:x:VPC", name, {}, opts)
-        child_opts = ResourceOptions(parent=self)
+        super().__init__("component:network:VPC", name, {}, opts)
+        #child_opts = ResourceOptions(parent=self)
         
         self.network = compute.Network(name,auto_create_subnetworks=False, opts=ResourceOptions(parent=self))
         self.subnets = []
