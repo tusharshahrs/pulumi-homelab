@@ -146,12 +146,15 @@ This example deploys a google vpc network and subnet, a cloud sql in postgres, a
      **gcp-ref-py-demo-vpc-dceecca**
 
     `pulumi stack output network_subnets_names`
+
     **["gcp-ref-py-demo-vpc-subnet-0-3ddaf53","gcp-ref-py-demo-vpc-subnet-1-2c77fc4","gcp-ref-py-demo-vpc-subnet-2-d9864be"]**
     
     `pulumi stack output network_subnets_cidr_blocks`
+
     **["10.0.0.0/25","10.0.0.128/26","10.0.0.192/26"]**
 
-1.  To see the cloud sql postgres instance and database
+1.  To see the cloud sql postgres instance and database run: 
+
     `pulumi stack output database_instance`
 
     **gcp-ref-py-demo-database-dbinstance-a3461f1**
