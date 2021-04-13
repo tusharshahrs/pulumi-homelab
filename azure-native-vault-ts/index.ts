@@ -53,63 +53,19 @@ const mytenantid = config.getSecret("tenantid");
 // https://www.pulumi.com/docs/reference/pkg/azure-native/keyvault/vault/
 
 const vault = new keyvault.Vault(`${name}-vault`, {
-    resourceGroupName: resourceGroup.name,
     location: resourceGroup.location,
+    resourceGroupName: resourceGroup.name,
     properties: {
-        accessPolicies: [{
-            objectId: "00000000-0000-0000-0000-000000000000",
-            permissions: {
-                certificates: [
-                    "get",
-                    "list",
-                    "delete",
-                    "create",
-                    "import",
-                    "update",
-                    "managecontacts",
-                    "getissuers",
-                    "listissuers",
-                    "setissuers",
-                    "deleteissuers",
-                    "manageissuers",
-                    "recover",
-                    "purge",
-                ],
-                keys: [
-                    "encrypt",
-                    "decrypt",
-                    "wrapKey",
-                    "unwrapKey",
-                    "sign",
-                    "verify",
-                    "get",
-                    "list",
-                    "create",
-                    "update",
-                    "import",
-                    "delete",
-                    "backup",
-                    "restore",
-                    "recover",
-                    "purge",
-                ],
-                secrets: [
-                    "get",
-                    "list",
-                    "set",
-                    "delete",
-                    "backup",
-                    "restore",
-                    "recover",
-                    "purge",
-                ],
-            },
-            // interpolate:  https://www.pulumi.com/docs/intro/concepts/inputs-outputs/#outputs-and-strings
-            tenantId: pulumi.interpolate`${mytenantid}`,
-        }],
+        sku: {
+            family: "A",
+            name: "standard",
+        },
+        // interpolate:  https://www.pulumi.com/docs/intro/concepts/inputs-outputs/#outputs-and-strings
+        tenantId: pulumi.interpolate`${mytenantid}`,
         enabledForDeployment: false,
         enabledForDiskEncryption: true,
         enabledForTemplateDeployment: true,
+        createMode: "default",
         networkAcls: {
             bypass: "AzureServices",
             defaultAction: "Deny",
@@ -121,18 +77,23 @@ const vault = new keyvault.Vault(`${name}-vault`, {
                     value: "124.56.78.92/32",
                 },
             ],
-            //virtualNetworkRules: "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1",
-            virtualNetworkRules: [{
-                id: subnets[0].id,
-            }],
+            virtualNetworkRules: [
+                { id: subnets[0].id,}, 
+                { id: subnets[1].id }],
         },
-        createMode: "default",
-        sku: {
-            family: "A",
-            name: "standard",
-        },
-        // interpolate:  https://www.pulumi.com/docs/intro/concepts/inputs-outputs/#outputs-and-strings
-        tenantId: pulumi.interpolate`${mytenantid}`,
+        accessPolicies: [{
+            objectId: "00000000-0000-0000-0000-000000000000",
+            // interpolate:  https://www.pulumi.com/docs/intro/concepts/inputs-outputs/#outputs-and-strings
+            tenantId: pulumi.interpolate`${mytenantid}`,
+            permissions: {
+                //secrets: ["get","list","set","delete","backup","restore","recover","purge",],
+                secrets: ["get","list","set","delete","backup","restore","recover","purge"],
+                //certificates: ["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover","purge",],
+                certificates: ["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover","purge"],
+                //keys: ["encrypt","decrypt","wrapKey","unwrapKey","sign","verify","get","list","create","update","import","delete","backup","restore","recover","purge",],
+                keys: ["encrypt","decrypt","wrapKey","unwrapKey","sign","verify","get","list","create","update","import","delete","backup","restore","recover","purge"],
+            },
+        }],
     },
 }, {parent: mynetwork, dependsOn: [subnet1, subnet2]});
 
