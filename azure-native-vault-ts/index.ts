@@ -21,18 +21,27 @@ const mynetwork = new network.VirtualNetwork(`${name}-vnet`, {
 
 const subnets_cidr_blocks = ["10.0.0.0/23", "10.0.2.0/23"]
 const subnets = [];
-for (let i = 0; i < 2; i++) {
-    const subnet =  new network.Subnet(`${name}-subnet-${i}`, {
-        resourceGroupName: resourceGroup.name,
-        virtualNetworkName: mynetwork.name,
-        serviceEndpoints: [{
-            service: "Microsoft.KeyVault",
-        }],
-        addressPrefix: subnets_cidr_blocks[i],
-    }, {parent: mynetwork});
-    subnets.push(subnet)
-}
 
+const subnet1 =  new network.Subnet(`${name}-subnet-1`, {
+    resourceGroupName: resourceGroup.name,
+    virtualNetworkName: mynetwork.name,
+    serviceEndpoints: [{
+        service: "Microsoft.KeyVault",
+    }],
+    addressPrefix: "10.0.0.0/23",
+    }, {parent: mynetwork});
+
+const subnet2 =  new network.Subnet(`${name}-subnet-2`, {
+    resourceGroupName: resourceGroup.name,
+    virtualNetworkName: mynetwork.name,
+    serviceEndpoints: [{
+        service: "Microsoft.KeyVault",
+    }],
+    addressPrefix: "10.0.2.0/23",
+    }, {parent: mynetwork, dependsOn: subnet1},);
+
+subnets.push(subnet1)
+subnets.push(subnet2)
 // local config
 const config = new pulumi.Config();
 // reading in a secret 
@@ -114,7 +123,7 @@ const vault = new keyvault.Vault(`${name}-vault`, {
             ],
             //virtualNetworkRules: "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1",
             virtualNetworkRules: [{
-                id: subnets[0].id, 
+                id: subnets[0].id,
             }],
         },
         createMode: "default",
@@ -125,9 +134,13 @@ const vault = new keyvault.Vault(`${name}-vault`, {
         // interpolate:  https://www.pulumi.com/docs/intro/concepts/inputs-outputs/#outputs-and-strings
         tenantId: pulumi.interpolate`${mytenantid}`,
     },
-});
+}, {parent: mynetwork, dependsOn: [subnet1, subnet2]});
 
 
 // Exports
 export const resource_group_name = resourceGroup.name;
-export const vault_name = vault.id;
+export const network_name = mynetwork.name;
+export const network_subnet_1_name = subnet1.name;
+export const network_subnet_2_name = subnet2.name;
+export const vault_name = vault.name;
+export const vault_type = vault.type;
