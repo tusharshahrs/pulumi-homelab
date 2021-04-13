@@ -1,0 +1,4 @@
+config:
+  azure-native-vault-ts:tenantid:
+    secure: AAABADSpOyop5FmsUknD1VgHR9c0RRb1BrVUDn/Jc2dp492NHESv12Nhzd1POlf6WJmjGGbXjAc1m09uPiZ8s+/D/h0=
+  azure-native:location: eastus2

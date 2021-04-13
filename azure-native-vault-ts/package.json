@@ -1,0 +1,10 @@
+{
+    "name": "azure-native-vault-ts",
+    "devDependencies": {
+        "@types/node": "^10.0.0"
+    },
+    "dependencies": {
+        "@pulumi/azure-native": "^0.7.0",
+        "@pulumi/pulumi": "^2.0.0"
+    }
+}
