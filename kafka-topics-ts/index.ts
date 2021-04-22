@@ -23,6 +23,15 @@ const commerceLocationConsumeOutgoingTopic = new kafka.Topic("commerce.location.
     name: "commerce.location.consume.outgoing",
 });
 
+const healtCheckTopicACL = new kafka.Acl("healtCheckTopicACL", {
+    aclHost: "*",
+    aclOperation: "Write",
+    aclPermissionType: "Allow",
+    aclPrincipal: "User:CN=msk-healthcheck-producer",
+    aclResourceName: healthCheckTopic.name,
+    aclResourceType: "Topic",
+});
+
 const commercePaymentConsumeOutgoingTopic = new kafka.Topic("commerce.payment.consume.outgoing", {
     config: {
         "cleanup.policy": "compact",
