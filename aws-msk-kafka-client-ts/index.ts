@@ -33,7 +33,7 @@ const mykeypair = new aws.ec2.KeyPair(`${myname}-keypair`, {
 });
 
 // Get the AMI
-const amiId = aws.getAmi({
+const amiId = aws.ec2.getAmi({
     owners: ["amazon"],
     mostRecent: true,
     filters: [{
@@ -52,10 +52,12 @@ export const keypair_publicKey = mykeypair.publicKey;
 const userData =
     `#!/bin/bash
     sudo yum update -y
+    sudo yum -y curl
     sudo yum -y install java-1.8.0
     wget https://archive.apache.org/dist/kafka/2.2.1/kafka_2.12-2.2.1.tgz
     tar -xzf kafka_2.12-2.2.1.tgz
     cd kafka_2.12-2.2.1
+    curl -fsSL https://get.pulumi.com | sh -s -- --version 2.24.1
     `;
 
 const msk_client_server = new aws.ec2.SpotInstanceRequest(`${name}-msk-client`, {
@@ -68,6 +70,7 @@ const msk_client_server = new aws.ec2.SpotInstanceRequest(`${name}-msk-client`, 
     userData: userData,
     subnetId: subnetaz1,
     vpcSecurityGroupIds: [mysecurity_group],
+    tags: {"Name":`${name}-msk-client`},
 
 }, {dependsOn: mykeypair});
 
@@ -117,3 +120,4 @@ export const mskcluster_appautoscaling_policy_serviceNamespace = mskcluster_appa
 export const mskcluster_appautoscaling_policy_stepScalingPolicyConfiguration = mskcluster_appautoscaling_policy.stepScalingPolicyConfiguration;
 export const mskcluster_appautoscaling_policy_targetTrackingScalingPolicyConfiguration = mskcluster_appautoscaling_policy.targetTrackingScalingPolicyConfiguration;
 export const mskcluster_appautoscaling_policy_urn = mskcluster_appautoscaling_policy.urn;
+export const server_id = msk_client_server.tags;
