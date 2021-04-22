@@ -97,7 +97,7 @@ const testStream = new aws.kinesis.FirehoseDeliveryStream(`${my_name}-kinesisFir
 
 const msk = new aws.msk.Cluster(`${my_name}-msk`, {
     //clusterName: "kafka-msk",
-    kafkaVersion: "2.6.0",
+    kafkaVersion: "2.3.1",
     numberOfBrokerNodes: 3,
     brokerNodeGroupInfo: {
         instanceType: "kafka.t3.small",
@@ -137,11 +137,14 @@ const msk = new aws.msk.Cluster(`${my_name}-msk`, {
                 enabled: true,
                 bucket: bucket.id,
                 prefix: "logs/msk-",
+                
             },
         },
     },
     tags: {
-        foo: "kafka-foobar",
+        Name: "shaht-kafka-cluster",
+        team: "pulumi-ce-team",
+        env: "dev"
     },
 });
 
