@@ -1,6 +1,4 @@
 import * as pulumi from "@pulumi/pulumi";
-//import * as aws from "@pulumi/aws";
-//import * as awsx from "@pulumi/awsx";
 import * as kafka from "@pulumi/kafka";
 
 // This will ONLY work if it s in the SAME VPC and SAME SECURITY group as the MSK brokers(3).  Port has to be included.
