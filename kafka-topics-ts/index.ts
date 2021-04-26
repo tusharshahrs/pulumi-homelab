@@ -32,10 +32,10 @@ const healtCheckTopicACLRead = new kafka.Acl("healtCheckTopicACLRead", {
 //}, {parent:healthCheckTopic, dependsOn: healthCheckTopic});
 
 const healthCheckTopic2 = new kafka.Topic("healthCheckTopic2", {
-    config: {
+/*    config: {
         "cleanup.policy": "compact",
         "segment.ms": "20000",
-    },
+    },*/
     partitions: 3,
     replicationFactor: 3,
 });
@@ -90,10 +90,10 @@ const commerceLocationConsumeOutgoingTopicACLRead = new kafka.Acl("commerceLocat
 //}, {parent:commerceLocationConsumeOutgoingTopic, dependsOn: commerceLocationConsumeOutgoingTopic});
 
 const commerceLocationConsumeOutgoingTopic2 = new kafka.Topic("commerceLocationConsumeOutgoingTopic2", {
-    config: {
+    /*config: {
         "cleanup.policy": "compact",
         "segment.ms": "20000",
-    },
+    },*/
     partitions: 3,
     replicationFactor: 3,
 });
@@ -209,10 +209,10 @@ const commerceProductIngestCustomizableProductHeaderTopicACLRead = new kafka.Acl
 //}, {parent:commerceProductIngestCustomizableProductHeaderTopic, dependsOn: commerceProductIngestCustomizableProductHeaderTopic});
 
 const commerceProductIngestCustomizableProductHeaderTopic2 = new kafka.Topic("commerce.product.ingest.customizable-product-header2", {
-    config: {
+    /*config: {
         "cleanup.policy": "compact",
         "segment.ms": "20003",
-    },
+    },*/
     partitions: 3,
     replicationFactor: 3,
   });
