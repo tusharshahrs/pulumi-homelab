@@ -5,10 +5,10 @@ import * as kafka from "@pulumi/kafka";
 
 // This will ONLY work if it s in the SAME VPC and SAME SECURITY group as the MSK brokers(3).  Port has to be included.
 const healthCheckTopic = new kafka.Topic("healthCheckTopic", {
-    config: {
+    /*config: {
         "cleanup.policy": "compact",
         "segment.ms": "20000",
-    },
+    },*/
     partitions: 3,
     replicationFactor: 3,
 });
