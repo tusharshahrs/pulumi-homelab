@@ -61,7 +61,7 @@ export const sg = new aws.ec2.SecurityGroup(`${my_name}-sg`,
     });
 export const kms = new aws.kms.Key(`${my_name}-kms`, {description: "msk kafka kms key"});
 const test = new aws.cloudwatch.LogGroup(`${my_name}-kms-cloudwatch-loggroup`, {});
-const bucket = new aws.s3.Bucket(`${my_name}-bucket`, {acl: "private"});
+const bucket = new aws.s3.Bucket(`${my_name}-bucket`, {acl: "private", forceDestroy: true});
 
 const subnetAz1 = vpc_publicsubnetids.apply(vpc_publicsubnetids => vpc_publicsubnetids[0]);
 const subnetAz2 = vpc_publicsubnetids.apply(vpc_publicsubnetids => vpc_publicsubnetids[1]);
@@ -96,7 +96,6 @@ const testStream = new aws.kinesis.FirehoseDeliveryStream(`${my_name}-kinesisFir
 });
 
 const msk = new aws.msk.Cluster(`${my_name}-msk`, {
-    //clusterName: "kafka-msk",
     kafkaVersion: "2.3.1",
     numberOfBrokerNodes: 3,
     brokerNodeGroupInfo: {
