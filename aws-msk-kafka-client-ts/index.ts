@@ -57,6 +57,8 @@ const userData =
     cd /home/ec2-user
     wget https://archive.apache.org/dist/kafka/2.2.1/kafka_2.12-2.2.1.tgz
     tar -xzf kafka_2.12-2.2.1.tgz
+    curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
+    sudo yum install -y nodejs
     curl -fsSL https://get.pulumi.com | sh -s -- --version 2.24.1
     `;
 
