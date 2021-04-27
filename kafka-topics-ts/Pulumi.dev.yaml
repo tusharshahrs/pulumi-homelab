@@ -1,3 +1,5 @@
 config:
   aws:region: us-east-2
-  kafka:bootstrapServers: ["b-2.shaht-kafka-msk-c1cbbf.t9esdu.c4.kafka.us-east-2.amazonaws.com:9094","b-1.shaht-kafka-msk-c1cbbf.t9esdu.c4.kafka.us-east-2.amazonaws.com:9094","b-3.shaht-kafka-msk-c1cbbf.t9esdu.c4.kafka.us-east-2.amazonaws.com:9094"]
+  kafka:bootstrapServers: ["b-3.shaht-kafka-msk-cbd3c5.4przdp.c4.kafka.us-east-2.amazonaws.com:9094","b-2.shaht-kafka-msk-cbd3c5.4przdp.c4.kafka.us-east-2.amazonaws.com:9094","b-1.shaht-kafka-msk-cbd3c5.4przdp.c4.kafka.us-east-2.amazonaws.com:9094"]
+  kafka:skipTlsVerify: "false"
+  kafka:tlsEnabled: "true"

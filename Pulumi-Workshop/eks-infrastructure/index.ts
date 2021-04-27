@@ -33,7 +33,7 @@ const cluster = new eks.Cluster("shahteks",
     tags: mytags,
     nodeRootVolumeSize: 10,
     encryptRootBockDevice: true,
-    version: "1.18",
+    version: "1.19",
     enabledClusterLogTypes: ["api", "audit", "authenticator", "controllerManager", "scheduler"],
 });
 
