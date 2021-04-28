@@ -10,10 +10,12 @@ Create a new stack:
 pulumi stack init prod
 ```
 
+`Created stack 'prod'`
+
 Next, configure its two required variables:
 
 ```bash
-pulumi config set azure:location westeurope
+pulumi config set azure-native:location eastus2
 pulumi config set iac-workshop:container htmlprod
 ```
 
@@ -27,8 +29,8 @@ It will print all stacks for this project that are available to you:
 
 ```
 NAME   LAST UPDATE     RESOURCE COUNT  URL
-dev    30 minutes ago  4               https://app.pulumi.com/myuser/iac-workshop/dev
-prod*  3 minutes ago   0               https://app.pulumi.com/myuser/iac-workshop/prod
+dev    17 minutes ago  5               https://app.pulumi.com/shaht/iac-workshop/dev
+prod*  n/a             n/a             https://app.pulumi.com/shaht/iac-workshop/prod
 ```
 
 ## Step 2 &mdash; Deploy the New Stack
@@ -39,22 +41,24 @@ Now deploy all of the changes:
 pulumi up
 ```
 
-This will create an entirely new set of resources from scratch, unrelated to the existing `dev` stack's resources.
+This will create an entirely new set of resources from scratch for `prod`, unrelated to the existing `dev` stack's resources.
 
 ```
 Updating (prod):
 
-     Type                         Name               Status
- +   pulumi:pulumi:Stack          iac-workshop-prod  created
- +   ├─ azure:core:ResourceGroup  my-group           created     
- +   ├─ azure:storage:Account     mystorage          created     
- +   └─ azure:storage:Container   mycontainer        created 
-
+     Type                                     Name               Status      
+ +   pulumi:pulumi:Stack                      iac-workshop-prod  created     
+ +   ├─ azure-native:resources:ResourceGroup  my-group           created     
+ +   ├─ azure-native:storage:StorageAccount   mystorage          created     
+ +   └─ azure-native:storage:BlobContainer    mycontainer        created     
+ 
 Outputs:
-    AccountName: "mystorage4a3f2830"
+    AccountName: "mystorage695a2b66"
 
 Resources:
     + 4 created
+
+Duration: 1m2s
 
 Duration: 30s
 
@@ -62,6 +66,29 @@ Permalink: https://app.pulumi.com/myuser/iac-workshop/prod/updates/1
 ```
 
 A new set of resources has been created for the `prod` stack.
+
+## Step 4 &mdash; Inspect Your New Storage Account in the new environment
+
+Now run the `az` CLI to list the containers in this new stack:
+
+```
+az storage container list --account-name $(pulumi stack output AccountName) -o table
+Name      Lease Status    Last Modified
+--------  --------------  -------------------------
+htmlprod  unlocked        2021-04-28T18:52:57+00:00
+```
+
+Notice that your container now has `htmlprod`.
+
+```bash
+pulumi stack ls
+```
+
+```
+NAME   LAST UPDATE     RESOURCE COUNT  URL
+dev    23 minutes ago  5               https://app.pulumi.com/shaht/iac-workshop/dev
+prod*  1 minute ago    5               https://app.pulumi.com/shaht/iac-workshop/prod
+```
 
 ## Next Steps
 
