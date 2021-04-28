@@ -15,14 +15,14 @@ This will show you a preview, much like the `pulumi up` command does:
 ```
 Previewing destroy (prod):
 
-     Type                         Name               Plan
- -   pulumi:pulumi:Stack          iac-workshop-prod  delete
- -   ├─ azure:storage:Container   mycontainer        delete     
- -   ├─ azure:storage:Account     mystorage          delete     
- -   └─ azure:core:ResourceGroup  my-group           delete 
-
+     Type                                     Name               Plan       
+ -   pulumi:pulumi:Stack                      iac-workshop-prod  delete     
+ -   ├─ azure-native:storage:BlobContainer    mycontainer        delete     
+ -   ├─ azure-native:storage:StorageAccount   mystorage          delete     
+ -   └─ azure-native:resources:ResourceGroup  my-group           delete     
+ 
 Outputs:
-  - AccountName: "mystorage4a3f2830"
+  - AccountName: "mystorage695a2b66"
 
 Resources:
     - 4 to delete
@@ -38,19 +38,20 @@ To proceed, select `yes`.
 ```
 Destroying (prod):
 
-     Type                         Name               Status
- -   pulumi:pulumi:Stack          iac-workshop-prod  deleted
- -   ├─ azure:storage:Container   mycontainer        deleted     
- -   ├─ azure:storage:Account     mystorage          deleted     
- -   └─ azure:core:ResourceGroup  my-group           deleted 
 
+     Type                                     Name               Status      
+ -   pulumi:pulumi:Stack                      iac-workshop-prod  deleted     
+ -   ├─ azure-native:storage:BlobContainer    mycontainer        deleted     
+ -   ├─ azure-native:storage:StorageAccount   mystorage          deleted     
+ -   └─ azure-native:resources:ResourceGroup  my-group           deleted     
+ 
 Outputs:
-  - AccountName: "mystorage4a3f2830"
+  - AccountName: "mystorage695a2b66"
 
 Resources:
     - 4 deleted
 
-Duration: 1m0s
+Duration: 56s
 
 Permalink: https://app.pulumi.com/myuser/iac-workshop/prod/updates/2
 The resources in the stack have been deleted, but the history and configuration
@@ -72,7 +73,8 @@ This is irreversible and so asks to confirm that this is your intent:
 
 ```
 This will permanently remove the 'prod' stack!
-Please confirm that this is what you'd like to do by typing ("prod"):
+Please confirm that this is what you'd like to do by typing ("prod"): prod
+Stack 'prod' has been removed!
 ```
 
 Type the name of the stack and hit enter. The stack is now gone.
@@ -99,11 +101,4 @@ pulumi stack ls
 
 Congratulations! :tada: You have completed the first lab.
 
-Now that you're more familiar with infrastructure as code concepts, and how the tool works, you can feel free to explore the more advanced collection of labs. These labs will teach you how to provision and scale virtual machines, containers (including Kubernetes), and serverless workloads. Feel free to do them sequentially, or choose what's most interesting to you &mdash; this first lab will have given you all of the foundational understanding you need to succeed at any of them.
-
-
-*Coming soon*
-* Deploying Serverless Applications with Azure Functions
-* Deploying Containers to Azure Container Instance
-* Provisioning Virtual Machines
-* Deploying Containers to a Kubernetes Cluster
+Now that you're more familiar with infrastructure as code concepts, and how the tool works, you can feel free to explore the more advanced collection of labs.
