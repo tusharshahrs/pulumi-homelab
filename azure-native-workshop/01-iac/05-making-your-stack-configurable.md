@@ -1,4 +1,4 @@
-# Making Your Stack Configurable
+cd# Making Your Stack Configurable
 
 Right now, the container's name is hard-coded. Next, you'll make the name configurable.
 
@@ -17,9 +17,10 @@ config = pulumi.Config()
 Replace the hard-coded `"Name"` property value with the one from configuration:
 
 ```python
-container = storage.Container('mycontainer',
-                        name =  config.require('container'),
-                        storage_account_name = account.name)
+container = storage.BlobContainer('mycontainer',
+                resource_group_name= resource_group.name,
+                account_name= account.name,
+                container_name= config.require('container') )
 ```
 
 > :white_check_mark: After these changes, your `__main__.py` should [look like this](./code/05-making-your-stack-configurable/step2.py).
@@ -36,8 +37,8 @@ This results in an error like the following:
 
 ```
 ...
-ConfigMissingException: Missing Required configuration variable 'iac-workshop:container'
-    	please set a value using the command `pulumi config set iac-workshop:container <value>`
+    error: Missing required configuration variable 'iac-workshop:container'
+        please set a value using the command `pulumi config set iac-workshop:container <value>`
 ...
 ```
 
@@ -52,25 +53,37 @@ To make things interesting, I set the name to `html` which is different from the
 Run `pulumi up` again. This detects that the container has changed and will perform a simple update:
 
 ```
-Updating (dev):
+Updating (dev)
 
-     Type                        Name              Status      Info
-     pulumi:pulumi:Stack         iac-workshop-dev
-  +- └─ azure:storage:Container  mycontainer       replaced    [diff: ~name]
-
+     Type                                   Name              Status       Info
+     pulumi:pulumi:Stack                    iac-workshop-dev               
+ +-  └─ azure-native:storage:BlobContainer  mycontainer       replaced     [diff: ~containerName]
+ 
 Outputs:
-    AccountName: "mystorage872202e1"
+    AccountName: "mystorage63615ca1"
 
 Resources:
     +-1 replaced
     3 unchanged
 
-Duration: 10s
-
 Permalink: https://app.pulumi.com/myuser/iac-workshop/dev/updates/5
 ```
 
 And you will see the contents added above.
+
+## Step 4 &mdash; Inspect Your New Storage Account with the updated file name
+
+Now run the `az` CLI to list the containers in this new account:
+
+```
+az storage container list --account-name $(pulumi stack output AccountName) -o table
+Name    Lease Status    Last Modified
+------  --------------  -------------------------
+html    unlocked        2021-04-28T18:31:27+00:00
+```
+
+Notice that your `files` container has been replaced with `html`.
+
 
 ## Next Steps
 
