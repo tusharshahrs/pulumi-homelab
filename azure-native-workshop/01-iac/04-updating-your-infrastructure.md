@@ -53,7 +53,7 @@ To inspect your new storage account, you will need its physical Azure name. Pulu
 Programs can export variables which will be shown in the CLI and recorded for each deployment. Export your account's name by adding an export statement to `__main__.py`:
 
 ```python
-pulumi.export('account_name', account.name)
+pulumi.export('AccountName', account.name)
 ```
 
 > :white_check_mark: After these changes, your `__main__.py` should [look like this](./code/04-updating-your-infrastructure/step2.py).
