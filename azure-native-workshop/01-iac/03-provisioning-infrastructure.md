@@ -15,7 +15,7 @@ from pulumi_azure_native import resources
 resource_group = resources.ResourceGroup('my-group')
 ```
 
-> :white_check_mark: After this change, your `__main__.py` should [look like this](./code/03-provisioning-infrastructure/step1.).
+> :white_check_mark: After this change, your `__main__.py` should [look like this](./code/03-provisioning-infrastructure/step1.py).
 
 ## Step 2 &mdash; Preview Your Changes
 
