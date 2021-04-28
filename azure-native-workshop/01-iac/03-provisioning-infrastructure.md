@@ -8,10 +8,11 @@ Edit your `__main__.py` file, and leave only a new resource definition and requi
 
 ```python
 import pulumi
-from pulumi_azure import core, storage
+from pulumi_azure_native import storage
+from pulumi_azure_native import resources
 
 # Create an Azure Resource Group
-resource_group = core.ResourceGroup('my-group')
+resource_group = resources.ResourceGroup('my-group')
 ```
 
 > :white_check_mark: After this change, your `__main__.py` should [look like this](./code/03-provisioning-infrastructure/step1.).
@@ -29,17 +30,17 @@ This command evaluates your program, determines the resource updates to make, an
 ```
 Previewing update (dev):
 
-     Type                         Name              Plan
- +   pulumi:pulumi:Stack          iac-workshop-dev  create
- +   └─ azure:core:ResourceGroup  my-group          create
-
+     Type                                     Name              Plan       
+ +   pulumi:pulumi:Stack                      iac-workshop-dev  create     
+ +   └─ azure-native:resources:ResourceGroup  my-group          create     
+ 
 Resources:
     + 2 to create
 
 Do you want to perform this update?
   yes
-> no
-  details
+  no
+> details
 ```
 
 This is a summary view. Select `details` to view the full set of properties:
@@ -47,11 +48,11 @@ This is a summary view. Select `details` to view the full set of properties:
 ```
 + pulumi:pulumi:Stack: (create)
     [urn=urn:pulumi:dev::iac-workshop::pulumi:pulumi:Stack::iac-workshop-dev]
-    + azure:core/resourceGroup:ResourceGroup: (create)
-        [urn=urn:pulumi:dev::iac-workshop::azure:core/resourceGroup:ResourceGroup::my-group]
-        [provider=urn:pulumi:dev::iac-workshop::pulumi:providers:azure::default_1_12_0::04da6b54-80e4-46f7-96ec-b56ff0333aa9]
-        location  : "westus2"
-        name      : "my-groupfa48c889"
+    + azure-native:resources:ResourceGroup: (create)
+        [urn=urn:pulumi:dev::iac-workshop::azure-native:resources:ResourceGroup::my-group]
+        [provider=urn:pulumi:dev::iac-workshop::pulumi:providers:azure-native::default_1_2_0::04da6b54-80e4-46f7-96ec-b56ff0331ba9]
+        location            : "WestUS"
+        resourceGroupName   : "my-group1e56c2cf"
 
 Do you want to perform this update?
   yes
@@ -68,9 +69,11 @@ Now that we've seen the full set of changes, let's deploy them. Select `yes`:
 ```
 Updating (dev):
 
-     Type                         Name              Status
- +   pulumi:pulumi:Stack          iac-workshop-dev  created
- +   └─ azure:core:ResourceGroup  my-group          created
+     Type                                     Name              Status      
+ +   pulumi:pulumi:Stack                      iac-workshop-dev  created     
+ +   └─ azure-native:resources:ResourceGroup  my-group          created     
+ 
+Resources:
 
 Resources:
     + 2 created
