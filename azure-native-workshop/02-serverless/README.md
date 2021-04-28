@@ -5,4 +5,4 @@ This hands-on workshop will walk you through various tasks of managing Azure inf
 ## Lab 2: Deploying Serverless Applications with Azure Functions
 
 This lab assumes you have setup Pulumi and configured Azure. If you don't have these
-steps completed, please complete the [prerequisities](../00-installing-prerequisites)
+steps completed, please complete the [prerequisities](../00-installing-prerequisites.md)
