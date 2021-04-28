@@ -10,10 +10,11 @@ And then add these lines to `__main__.py` right after creating the resource grou
 
 ```python
 ...
-storage_account = storage.Account('mystorage',
+# Create an Azure resource (Storage Account)
+account = storage.StorageAccount('mystorage',
     resource_group_name=resource_group.name,
-    account_tier='Standard',
-    account_replication_type='LRS')
+    sku=storage.SkuArgs(name=storage.SkuName.STANDARD_LRS,),
+    kind=storage.Kind.STORAGE_V2)
 ...
 ```
 
@@ -55,7 +56,7 @@ Programs can export variables which will be shown in the CLI and recorded for ea
 pulumi.export('account_name', account.name)
 ```
 
-> :white_check_mark: After these changes, your `__main__.py` should [look like this](./code/04-updating-your-infrastructure/step4.py).
+> :white_check_mark: After these changes, your `__main__.py` should [look like this](./code/04-updating-your-infrastructure/step2.py).
 
 Now deploy the changes:
 
@@ -69,7 +70,7 @@ Notice a new `Outputs` section is included in the output containing the account'
 ...
 
 Outputs:
-  + AccountName: "mystorage872202e3"
+  + AccountName: "mystorage63615ca1"
 
 Resources:
     3 unchanged
@@ -79,7 +80,7 @@ Duration: 7s
 Permalink: https://app.pulumi.com/myuser/iac-workshop/dev/updates/3
 ```
 
-As we already learned, Pulumi generated a longer physical name for the Storage Account. Autonaming is very handy in our case: Each Storage Account receives a subdomain of `blob.core.windows.net`, therefore the name has to be globally unique across all Azure subscriptions worldwide. Instead of inventing such a name, we can trust Pulumi to generate one.
+Azure requires each storage account to have a globally unique names across all tenants. As we already learned, Pulumi generated a longer physical name for the Storage Account. Autonaming is very handy in our case: Each Storage Account receives a subdomain of `*.core.windows.net`, therefore the name has to be globally unique across all Azure subscriptions worldwide. Instead of inventing such a name, we can trust Pulumi to generate one.  This is a good example of when a logical resource name may differ from a physical name.
 
 Also, we haven’t defined an explicit location for the Storage Account. By default, Pulumi inherits the location from the Resource Group. You can always override it with the `Location` property if needed.
 
@@ -88,7 +89,7 @@ Also, we haven’t defined an explicit location for the Storage Account. By defa
 Now run the `az` CLI to list the containers in this new account:
 
 ```
-az storage container list --account-name $(pulumi stack output AccountName)
+az storage container list --account-name $(pulumi stack output AccountName) -o table
 []
 ```
 
@@ -100,9 +101,10 @@ Add these lines to `__main__.py` right after creating the storage account itself
 
 ```python
 ...
-container = storage.Container('mycontainer',
-                        name = 'files',
-                        storage_account_name = account.name)
+container = storage.BlobContainer('mycontainer',
+                resource_group_name= resource_group.name,
+                account_name= account.name,
+                container_name= "files")
 ...
 ```
 
@@ -119,11 +121,14 @@ pulumi up
 This will give you a preview and selecting `yes` will apply the changes:
 
 ```
-Updating (dev):
+View Live: https://app.pulumi.com/shaht/iac-workshop/dev/updates/6
 
-     Type                        Name              Status
-     pulumi:pulumi:Stack         iac-workshop-dev
- +   └─ azure:storage:Container  mycontainer       created
+     Type                                   Name              Status      
+     pulumi:pulumi:Stack                    iac-workshop-dev              
+ +   └─ azure-native:storage:BlobContainer  mycontainer       created     
+ 
+Outputs:
+    AccountName: "mystorage63615ca1"
 
 Resources:
     + 1 created
@@ -139,7 +144,7 @@ Finally, relist the contents of your account:
 az storage container list --account-name $(pulumi stack output AccountName) -o table
 Name    Lease Status    Last Modified
 ------  --------------  -------------------------
-files   unlocked        2020-02-10T12:51:16+00:00
+files   unlocked        2021-04-28T18:15:14+00:00
 ```
 
 Notice that your `files` container has been added.
