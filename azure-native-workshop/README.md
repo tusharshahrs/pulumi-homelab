@@ -5,5 +5,4 @@ This hands-on workshop will walk you through various tasks of managing Azure inf
 ## Prerequisities
 
 Before Proceeding, ensure your machine is ready to go:
-
-    - [Installing Prerequisites](./00-installing-prerequisites.md)
+* [Installing Prerequisites](./00-installing-prerequisites.md)
