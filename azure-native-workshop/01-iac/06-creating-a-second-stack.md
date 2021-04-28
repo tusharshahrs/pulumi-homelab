@@ -67,7 +67,7 @@ Permalink: https://app.pulumi.com/myuser/iac-workshop/prod/updates/1
 
 A new set of resources has been created for the `prod` stack.
 
-## Step 4 &mdash; Inspect Your New Storage Account in the new environment
+## Step 3 &mdash; Inspect Your New Storage Account in the new environment
 
 Now run the `az` CLI to list the containers in this new stack:
 
