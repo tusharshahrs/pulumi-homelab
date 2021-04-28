@@ -1,10 +1,12 @@
 import pulumi
-from pulumi_azure import core, storage
+from pulumi_azure_native import storage
+from pulumi_azure_native import resources
 
 # Create an Azure Resource Group
-resource_group = core.ResourceGroup('my-group')
+resource_group = resources.ResourceGroup('my-group')
 
-storage_account = storage.Account('mystorage',
+# Create an Azure resource (Storage Account)
+account = storage.StorageAccount('mystorage',
     resource_group_name=resource_group.name,
-    account_tier='Standard',
-    account_replication_type='LRS')
+    sku=storage.SkuArgs(name=storage.SkuName.STANDARD_LRS,),
+    kind=storage.Kind.STORAGE_V2)
