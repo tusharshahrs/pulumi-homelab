@@ -90,24 +90,46 @@ Resources:
     2 unchanged
 ```
 
-This is a summary view. Select `details` to view the full set of properties:
+## Step 3 &mdash; Step 2 — Define a Consumption Plan
+There are several options to deploy Azure Functions. The serverless pay-per-execution hosting plan is called _Consumption Plan_.
 
+There’s no resource named Consumption Plan, however. The resource name is inherited from Azure App Service: Consumption is one kind of an App Service Plan. It’s the SKU property of the resource that defines the type of hosting plan.
+
+Here is a snippet that defines a Consumption Plan:
+
+```python
+...
+from pulumi_azure_native import web
+
+# Create a consumption plan
+plan = web.AppServicePlan("appserviceplan",
+    resource_group_name=resource_group.name,
+    kind="app",
+    name="consumption-plan",
+    sku=web.SkuDescriptionArgs(
+        name="Y1",
+        family="Y1",
+        tier="Dynamic"
+    )
+)
+
+# Add the following after the storage account export
+pulumi.export('ConsumptionPlan', plan.name)
+...
 ```
-+ pulumi:pulumi:Stack: (create)
-    [urn=urn:pulumi:dev::iac-workshop::pulumi:pulumi:Stack::iac-workshop-dev]
-    + azure-native:resources:ResourceGroup: (create)
-        [urn=urn:pulumi:dev::iac-workshop::azure-native:resources:ResourceGroup::my-group]
-        [provider=urn:pulumi:dev::iac-workshop::pulumi:providers:azure-native::default_1_2_0::04da6b54-80e4-46f7-96ec-b56ff0331ba9]
-        location            : "WestUS"
-        resourceGroupName   : "my-group1e56c2cf"
 
-Do you want to perform this update?
-  yes
-> no
-  details
-```
+Note the specific way that the property `sku` is configured. If you ever want to deploy to another type of a service plan, you would need to change these values accordingly.
 
-The stack resource is a synthetic resource that all resources your program creates are parented to.
+> :white_check_mark: After these changes, your `__main__.py` should [look like this](./code/03-provisioning-infrastructure/step3.py).
+
+## Step 4 &mdash; Deploy Your Changes
+We need to pass a Storage Account connection string to the settings of our future Function App. As this information is sensitive, Azure doesn't return it by default in the outputs of the Storage Account resource.
+
+We need to make a separate invocation to the listStorageAccountKeys function to retrieve storage account keys. This invocation can only be run after the storage account is created. Therefore, we must place it inside an apply call that depends on a storage account
+
+o1022350/utpu00t:441478
+
+
 
 ## Step 3 &mdash; Deploy Your Changes
 
