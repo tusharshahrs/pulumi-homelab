@@ -1,3 +1,3 @@
-name: iac-workshop-aws
+name: projectnameissue
 runtime: nodejs
 description: A minimal AWS TypeScript Pulumi program
