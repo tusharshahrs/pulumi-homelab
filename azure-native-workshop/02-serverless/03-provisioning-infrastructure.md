@@ -154,9 +154,63 @@ We need to pass a Storage Account connection string to the settings of our futur
 
 We need to make a separate invocation to the listStorageAccountKeys function to retrieve storage account keys. This invocation can only be run after the storage account is created. Therefore, we must place it inside an apply call that depends on a storage account
 
-Pending
+```python
+...
+# Add this to the top of your code
+from pulumi import Output
 
+# List of storage account keys
+storageAccountKeys = pulumi.Output.all(resource_group.name, account.name).apply(lambda args:  storage.list_storage_account_keys(resource_group_name=args[0],account_name=args[1]))
+...
+```
 
+Extract the first key.  Add this after the storageAccountKeys
+
+```python
+...
+# Primary storage account key
+primaryStorageKey = storageAccountKeys.apply(lambda accountKeys: accountKeys.keys[0].value)
+...
+```
+
+Build a connection string out of it.  Add this after the primaryStorageKey
+
+```python
+...
+# Build a connection string out of it:
+storageConnectionString = Output.concat("DefaultEndpointsProtocol=https;AccountName=$",account.name,";AccountKey=",primaryStorageKey )
+...
+```
+
+> :white_check_mark: After these changes, your `__main__.py` should [look like this](./code/03-provisioning-infrastructure/step4.py).
+
+Deploy the changes:
+
+```
+pulumi up
+```
+This will give you a preview and selecting `yes` will apply the changes:
+
+```
+Updating (dev)
+
+View Live: https://app.pulumi.com/youruser/azure-function-workshop/dev/updates/17
+
+     Type                 Name                         Status     
+     pulumi:pulumi:Stack  azure-function-workshop-dev             
+ 
+Outputs:
+    AccountName    : "saserverlessf715dd5d"
+    ConsumptionPlan: "consumption-plan"
+    ResourceGroup  : "my-serverlessfunction-group8edd9b0a"
+
+Resources:
+    4 unchanged
+
+Duration: 42s
+```   
+
+Notice, that no resources are created.  This is expected as we were creating the `storageConnectionString` for the next part
 ## Step 5 &mdash; Create a Function App
 
 Pending
