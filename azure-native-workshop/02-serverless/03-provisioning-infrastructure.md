@@ -13,34 +13,81 @@ from pulumi_azure_native import resources
 
 # Create an Azure Resource Group
 resource_group = resources.ResourceGroup('my-serverlessfunction-group')
+pulumi.export('ResourceGroup', resource_group.name)
 ```
 
 > :white_check_mark: After this change, your `__main__.py` should [look like this](./code/03-provisioning-infrastructure/step1.py).
 
-## Step 2 &mdash; Preview Your Changes
+Deploy the changes:
 
-Now preview your changes:
+```bash
+pulumi up
+```
+
+This will give you a preview and selecting `yes` will apply the changes:
+
+```
+Updating (dev):
+
+View Live: https://app.pulumi.com/myuser/azure-function-workshop/dev/updates/1
+
+     Type                                     Name                         Status      
+ +   pulumi:pulumi:Stack                      azure-function-workshop-dev  created     
+ +   └─ azure-native:resources:ResourceGroup  my-serverlessfunction-group  created     
+ 
+Outputs:
+    ResourceGroup: "my-serverlessfunction-group8edd9b0a"
+
+Resources:
+    + 2 created
+```
+
+## Step 2 &mdash; Add a Storage Account
+
+And then add these lines to `__main__.py` right after creating the resource group.
+
+```python
+...
+# Create a Storage Account.
+# Azure Naming constraint for storage account: Storage account name must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+account = storage.StorageAccount('saserverless',
+    resource_group_name=resource_group.name,
+    sku=storage.SkuArgs(name=storage.SkuName.STANDARD_LRS,),
+    kind=storage.Kind.STORAGE_V2)
+...
+```
+
+Add this line after the resource group export
+```python
+...
+pulumi.export('AccountName', account.name)
+...
+```
+
+> :white_check_mark: After these changes, your `__main__.py` should [look like this](./code/03-provisioning-infrastructure/step2.py).
+
+Deploy the changes:
 
 ```
 pulumi up
 ```
-
-This command evaluates your program, determines the resource updates to make, and shows you an outline of these changes:
+This will give you a preview and selecting `yes` will apply the changes:
 
 ```
-Previewing update (dev):
+Updating (dev):
 
-     Type                                     Name              Plan       
- +   pulumi:pulumi:Stack                      iac-workshop-dev  create     
- +   └─ azure-native:resources:ResourceGroup  my-group          create     
+
+     Type                                    Name                         Status      
+     pulumi:pulumi:Stack                     azure-function-workshop-dev              
+ +   └─ azure-native:storage:StorageAccount  saserverless                 created     
  
-Resources:
-    + 2 to create
+Outputs:
+  + AccountName  : "saserverlessf715dd5d"
+    ResourceGroup: "my-serverlessfunction-group8edd9b0a"
 
-Do you want to perform this update?
-  yes
-  no
-> details
+Resources:
+    + 1 created
+    2 unchanged
 ```
 
 This is a summary view. Select `details` to view the full set of properties:

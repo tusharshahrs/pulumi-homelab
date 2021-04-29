@@ -18,7 +18,25 @@ cd azure-function-workshop
 A Pulumi project is just a directory with some files in it. It's possible for you to create a new one by hand. The `pulumi new` command, however, automates the process:
 
 ```bash
-pulumi new azure-python -y
+pulumi new azure-python
+```
+
+```
+This command will walk you through creating a new Pulumi project.
+
+Enter a value or leave blank to accept the (default), and press <ENTER>.
+Press ^C at any time to quit.
+
+project name: (azure-function-workshop)
+project description: (A minimal Azure Native Python Pulumi program)
+Created project 'azure-function-workshop'
+
+Please enter your desired stack name.
+To create a stack in an organization, use the format <org-name>/<stack-name> (e.g. `acmecorp/dev`).
+stack name: (dev)
+Created stack 'dev'
+
+azure-native:location: The Azure location to use: (WestUS) eastus
 ```
 
 This will print output similar to the following with a bit more information and status as it goes:
