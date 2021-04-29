@@ -35,6 +35,3 @@ storageConnectionString = Output.concat("DefaultEndpointsProtocol=https;AccountN
 pulumi.export('ResourceGroup', resource_group.name)
 pulumi.export('AccountName', account.name)
 pulumi.export('ConsumptionPlan', plan.name)
-pulumi.export("StorageAccountKeys", storageAccountKeys)
-pulumi.export('PrimaryStorageKey',primaryStorageKey ) 
-pulumi.export('StorageConnectionString', storageConnectionString)
