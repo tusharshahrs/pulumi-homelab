@@ -2,6 +2,9 @@
 
 The hands-on workshop will walk you through various tasks of managing Azure infrastructure with the focus on serverless compute and managed Azure services. The prerequisites listed below are required to successfully complete them.
 
+## Install Visual Studio Code
+   Install [visual studio code](https://code.visualstudio.com/download)
+
 ## Python Install
 Install [Python version 3.6 or later](https://www.python.org/downloads/). To reduce potential issues with setting up your Python environment on Windows or macOS, you should install Python through the official Python installer.
    
