@@ -225,7 +225,7 @@ app = web.WebApp("functionapp",
             web.NameValuePairArgs(name = "AzureWebJobsStorage", value=storageConnectionString),
             web.NameValuePairArgs(name = "FUNCTIONS_EXTENSION_VERSION", value="~3"),
             web.NameValuePairArgs(name = "FUNCTIONS_WORKER_RUNTIME", value ="python"),
-            web.NameValuePairArgs(name="WEBSITE_RUN_FROM_PACKAGE", value="signed_blob_url")
+            web.NameValuePairArgs(name="WEBSITE_RUN_FROM_PACKAGE", value="REPLACE_ME_WITH_REAL_URL_FIX_PENDING")
             ]
         )
     )
