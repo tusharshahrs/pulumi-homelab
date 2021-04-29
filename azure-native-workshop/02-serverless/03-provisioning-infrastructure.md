@@ -213,18 +213,74 @@ Duration: 42s
 Notice, that no resources are created.  This is expected as we were creating the `storageConnectionString` for the next part
 ## Step 5 &mdash; Create a Function App
 
-Pending
+> :white_check_mark: After these changes, your `__main__.py` should [look like this](./code/03-provisioning-infrastructure/step5.py).
+
+```python
+...
+app = new web.WebApp("functionapp", 
+    resource_group_name=resource_group.name,
+    name="myfunctionapp123",
+    server_farm_id=plan.id,
+    kind="functionapp",na
+    site_config=web.SiteConfigArgs(
+        app_settings=[
+            web.NameValuePairArgs(name = "AzureWebJobsStorage", value=storageConnectionString),
+            web.NameValuePairArgs(name = "FUNCTIONS_EXTENSION_VERSION", value="~3"),
+            web.NameValuePairArgs(name = "FUNCTIONS_WORKER_RUNTIME", value ="python"),
+            web.NameValuePairArgs(name="WEBSITE_RUN_FROM_PACKAGE", value=signed_blob_url)
+            ],
+        )
+    )
+...
+```
 
 ## Step 6 &mdash; Export the Function App endpoint
 
-pending
+Finally, declare a stack output called endpoint to export the URL of the Azure Function using the defaultHostName.
+Now, if you inspect the type of the app.defaultHostname, you will see that it's `pulumi.Output<string>` not just `string`. That’s because Pulumi runs your program before it creates any infrastructure, and it wouldn’t be able to put an actual string into the variable. You can think of `Output<T>` as similar to `Promise<T>`, although they are not the same thing.
+
+You want to export the full endpoint of your Function App.  Add this to the end of your code.
+
+```python
+...
+endpoint = Output.concat("https://", app.defaultHostname,"/api/hello")
+pulumi.export('Endpoint', endpoint)
+...
+```
+
+> :white_check_mark: After these changes, your `__main__.py` should [look like this](./code/03-provisioning-infrastructure/step6.py).
 
 ## Step 7 &mdash; Provision the Function App
 
-pending
+Deploy the program to stand up your Azure Function App:
+
+```
+pulumi up
+```
+This will output the status and resulting public URL:
+
+```
+REPLACE
+```
+
+You can now open the resulting endpoint in the browser or curl it:
+
+```bash
+curl $(pulumi stack output endpoint)
+```
+
 
 ## Step 8 &mdash; Destroy Everything
 
-pending
+```
+pulumi destroy
+```
+This will give you a preview and selecting `yes` will apply the changes:
+
+Remove the stack
+```
+pulumi stack rm
+```
+
 
 * [Updating Your Infrastructure](./04-updating-your-infrastructure.md)
