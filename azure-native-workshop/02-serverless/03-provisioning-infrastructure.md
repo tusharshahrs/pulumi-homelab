@@ -161,6 +161,16 @@ Pending
 
 Pending
 
-## Next Steps
+## Step 6 &mdash; Export the Function App endpoint
+
+pending
+
+## Step 7 &mdash; Provision the Function App
+
+pending
+
+## Step 8 &mdash; Destroy Everything
+
+pending
 
 * [Updating Your Infrastructure](./04-updating-your-infrastructure.md)
