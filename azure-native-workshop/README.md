@@ -32,4 +32,7 @@ In this lab, you deploy an Azure Function App with HTTP-triggered serverless fun
 5. [Creating a Consumption Plan](./02-serverless/03-provisioning-infrastructure.md#step-3--define-a-consumption-plan)
 6. [Retrieve Storage Account Keys and Build Connection String](./02-serverless/03-provisioning-infrastructure.md#step-4--retrieve-storage-account-keys-and-build-connection-string)
 7. [Creating a Function App](./02-serverless/03-provisioning-infrastructure.md#step-5--create-a-function-app)
+8. [Export the Function App endpoint](./02-serverless/03-provisioning-infrastructure.md#)
+9. [Provision the Function App](./02-serverless/03-provisioning-infrastructure.md#)
+10. [Destroy Everything](./02-serverless/03-provisioning-infrastructure.md#)
 [Get Started with Lab 2](./02-serverless/README.md)
