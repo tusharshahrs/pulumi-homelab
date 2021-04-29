@@ -27,5 +27,6 @@ In this lab, you deploy an Azure Function App with HTTP-triggered serverless fun
 
 1. [Creating a New Project](./02-serverless/01-creating-a-new-project.md)
 2. [Configuring Azure](./02-serverless/02-configuring-azure.md)
+3. [Creating a Resource Group](./02-serverless/03-provisioning-infrastructure.md)
 
 [Get Started with Lab 2](./02-serverless/README.md)
