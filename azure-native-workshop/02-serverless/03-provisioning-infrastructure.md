@@ -283,4 +283,4 @@ pulumi stack rm
 ```
 
 
-* [Home](./#azure-native-workshop-with-pulumi)
+* [Home](../#azure-native-workshop-with-pulumi)

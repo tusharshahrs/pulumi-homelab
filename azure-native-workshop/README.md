@@ -19,8 +19,6 @@ The first lab takes you on a tour of infrastructure as code concepts:
 6. [Creating a Second Stack](./01-iac/06-creating-a-second-stack.md)
 7. [Destroying Your Infrastructure](./01-iac/07-destroying-your-infrastructure.md)
 
-[Get Started with Lab 1](./01-iac/01-creating-a-new-project.md)
-
 ### Lab 2 - Deploy Serverless Applications with Azure Functions
 
 In this lab, you deploy an Azure Function App with HTTP-triggered serverless functions.
@@ -35,4 +33,3 @@ In this lab, you deploy an Azure Function App with HTTP-triggered serverless fun
 8. [Export the Function App endpoint](./02-serverless/03-provisioning-infrastructure.md#step-6--export-the-function-app-endpoint)
 9. [Provision the Function App](./02-serverless/03-provisioning-infrastructure.md#step-7--provision-the-function-app)
 10. [Destroy Everything](./02-serverless/03-provisioning-infrastructure.md#step-8--destroy-everything)
-[Get Started with Lab 2](./02-serverless/README.md)
