@@ -213,8 +213,6 @@ Duration: 42s
 Notice, that no resources are created.  This is expected as we were creating the `storageConnectionString` for the next part
 ## Step 5 &mdash; Create a Function App
 
-> :white_check_mark: After these changes, your `__main__.py` should [look like this](./code/03-provisioning-infrastructure/step5.py).
-
 ```python
 ...
 app = web.WebApp("functionapp", 
@@ -233,6 +231,8 @@ app = web.WebApp("functionapp",
     )
 ...
 ```
+
+> :white_check_mark: After these changes, your `__main__.py` should [look like this](./code/03-provisioning-infrastructure/step5.py).
 
 ## Step 6 &mdash; Export the Function App endpoint
 
@@ -283,4 +283,4 @@ pulumi stack rm
 ```
 
 
-* [Updating Your Infrastructure](./04-updating-your-infrastructure.md)
+* [Home](./#azure-native-workshop-with-pulumi)
