@@ -217,18 +217,18 @@ Notice, that no resources are created.  This is expected as we were creating the
 
 ```python
 ...
-app = new web.WebApp("functionapp", 
+app = web.WebApp("functionapp", 
     resource_group_name=resource_group.name,
-    name="myfunctionapp123",
+    name="myfunctionapp123",  # This has to be unique across all of azure
     server_farm_id=plan.id,
-    kind="functionapp",na
+    kind="functionapp",
     site_config=web.SiteConfigArgs(
         app_settings=[
             web.NameValuePairArgs(name = "AzureWebJobsStorage", value=storageConnectionString),
             web.NameValuePairArgs(name = "FUNCTIONS_EXTENSION_VERSION", value="~3"),
             web.NameValuePairArgs(name = "FUNCTIONS_WORKER_RUNTIME", value ="python"),
-            web.NameValuePairArgs(name="WEBSITE_RUN_FROM_PACKAGE", value=NEEDTOREPLACE)
-            ],
+            web.NameValuePairArgs(name="WEBSITE_RUN_FROM_PACKAGE", value="signed_blob_url")
+            ]
         )
     )
 ...
@@ -243,8 +243,8 @@ You want to export the full endpoint of your Function App.  Add this to the end 
 
 ```python
 ...
-endpoint = Output.concat("https://", app.defaultHostname,"/api/hello")
-pulumi.export('Endpoint', endpoint)
+function_endpoint = app.default_host_name.apply(lambda default_host_name: f"https://{default_host_name}/hello")
+pulumi.export('endpoint', function_endpoint)
 ...
 ```
 
