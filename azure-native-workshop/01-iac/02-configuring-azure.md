@@ -53,8 +53,15 @@ pulumi config set azure:location eastus2
 ```
 
 Feel free to choose any Azure region that supports the services used in these labs ([see this infographic](https://azure.microsoft.com/en-us/global-infrastructure/regions/) for a list of available regions).  The list of regions are
+
 ```
-centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus,southcentralus,westcentralus,northeurope,westeurope,japaneast,japanwest,brazilsouth,australiasoutheast,australiaeast,westindia,southindia,centralindia,canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth,francecentral,southafricanorth,uaenorth,australiacentral,switzerlandnorth,germanywestcentral,norwayeast,jioindiawest,australiacentral2
+
+centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus,southcentralus,
+westcentralus,northeurope,westeurope,japaneast,japanwest,brazilsouth,australiasoutheast,australiaeast,
+westindia,southindia,centralindia,canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth,
+francecentral,southafricanorth,uaenorth,australiacentral,switzerlandnorth,germanywestcentral,
+norwayeast,jioindiawest,australiacentral2
+
 ```
 
 The command updates and persists the value to the local `Pulumi.dev.yaml` file. You can view or edit this file at any time to effect the configuration of the current stack.
