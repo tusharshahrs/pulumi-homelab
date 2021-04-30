@@ -52,7 +52,7 @@ The Azure region to deploy to is pre-set to WestUS - but you can modify the regi
 pulumi config set azure:location eastus2
 ```
 
-Feel free to choose any Azure region that supports the services used in these labs ([see this infographic](https://azure.microsoft.com/en-us/global-infrastructure/regions/) for the most upto date list of available regions).  Here is the list of regions:
+Feel free to choose any Azure region that supports the services used in these labs ([see this infographic](https://azure.microsoft.com/en-us/global-infrastructure/regions/) for current list of available regions).  A list of some of the regions:
 
 ```
 centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus,southcentralus,
