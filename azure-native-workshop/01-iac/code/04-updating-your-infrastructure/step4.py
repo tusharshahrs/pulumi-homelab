@@ -11,7 +11,7 @@ account = storage.StorageAccount('mystorage',
     sku=storage.SkuArgs(name=storage.SkuName.STANDARD_LRS,),
     kind=storage.Kind.STORAGE_V2)
 
-container = storage.BlobContainer('mycontainer',
+container = storage.BlobContainer('blobcontainer',
                 resource_group_name= resource_group.name,
                 account_name= account.name,
                 container_name= "files")

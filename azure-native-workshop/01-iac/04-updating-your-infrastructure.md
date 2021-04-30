@@ -6,6 +6,14 @@ This demonstrates how declarative infrastructure as code tools can be used not j
 
 ## Step 1 &mdash; Add a Storage Account
 
+Add this line to the `__main__.py` right after the `import resources` at the top
+
+```python
+...
+from pulumi_azure_native import storage
+...
+```
+
 And then add these lines to `__main__.py` right after creating the resource group:
 
 ```python
@@ -29,11 +37,16 @@ pulumi up
 This will give you a preview and selecting `yes` will apply the changes:
 
 ```
-Updating (dev):
+Updating (dev)
 
-     Type                      Name              Status
-     pulumi:pulumi:Stack       iac-workshop-dev
- +   └─ azure:storage:Account  mystorage         created
+View Live: https://app.pulumi.com/myuser/iac-workshop/dev/updates/14
+
+     Type                                    Name              Status      
+     pulumi:pulumi:Stack                     iac-workshop-dev              
+ +   └─ azure-native:storage:StorageAccount  storageaccount    created     
+ 
+Outputs:
+    myresourcegroup: "my-resourcegroup32b80185"
 
 Resources:
     + 1 created
@@ -41,7 +54,6 @@ Resources:
 
 Duration: 4s
 
-Permalink: https://app.pulumi.com/myuser/iac-workshop/dev/updates/2
 ```
 
 A single resource is added and the 2 existing resources are left unchanged. This is a key attribute of infrastructure as code &mdash; such tools determine the minimal set of changes necessary to update your infrastructure from one version to the next.
@@ -50,10 +62,11 @@ A single resource is added and the 2 existing resources are left unchanged. This
 
 To inspect your new storage account, you will need its physical Azure name. Pulumi records a logical name, `mystorage`, however the resulting Azure name will be different.
 
-Programs can export variables which will be shown in the CLI and recorded for each deployment. Export your account's name by adding an export statement to `__main__.py`:
+Programs can export variables which will be shown in the CLI and recorded for each deployment. Export your account's name by adding an export statement to `__main__.py` after the resource group export:
 
 ```python
-pulumi.export('AccountName', account.name)
+# Export the Storage Account
+pulumi.export('StorageAccountName', account.name)
 ```
 
 > :white_check_mark: After these changes, your `__main__.py` should [look like this](./code/04-updating-your-infrastructure/step2.py).
@@ -70,14 +83,15 @@ Notice a new `Outputs` section is included in the output containing the account'
 ...
 
 Outputs:
-  + AccountName: "mystorage63615ca1"
+    myresourcegroup   : "my-resourcegroup32b80185"
+  + storageaccountname: "storageaccounta86f2840"
 
 Resources:
     3 unchanged
 
-Duration: 7s
+Duration: 37s
 
-Permalink: https://app.pulumi.com/myuser/iac-workshop/dev/updates/3
+View Live: : https://app.pulumi.com/myuser/iac-workshop/dev/updates/3
 ```
 
 Azure requires each storage account to have a globally unique names across all tenants. As we already learned, Pulumi generated a longer physical name for the Storage Account. Autonaming is very handy in our case: Each Storage Account receives a subdomain of `*.core.windows.net`, therefore the name has to be globally unique across all Azure subscriptions worldwide. Instead of inventing such a name, we can trust Pulumi to generate one.  This is a good example of when a logical resource name may differ from a physical name.
@@ -89,7 +103,7 @@ Also, we haven’t defined an explicit location for the Storage Account. By defa
 Now run the `az` CLI to list the containers in this new account:
 
 ```
-az storage container list --account-name $(pulumi stack output AccountName) -o table
+az storage container list --account-name $(pulumi stack output storageaccountname)
 []
 ```
 
@@ -101,10 +115,18 @@ Add these lines to `__main__.py` right after creating the storage account itself
 
 ```python
 ...
-container = storage.BlobContainer('mycontainer',
+container = storage.BlobContainer('blobcontainer',
                 resource_group_name= resource_group.name,
                 account_name= account.name,
-                container_name= "files")
+                container_name="files")
+...
+```
+
+Export the Blobcontainer's name by adding this after the storage account export
+```python
+...
+# Export the BlobContainer
+pulumi.export('blobcontainername', container.name)
 ...
 ```
 
@@ -121,30 +143,30 @@ pulumi up
 This will give you a preview and selecting `yes` will apply the changes:
 
 ```
-View Live: https://app.pulumi.com/shaht/iac-workshop/dev/updates/6
+View Live: https://app.pulumi.com/myuser/iac-workshop/dev/updates/6
 
      Type                                   Name              Status      
      pulumi:pulumi:Stack                    iac-workshop-dev              
- +   └─ azure-native:storage:BlobContainer  mycontainer       created     
+ +   └─ azure-native:storage:BlobContainer  blobcontainer     created     
  
 Outputs:
-    AccountName: "mystorage63615ca1"
+  + blobcontainername : "files"
+    myresourcegroup   : "my-resourcegroup32b80185"
+    storageaccountname: "storageaccounta86f2840"
 
 Resources:
     + 1 created
     3 unchanged
 
-Duration: 9s
-
-Permalink: https://app.pulumi.com/myuser/iac-workshop/dev/updates/4
+Duration: 29s
 
 Finally, relist the contents of your account:
 
 ```bash
-az storage container list --account-name $(pulumi stack output AccountName) -o table
+az storage container list --account-name $(pulumi stack output storageaccountname) -o table
 Name    Lease Status    Last Modified
 ------  --------------  -------------------------
-files   unlocked        2021-04-28T18:15:14+00:00
+files   unlocked        2021-04-30T20:23:48+00:00
 ```
 
 Notice that your `files` container has been added.
