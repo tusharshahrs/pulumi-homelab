@@ -113,7 +113,7 @@ Current stack outputs (1):
     myresourcegroup  my-resourcegroup32b80185
 ```
 
-Note that Pulumi appends a suffix to the physical name of the resource group, e.g. `my-resourcegroupebf6c84a`. The difference between logical and physical names is due to "auto-naming" which Pulumi does to ensure side-by-side projects and zero-downtime upgrades work seamlessly. It can be disabled if you wish; [read more about auto-naming here](https://www.pulumi.com/docs/intro/concepts/programming-model/#autonaming).
+Note that Pulumi appends a suffix to the physical name of the resource group, e.g. `my-resourcegroup32b80185`. The difference between logical and physical names is due to "auto-naming" which Pulumi does to ensure side-by-side projects and zero-downtime upgrades work seamlessly. It can be disabled if you wish; [read more about auto-naming here](https://www.pulumi.com/docs/intro/concepts/programming-model/#autonaming).
 
 ## Next Steps
 
