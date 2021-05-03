@@ -1,7 +1,8 @@
 import pulumi
-from pulumi_azure_native import storage
 from pulumi_azure_native import resources
 
 # Create an Azure Resource Group
-resource_group = resources.ResourceGroup('my-serverlessfunction-group')
-pulumi.export('ResourceGroup', resource_group.name)
+resource_group = resources.ResourceGroup('resourcegroup_functionapp')
+
+# Export the Azure Resource Group
+pulumi.export('resourcegroup', resource_group.name)
