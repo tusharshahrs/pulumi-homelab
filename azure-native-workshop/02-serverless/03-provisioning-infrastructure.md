@@ -45,13 +45,20 @@ Resources:
 
 ## Step 2 &mdash; Add a Storage Account
 
-And then add these lines to `__main__.py` right after creating the resource group.
+Add this line to the `__main__.py` right after the `import resources` at the top
 
 ```python
 ...
-# Create a Storage Account.
-# Azure Naming constraint for storage account: Storage account name must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-account = storage.StorageAccount('saserverless',
+from pulumi_azure_native import storage
+...
+```
+
+And then add these lines to `__main__.py` right after creating the resource group:
+
+```python
+...
+# Create an Azure resource (Storage Account)
+account = storage.StorageAccount('storageaccount',
     resource_group_name=resource_group.name,
     sku=storage.SkuArgs(name=storage.SkuName.STANDARD_LRS,),
     kind=storage.Kind.STORAGE_V2)
@@ -61,7 +68,7 @@ account = storage.StorageAccount('saserverless',
 Add this line after the resource group export
 ```python
 ...
-pulumi.export('AccountName', account.name)
+pulumi.export('storageaccount', account.name)
 ...
 ```
 
@@ -75,16 +82,17 @@ pulumi up
 This will give you a preview and selecting `yes` will apply the changes:
 
 ```
-Updating (dev):
+Updating (dev)
 
+View Live: https://app.pulumi.com/myuser/azure-function-workshop/dev/updates/44
 
      Type                                    Name                         Status      
      pulumi:pulumi:Stack                     azure-function-workshop-dev              
- +   └─ azure-native:storage:StorageAccount  saserverless                 created     
+ +   └─ azure-native:storage:StorageAccount  storageaccount               created     
  
 Outputs:
-  + AccountName  : "saserverlessf715dd5d"
-    ResourceGroup: "my-serverlessfunction-group8edd9b0a"
+    resourcegroup : "resourcegroup_functionapp2d04f1cc"
+  + storageaccount: "storageaccountb5478675"
 
 Resources:
     + 1 created
