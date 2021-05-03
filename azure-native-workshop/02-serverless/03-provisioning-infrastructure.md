@@ -106,10 +106,17 @@ There’s no resource named Consumption Plan, however. The resource name is inhe
 
 Here is a snippet that defines a Consumption Plan:
 
+Add this line to the `__main__.py` right after the `import resources` at the top
+
 ```python
 ...
-from pulumi_azure_native import web
+from pulumi_azure_native import web...
+```
 
+And then add these lines to `__main__.py` right after creating the storage account resource:
+
+```python
+...
 # Create a consumption plan
 plan = web.AppServicePlan("appserviceplan",
     resource_group_name=resource_group.name,
@@ -123,7 +130,7 @@ plan = web.AppServicePlan("appserviceplan",
 )
 
 # Add the following after the storage account export
-pulumi.export('ConsumptionPlan', plan.name)
+pulumi.export('consumptionplan', plan.name)
 ...
 ```
 
@@ -141,16 +148,16 @@ This will give you a preview and selecting `yes` will apply the changes:
 ```
 Updating (dev)
 
-View Live: https://app.pulumi.com/myuser/azure-function-workshop/dev/updates/8
+View Live: https://app.pulumi.com/myuser/azure-function-workshop/dev/updates/45
 
      Type                                Name                         Status      
      pulumi:pulumi:Stack                 azure-function-workshop-dev              
- +   └─ azure-native:web:AppServicePlan  appserviceplan               created     
+ +   └─ azure-native:web:AppServicePlan  consumption-plan             created     
  
 Outputs:
-    AccountName    : "saserverlessf715dd5d"
-  + ConsumptionPlan: "consumption-plan"
-    ResourceGroup  : "my-serverlessfunction-group8edd9b0a"
+  + consumptionplan: "consumption-planb28a196c"
+    resourcegroup  : "resourcegroup_functionapp2d04f1cc"
+    storageaccount : "storageaccountb5478675"
 
 Resources:
     + 1 created
