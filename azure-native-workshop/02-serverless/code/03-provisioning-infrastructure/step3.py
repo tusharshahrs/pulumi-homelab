@@ -24,5 +24,7 @@ plan = web.AppServicePlan("consumption-plan",
 
 # Export the Azure Resource Group
 pulumi.export('resourcegroup', resource_group.name)
+# Export the Storage Account
 pulumi.export('storageaccount', account.name)
+# Export the Consumption Plan
 pulumi.export('consumptionplan', plan.name)

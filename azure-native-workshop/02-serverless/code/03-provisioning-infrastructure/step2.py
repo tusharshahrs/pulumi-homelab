@@ -13,4 +13,5 @@ account = storage.StorageAccount('storageaccount',
 
 # Export the Azure Resource Group
 pulumi.export('resourcegroup', resource_group.name)
+# Export the Storage Account
 pulumi.export('storageaccount', account.name)
