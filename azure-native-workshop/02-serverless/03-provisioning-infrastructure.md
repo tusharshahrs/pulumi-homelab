@@ -227,43 +227,60 @@ pulumi up
 This will give you a preview and selecting `yes` will apply the changes:
 
 ```
-Updating (dev)
-
-View Live: https://app.pulumi.com/youruser/azure-function-workshop/dev/updates/17
+View Live: https://app.pulumi.com/shaht/azure-function-workshop/dev/updates/46
 
      Type                 Name                         Status     
      pulumi:pulumi:Stack  azure-function-workshop-dev             
  
 Outputs:
-    AccountName    : "saserverlessf715dd5d"
-    ConsumptionPlan: "consumption-plan"
-    ResourceGroup  : "my-serverlessfunction-group8edd9b0a"
+    consumptionplan        : "consumption-planb28a196c"
+  + primarystoragekey      : "***ssdfsfsd8***sfs**sdfsd***"
+    resourcegroup          : "resourcegroup_functionapp2d04f1cc"
+    storageaccount         : "storageaccountb5478675"
+  + storageaccountkeys     : {
+      + keys: [
+      +     [0]: {
+              + creation_time: "2021-05-03T14:07:02.6151987Z"
+              + key_name     : "key1"
+              + permissions  : "FULL"
+              + value        : "sdfsdfsf**sdfsdfsdwe*ersdfd**"
+            }
+      +     [1]: {
+              + creation_time: "2021-05-03T14:07:02.6151987Z"
+              + key_name     : "key2"
+              + permissions  : "FULL"
+              + value        : "sdfsdfsf**sdfsdfsdwe*ersdfd**/KgZfw=="
+            }
+        ]
+    }
+  + storageconnectionstring: "DefaultEndpointsProtocol=https;AccountName=$storageaccountb5478675;AccountKey=sdfsdfsf**sdfsdfsdwe*ersdfd**"
 
 Resources:
     4 unchanged
-
-Duration: 42s
 ```   
 
 Notice, that no resources are created.  This is expected as we were creating the `storageConnectionString` for the next part
+
 ## Step 5 &mdash; Create a Function App
+
+And then add these lines to `__main__.py` right after creating the storageconnectionstring `export`
 
 ```python
 ...
 app = web.WebApp("functionapp", 
     resource_group_name=resource_group.name,
-    name="myfunctionapp123",  # This has to be unique across all of azure
+    location=resource_group.location,
     server_farm_id=plan.id,
     kind="functionapp",
-    site_config=web.SiteConfigArgs(
+        site_config=web.SiteConfigArgs(
         app_settings=[
-            web.NameValuePairArgs(name = "AzureWebJobsStorage", value=storageConnectionString),
             web.NameValuePairArgs(name = "FUNCTIONS_EXTENSION_VERSION", value="~3"),
             web.NameValuePairArgs(name = "FUNCTIONS_WORKER_RUNTIME", value ="python"),
-            web.NameValuePairArgs(name="WEBSITE_RUN_FROM_PACKAGE", value="REPLACE_ME_WITH_REAL_URL_FIX_PENDING")
-            ]
-        )
+            web.NameValuePairArgs(name = "AzureWebJobsStorage", value=storageConnectionString),
+            web.NameValuePairArgs(name="WEBSITE_RUN_FROM_PACKAGE", value="https://github.com/tusharshahrs/demo/raw/main/content/lab/pulumi/azure-native/python/app.zip")
+        ]
     )
+)
 ...
 ```
 
@@ -274,7 +291,7 @@ app = web.WebApp("functionapp",
 Finally, declare a stack output called endpoint to export the URL of the Azure Function using the defaultHostName.
 Now, if you inspect the type of the app.defaultHostname, you will see that it's `pulumi.Output<string>` not just `string`. That’s because Pulumi runs your program before it creates any infrastructure, and it wouldn’t be able to put an actual string into the variable. You can think of `Output<T>` as similar to `Promise<T>`, although they are not the same thing.
 
-You want to export the full endpoint of your Function App.  Add this to the end of your code.
+You want to export the full endpoint of your Function App.  Add this to the end of your code after the functionapp called `app`
 
 ```python
 ...
@@ -291,11 +308,25 @@ Deploy the program to stand up your Azure Function App:
 
 ```
 pulumi up
-```
-This will output the status and resulting public URL:
 
+Updating (dev)
+
+View Live: https://app.pulumi.com/myuser/azure-function-workshop/dev/updates/47
+
+     Type                        Name                         Status      
+     pulumi:pulumi:Stack         azure-function-workshop-dev              
+ +   └─ azure-native:web:WebApp  functionapp                  created     
+ 
+Outputs:
+    consumptionplan        : "consumption-planb28a196c"
+  + endpoint               : "https://functionappaeef2deb.azurewebsites.net/hello"
 ```
-REPLACE
+
+You can now view the stack output via `pulumi stack output`
+
+```bash
+pulumi stack output endpoint
+https://functionappaeef2deb.azurewebsites.net/hello
 ```
 
 You can now open the resulting endpoint in the browser or curl it:
@@ -303,7 +334,6 @@ You can now open the resulting endpoint in the browser or curl it:
 ```bash
 curl $(pulumi stack output endpoint)
 ```
-
 
 ## Step 8 &mdash; Destroy Everything
 
