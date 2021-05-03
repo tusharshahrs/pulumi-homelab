@@ -110,7 +110,7 @@ Add this line to the `__main__.py` right after the `import resources` at the top
 
 ```python
 ...
-from pulumi_azure_native import web...
+from pulumi_azure_native import web
 ```
 
 And then add these lines to `__main__.py` right after creating the storage account resource:
@@ -168,13 +168,20 @@ Resources:
 
 We need to pass a Storage Account connection string to the settings of our future Function App. As this information is sensitive, Azure doesn't return it by default in the outputs of the Storage Account resource.
 
-We need to make a separate invocation to the listStorageAccountKeys function to retrieve storage account keys. This invocation can only be run after the storage account is created. Therefore, we must place it inside an apply call that depends on a storage account
+We need to make a separate invocation to the listStorageAccountKeys function to retrieve storage account keys. This invocation can only be run after the storage account is created. Therefore, we must place it inside an [apply](https://www.pulumi.com/docs/intro/concepts/inputs-outputs/#apply) call that depends on a storage account.  We will also be using [all](https://www.pulumi.com/docs/intro/concepts/inputs-outputs/#all) since we need to use an `apply` over many resources.
+
+Add this line to the `__main__.py` right after the `import web` at the top
 
 ```python
 ...
-# Add this to the top of your code
 from pulumi import Output
+...
+```
 
+Add this line to the `__main__.py` right after the `consumption plan resource`
+
+```python
+...
 # List of storage account keys
 storageAccountKeys = pulumi.Output.all(resource_group.name, account.name).apply(lambda args:  storage.list_storage_account_keys(resource_group_name=args[0],account_name=args[1]))
 ...
@@ -195,6 +202,18 @@ Build a connection string out of it.  Add this after the primaryStorageKey
 ...
 # Build a connection string out of it:
 storageConnectionString = Output.concat("DefaultEndpointsProtocol=https;AccountName=$",account.name,";AccountKey=",primaryStorageKey )
+...
+```
+
+And then add these lines to `__main__.py` right after creating the consumption plan export
+```python
+...
+# Export the storageacountkey
+pulumi.export("storageaccountkeys", storageAccountKeys)
+# Export the primarystoragekey
+pulumi.export('primarystoragekey',  primaryStorageKey ) 
+# Export the storageconnectionstring
+pulumi.export('storageconnectionstring', storageConnectionString)
 ...
 ```
 
