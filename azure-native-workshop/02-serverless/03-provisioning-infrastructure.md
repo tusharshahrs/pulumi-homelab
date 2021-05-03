@@ -11,13 +11,11 @@ import pulumi
 from pulumi_azure_native import resources
 
 # Create an Azure Resource Group
-resource_group = resources.ResourceGroup('my-resourcegroup')
+resource_group = resources.ResourceGroup('resourcegroup_serverless_function')
 
 # Export the Azure Resource Group
-pulumi.export('myresourcegroup', resource_group.name)
+pulumi.export('resourcegroup', resource_group.name)
 ```
-
-Programs can export variables which will be shown in the CLI and recorded for each deployment.
 
 > :white_check_mark: After this change, your `__main__.py` should [look like this](./code/03-provisioning-infrastructure/step1.py).
 
@@ -30,16 +28,16 @@ pulumi up
 This will give you a preview and selecting `yes` will apply the changes:
 
 ```
-Updating (dev):
+Updating (dev)
 
-View Live: https://app.pulumi.com/myuser/azure-function-workshop/dev/updates/1
+View Live: https://app.pulumi.com/myuser/azure-function-workshop/dev/updates/43
 
      Type                                     Name                         Status      
  +   pulumi:pulumi:Stack                      azure-function-workshop-dev  created     
- +   └─ azure-native:resources:ResourceGroup  my-serverlessfunction-group  created     
+ +   └─ azure-native:resources:ResourceGroup  resourcegroup_functionapp    created     
  
 Outputs:
-    ResourceGroup: "my-serverlessfunction-group8edd9b0a"
+    resourcegroup: "resourcegroup_functionapp2d04f1cc"
 
 Resources:
     + 2 created
