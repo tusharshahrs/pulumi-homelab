@@ -2,19 +2,22 @@
 
 Now that you have a project configured to use Azure, you'll create some basic infrastructure in it. We will start with a Resource Group.
 
-## Step 1 &mdash; Declare a New Resource Group
+## Step 1 &mdash; Declare a New Resource Group and export it
 
-Edit your `__main__.py` file, and leave only a new resource definition and required dependencies. Change the name of the resource group to 'my-serverlessfunction-group':
+Edit your `__main__.py` file, and leave only a new resource definition and required dependencies. Change the name of the resource group to 'my-resourcegroup'. Programs can export variables which will be shown in the CLI and recorded for each deployment.  We will add a pulumi.export code.
 
 ```python
 import pulumi
-from pulumi_azure_native import storage
 from pulumi_azure_native import resources
 
 # Create an Azure Resource Group
-resource_group = resources.ResourceGroup('my-serverlessfunction-group')
-pulumi.export('ResourceGroup', resource_group.name)
+resource_group = resources.ResourceGroup('my-resourcegroup')
+
+# Export the Azure Resource Group
+pulumi.export('myresourcegroup', resource_group.name)
 ```
+
+Programs can export variables which will be shown in the CLI and recorded for each deployment.
 
 > :white_check_mark: After this change, your `__main__.py` should [look like this](./code/03-provisioning-infrastructure/step1.py).
 
