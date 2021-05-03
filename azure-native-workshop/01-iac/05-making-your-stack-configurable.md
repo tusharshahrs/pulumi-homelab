@@ -61,8 +61,8 @@ View Live: https://app.pulumi.com/myuser/iac-workshop/dev/updates/17
  
 Outputs:
   ~ blobcontainername : "files" => "html"
-    myresourcegroup   : "my-resourcegroup32b80185"
-    storageaccountname: "storageaccounta86f2840"
+    myresourcegroup   : "my-resourcegroup76968b38"
+    storageaccountname: "storageaccount88b0e076"
 
 Resources:
     +-1 replaced

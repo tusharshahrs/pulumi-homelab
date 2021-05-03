@@ -10,6 +10,3 @@ account = storage.StorageAccount('storageaccount',
     resource_group_name=resource_group.name,
     sku=storage.SkuArgs(name=storage.SkuName.STANDARD_LRS,),
     kind=storage.Kind.STORAGE_V2)
-    
-# Export the Azure Resource Group
-pulumi.export('myresourcegroup', resource_group.name)
