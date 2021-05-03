@@ -323,10 +323,15 @@ Outputs:
   + endpoint               : "https://functionappaeef2deb.azurewebsites.net/hello"
 ```
 
-You can now view the stack output via `pulumi stack output`
+You can now view the stack output via `pulumi stack output`:
 
 ```bash
 pulumi stack output endpoint
+```
+
+You will get the following:
+
+```
 https://functionappaeef2deb.azurewebsites.net/hello
 ```
 
