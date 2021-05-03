@@ -267,6 +267,7 @@ And then add these lines to `__main__.py` right after creating the storageconnec
 
 ```python
 ...
+# Create the functionapp
 app = web.WebApp("functionapp", 
     resource_group_name=resource_group.name,
     location=resource_group.location,

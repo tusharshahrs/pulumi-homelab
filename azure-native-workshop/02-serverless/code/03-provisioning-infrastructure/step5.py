@@ -45,6 +45,7 @@ pulumi.export('primarystoragekey',  primaryStorageKey )
 # Export the storageconnectionstring
 pulumi.export('storageconnectionstring', storageConnectionString)
 
+# Create the functionapp
 app = web.WebApp("functionapp", 
     resource_group_name=resource_group.name,
     location=resource_group.location,
