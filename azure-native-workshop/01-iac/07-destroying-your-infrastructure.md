@@ -13,21 +13,25 @@ pulumi destroy
 This will show you a preview, much like the `pulumi up` command does:
 
 ```
-Previewing destroy (prod):
+Previewing destroy (prod)
+
+View Live: https://app.pulumi.com/myuser/iac-workshop/prod/previews/3a07bf51-0a64-4c13-a3f5-c5a8bc012bd0
 
      Type                                     Name               Plan       
  -   pulumi:pulumi:Stack                      iac-workshop-prod  delete     
- -   ├─ azure-native:storage:BlobContainer    mycontainer        delete     
- -   ├─ azure-native:storage:StorageAccount   mystorage          delete     
- -   └─ azure-native:resources:ResourceGroup  my-group           delete     
+ -   ├─ azure-native:storage:BlobContainer    blobcontainer      delete     
+ -   ├─ azure-native:storage:StorageAccount   storageaccount     delete     
+ -   └─ azure-native:resources:ResourceGroup  my-resourcegroup   delete     
  
 Outputs:
-  - AccountName: "mystorage695a2b66"
+  - blobcontainername : "htmlprod"
+  - myresourcegroup   : "my-resourcegroupd1731799"
+  - storageaccountname: "storageaccount59f85cdd"
 
 Resources:
     - 4 to delete
 
-Do you want to perform this destroy?
+Do you want to perform this destroy?  [Use arrows to move, enter to select, type to filter]
   yes
 > no
   details
@@ -36,17 +40,20 @@ Do you want to perform this destroy?
 To proceed, select `yes`.
 
 ```
-Destroying (prod):
+Destroying (prod)
 
+View Live: https://app.pulumi.com/myuser/iac-workshop/prod/updates/2
 
      Type                                     Name               Status      
  -   pulumi:pulumi:Stack                      iac-workshop-prod  deleted     
- -   ├─ azure-native:storage:BlobContainer    mycontainer        deleted     
- -   ├─ azure-native:storage:StorageAccount   mystorage          deleted     
- -   └─ azure-native:resources:ResourceGroup  my-group           deleted     
+ -   ├─ azure-native:storage:BlobContainer    blobcontainer      deleted     
+ -   ├─ azure-native:storage:StorageAccount   storageaccount     deleted     
+ -   └─ azure-native:resources:ResourceGroup  my-resourcegroup   deleted     
  
 Outputs:
-  - AccountName: "mystorage695a2b66"
+  - blobcontainername : "htmlprod"
+  - myresourcegroup   : "my-resourcegroupd1731799"
+  - storageaccountname: "storageaccount59f85cdd"
 
 Resources:
     - 4 deleted
