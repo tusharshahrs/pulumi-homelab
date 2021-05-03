@@ -1,15 +1,16 @@
 import pulumi
-from pulumi_azure_native import storage
 from pulumi_azure_native import resources
+from pulumi_azure_native import storage
 
 # Create an Azure Resource Group
-resource_group = resources.ResourceGroup('my-serverlessfunction-group')
+resource_group = resources.ResourceGroup('resourcegroup_functionapp')
 
 # Create a Storage Account
-account = storage.StorageAccount('saserverless',
+account = storage.StorageAccount('storageaccount',
     resource_group_name=resource_group.name,
     sku=storage.SkuArgs(name=storage.SkuName.STANDARD_LRS,),
     kind=storage.Kind.STORAGE_V2)
 
-pulumi.export('ResourceGroup', resource_group.name)
-pulumi.export('AccountName', account.name)
+# Export the Azure Resource Group
+pulumi.export('resourcegroup', resource_group.name)
+pulumi.export('storageaccount', account.name)
