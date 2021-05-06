@@ -39,11 +39,11 @@ primaryStorageKey = storageAccountKeys.apply(lambda accountKeys: accountKeys.key
 storageConnectionString = Output.concat("DefaultEndpointsProtocol=https;AccountName=$",account.name,";AccountKey=",primaryStorageKey)
 
 # Export the storageacountkey
-pulumi.export("storageaccountkeys", storageAccountKeys)
+pulumi.export("storageaccountkeys", pulumi.Output.secret(storageAccountKeys))
 # Export the primarystoragekey
-pulumi.export('primarystoragekey',  primaryStorageKey ) 
+pulumi.export('primarystoragekey',  pulumi.Output.secret(primaryStorageKey )) 
 # Export the storageconnectionstring
-pulumi.export('storageconnectionstring', storageConnectionString)
+pulumi.export('storageconnectionstring', pulumi.Output.secret(storageConnectionString))
 
 # Create the functionapp
 app = web.WebApp("functionapp", 
@@ -51,16 +51,19 @@ app = web.WebApp("functionapp",
     location=resource_group.location,
     server_farm_id=plan.id,
     kind="functionapp",
+    https_only=True,
         site_config=web.SiteConfigArgs(
+            always_on=True,
         app_settings=[
             web.NameValuePairArgs(name = "FUNCTIONS_EXTENSION_VERSION", value="~3"),
             web.NameValuePairArgs(name = "FUNCTIONS_WORKER_RUNTIME", value ="python"),
             web.NameValuePairArgs(name = "AzureWebJobsStorage", value=storageConnectionString),
-            web.NameValuePairArgs(name="WEBSITE_RUN_FROM_PACKAGE", value="https://github.com/tusharshahrs/demo/raw/main/content/lab/pulumi/azure-native/python/app.zip")
+            web.NameValuePairArgs(name="WEBSITE_RUN_FROM_PACKAGE", value="https://github.com/tusharshahrs/demo/raw/fix_python/content/lab/pulumi/azure-native/python/app.zip")
+            #web.NameValuePairArgs(name="WEBSITE_RUN_FROM_PACKAGE", value="https://github.com/tusharshahrs/demo/raw/main/content/lab/pulumi/azure-native/python/app.zip")
         ]
     )
 )
 
 # Full  endpoint of your Function App
-function_endpoint = app.default_host_name.apply(lambda default_host_name: f"https://{default_host_name}/hello")
+function_endpoint = app.default_host_name.apply(lambda default_host_name: f"https://{default_host_name}/api/hello")
 pulumi.export('endpoint', function_endpoint)
