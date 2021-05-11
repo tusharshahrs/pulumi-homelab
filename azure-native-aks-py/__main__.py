@@ -44,21 +44,21 @@ mynetwork = network.VirtualNetwork(f'{name}-vnet',
             address_space=network.AddressSpaceArgs(
                 address_prefixes=["10.0.0.0/20"],
             ),
-            opts=ResourceOptions(ignore_changes=["subnet1", "subnet2"])
+            #opts=ResourceOptions(ignore_changes=["subnet1", "subnet2"])
 )
 
 subnet1 = network.Subnet(f'{name}-subnet-1',
             resource_group_name = resource_group.name,
             virtual_network_name = mynetwork.name,
             address_prefix="10.0.0.0/21",
-            opts=ResourceOptions(parent=mynetwork, depends_on=mynetwork)
+            opts=ResourceOptions(parent=mynetwork)
 )
 
 subnet2 = network.Subnet(f'{name}-subnet-2',
             resource_group_name = resource_group.name,
             virtual_network_name = mynetwork.name,
             address_prefix= "10.0.8.0/21",
-            opts=ResourceOptions(parent=mynetwork,depends_on=mynetwork)
+            opts=ResourceOptions(parent=mynetwork)
 )
 
 managed_cluster = containerservice.ManagedCluster(
