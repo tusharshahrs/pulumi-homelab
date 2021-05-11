@@ -1,0 +1,3 @@
+config:
+  azure-native-aks-py:managedClusterName: shaht-aks
+  azure-native:location: eastus2
