@@ -51,12 +51,64 @@ subnet1 = network.Subnet(f'{name}-subnet-1',
             resource_group_name = resource_group.name,
             virtual_network_name = mynetwork.name,
             address_prefix="10.0.0.0/21",
-            opts=ResourceOptions(parent=mynetwork)
+            opts=ResourceOptions(parent=mynetwork, depends_on=mynetwork)
 )
 
 subnet2 = network.Subnet(f'{name}-subnet-2',
             resource_group_name = resource_group.name,
             virtual_network_name = mynetwork.name,
             address_prefix= "10.0.8.0/21",
-            opts=ResourceOptions(parent=mynetwork)
+            opts=ResourceOptions(parent=mynetwork,depends_on=mynetwork)
 )
+
+managed_cluster = containerservice.ManagedCluster(
+    managed_cluster_name,
+    resource_group_name=resource_group.name,
+        agent_pool_profiles=[{
+        "count": 3,
+        "max_pods": 110,
+        "mode": "System",
+        "name": "agentpool",
+        "node_labels": {},
+        "os_disk_size_gb": 30,
+        "os_type": "Linux",
+        "type": "VirtualMachineScaleSets",
+        "vm_size": "Standard_DS2_v2",
+        "vnet_subnet_id": subnet1.id,
+    }],
+        linux_profile={
+        "admin_username": "testuser",
+        "ssh": {
+            "public_keys": [{
+                "key_data": ssh_key.public_key_openssh,
+            }],
+        },
+    },
+    enable_rbac=True,
+    dns_prefix=resource_group.name,
+
+    kubernetes_version="1.18.14",
+    service_principal_profile={
+        "client_id": ad_app.application_id,
+        "secret": ad_sp_password.value
+    },
+    network_profile=containerservice.ContainerServiceNetworkProfileArgs(
+        network_plugin = "azure",
+        network_mode= "transparent"),
+    sku=containerservice.ManagedClusterSKUArgs(
+        name="Basic",
+        tier="Free",
+    ),
+)
+
+creds = pulumi.Output.all(resource_group.name, managed_cluster.name).apply(
+    lambda args:
+    containerservice.list_managed_cluster_user_credentials(
+        resource_group_name=args[0],
+        resource_name=args[1]))   
+
+# Export kubeconfig
+encoded = creds.kubeconfigs[0].value
+kubeconfig = encoded.apply(
+    lambda enc: base64.b64decode(enc).decode())
+pulumi.export("kubeconfig", kubeconfig)
