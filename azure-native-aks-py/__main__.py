@@ -15,7 +15,7 @@ name="shaht"
 # Create new resource group
 resource_group = resources.ResourceGroup(f'{name}-azure-native-py-aks')
 
-"""# Create an AD service principal
+# Create an AD service principal
 ad_app = azuread.Application(f'{name}-aks-app', display_name=f'{name}-aks-app')
 ad_sp = azuread.ServicePrincipal(f'{name}-aksSp', application_id=ad_app.application_id)
 
@@ -31,11 +31,12 @@ ad_sp_password = azuread.ServicePrincipalPassword(f'{name}-aksSpPassword',
 # Generate an SSH key
 ssh_key = tls.PrivateKey(f'{name}-ssh-key', algorithm="RSA", rsa_bits=4096)
 
+
 # Create cluster
 managed_cluster_name = config.get("managedClusterName")
 if managed_cluster_name is None:
     managed_cluster_name = f'{name}-azure-native-aks'
-
+"""
 # Create network
 mynetwork = network.VirtualNetwork(f'{name}-vnet', 
             resource_group_name=resource_group.name,
@@ -57,4 +58,4 @@ subnet2 = network.Subnet(f'{name}-subnet-2',
             address_prefix= ["10.0.8.0/21"],
             opts=ResourceOptions(parent=mynetwork)
 )
-"""
+"""  
