@@ -36,26 +36,27 @@ ssh_key = tls.PrivateKey(f'{name}-ssh-key', algorithm="RSA", rsa_bits=4096)
 managed_cluster_name = config.get("managedClusterName")
 if managed_cluster_name is None:
     managed_cluster_name = f'{name}-azure-native-aks'
-"""
+
 # Create network
 mynetwork = network.VirtualNetwork(f'{name}-vnet', 
             resource_group_name=resource_group.name,
             location=resource_group.location,
-            address_space= ["10.0.0.0/20"],
-            opts=ResourceOptions(ignore_changes=["subnets"])
+            address_space=network.AddressSpaceArgs(
+                address_prefixes=["10.0.0.0/20"],
+            ),
+            opts=ResourceOptions(ignore_changes=["subnet1", "subnet2"])
 )
 
 subnet1 = network.Subnet(f'{name}-subnet-1',
             resource_group_name = resource_group.name,
             virtual_network_name = mynetwork.name,
-            address_prefix= ["10.0.0.0/21"],
+            address_prefix="10.0.0.0/21",
             opts=ResourceOptions(parent=mynetwork)
 )
 
 subnet2 = network.Subnet(f'{name}-subnet-2',
             resource_group_name = resource_group.name,
             virtual_network_name = mynetwork.name,
-            address_prefix= ["10.0.8.0/21"],
+            address_prefix= "10.0.8.0/21",
             opts=ResourceOptions(parent=mynetwork)
 )
-"""  
