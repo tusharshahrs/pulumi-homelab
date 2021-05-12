@@ -72,6 +72,9 @@ Clone the project
 
     The command updates and persists the value to the local `Pulumi.dev.yaml` file. You can view or edit this file at any time to effect the configuration of the current stack.
 
+1. Azure Python Function Zip file
+   The applications settings configure the app to run on Python3 deploy the specified zip file to the Function App. The app will download the specified file, extract the code from it, discover the functions, and run them. We’ve prepared this [zip](https://github.com/tusharshahrs/demo/blob/main/content/lab/pulumi/azure-native/python/app/HelloWithPython.zip) file for you to get started faster, you can find its code [here](https://github.com/tusharshahrs/demo/tree/main/content/lab/pulumi/azure-native/python/app). The code contains a single HTTP-triggered Azure Function.
+
 1. Run `pulumi up` to preview and select `yes` to deploy changes:
 
     ```
