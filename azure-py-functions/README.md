@@ -4,8 +4,6 @@ You will deploy a Azure Function Apps with HTTP-triggered serverless functions i
 
 ## Running the App
 
-Clone the project
-
 1.  Login to Azure CLI (you will be prompted to do this during deployment if you forget this step):
 
     ```
