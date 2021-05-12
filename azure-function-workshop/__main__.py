@@ -42,19 +42,13 @@ storageAccountKeys = pulumi.Output.all(resource_group.name, account.name).apply(
 primaryStorageKey = storageAccountKeys.apply(lambda accountKeys: accountKeys.keys[0].value)
 # Build a storage connection string out of it:
 storageConnectionString = Output.concat("DefaultEndpointsProtocol=https;AccountName=",account.name,";AccountKey=",primaryStorageKey)
-storageConnectionString2 = Output.concat("https://",account.name,".blob.core.windows.net/",primaryStorageKey)
-#DefaultEndpointsProtocol=https;AccountName=storageaccountc5a3dfb0;AccountKey=G4bPiQH0KA4orLjfJt8wde2v3olMcSZjP1GNW4STNt1Kdpj6qQVpiWKaUvKsggpdFxWPsRrIusHuizi2i8RfZA==;EndpointSuffix=core.windows.net
-storageConnectionString3 = Output.concat("DefaultEndpointsProtocol=https;AccountName=",account.name,";AccountKey=",primaryStorageKey,";EndpointSuffix=core.windows.net")
 
 # Export the storageacountkey
-pulumi.export("storageaccountkeys", (storageAccountKeys))
-
+##pulumi.export("storageaccountkeys", (storageAccountKeys))
 # Export the primarystoragekey
-pulumi.export('primarystoragekey',  (primaryStorageKey )) 
+##pulumi.export('primarystoragekey',  (primaryStorageKey )) 
 # Export the storageconnectionstring
-pulumi.export('storageconnectionstring', (storageConnectionString))
-pulumi.export("storageconnectionstring2", (storageConnectionString2))
-pulumi.export("storageconnectionstring3", (storageConnectionString3))
+##pulumi.export('storageconnectionstring', (storageConnectionString))
 
 
 # Create the functionapp
@@ -70,23 +64,12 @@ app = web.WebApp("functionapp",
             web.NameValuePairArgs(name = "FUNCTIONS_WORKER_RUNTIME", value ="python"),
             web.NameValuePairArgs(name = "FUNCTIONS_EXTENSION_VERSION", value="~3"),
             web.NameValuePairArgs(name = "AzureWebJobsStorage", value=storageConnectionString),
-            web.NameValuePairArgs(name=  "WEBSITE_RUN_FROM_PACKAGE", value="https://github.com/tusharshahrs/demo/raw/fix_python/content/lab/pulumi/azure-native/python/app/HelloWithPython.zip"),
-            #web.NameValuePairArgs(name=  "WEBSITE_RUN_FROM_PACKAGE", value="https://github.com/pulumi/examples/tree/2e9e18b36a9720dd0e691f2bfe883bbfd46bd512/azure-ts-functions-many/python/HelloPython")
-
-            #web.NameValuePairArgs(name = "FUNCTIONS_WORKER_RUNTIME", value ="node"),
-            #web.NameValuePairArgs(name = "runtime", value="node"),
-            #web.NameValuePairArgs(name=  "WEBSITE_RUN_FROM_PACKAGE", value="https://github.com/tusharshahrs/demo/raw/fix_python/content/lab/pulumi/azure-native/python/app"),
-            #web.NameValuePairArgs(name=  "WEBSITE_RUN_FROM_PACKAGE", value="https://github.com/tusharshahrs/demo/raw/fix_python/content/lab/pulumi/azure-native/typescript/app.zip"),
-
-            ## Below works
-            ##web.NameValuePairArgs(name=  "WEBSITE_RUN_FROM_PACKAGE", value="https://mikhailworkshop.blob.core.windows.net/zips/app.zip")
-            #web.NameValuePairArgs(name=  "WEBSITE_RUN_FROM_PACKAGE", value="https://github.com/tusharshahrs/demo/raw/fix_python/content/lab/pulumi/azure-native/python/app.zip")
-            #web.NameValuePairArgs(name="WEBSITE_RUN_FROM_PACKAGE", value="https://github.com/tusharshahrs/demo/raw/main/content/lab/pulumi/azure-native/python/app.zip")
+            web.NameValuePairArgs(name=  "WEBSITE_RUN_FROM_PACKAGE", value="https://github.com/tusharshahrs/demo/raw/main/content/lab/pulumi/azure-native/python/app/HelloWithPython.zip"),
         ],
     )
 )
 
 pulumi.export('function_app_name', app.name)
 # Full  endpoint of your Function App
-function_endpoint = app.default_host_name.apply(lambda default_host_name: f"https://{default_host_name}/api/hello")
+function_endpoint = app.default_host_name.apply(lambda default_host_name: f"https://{default_host_name}/api/HelloWithPython")
 pulumi.export('endpoint', function_endpoint)
