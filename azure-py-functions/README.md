@@ -1,3 +1,7 @@
+# Deploying Serverless Applications with Azure Functions
+
+You will deploy a Azure Function Apps with HTTP-triggered serverless functions in python
+
 ## Running the App
 
 Clone the project
