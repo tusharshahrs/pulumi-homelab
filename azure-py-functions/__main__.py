@@ -70,3 +70,10 @@ app = web.WebApp("functionapp",
         ],
     )
 )
+
+# Export the function
+pulumi.export('function_app', app.name)
+
+# Full endpoint of your Function App
+function_endpoint = app.default_host_name.apply(lambda default_host_name: f"https://{default_host_name}/api/HelloWithPython")
+pulumi.export('endpoint', function_endpoint)
