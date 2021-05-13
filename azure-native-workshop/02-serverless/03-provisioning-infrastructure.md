@@ -215,7 +215,6 @@ storageConnectionString = Output.concat("DefaultEndpointsProtocol=https;AccountN
 ```
 
 The connection keys are sensitive data so we want to protect them as secrets.
-
 Pulumi allows you to [programmatically create secrets](https://www.pulumi.com/docs/intro/concepts/secrets/#programmatically-creating-secrets).  We will be calling [Output.secret](https://www.pulumi.com/docs/reference/pkg/python/pulumi/#pulumi.Output.secret) to construct a secret from an existing value.
 
 And then add these lines to `__main__.py` right after creating the consumption plan export
@@ -259,9 +258,7 @@ Resources:
 Duration: 7s
 ```   
 
-Notice that no resources are created.  This is expected as we were adding outputs. The keys and the connection strings are marked as **secret**
-
-To view them via the cli, run:  [pulumi stack output](https://www.pulumi.com/docs/reference/cli/pulumi_stack_output/) ```--show-secrets```
+Notice that no resources are created.  This is expected as we were adding outputs. The keys and the connection strings are marked as **secret**.  To view them via the cli, run:  [pulumi stack output](https://www.pulumi.com/docs/reference/cli/pulumi_stack_output/) ```--show-secrets```
 
 ## Step 5 &mdash; Create a Function App
 
@@ -288,6 +285,9 @@ app = web.WebApp("functionapp",
 )
 ...
 ```
+
+**Azure Python Function Zip file** - 
+   The applications settings configure the app to run on Python3 deploy the specified zip file to the Function App. The app will download the specified file, extract the code from it, discover the functions, and run them. We’ve prepared this [zip](https://github.com/tusharshahrs/demo/blob/main/content/lab/pulumi/azure-native/python/app/HelloWithPython.zip) file for you to get started faster, you can find its code [here](https://github.com/tusharshahrs/demo/tree/main/content/lab/pulumi/azure-native/python/app). The code contains a single HTTP-triggered Azure Function.
 
 > :white_check_mark: After these changes, your `__main__.py` should [look like this](./code/03-provisioning-infrastructure/step5.py).
 
