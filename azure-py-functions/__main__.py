@@ -31,11 +31,12 @@ plan = web.AppServicePlan("consumption-plan",
 
 # Export the Azure Resource Group
 pulumi.export('resourcegroup', resource_group.name)
+
 # Export the Storage Account
 pulumi.export('storageaccount', account.name)
+
 # Export the Consumption Plan
 pulumi.export('consumptionplan', plan.name)
-
 
 # List of storage account keys
 storageAccountKeys = pulumi.Output.all(resource_group.name, account.name).apply(lambda args:  storage.list_storage_account_keys(resource_group_name=args[0],account_name=args[1]))
@@ -43,6 +44,7 @@ storageAccountKeys = pulumi.Output.all(resource_group.name, account.name).apply(
 primaryStorageKey = storageAccountKeys.apply(lambda accountKeys: accountKeys.keys[0].value)
 # Build a storage connection string out of it:
 storageConnectionString = Output.concat("DefaultEndpointsProtocol=https;AccountName=",account.name,";AccountKey=",primaryStorageKey)
+
 
 # Export the storageacountkey as a secret
 pulumi.export("storageaccountkeys", pulumi.Output.secret(storageAccountKeys))
@@ -69,7 +71,9 @@ app = web.WebApp("functionapp",
     )
 )
 
+# Export the function
 pulumi.export('function_app', app.name)
-# Full  endpoint of your Function App
+
+# Full endpoint of your Function App
 function_endpoint = app.default_host_name.apply(lambda default_host_name: f"https://{default_host_name}/api/HelloWithPython")
 pulumi.export('endpoint', function_endpoint)

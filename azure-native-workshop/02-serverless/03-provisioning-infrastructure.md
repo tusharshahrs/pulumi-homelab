@@ -11,7 +11,7 @@ import pulumi
 from pulumi_azure_native import resources
 
 # Create an Azure Resource Group
-resource_group = resources.ResourceGroup('resourcegroup_serverless_function')
+resource_group = resources.ResourceGroup('resourcegroup_functions_py')
 
 # Export the Azure Resource Group
 pulumi.export('resourcegroup', resource_group.name)
@@ -30,17 +30,19 @@ This will give you a preview and selecting `yes` will apply the changes:
 ```
 Updating (dev)
 
-View Live: https://app.pulumi.com/myuser/azure-function-workshop/dev/updates/43
+View Live: https://app.pulumi.com/myuser/azure-function-workshop/dev/updates/3
 
      Type                                     Name                         Status      
- +   pulumi:pulumi:Stack                      azure-function-workshop-dev  created     
- +   └─ azure-native:resources:ResourceGroup  resourcegroup_functionapp    created     
+ +   pulumi:pulumi:Stack                      azure-py-functions-dev      created     
+ +   └─ azure-native:resources:ResourceGroup  resourcegroup_functions_py  created  
  
 Outputs:
-    resourcegroup: "resourcegroup_functionapp2d04f1cc"
+    resourcegroup: "resourcegroup_functions_py925e474c"
 
 Resources:
     + 2 created
+
+Duration: 5s
 ```
 
 ## Step 2 &mdash; Add a Storage Account
@@ -84,19 +86,21 @@ This will give you a preview and selecting `yes` will apply the changes:
 ```
 Updating (dev)
 
-View Live: https://app.pulumi.com/myuser/azure-function-workshop/dev/updates/44
+View Live: https://app.pulumi.com/myuser/azure-function-workshop/dev/updates/4
 
-     Type                                    Name                         Status      
-     pulumi:pulumi:Stack                     azure-function-workshop-dev              
- +   └─ azure-native:storage:StorageAccount  storageaccount               created     
+     Type                                    Name                    Status      
+     pulumi:pulumi:Stack                     azure-py-functions-dev              
+ +   └─ azure-native:storage:StorageAccount  storageaccount          created     
  
 Outputs:
-    resourcegroup : "resourcegroup_functionapp2d04f1cc"
-  + storageaccount: "storageaccountb5478675"
+    resourcegroup : "resourcegroup_functions_py925e474c"
+  + storageaccount: "storageaccounte925e820"
 
 Resources:
     + 1 created
     2 unchanged
+
+Duration: 24s
 ```
 
 ## Step 3 &mdash; Define a Consumption Plan
@@ -118,14 +122,18 @@ And then add these lines to `__main__.py` right after creating the storage accou
 ```python
 ...
 # Create a consumption plan
-plan = web.AppServicePlan("appserviceplan",
+# Consumption plan must be linux for python: https://docs.microsoft.com/en-us/azure/azure-functions/functions-scale#operating-systemruntime
+plan = web.AppServicePlan("consumption-plan",
     resource_group_name=resource_group.name,
-    kind="app",
-    name="consumption-plan",
+    location=resource_group.location,
+    kind = "functionapp",
+    reserved=True, # This is an Azure Requirement for PYTHON. The function can only run on Linux. 
     sku=web.SkuDescriptionArgs(
         name="Y1",
-        family="Y1",
-        tier="Dynamic"
+        tier="Dynamic",
+        size="Y1",
+        family="Y",
+        capacity=0
     )
 )
 
@@ -150,18 +158,19 @@ Updating (dev)
 
 View Live: https://app.pulumi.com/myuser/azure-function-workshop/dev/updates/45
 
-     Type                                Name                         Status      
-     pulumi:pulumi:Stack                 azure-function-workshop-dev              
- +   └─ azure-native:web:AppServicePlan  consumption-plan             created     
+     pulumi:pulumi:Stack                 azure-py-functions-dev              
+ +   └─ azure-native:web:AppServicePlan  consumption-plan        created     
  
 Outputs:
-  + consumptionplan: "consumption-planb28a196c"
-    resourcegroup  : "resourcegroup_functionapp2d04f1cc"
-    storageaccount : "storageaccountb5478675"
+  + consumptionplan: "consumption-planbb670fa1"
+    resourcegroup  : "resourcegroup_functions_py925e474c"
+    storageaccount : "storageaccounte925e820"
 
 Resources:
     + 1 created
     3 unchanged
+
+Duration: 8s
 ```    
 
 ## Step 4 &mdash; Retrieve Storage Account Keys and Build Connection String
@@ -205,15 +214,19 @@ storageConnectionString = Output.concat("DefaultEndpointsProtocol=https;AccountN
 ...
 ```
 
+The connection keys are sensitive data so we want to protect them as secrets.
+
+Pulumi allows you to [programmatically create secrets](https://www.pulumi.com/docs/intro/concepts/secrets/#programmatically-creating-secrets).  We will be calling [Output.secret](https://www.pulumi.com/docs/reference/pkg/python/pulumi/#pulumi.Output.secret) to construct a secret from an existing value.
+
 And then add these lines to `__main__.py` right after creating the consumption plan export
 ```python
 ...
-# Export the storageacountkey
-pulumi.export("storageaccountkeys", storageAccountKeys)
-# Export the primarystoragekey
-pulumi.export('primarystoragekey',  primaryStorageKey ) 
-# Export the storageconnectionstring
-pulumi.export('storageconnectionstring', storageConnectionString)
+# Export the storageacountkey as a secret
+pulumi.export("storageaccountkeys", pulumi.Output.secret(storageAccountKeys))
+# Export the primarystoragekey as a secret
+pulumi.export('primarystoragekey',  pulumi.Output.secret(primaryStorageKey )) 
+# Export the storageconnectionstring  as a secret
+pulumi.export('storageconnectionstring', pulumi.Output.secret(storageConnectionString))
 ...
 ```
 
@@ -227,39 +240,28 @@ pulumi up
 This will give you a preview and selecting `yes` will apply the changes:
 
 ```
-View Live: https://app.pulumi.com/shaht/azure-function-workshop/dev/updates/46
+View Live: https://app.pulumi.com/myuser/azure-function-workshop/dev/updates/46
 
-     Type                 Name                         Status     
-     pulumi:pulumi:Stack  azure-function-workshop-dev             
+     Type                 Name                    Status     
+     pulumi:pulumi:Stack  azure-py-functions-dev             
  
 Outputs:
-    consumptionplan        : "consumption-planb28a196c"
-  + primarystoragekey      : "***ssdfsfsd8***sfs**sdfsd***"
-    resourcegroup          : "resourcegroup_functionapp2d04f1cc"
-    storageaccount         : "storageaccountb5478675"
-  + storageaccountkeys     : {
-      + keys: [
-      +     [0]: {
-              + creation_time: "2021-05-03T14:07:02.6151987Z"
-              + key_name     : "key1"
-              + permissions  : "FULL"
-              + value        : "sdfsdfsf**sdfsdfsdwe*ersdfd**"
-            }
-      +     [1]: {
-              + creation_time: "2021-05-03T14:07:02.6151987Z"
-              + key_name     : "key2"
-              + permissions  : "FULL"
-              + value        : "sdfsdfsf**sdfsdfsdwe*ersdfd**/KgZfw=="
-            }
-        ]
-    }
-  + storageconnectionstring: "DefaultEndpointsProtocol=https;AccountName=$storageaccountb5478675;AccountKey=sdfsdfsf**sdfsdfsdwe*ersdfd**"
+    consumptionplan        : "consumption-planbb670fa1"
+  + primarystoragekey      : "[secret]"
+    resourcegroup          : "resourcegroup_functions_py925e474c"
+    storageaccount         : "storageaccounte925e820"
+  + storageaccountkeys     : "[secret]"
+  + storageconnectionstring: "[secret]"
 
 Resources:
     4 unchanged
+
+Duration: 7s
 ```   
 
-Notice, that no resources are created.  This is expected as we were creating the `storageConnectionString` for the next part
+Notice that no resources are created.  This is expected as we were adding outputs. The keys and the connection strings are marked as **secret**
+
+To view them via the cli, run:  [pulumi stack output](https://www.pulumi.com/docs/reference/cli/pulumi_stack_output/) ```--show-secrets```
 
 ## Step 5 &mdash; Create a Function App
 
@@ -271,15 +273,17 @@ And then add these lines to `__main__.py` right after creating the storageconnec
 app = web.WebApp("functionapp", 
     resource_group_name=resource_group.name,
     location=resource_group.location,
-    server_farm_id=plan.id,
     kind="functionapp",
+    reserved=True,
+    server_farm_id=plan.id,
         site_config=web.SiteConfigArgs(
         app_settings=[
-            web.NameValuePairArgs(name = "FUNCTIONS_EXTENSION_VERSION", value="~3"),
+            web.NameValuePairArgs(name = "runtime", value="python"),
             web.NameValuePairArgs(name = "FUNCTIONS_WORKER_RUNTIME", value ="python"),
+            web.NameValuePairArgs(name = "FUNCTIONS_EXTENSION_VERSION", value="~3"),
             web.NameValuePairArgs(name = "AzureWebJobsStorage", value=storageConnectionString),
-            web.NameValuePairArgs(name="WEBSITE_RUN_FROM_PACKAGE", value="https://github.com/tusharshahrs/demo/raw/main/content/lab/pulumi/azure-native/python/app.zip")
-        ]
+            web.NameValuePairArgs(name=  "WEBSITE_RUN_FROM_PACKAGE", value="https://github.com/tusharshahrs/demo/raw/main/content/lab/pulumi/azure-native/python/app/HelloWithPython.zip"),
+        ],
     )
 )
 ...
@@ -290,13 +294,14 @@ app = web.WebApp("functionapp",
 ## Step 6 &mdash; Export the Function App endpoint
 
 Finally, declare a stack output called endpoint to export the URL of the Azure Function using the defaultHostName.
-Now, if you inspect the type of the app.defaultHostname, you will see that it's `pulumi.Output<string>` not just `string`. That’s because Pulumi runs your program before it creates any infrastructure, and it wouldn’t be able to put an actual string into the variable. You can think of `Output<T>` as similar to `Promise<T>`, although they are not the same thing.
-
-You want to export the full endpoint of your Function App.  Add this to the end of your code after the functionapp called `app`
+Now, if you inspect the type of the app.defaultHostname, you will see that it's `pulumi.Output<string>` not just `string`. That’s because Pulumi runs your program before it creates any infrastructure, and it wouldn’t be able to put an actual string into the variable. You can think of `Output<T>` as similar to `Promise<T>`, although they are not the same thing. A quick aside here, for those not familiar with what <T> is. <T> is a mechanism for denoting that the value is known at some point in the future. It comes from [Generic Programming](https://en.wikipedia.org/wiki/Generic_programming) and is really useful in situations like this, when we (ie, us running our Pulumi programs) are waiting for the value to be returned from our cloud providers API.  You want to export the full endpoint of your Function App.  Add this to the end of your code after the functionapp called `app`
 
 ```python
 ...
-function_endpoint = app.default_host_name.apply(lambda default_host_name: f"https://{default_host_name}/hello")
+# Export the function
+pulumi.export('function_app', app.name)
+# Full  endpoint of your Function App
+function_endpoint = app.default_host_name.apply(lambda default_host_name: f"https://{default_host_name}/api/HelloWithPython")
 pulumi.export('endpoint', function_endpoint)
 ...
 ```
@@ -310,20 +315,28 @@ Deploy the program to stand up your Azure Function App:
 ```
 pulumi up
 
-Updating (dev)
-
-View Live: https://app.pulumi.com/myuser/azure-function-workshop/dev/updates/47
-
-     Type                        Name                         Status      
-     pulumi:pulumi:Stack         azure-function-workshop-dev              
- +   └─ azure-native:web:WebApp  functionapp                  created     
+     Type                        Name                    Status      
+     pulumi:pulumi:Stack         azure-py-functions-dev              
+ +   └─ azure-native:web:WebApp  functionapp             created     
  
 Outputs:
-    consumptionplan        : "consumption-planb28a196c"
-  + endpoint               : "https://functionappaeef2deb.azurewebsites.net/hello"
+    consumptionplan        : "consumption-planbb670fa1"
+  + endpoint               : "https://functionappa6fe3701.azurewebsites.net/api/HelloWithPython"
+  + function_app           : "functionappa6fe3701"
+    primarystoragekey      : "[secret]"
+    resourcegroup          : "resourcegroup_functions_py925e474c"
+    storageaccount         : "storageaccounte925e820"
+    storageaccountkeys     : "[secret]"
+    storageconnectionstring: "[secret]"
+
+Resources:
+    + 1 created
+    4 unchanged
+
+Duration: 25s
 ```
 
-You can now view the stack output via `pulumi stack output`:
+You can now view the stack output via [pulumi stack output](https://www.pulumi.com/docs/reference/cli/pulumi_stack_output/):
 
 ```bash
 pulumi stack output endpoint
@@ -332,13 +345,18 @@ pulumi stack output endpoint
 You will get the following:
 
 ```
-https://functionappaeef2deb.azurewebsites.net/hello
+https://functionappa6fe3701.azurewebsites.net/api/HelloWithPython
 ```
 
 You can now open the resulting endpoint in the browser or curl it:
 
 ```bash
 curl $(pulumi stack output endpoint)
+```
+And you'll see a the following message:
+
+```
+Hello from Python in Pulumi! You have stood up a serverless function in Azure!
 ```
 
 ## Step 8 &mdash; Destroy Everything
@@ -351,7 +369,10 @@ This will give you a preview and selecting `yes` will apply the changes:
 Remove the stack
 ```
 pulumi stack rm
+This will permanently remove the 'dev' stack!
+Please confirm that this is what you'd like to do by typing ("dev"):
 ```
 
+You must enter the stack name:  `dev`
 
 * [Home](../#azure-native-workshop-with-pulumi)
