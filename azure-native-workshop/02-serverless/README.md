@@ -6,3 +6,5 @@ This hands-on workshop will walk you through various tasks of managing Azure inf
 
 This lab assumes you have setup Pulumi and configured Azure. If you don't have these
 steps completed, please complete the [prerequisities](../00-installing-prerequisites.md)
+
+1. Start by [Creating a New Project](./02-serverless/01-creating-a-new-project.md)
