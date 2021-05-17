@@ -1,12 +1,11 @@
 import * as docker from "@pulumi/docker";
 import * as pulumi from "@pulumi/pulumi";
 
-import * as containerregistry from "@pulumi/azure-native/containerregistry";
 import * as resources from "@pulumi/azure-native/resources";
 import * as web from "@pulumi/azure-native/web";
 
 // Create an Azure Resource Group
-const resourceGroup = new resources.ResourceGroup("jekins-tutorial-rg");
+const resourceGroup = new resources.ResourceGroup("jenkins-tutorial-rg");
 
 const plan = new web.AppServicePlan("plan", {
     resourceGroupName: resourceGroup.name,
@@ -38,4 +37,5 @@ const jekinsApp = new web.WebApp("jekinsApp", {
     httpsOnly: true,
 });
 
+// Jenkins Endpoint.  You will have to wait at least 2 minutes before it is live
 export const jenkinsEndpoint = pulumi.interpolate`https://${jekinsApp.defaultHostName}`;
