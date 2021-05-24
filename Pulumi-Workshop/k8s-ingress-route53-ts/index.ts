@@ -33,7 +33,7 @@ const nginxIngress = new k8s.helm.v3.Chart(`ingresshelm`, {
     values: {
         controller: {
             replicaCount: 1,
-            annotations: {"kubernetes.io/ingress.class":"alb"},
+            annotations: {"kubernetes.io/ingress.class":"nginx"},
         },
         defaultBackend: {
             enabled: true
@@ -155,9 +155,9 @@ function createAliasRecord(targetDomain: string, albUrl: string): aws.route53.Re
   export const water_ingress_1 = mywater_ingress.status.loadBalancer.ingress[0].hostname;
   //export const water_ingress_2 = mywater_ingress.status.loadBalancer.ingress[1].hostname;
  
- /* let aRecords = mywater_ingress.status.apply((s) => {
-    createAliasRecord('water-pulumi.shaht.com', s.loadBalancer.ingress[0].hostname)
-    createAliasRecord('water-pulumi-api.shaht.com', s.loadBalancer.ingress[0].hostname)
+ /*const aRecords = mywater_ingress.status.apply((s) => {
+    createAliasRecord('water-pulumi.tusharshah.com', s.loadBalancer.ingress[0].hostname)
+    createAliasRecord('water-pulumi-api.tusharshah.com', s.loadBalancer.ingress[0].hostname)
     }
   );
 */
