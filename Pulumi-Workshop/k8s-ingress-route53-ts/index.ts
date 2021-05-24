@@ -89,7 +89,7 @@ const mywater_ingress = new k8s.networking.v1beta1.Ingress(
                 },
                 {
                   path: "/*",
-                  backend: { serviceName: "backend", servicePort: 4000 }
+                  backend: { serviceName: "backend", servicePort: "http" }
                 },
 
               ]
