@@ -33,7 +33,7 @@ const nginxIngress = new k8s.helm.v3.Chart(`ingresshelm`, {
     values: {
         controller: {
             replicaCount: 1,
-            annotations: {"kubernetes.io/ingress.class":"nginx"},
+            annotations: {"kubernetes.io/ingress.class":"alb"},
         },
         defaultBackend: {
             enabled: true
