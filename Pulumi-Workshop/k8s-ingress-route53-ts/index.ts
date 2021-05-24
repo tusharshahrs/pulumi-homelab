@@ -43,6 +43,7 @@ const nginxIngress = new k8s.helm.v3.Chart(`ingresshelm`, {
 
  // Frontend Ingress
 const mywater_ingress = new k8s.networking.v1beta1.Ingress(    
+//const mywater_ingress = new k8s.extensions.v1beta1.Ingress(
     `water-ingress`,
     {
       metadata: {
@@ -56,7 +57,7 @@ const mywater_ingress = new k8s.networking.v1beta1.Ingress(
           "ingress.kubernetes.io/force-ssl-redirect": "true",
           "alb.ingress.kubernetes.io/listen-ports": '[{"HTTP": 80}, {"HTTPS":443}]',
           "alb.ingress.kubernetes.io/actions.ssl-redirect": '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
-          //"alb.ingress.kubernetes.io/load-balancer-attributes": "idle_timeout.timeout_seconds=180",
+          "alb.ingress.kubernetes.io/load-balancer-attributes": "idle_timeout.timeout_seconds=180",
           "pulumi.com/skipAwait": "true"
         },
         labels: { app: "shaht-node" }
@@ -74,6 +75,13 @@ const mywater_ingress = new k8s.networking.v1beta1.Ingress(
                 {
                   path: "/*",
                   backend: { serviceName: "frontend", servicePort: "http" }
+                },
+                {
+                  path: "/api",
+                  backend: {
+                    serviceName: "ipfs",
+                    servicePort: "gateway"
+                  },
                 },
 
               ]
