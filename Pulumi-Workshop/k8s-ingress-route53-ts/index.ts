@@ -152,12 +152,47 @@ function createAliasRecord(targetDomain: string, albUrl: string): aws.route53.Re
     });
   }
 
+  // Exported this to view it.
   export const water_ingress_1 = mywater_ingress.status.loadBalancer.ingress[0].hostname;
-  //export const water_ingress_2 = mywater_ingress.status.loadBalancer.ingress[1].hostname;
- 
+  // This ends up being something along the lines of:  water_ingress_1: "a6c7c878c56224f388aa5680b8bbc903-759956113.us-east-2.elb.amazonaws.com"
+
  /*const aRecords = mywater_ingress.status.apply((s) => {
     createAliasRecord('water-pulumi.tusharshah.com', s.loadBalancer.ingress[0].hostname)
     createAliasRecord('water-pulumi-api.tusharshah.com', s.loadBalancer.ingress[0].hostname)
     }
   );
 */
+
+// Changed the albUrl type from: string to:  k8s.networking.v1beta1.Ingress
+function createAliasRecord2(targetDomain: string, albUrl: k8s.networking.v1beta1.Ingress): aws.route53.Record {
+  const targetDomainObj = getDomainAndSubdomain(targetDomain);
+  //const hostedZoneId = "Z09797241AM9SLA1R3RHU"
+
+  // Passing in the albUrl after applying the apply.
+  const albUrlObj = albUrl.status.loadBalancer.ingress[0].hostname.apply(mylb => mylb);
+  //const albUrlObj = getDomainAndSubdomain(albUrl);
+
+  console.log('albUrlObj', albUrlObj);
+  const hostedZoneIdALB = aws.elb.getHostedZoneId().then(hostedZoneIdALB => hostedZoneIdALB.id);
+
+   const targetZoneID = aws.route53.getZone({
+    name: "tusharshah.com",
+    }).then(targetZoneID => targetZoneID.zoneId)
+
+  // Updated name within the aliases block.
+  return new aws.route53.Record(targetDomain, {
+    name: targetDomainObj.subdomain,
+    zoneId: targetZoneID,
+    type: 'A',
+    aliases: [
+      {
+        name: albUrlObj,
+        zoneId: hostedZoneIdALB,
+        evaluateTargetHealth: false
+      }
+    ]
+  });
+}
+
+// Tested on 1st record.
+const aRecords = createAliasRecord2('water-pulumi.tusharshah.com', mywater_ingress);
