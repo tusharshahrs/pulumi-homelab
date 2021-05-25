@@ -1,0 +1,3 @@
+name: k8s-ingress-route53-ts
+runtime: nodejs
+description: A minimal AWS TypeScript Pulumi program

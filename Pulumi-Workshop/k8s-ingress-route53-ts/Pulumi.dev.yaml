@@ -1,0 +1,3 @@
+config:
+  aws:region: us-east-2
+  k8s-ingress-route53-ts:eksclusterStack: shaht/eks-infrastructure/dev
