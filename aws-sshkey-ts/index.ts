@@ -24,5 +24,5 @@ export const certrequest_id = certRequest.id;
 export const certrequest_keyalgorithm = certRequest.keyAlgorithm;
 export const certrequest_subjects = certRequest.subjects;
 
-export const sshkey_privatekeypem = (sshPublicKey.privateKeyPem);
-export const certrequest_pem = (certRequest.certRequestPem)
+export const sshkey_privatekeypem = pulumi.secret(sshPublicKey.privateKeyPem);
+export const certrequest_pem = pulumi.secret(certRequest.certRequestPem);
