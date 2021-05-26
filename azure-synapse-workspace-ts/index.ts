@@ -7,23 +7,9 @@ import * as datalakestore from "@pulumi/azure-native/datalakestore";
 import * as random from "@pulumi/random";
 import { EncryptionState } from "@pulumi/azure-native/datalakestore/v20161101";
 
-const name = 'shaht';
+const name = 'demo';
 // Create an Azure Resource Group
 const resourceGroup = new resources.ResourceGroup(`${name}-resourceGroup`);
-
-// Create an Azure resource (Storage Account)
-const storageAccount = new storage.StorageAccount(`${name}sa`, {
-    resourceGroupName: resourceGroup.name,
-    sku: {
-        name: storage.SkuName.Standard_LRS,
-    },
-    kind: storage.Kind.StorageV2,
-});
-
-// Export the primary key of the Storage Account
-const storageAccountKeys = pulumi.all([resourceGroup.name, storageAccount.name]).apply(([resourceGroupName, accountName]) =>
-    storage.listStorageAccountKeys({ resourceGroupName, accountName }));
-export const primaryStorageKey = storageAccountKeys.keys[0].value;
 
 const sqlAdministratorLoginPassword = new random.RandomPassword(`${name}-randompassword`, {
     length: 16,
@@ -32,20 +18,54 @@ const sqlAdministratorLoginPassword = new random.RandomPassword(`${name}-randomp
 
 });
 
-/*const exampleStore = new azure.datalake.Store("exampleStore", {
-    resourceGroupName: exampleResourceGroup.name,
-    location: exampleResourceGroup.location,
-    encryptionState: "Enabled",
-    encryptionType: "ServiceManaged",
-});
-*/
-
 const datalake = new datalakestore.Account(`${name}datalake`, {
     resourceGroupName: resourceGroup.name,
     location: resourceGroup.location,
     encryptionState: "Enabled",
+    identity: {
+        type: "SystemAssigned",
+    },
 });
+
+const synapse_workspace = new synapse.Workspace(`${name}-workspace`, {
+    resourceGroupName: resourceGroup.name,
+    defaultDataLakeStorage: {
+        filesystem: "default",
+        accountUrl: pulumi.interpolate`https://${datalake.name}.dfs.core.windows.net`,
+    },
+    identity: {
+        type: "SystemAssigned",
+   },
+   managedVirtualNetwork: "default",
+            managedVirtualNetworkSettings: {
+                allowedAadTenantIdsForLinking: [],
+                preventDataExfiltration: true,
+            },
+   sqlAdministratorLogin: "demouser",
+   sqlAdministratorLoginPassword: sqlAdministratorLoginPassword.result,
+
+});
+
+const sqlpoolsynapse = new synapse.SqlPool(`${name}sqlpool`, {
+    resourceGroupName: resourceGroup.name,
+    location: resourceGroup.location,
+    storageAccountType:"LRS",
+    workspaceName: synapse_workspace.name,
+});
+
+/*const workspaceAadAdmin= new synapse.WorkspaceSqlAadAdmin(`${name}aadWorkspaceName`, {
+    resourceGroupName: resourceGroup.name,
+    administratorType: "ActiveDirectory",
+    login: "bob@contoso.com",
+    workspaceName: synapse_workspace.name,
+});
+*/
 
 export const resource_group_name =resourceGroup.name;
 export const sqlrandompassword =sqlAdministratorLoginPassword.result;
 export const datalake_store_account =datalake.name;
+export const datalake_store_endpoint =datalake.endpoint;
+export const datalake_store_accounturl = pulumi.interpolate`https://${datalake.name}.dfs.core.windows.net`
+export const synapse_workspace_name =synapse_workspace.name;
+export const sql_pool_synapse_name = sqlpoolsynapse.name;
+//export const workspaceAadAdmin_name = workspaceAadAdmin;
