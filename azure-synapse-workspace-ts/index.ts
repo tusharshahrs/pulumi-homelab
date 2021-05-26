@@ -53,13 +53,15 @@ const sqlpoolsynapse = new synapse.SqlPool(`${name}sqlpool`, {
     workspaceName: synapse_workspace.name,
 });
 
-/*const workspaceAadAdmin= new synapse.WorkspaceSqlAadAdmin(`${name}aadWorkspaceName`, {
+// https://www.pulumi.com/docs/reference/pkg/azure-native/synapse/workspacesqlaadadmin/#administratortype_nodejs
+// This is throwing an error.
+// regardless of the user email that we put in login:..., we get an error.
+const workspaceAadAdmin= new synapse.WorkspaceSqlAadAdmin(`${name}aadWorkspaceName`, {
     resourceGroupName: resourceGroup.name,
     administratorType: "ActiveDirectory",
     login: "bob@contoso.com",
     workspaceName: synapse_workspace.name,
 });
-*/
 
 export const resource_group_name =resourceGroup.name;
 export const sqlrandompassword =sqlAdministratorLoginPassword.result;
