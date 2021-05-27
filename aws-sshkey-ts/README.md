@@ -73,5 +73,12 @@ pulumi 3.0 & node 14.
     Duration: 4s
     ```
 
+1.  Run `pulumi stack` since we need the part appended to the pulumi console url.
+   
+    ```
+    More information at: https://app.pulumi.com/myuser/aws-sshkey-ts/dev
+    ```
+    We will need this: `myuser/aws-sshkey-ts/dev`
+
 1. Destroy the stack
     ` pulumi stack destroy -y`
