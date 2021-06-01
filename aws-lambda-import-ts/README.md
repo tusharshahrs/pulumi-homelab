@@ -58,7 +58,7 @@ The following issue: [Import lambda fails because of missing inputs](https://git
 
     ```
 
-        View Live: https://app.pulumi.com/shaht/aws-lambda-import-ts/dev/previews/099eaffa-85eb-4cc0-a142-7c26cc91c7c3
+        View Live: https://app.pulumi.com/myuser/aws-lambda-import-ts/dev/previews/099eaffa-85eb-4cc0-a142-7c26cc91c7c3
 
            Type                    Name                      Plan       Info
        +   pulumi:pulumi:Stack     aws-lambda-import-ts-dev  create     
@@ -111,7 +111,7 @@ The following issue: [Import lambda fails because of missing inputs](https://git
         $ pulumi up
         Previewing update (dev)
 
-        View Live: https://app.pulumi.com/shaht/aws-lambda-import-ts/dev/previews/101d8ccf-25f0-4e63-8314-79e0ebcf1cd0
+        View Live: https://app.pulumi.com/myuser/aws-lambda-import-ts/dev/previews/101d8ccf-25f0-4e63-8314-79e0ebcf1cd0
 
             Type                    Name                      Plan       
             pulumi:pulumi:Stack     aws-lambda-import-ts-dev             
@@ -155,7 +155,7 @@ The following issue: [Import lambda fails because of missing inputs](https://git
         Do you want to perform this update? yes
         Updating (dev)
 
-        View Live: https://app.pulumi.com/shaht/aws-lambda-import-ts/dev/updates/3
+        View Live: https://app.pulumi.com/myuser/aws-lambda-import-ts/dev/updates/3
 
             Type                    Name                      Status       
             pulumi:pulumi:Stack     aws-lambda-import-ts-dev               
@@ -166,4 +166,41 @@ The following issue: [Import lambda fails because of missing inputs](https://git
             1 unchanged
 
         Duration: 3s
-   ```
+    ```
+
+
+1. Now I can **destroy** the lambda function via Pulumi
+
+    ```  
+        $ pulumi destroy
+        Previewing destroy (dev)
+
+        View Live: https://app.pulumi.com/myuser/aws-lambda-import-ts/dev/previews/d9907f42-fa5c-47f5-879f-3fa14ed383a3
+
+            Type                    Name                      Plan       
+        -   pulumi:pulumi:Stack     aws-lambda-import-ts-dev  delete     
+        -   └─ aws:lambda:Function  mylambdafunction          delete     
+        
+        Resources:
+            - 2 to delete
+
+        Do you want to perform this destroy? details
+        - aws:lambda/function:Function: (delete)
+            [id=serverlessrepo-hello-world-helloworld-yBIdZSWEGSbC]
+            [urn=urn:pulumi:dev::aws-lambda-import-ts::aws:lambda/function:Function::mylambdafunction]
+            [provider=urn:pulumi:dev::aws-lambda-import-ts::pulumi:providers:aws::default_4_6_0::a1efb29b-8ac5-4598-932e-23508d0c8709]
+        - pulumi:pulumi:Stack: (delete)
+            [urn=urn:pulumi:dev::aws-lambda-import-ts::pulumi:pulumi:Stack::aws-lambda-import-ts-dev]
+
+        Do you want to perform this destroy? yes
+        Destroying (dev)
+
+        View Live: https://app.pulumi.com/myuser/aws-lambda-import-ts/dev/updates/4
+
+            Type                    Name                      Status      
+        -   pulumi:pulumi:Stack     aws-lambda-import-ts-dev  deleted     
+        -   └─ aws:lambda:Function  mylambdafunction          deleted     
+        
+        Resources:
+            - 2 deleted
+    ```
