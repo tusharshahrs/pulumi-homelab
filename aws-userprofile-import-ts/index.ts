@@ -6,5 +6,5 @@ const mydemouserprofile = new aws.iam.UserLoginProfile("UserLoginProfile", {
     user: "demotest-forimport",
     // The pgpKey is a made up value.  As you can see here, it will be ignored.
     pgpKey: "keybase:demotest-forimport",
-}, {import: "demotest-forimport"});
-//}, {import: "demotest-forimport", ignoreChanges: ["pgpKey"]});
+//}, {import: "demotest-forimport"});
+}, {import: "demotest-forimport", ignoreChanges: ["pgpKey"]});
