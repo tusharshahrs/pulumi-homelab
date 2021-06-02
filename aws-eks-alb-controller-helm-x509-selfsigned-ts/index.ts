@@ -8,7 +8,7 @@ const name = "demo"
 const vpc = new awsx.ec2.Vpc(`${name}-vpc`, { numberOfAvailabilityZones: 2, tags: {"Name":`${name}-vpc`} });
 const cluster = new eks.Cluster(`${name}-cluster`, {
     vpcId: vpc.id,
-    instanceType: "t4g.medium",
+    instanceType: "t3.medium",
     subnetIds: vpc.publicSubnetIds,
     desiredCapacity: 2,
     minSize: 1,
