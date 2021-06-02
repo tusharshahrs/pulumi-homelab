@@ -1,0 +1,3 @@
+name: aws-eks-alb-controller-helm-x509-selfsigned-ts
+runtime: nodejs
+description: A minimal AWS TypeScript Pulumi program

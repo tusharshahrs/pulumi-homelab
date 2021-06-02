@@ -1,0 +1,2280 @@
+{
+    "version": 3,
+    "deployment": {
+        "manifest": {
+            "time": "2021-06-02T11:32:31.956501-04:00",
+            "magic": "1e46860be55f4bfa3ee10d1c7370b994c363a4d42c9b706cd8d068a481e22b78",
+            "version": "v3.3.1"
+        },
+        "secrets_providers": {
+            "type": "service",
+            "state": {
+                "url": "https://api.pulumi.com",
+                "owner": "shaht",
+                "project": "aws-eks-alb-controller-helm-x509-selfsigned-ts",
+                "stack": "dev"
+            }
+        },
+        "resources": [
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:pulumi:Stack::aws-eks-alb-controller-helm-x509-selfsigned-ts-dev",
+                "custom": false,
+                "type": "pulumi:pulumi:Stack"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0",
+                "custom": true,
+                "id": "f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "type": "pulumi:providers:aws",
+                "inputs": {
+                    "region": "us-east-1",
+                    "version": "4.6.0"
+                },
+                "outputs": {
+                    "region": "us-east-1",
+                    "version": "4.6.0"
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "custom": false,
+                "type": "eks:index:Cluster",
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:pulumi:Stack::aws-eks-alb-controller-helm-x509-selfsigned-ts-dev"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc::demo-vpc",
+                "custom": false,
+                "type": "awsx:x:ec2:Vpc",
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:pulumi:Stack::aws-eks-alb-controller-helm-x509-selfsigned-ts-dev"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole::demo-cluster-eksRole",
+                "custom": false,
+                "type": "eks:index:ServiceRole",
+                "outputs": {
+                    "role": {
+                        "4dabf18193072939515e22adb298388d": "5cf8f73096256a8f31e491e813e4eb8e",
+                        "id": "demo-cluster-eksRole-role-a2f560f",
+                        "packageVersion": "",
+                        "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-eksRole-role"
+                    }
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole::demo-cluster-instanceRole",
+                "custom": false,
+                "type": "eks:index:ServiceRole",
+                "outputs": {
+                    "role": {
+                        "4dabf18193072939515e22adb298388d": "5cf8f73096256a8f31e491e813e4eb8e",
+                        "id": "demo-cluster-instanceRole-role-70b7324",
+                        "packageVersion": "",
+                        "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-instanceRole-role"
+                    }
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:eks::default",
+                "custom": true,
+                "id": "9d1be108-e4e7-4d33-85d9-60fa03337aa8",
+                "type": "pulumi:providers:eks",
+                "inputs": {
+                    "version": "0.30.0"
+                },
+                "outputs": {
+                    "version": "0.30.0"
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:InternetGateway::demo-vpc",
+                "custom": false,
+                "type": "awsx:x:ec2:InternetGateway",
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc::demo-vpc"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-public-1",
+                "custom": false,
+                "type": "awsx:x:ec2:Subnet",
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc::demo-vpc",
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet::demo-vpc-public-1"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway::demo-vpc-1",
+                "custom": false,
+                "type": "awsx:x:ec2:NatGateway",
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc::demo-vpc"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-public-0",
+                "custom": false,
+                "type": "awsx:x:ec2:Subnet",
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc::demo-vpc",
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet::demo-vpc-public-0"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway::demo-vpc-0",
+                "custom": false,
+                "type": "awsx:x:ec2:NatGateway",
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc::demo-vpc"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-private-1",
+                "custom": false,
+                "type": "awsx:x:ec2:Subnet",
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc::demo-vpc",
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet::demo-vpc-private-1"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-private-0",
+                "custom": false,
+                "type": "awsx:x:ec2:Subnet",
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc::demo-vpc",
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet::demo-vpc-private-0"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-eksRole-role",
+                "custom": true,
+                "id": "demo-cluster-eksRole-role-a2f560f",
+                "type": "aws:iam/role:Role",
+                "inputs": {
+                    "__defaults": [
+                        "forceDetachPolicies",
+                        "maxSessionDuration",
+                        "name",
+                        "path"
+                    ],
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"sts:AssumeRole\"],\"Effect\":\"Allow\",\"Principal\":{\"Service\":[\"eks.amazonaws.com\"]}}]}",
+                    "description": "Allows EKS to manage clusters on your behalf.",
+                    "forceDetachPolicies": false,
+                    "maxSessionDuration": 3600,
+                    "name": "demo-cluster-eksRole-role-a2f560f",
+                    "path": "/"
+                },
+                "outputs": {
+                    "arn": "arn:aws:iam::052848974346:role/demo-cluster-eksRole-role-a2f560f",
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"eks.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "createDate": "2021-06-02T14:10:08Z",
+                    "description": "Allows EKS to manage clusters on your behalf.",
+                    "forceDetachPolicies": false,
+                    "id": "demo-cluster-eksRole-role-a2f560f",
+                    "inlinePolicies": [
+                        {
+                            "name": "",
+                            "policy": ""
+                        }
+                    ],
+                    "managedPolicyArns": [],
+                    "maxSessionDuration": 3600,
+                    "name": "demo-cluster-eksRole-role-a2f560f",
+                    "path": "/",
+                    "tags": {},
+                    "tagsAll": {},
+                    "uniqueId": "AROAQYTQLLIFI7WTIWCIH"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole::demo-cluster-eksRole",
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "assumeRolePolicy": null,
+                    "description": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-instanceRole-role",
+                "custom": true,
+                "id": "demo-cluster-instanceRole-role-70b7324",
+                "type": "aws:iam/role:Role",
+                "inputs": {
+                    "__defaults": [
+                        "forceDetachPolicies",
+                        "maxSessionDuration",
+                        "name",
+                        "path"
+                    ],
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"sts:AssumeRole\"],\"Effect\":\"Allow\",\"Principal\":{\"Service\":[\"ec2.amazonaws.com\"]}}]}",
+                    "forceDetachPolicies": false,
+                    "maxSessionDuration": 3600,
+                    "name": "demo-cluster-instanceRole-role-70b7324",
+                    "path": "/"
+                },
+                "outputs": {
+                    "arn": "arn:aws:iam::052848974346:role/demo-cluster-instanceRole-role-70b7324",
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ec2.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "createDate": "2021-06-02T14:10:08Z",
+                    "description": "",
+                    "forceDetachPolicies": false,
+                    "id": "demo-cluster-instanceRole-role-70b7324",
+                    "inlinePolicies": [
+                        {
+                            "name": "",
+                            "policy": ""
+                        }
+                    ],
+                    "managedPolicyArns": [],
+                    "maxSessionDuration": 3600,
+                    "name": "demo-cluster-instanceRole-role-70b7324",
+                    "path": "/",
+                    "tags": {},
+                    "tagsAll": {},
+                    "uniqueId": "AROAQYTQLLIFMU6TTIPKR"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole::demo-cluster-instanceRole",
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "assumeRolePolicy": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc",
+                "custom": true,
+                "id": "vpc-052795e946b755a53",
+                "type": "aws:ec2/vpc:Vpc",
+                "inputs": {
+                    "__defaults": [],
+                    "assignGeneratedIpv6CidrBlock": false,
+                    "cidrBlock": "10.0.0.0/16",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "instanceTenancy": "default"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:us-east-1:052848974346:vpc/vpc-052795e946b755a53",
+                    "assignGeneratedIpv6CidrBlock": false,
+                    "cidrBlock": "10.0.0.0/16",
+                    "defaultNetworkAclId": "acl-0bbfd791453926a19",
+                    "defaultRouteTableId": "rtb-0c98af942fe11403d",
+                    "defaultSecurityGroupId": "sg-00a7a4fcdca295aed",
+                    "dhcpOptionsId": "dopt-34f2a34f",
+                    "enableClassiclink": false,
+                    "enableClassiclinkDnsSupport": false,
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "id": "vpc-052795e946b755a53",
+                    "instanceTenancy": "default",
+                    "ipv6AssociationId": "",
+                    "ipv6CidrBlock": "",
+                    "mainRouteTableId": "rtb-0c98af942fe11403d",
+                    "ownerId": "052848974346",
+                    "tags": {},
+                    "tagsAll": {}
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc::demo-vpc",
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "assignGeneratedIpv6CidrBlock": null,
+                    "cidrBlock": null,
+                    "enableDnsHostnames": null,
+                    "enableDnsSupport": null,
+                    "instanceTenancy": null
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::aws:ec2/vpc:Vpc::demo-vpc"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:RandomSuffix::demo-cluster-cfnStackName",
+                "custom": true,
+                "id": "demo-cluster-cfnStackName",
+                "type": "eks:index:RandomSuffix",
+                "inputs": {
+                    "input": "demo-cluster"
+                },
+                "outputs": {
+                    "output": "demo-cluster-d0391efb"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:eks::default::9d1be108-e4e7-4d33-85d9-60fa03337aa8",
+                "propertyDependencies": {
+                    "input": null
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$pulumi-nodejs:dynamic:Resource::demo-cluster-cfnStackName"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway$aws:ec2/eip:Eip::demo-vpc-1",
+                "custom": true,
+                "id": "eipalloc-015009e4964bc9e0b",
+                "type": "aws:ec2/eip:Eip",
+                "inputs": {
+                    "__defaults": [],
+                    "tags": {
+                        "Name": "demo-vpc-1",
+                        "__defaults": []
+                    },
+                    "vpc": true
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":180000000000,\"read\":900000000000,\"update\":300000000000}}",
+                    "associationId": "",
+                    "carrierIp": "",
+                    "customerOwnedIp": "",
+                    "customerOwnedIpv4Pool": "",
+                    "domain": "vpc",
+                    "id": "eipalloc-015009e4964bc9e0b",
+                    "instance": "",
+                    "networkBorderGroup": "us-east-1",
+                    "networkInterface": "",
+                    "privateIp": "",
+                    "publicDns": "ec2-54-210-79-167.compute-1.amazonaws.com",
+                    "publicIp": "54.210.79.167",
+                    "publicIpv4Pool": "amazon",
+                    "tags": {
+                        "Name": "demo-vpc-1"
+                    },
+                    "tagsAll": {
+                        "Name": "demo-vpc-1"
+                    },
+                    "vpc": true
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway::demo-vpc-1",
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "tags": null,
+                    "vpc": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway$aws:ec2/eip:Eip::demo-vpc-0",
+                "custom": true,
+                "id": "eipalloc-0da793a0759b87609",
+                "type": "aws:ec2/eip:Eip",
+                "inputs": {
+                    "__defaults": [],
+                    "tags": {
+                        "Name": "demo-vpc-0",
+                        "__defaults": []
+                    },
+                    "vpc": true
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":180000000000,\"read\":900000000000,\"update\":300000000000}}",
+                    "associationId": "",
+                    "carrierIp": "",
+                    "customerOwnedIp": "",
+                    "customerOwnedIpv4Pool": "",
+                    "domain": "vpc",
+                    "id": "eipalloc-0da793a0759b87609",
+                    "instance": "",
+                    "networkBorderGroup": "us-east-1",
+                    "networkInterface": "",
+                    "privateIp": "",
+                    "publicDns": "ec2-52-204-241-177.compute-1.amazonaws.com",
+                    "publicIp": "52.204.241.177",
+                    "publicIpv4Pool": "amazon",
+                    "tags": {
+                        "Name": "demo-vpc-0"
+                    },
+                    "tagsAll": {
+                        "Name": "demo-vpc-0"
+                    },
+                    "vpc": true
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway::demo-vpc-0",
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "tags": null,
+                    "vpc": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-eksRole-4b490823",
+                "custom": true,
+                "id": "demo-cluster-eksRole-role-a2f560f-20210602141010605500000001",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "inputs": {
+                    "__defaults": [],
+                    "policyArn": "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
+                    "role": "demo-cluster-eksRole-role-a2f560f"
+                },
+                "outputs": {
+                    "id": "demo-cluster-eksRole-role-a2f560f-20210602141010605500000001",
+                    "policyArn": "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
+                    "role": "demo-cluster-eksRole-role-a2f560f"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole::demo-cluster-eksRole",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-eksRole-role"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "policyArn": null,
+                    "role": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-eksRole-role"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-eksRole-90eb1c99",
+                "custom": true,
+                "id": "demo-cluster-eksRole-role-a2f560f-20210602141010796300000002",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "inputs": {
+                    "__defaults": [],
+                    "policyArn": "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
+                    "role": "demo-cluster-eksRole-role-a2f560f"
+                },
+                "outputs": {
+                    "id": "demo-cluster-eksRole-role-a2f560f-20210602141010796300000002",
+                    "policyArn": "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
+                    "role": "demo-cluster-eksRole-role-a2f560f"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole::demo-cluster-eksRole",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-eksRole-role"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "policyArn": null,
+                    "role": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-eksRole-role"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-instanceRole-3eb088f2",
+                "custom": true,
+                "id": "demo-cluster-instanceRole-role-70b7324-20210602141011115800000004",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "inputs": {
+                    "__defaults": [],
+                    "policyArn": "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+                    "role": "demo-cluster-instanceRole-role-70b7324"
+                },
+                "outputs": {
+                    "id": "demo-cluster-instanceRole-role-70b7324-20210602141011115800000004",
+                    "policyArn": "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+                    "role": "demo-cluster-instanceRole-role-70b7324"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole::demo-cluster-instanceRole",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-instanceRole-role"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "policyArn": null,
+                    "role": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-instanceRole-role"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-instanceRole-e1b295bd",
+                "custom": true,
+                "id": "demo-cluster-instanceRole-role-70b7324-20210602141011243600000005",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "inputs": {
+                    "__defaults": [],
+                    "policyArn": "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+                    "role": "demo-cluster-instanceRole-role-70b7324"
+                },
+                "outputs": {
+                    "id": "demo-cluster-instanceRole-role-70b7324-20210602141011243600000005",
+                    "policyArn": "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+                    "role": "demo-cluster-instanceRole-role-70b7324"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole::demo-cluster-instanceRole",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-instanceRole-role"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "policyArn": null,
+                    "role": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-instanceRole-role"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-instanceRole-03516f97",
+                "custom": true,
+                "id": "demo-cluster-instanceRole-role-70b7324-20210602141010934000000003",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "inputs": {
+                    "__defaults": [],
+                    "policyArn": "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+                    "role": "demo-cluster-instanceRole-role-70b7324"
+                },
+                "outputs": {
+                    "id": "demo-cluster-instanceRole-role-70b7324-20210602141010934000000003",
+                    "policyArn": "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+                    "role": "demo-cluster-instanceRole-role-70b7324"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole::demo-cluster-instanceRole",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-instanceRole-role"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "policyArn": null,
+                    "role": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-instanceRole-role"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:InternetGateway$aws:ec2/internetGateway:InternetGateway::demo-vpc",
+                "custom": true,
+                "id": "igw-0374c866b9b2d35f6",
+                "type": "aws:ec2/internetGateway:InternetGateway",
+                "inputs": {
+                    "__defaults": [],
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "outputs": {
+                    "arn": "arn:aws:ec2:us-east-1:052848974346:internet-gateway/igw-0374c866b9b2d35f6",
+                    "id": "igw-0374c866b9b2d35f6",
+                    "ownerId": "052848974346",
+                    "tags": {},
+                    "tagsAll": {},
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:InternetGateway::demo-vpc",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "vpcId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-private-0",
+                "custom": true,
+                "id": "rtb-026029ea3acb887b4",
+                "type": "aws:ec2/routeTable:RouteTable",
+                "inputs": {
+                    "__defaults": [],
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "outputs": {
+                    "arn": "arn:aws:ec2:us-east-1:052848974346:route-table/rtb-026029ea3acb887b4",
+                    "id": "rtb-026029ea3acb887b4",
+                    "ownerId": "052848974346",
+                    "propagatingVgws": [],
+                    "routes": [],
+                    "tags": {},
+                    "tagsAll": {},
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-private-0",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "vpcId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-private-0"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-0",
+                "custom": true,
+                "id": "subnet-0430bdcbc059e2e76",
+                "type": "aws:ec2/subnet:Subnet",
+                "inputs": {
+                    "__defaults": [],
+                    "assignIpv6AddressOnCreation": false,
+                    "availabilityZone": "us-east-1a",
+                    "cidrBlock": "10.0.0.0/18",
+                    "mapPublicIpOnLaunch": true,
+                    "tags": {
+                        "Name": "demo-vpc-public-0",
+                        "__defaults": [],
+                        "type": "public"
+                    },
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":1200000000000},\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:us-east-1:052848974346:subnet/subnet-0430bdcbc059e2e76",
+                    "assignIpv6AddressOnCreation": false,
+                    "availabilityZone": "us-east-1a",
+                    "availabilityZoneId": "use1-az1",
+                    "cidrBlock": "10.0.0.0/18",
+                    "customerOwnedIpv4Pool": "",
+                    "id": "subnet-0430bdcbc059e2e76",
+                    "ipv6CidrBlock": "",
+                    "ipv6CidrBlockAssociationId": "",
+                    "mapCustomerOwnedIpOnLaunch": false,
+                    "mapPublicIpOnLaunch": true,
+                    "outpostArn": "",
+                    "ownerId": "052848974346",
+                    "tags": {
+                        "Name": "demo-vpc-public-0",
+                        "type": "public"
+                    },
+                    "tagsAll": {
+                        "Name": "demo-vpc-public-0",
+                        "type": "public"
+                    },
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-public-0",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "assignIpv6AddressOnCreation": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                    ],
+                    "availabilityZone": null,
+                    "cidrBlock": null,
+                    "mapPublicIpOnLaunch": null,
+                    "tags": null,
+                    "vpcId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-0"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-public-0",
+                "custom": true,
+                "id": "rtb-0dad4318634fef417",
+                "type": "aws:ec2/routeTable:RouteTable",
+                "inputs": {
+                    "__defaults": [],
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "outputs": {
+                    "arn": "arn:aws:ec2:us-east-1:052848974346:route-table/rtb-0dad4318634fef417",
+                    "id": "rtb-0dad4318634fef417",
+                    "ownerId": "052848974346",
+                    "propagatingVgws": [],
+                    "routes": [],
+                    "tags": {},
+                    "tagsAll": {},
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-public-0",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "vpcId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-public-0"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-private-1",
+                "custom": true,
+                "id": "rtb-0381a5ccf7eeff56d",
+                "type": "aws:ec2/routeTable:RouteTable",
+                "inputs": {
+                    "__defaults": [],
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "outputs": {
+                    "arn": "arn:aws:ec2:us-east-1:052848974346:route-table/rtb-0381a5ccf7eeff56d",
+                    "id": "rtb-0381a5ccf7eeff56d",
+                    "ownerId": "052848974346",
+                    "propagatingVgws": [],
+                    "routes": [],
+                    "tags": {},
+                    "tagsAll": {},
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-private-1",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "vpcId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-private-1"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-private-0",
+                "custom": true,
+                "id": "subnet-07d9663c73334d8cc",
+                "type": "aws:ec2/subnet:Subnet",
+                "inputs": {
+                    "__defaults": [],
+                    "assignIpv6AddressOnCreation": false,
+                    "availabilityZone": "us-east-1a",
+                    "cidrBlock": "10.0.128.0/18",
+                    "mapPublicIpOnLaunch": false,
+                    "tags": {
+                        "Name": "demo-vpc-private-0",
+                        "__defaults": [],
+                        "type": "private"
+                    },
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":1200000000000},\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:us-east-1:052848974346:subnet/subnet-07d9663c73334d8cc",
+                    "assignIpv6AddressOnCreation": false,
+                    "availabilityZone": "us-east-1a",
+                    "availabilityZoneId": "use1-az1",
+                    "cidrBlock": "10.0.128.0/18",
+                    "customerOwnedIpv4Pool": "",
+                    "id": "subnet-07d9663c73334d8cc",
+                    "ipv6CidrBlock": "",
+                    "ipv6CidrBlockAssociationId": "",
+                    "mapCustomerOwnedIpOnLaunch": false,
+                    "mapPublicIpOnLaunch": false,
+                    "outpostArn": "",
+                    "ownerId": "052848974346",
+                    "tags": {
+                        "Name": "demo-vpc-private-0",
+                        "type": "private"
+                    },
+                    "tagsAll": {
+                        "Name": "demo-vpc-private-0",
+                        "type": "private"
+                    },
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-private-0",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "assignIpv6AddressOnCreation": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                    ],
+                    "availabilityZone": null,
+                    "cidrBlock": null,
+                    "mapPublicIpOnLaunch": null,
+                    "tags": null,
+                    "vpcId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-private-0"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-eksClusterSecurityGroup",
+                "custom": true,
+                "id": "sg-03b67109e21ffa294",
+                "type": "aws:ec2/securityGroup:SecurityGroup",
+                "inputs": {
+                    "__defaults": [
+                        "name"
+                    ],
+                    "description": "Managed by Pulumi",
+                    "name": "demo-cluster-eksClusterSecurityGroup-0247c44",
+                    "revokeRulesOnDelete": true,
+                    "tags": {
+                        "Name": "demo-cluster-eksClusterSecurityGroup",
+                        "__defaults": [],
+                        "console": "no",
+                        "env": "dev",
+                        "github": "pulumi-homelab",
+                        "owner": "shaht",
+                        "pulumi": "yes"
+                    },
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":900000000000},\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:us-east-1:052848974346:security-group/sg-03b67109e21ffa294",
+                    "description": "Managed by Pulumi",
+                    "egress": [],
+                    "id": "sg-03b67109e21ffa294",
+                    "ingress": [],
+                    "name": "demo-cluster-eksClusterSecurityGroup-0247c44",
+                    "namePrefix": "",
+                    "ownerId": "052848974346",
+                    "revokeRulesOnDelete": true,
+                    "tags": {
+                        "Name": "demo-cluster-eksClusterSecurityGroup",
+                        "console": "no",
+                        "env": "dev",
+                        "github": "pulumi-homelab",
+                        "owner": "shaht",
+                        "pulumi": "yes"
+                    },
+                    "tagsAll": {
+                        "Name": "demo-cluster-eksClusterSecurityGroup",
+                        "console": "no",
+                        "env": "dev",
+                        "github": "pulumi-homelab",
+                        "owner": "shaht",
+                        "pulumi": "yes"
+                    },
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "description": null,
+                    "revokeRulesOnDelete": null,
+                    "tags": null,
+                    "vpcId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-private-1",
+                "custom": true,
+                "id": "subnet-07b91430398782c3f",
+                "type": "aws:ec2/subnet:Subnet",
+                "inputs": {
+                    "__defaults": [],
+                    "assignIpv6AddressOnCreation": false,
+                    "availabilityZone": "us-east-1b",
+                    "cidrBlock": "10.0.192.0/18",
+                    "mapPublicIpOnLaunch": false,
+                    "tags": {
+                        "Name": "demo-vpc-private-1",
+                        "__defaults": [],
+                        "type": "private"
+                    },
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":1200000000000},\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:us-east-1:052848974346:subnet/subnet-07b91430398782c3f",
+                    "assignIpv6AddressOnCreation": false,
+                    "availabilityZone": "us-east-1b",
+                    "availabilityZoneId": "use1-az2",
+                    "cidrBlock": "10.0.192.0/18",
+                    "customerOwnedIpv4Pool": "",
+                    "id": "subnet-07b91430398782c3f",
+                    "ipv6CidrBlock": "",
+                    "ipv6CidrBlockAssociationId": "",
+                    "mapCustomerOwnedIpOnLaunch": false,
+                    "mapPublicIpOnLaunch": false,
+                    "outpostArn": "",
+                    "ownerId": "052848974346",
+                    "tags": {
+                        "Name": "demo-vpc-private-1",
+                        "type": "private"
+                    },
+                    "tagsAll": {
+                        "Name": "demo-vpc-private-1",
+                        "type": "private"
+                    },
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-private-1",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "assignIpv6AddressOnCreation": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                    ],
+                    "availabilityZone": null,
+                    "cidrBlock": null,
+                    "mapPublicIpOnLaunch": null,
+                    "tags": null,
+                    "vpcId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-private-1"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-1",
+                "custom": true,
+                "id": "subnet-0e587590614c33ffa",
+                "type": "aws:ec2/subnet:Subnet",
+                "inputs": {
+                    "__defaults": [],
+                    "assignIpv6AddressOnCreation": false,
+                    "availabilityZone": "us-east-1b",
+                    "cidrBlock": "10.0.64.0/18",
+                    "mapPublicIpOnLaunch": true,
+                    "tags": {
+                        "Name": "demo-vpc-public-1",
+                        "__defaults": [],
+                        "type": "public"
+                    },
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":1200000000000},\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:us-east-1:052848974346:subnet/subnet-0e587590614c33ffa",
+                    "assignIpv6AddressOnCreation": false,
+                    "availabilityZone": "us-east-1b",
+                    "availabilityZoneId": "use1-az2",
+                    "cidrBlock": "10.0.64.0/18",
+                    "customerOwnedIpv4Pool": "",
+                    "id": "subnet-0e587590614c33ffa",
+                    "ipv6CidrBlock": "",
+                    "ipv6CidrBlockAssociationId": "",
+                    "mapCustomerOwnedIpOnLaunch": false,
+                    "mapPublicIpOnLaunch": true,
+                    "outpostArn": "",
+                    "ownerId": "052848974346",
+                    "tags": {
+                        "Name": "demo-vpc-public-1",
+                        "type": "public"
+                    },
+                    "tagsAll": {
+                        "Name": "demo-vpc-public-1",
+                        "type": "public"
+                    },
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-public-1",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "assignIpv6AddressOnCreation": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                    ],
+                    "availabilityZone": null,
+                    "cidrBlock": null,
+                    "mapPublicIpOnLaunch": null,
+                    "tags": null,
+                    "vpcId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-1"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-public-1",
+                "custom": true,
+                "id": "rtb-05474604c7fc20633",
+                "type": "aws:ec2/routeTable:RouteTable",
+                "inputs": {
+                    "__defaults": [],
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "outputs": {
+                    "arn": "arn:aws:ec2:us-east-1:052848974346:route-table/rtb-05474604c7fc20633",
+                    "id": "rtb-05474604c7fc20633",
+                    "ownerId": "052848974346",
+                    "propagatingVgws": [],
+                    "routes": [],
+                    "tags": {},
+                    "tagsAll": {},
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-public-1",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "vpcId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-public-1"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:iam/instanceProfile:InstanceProfile::demo-cluster-instanceProfile",
+                "custom": true,
+                "id": "demo-cluster-instanceProfile-996482b",
+                "type": "aws:iam/instanceProfile:InstanceProfile",
+                "inputs": {
+                    "__defaults": [
+                        "name",
+                        "path"
+                    ],
+                    "name": "demo-cluster-instanceProfile-996482b",
+                    "path": "/",
+                    "role": "demo-cluster-instanceRole-role-70b7324"
+                },
+                "outputs": {
+                    "arn": "arn:aws:iam::052848974346:instance-profile/demo-cluster-instanceProfile-996482b",
+                    "createDate": "2021-06-02T14:10:12Z",
+                    "id": "demo-cluster-instanceProfile-996482b",
+                    "name": "demo-cluster-instanceProfile-996482b",
+                    "path": "/",
+                    "role": "demo-cluster-instanceRole-role-70b7324",
+                    "tags": {},
+                    "tagsAll": {},
+                    "uniqueId": "AIPAQYTQLLIFIWWT6H7VZ"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-instanceRole-role",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-instanceRole-03516f97",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-instanceRole-3eb088f2",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-instanceRole-e1b295bd"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "role": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-instanceRole-role",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-instanceRole-03516f97",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-instanceRole-e1b295bd",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-instanceRole-3eb088f2"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-public-0",
+                "custom": true,
+                "id": "rtbassoc-01b7aea2bc251b063",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-0dad4318634fef417",
+                    "subnetId": "subnet-0430bdcbc059e2e76"
+                },
+                "outputs": {
+                    "id": "rtbassoc-01b7aea2bc251b063",
+                    "routeTableId": "rtb-0dad4318634fef417",
+                    "subnetId": "subnet-0430bdcbc059e2e76"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-public-0",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-public-0",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-0"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-public-0"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-0"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-public-0"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/route:Route::demo-vpc-public-0-ig",
+                "custom": true,
+                "id": "r-rtb-0dad4318634fef4171080289494",
+                "type": "aws:ec2/route:Route",
+                "inputs": {
+                    "__defaults": [],
+                    "destinationCidrBlock": "0.0.0.0/0",
+                    "gatewayId": "igw-0374c866b9b2d35f6",
+                    "routeTableId": "rtb-0dad4318634fef417"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":120000000000,\"delete\":300000000000}}",
+                    "carrierGatewayId": "",
+                    "destinationCidrBlock": "0.0.0.0/0",
+                    "destinationIpv6CidrBlock": "",
+                    "destinationPrefixListId": "",
+                    "egressOnlyGatewayId": "",
+                    "gatewayId": "igw-0374c866b9b2d35f6",
+                    "id": "r-rtb-0dad4318634fef4171080289494",
+                    "instanceId": "",
+                    "instanceOwnerId": "",
+                    "localGatewayId": "",
+                    "natGatewayId": "",
+                    "networkInterfaceId": "",
+                    "origin": "CreateRoute",
+                    "routeTableId": "rtb-0dad4318634fef417",
+                    "state": "active",
+                    "transitGatewayId": "",
+                    "vpcEndpointId": "",
+                    "vpcPeeringConnectionId": ""
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-public-0",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:InternetGateway$aws:ec2/internetGateway:InternetGateway::demo-vpc",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-public-0"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "destinationCidrBlock": null,
+                    "gatewayId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:InternetGateway$aws:ec2/internetGateway:InternetGateway::demo-vpc"
+                    ],
+                    "routeTableId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-public-0"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/route:Route::demo-vpc-public-0-ig"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-private-0",
+                "custom": true,
+                "id": "rtbassoc-0dde30ea085d8165c",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-026029ea3acb887b4",
+                    "subnetId": "subnet-07d9663c73334d8cc"
+                },
+                "outputs": {
+                    "id": "rtbassoc-0dde30ea085d8165c",
+                    "routeTableId": "rtb-026029ea3acb887b4",
+                    "subnetId": "subnet-07d9663c73334d8cc"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-private-0",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-private-0",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-private-0"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-private-0"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-private-0"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-private-0"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroupRule:SecurityGroupRule::demo-cluster-eksClusterInternetEgressRule",
+                "custom": true,
+                "id": "sgrule-1121950919",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [],
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "Allow internet access.",
+                    "fromPort": 0,
+                    "protocol": "-1",
+                    "securityGroupId": "sg-03b67109e21ffa294",
+                    "toPort": 0,
+                    "type": "egress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "Allow internet access.",
+                    "fromPort": 0,
+                    "id": "sgrule-1121950919",
+                    "protocol": "-1",
+                    "securityGroupId": "sg-03b67109e21ffa294",
+                    "self": false,
+                    "toPort": 0,
+                    "type": "egress"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-eksClusterSecurityGroup"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "cidrBlocks": null,
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-eksClusterSecurityGroup"
+                    ],
+                    "toPort": null,
+                    "type": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-private-1",
+                "custom": true,
+                "id": "rtbassoc-033c8e48e5686d3ad",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-0381a5ccf7eeff56d",
+                    "subnetId": "subnet-07b91430398782c3f"
+                },
+                "outputs": {
+                    "id": "rtbassoc-033c8e48e5686d3ad",
+                    "routeTableId": "rtb-0381a5ccf7eeff56d",
+                    "subnetId": "subnet-07b91430398782c3f"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-private-1",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-private-1",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-private-1"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-private-1"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-private-1"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-private-1"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-public-1",
+                "custom": true,
+                "id": "rtbassoc-00dc7789abd761a0c",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-05474604c7fc20633",
+                    "subnetId": "subnet-0e587590614c33ffa"
+                },
+                "outputs": {
+                    "id": "rtbassoc-00dc7789abd761a0c",
+                    "routeTableId": "rtb-05474604c7fc20633",
+                    "subnetId": "subnet-0e587590614c33ffa"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-public-1",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-public-1",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-1"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-public-1"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-1"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-public-1"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/route:Route::demo-vpc-public-1-ig",
+                "custom": true,
+                "id": "r-rtb-05474604c7fc206331080289494",
+                "type": "aws:ec2/route:Route",
+                "inputs": {
+                    "__defaults": [],
+                    "destinationCidrBlock": "0.0.0.0/0",
+                    "gatewayId": "igw-0374c866b9b2d35f6",
+                    "routeTableId": "rtb-05474604c7fc20633"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":120000000000,\"delete\":300000000000}}",
+                    "carrierGatewayId": "",
+                    "destinationCidrBlock": "0.0.0.0/0",
+                    "destinationIpv6CidrBlock": "",
+                    "destinationPrefixListId": "",
+                    "egressOnlyGatewayId": "",
+                    "gatewayId": "igw-0374c866b9b2d35f6",
+                    "id": "r-rtb-05474604c7fc206331080289494",
+                    "instanceId": "",
+                    "instanceOwnerId": "",
+                    "localGatewayId": "",
+                    "natGatewayId": "",
+                    "networkInterfaceId": "",
+                    "origin": "CreateRoute",
+                    "routeTableId": "rtb-05474604c7fc20633",
+                    "state": "active",
+                    "transitGatewayId": "",
+                    "vpcEndpointId": "",
+                    "vpcPeeringConnectionId": ""
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-public-1",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:InternetGateway$aws:ec2/internetGateway:InternetGateway::demo-vpc",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-public-1"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "destinationCidrBlock": null,
+                    "gatewayId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:InternetGateway$aws:ec2/internetGateway:InternetGateway::demo-vpc"
+                    ],
+                    "routeTableId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-public-1"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/route:Route::demo-vpc-public-1-ig"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway$aws:ec2/natGateway:NatGateway::demo-vpc-0",
+                "custom": true,
+                "id": "nat-0a93646386a5ab968",
+                "type": "aws:ec2/natGateway:NatGateway",
+                "inputs": {
+                    "__defaults": [],
+                    "allocationId": "eipalloc-0da793a0759b87609",
+                    "subnetId": "subnet-0430bdcbc059e2e76"
+                },
+                "outputs": {
+                    "allocationId": "eipalloc-0da793a0759b87609",
+                    "id": "nat-0a93646386a5ab968",
+                    "networkInterfaceId": "eni-0d5f755f2341f9919",
+                    "privateIp": "10.0.30.195",
+                    "publicIp": "52.204.241.177",
+                    "subnetId": "subnet-0430bdcbc059e2e76",
+                    "tags": {},
+                    "tagsAll": {}
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway::demo-vpc-0",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway$aws:ec2/eip:Eip::demo-vpc-0",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-public-0",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-0"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "allocationId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway$aws:ec2/eip:Eip::demo-vpc-0"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-0",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-public-0"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway$aws:ec2/natGateway:NatGateway::demo-vpc-1",
+                "custom": true,
+                "id": "nat-079c2abe53d98700b",
+                "type": "aws:ec2/natGateway:NatGateway",
+                "inputs": {
+                    "__defaults": [],
+                    "allocationId": "eipalloc-015009e4964bc9e0b",
+                    "subnetId": "subnet-0e587590614c33ffa"
+                },
+                "outputs": {
+                    "allocationId": "eipalloc-015009e4964bc9e0b",
+                    "id": "nat-079c2abe53d98700b",
+                    "networkInterfaceId": "eni-02d6de5255e633ad1",
+                    "privateIp": "10.0.99.32",
+                    "publicIp": "54.210.79.167",
+                    "subnetId": "subnet-0e587590614c33ffa",
+                    "tags": {},
+                    "tagsAll": {}
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway::demo-vpc-1",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway$aws:ec2/eip:Eip::demo-vpc-1",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-public-1",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-1"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "allocationId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway$aws:ec2/eip:Eip::demo-vpc-1"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-1",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-public-1"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:eks/cluster:Cluster::demo-cluster-eksCluster",
+                "custom": true,
+                "id": "demo-cluster-eksCluster-01e7231",
+                "type": "aws:eks/cluster:Cluster",
+                "inputs": {
+                    "__defaults": [
+                        "name"
+                    ],
+                    "enabledClusterLogTypes": [
+                        "api",
+                        "audit",
+                        "authenticator",
+                        "controllerManager",
+                        "scheduler"
+                    ],
+                    "name": "demo-cluster-eksCluster-01e7231",
+                    "roleArn": "arn:aws:iam::052848974346:role/demo-cluster-eksRole-role-a2f560f",
+                    "tags": {
+                        "Name": "demo-cluster-eksCluster",
+                        "__defaults": [],
+                        "console": "no",
+                        "env": "dev",
+                        "github": "pulumi-homelab",
+                        "owner": "shaht",
+                        "pulumi": "yes"
+                    },
+                    "version": "1.19",
+                    "vpcConfig": {
+                        "__defaults": [
+                            "endpointPrivateAccess",
+                            "endpointPublicAccess"
+                        ],
+                        "endpointPrivateAccess": false,
+                        "endpointPublicAccess": true,
+                        "securityGroupIds": [
+                            "sg-03b67109e21ffa294"
+                        ],
+                        "subnetIds": [
+                            "subnet-0430bdcbc059e2e76",
+                            "subnet-0e587590614c33ffa",
+                            "subnet-07d9663c73334d8cc",
+                            "subnet-07b91430398782c3f"
+                        ]
+                    }
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":1800000000000,\"delete\":900000000000,\"update\":3600000000000}}",
+                    "arn": "arn:aws:eks:us-east-1:052848974346:cluster/demo-cluster-eksCluster-01e7231",
+                    "certificateAuthority": {
+                        "data": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1EWXdNakUwTWpNeU0xb1hEVE14TURVek1URTBNak15TTFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTFg0CmRnY1BjTmN5L3lUVjdYeFJIZXBFZGM3U1c5Uy95WjE1VkloRWVkbHNja3gvb3ljNDFQWGxTSkRZYUI4MFY4bTgKU29KTVZtNmVRc2Z1TlNNU294aVdHMDdIdFpsS012VHR5cUpuYkZMMFErNWVBdzNhSGNOVDBYOHR2T2lTckVnKwozRG1SRTdsVUs5LzVSdmxXNG1wWGxpa2pqVDJRVFRScDBpaWFuQVlRN05DNXpsVHZUNnRJNWlGczFjbmRPQU1yCmwrdDRoQVdieDE4RGR4eG9KL1VDeHR5SVg3MDlHZnA1SkViV2J6c3JyOGV3ck9jdnhoQUVyWmdmWkd3NXVLZXUKTkZlVmdQeGFzWi9HSUJLMmtVaG1MV3BLOHBSSm1udWFzeGI0V05mSm1aYmJJOWIrVmtPN0l1elpCdDdFeFE5SgpOMmZOQjdTK0dZTHcvaitXRHlNQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZDM1k0K0xxU2JWY1dEMm8yY3U4QmtJcWhmdmlNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFDYW1tcUM5WGo0bUFYcmwrUklndlV4WDF4SElJdmVzY3l0cGM4enZkeFNHSGtkODBoQgp0Vkw3MGNBbjFKMi9ob2ZhRllxd1FESE9LL1pBM1A0V2ZqZUY4U1JaV1hubGdZeTZKMzBQNitkNE8vZCtyZ3J6CkhvSTdQZ2tOeEZYeUVtR01GVDJDQWtlaUNMaUNKVm9RWmxXSm5PMG9GV0ZOR3NJakJtNElXbmVTSXhQL1pteVYKRHBERStpR3R1NnBFaE9kSU95OFlRTHhPSEJsNnIrcFhRMWdiUy9hSjhFb2UrZWFtM285VVcwUHByd2hPSzNNUgpnb2dEeGhrbjkvSjJLeW83YWI1TjZuSzE0dllaelZZRWhkdW5xaGtZUHB4ek1pSzRiY1F4d1hMZlFHWmFtbzNXCk0wYWl6RkVtU2thOS9yMjN1cy9JNW9qZ3dxN2YzYndoUFovdQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg=="
+                    },
+                    "createdAt": "2021-06-02 14:16:40.292 +0000 UTC",
+                    "enabledClusterLogTypes": [
+                        "controllerManager",
+                        "scheduler",
+                        "authenticator",
+                        "audit",
+                        "api"
+                    ],
+                    "encryptionConfig": null,
+                    "endpoint": "https://33B8F8F0EF6A1522DD0874CF5BD3C543.gr7.us-east-1.eks.amazonaws.com",
+                    "id": "demo-cluster-eksCluster-01e7231",
+                    "identities": [
+                        {
+                            "oidcs": [
+                                {
+                                    "issuer": "https://oidc.eks.us-east-1.amazonaws.com/id/33B8F8F0EF6A1522DD0874CF5BD3C543"
+                                }
+                            ]
+                        }
+                    ],
+                    "kubernetesNetworkConfig": {
+                        "serviceIpv4Cidr": "172.20.0.0/16"
+                    },
+                    "name": "demo-cluster-eksCluster-01e7231",
+                    "platformVersion": "eks.5",
+                    "roleArn": "arn:aws:iam::052848974346:role/demo-cluster-eksRole-role-a2f560f",
+                    "status": "ACTIVE",
+                    "tags": {
+                        "Name": "demo-cluster-eksCluster",
+                        "console": "no",
+                        "env": "dev",
+                        "github": "pulumi-homelab",
+                        "owner": "shaht",
+                        "pulumi": "yes"
+                    },
+                    "tagsAll": {
+                        "Name": "demo-cluster-eksCluster",
+                        "console": "no",
+                        "env": "dev",
+                        "github": "pulumi-homelab",
+                        "owner": "shaht",
+                        "pulumi": "yes"
+                    },
+                    "version": "1.19",
+                    "vpcConfig": {
+                        "clusterSecurityGroupId": "sg-00a7c30b1b3484e7a",
+                        "endpointPrivateAccess": false,
+                        "endpointPublicAccess": true,
+                        "publicAccessCidrs": [
+                            "0.0.0.0/0"
+                        ],
+                        "securityGroupIds": [
+                            "sg-03b67109e21ffa294"
+                        ],
+                        "subnetIds": [
+                            "subnet-0430bdcbc059e2e76",
+                            "subnet-07b91430398782c3f",
+                            "subnet-07d9663c73334d8cc",
+                            "subnet-0e587590614c33ffa"
+                        ],
+                        "vpcId": "vpc-052795e946b755a53"
+                    }
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-private-0",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-private-1",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-public-0",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-public-1",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-private-0",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-private-1",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-0",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-1",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-eksClusterSecurityGroup",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-eksRole-role",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-eksRole-4b490823",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-eksRole-90eb1c99"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "enabledClusterLogTypes": null,
+                    "roleArn": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-eksRole-role",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-eksRole-4b490823",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-eksRole-90eb1c99"
+                    ],
+                    "tags": null,
+                    "version": null,
+                    "vpcConfig": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-eksClusterSecurityGroup",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-0",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-public-0",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-public-1",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-public-1",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-private-0",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-private-0",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/subnet:Subnet::demo-vpc-private-1",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTableAssociation:RouteTableAssociation::demo-vpc-private-1"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/route:Route::demo-vpc-private-0-nat-0",
+                "custom": true,
+                "id": "r-rtb-026029ea3acb887b41080289494",
+                "type": "aws:ec2/route:Route",
+                "inputs": {
+                    "__defaults": [],
+                    "destinationCidrBlock": "0.0.0.0/0",
+                    "natGatewayId": "nat-0a93646386a5ab968",
+                    "routeTableId": "rtb-026029ea3acb887b4"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":120000000000,\"delete\":300000000000}}",
+                    "carrierGatewayId": "",
+                    "destinationCidrBlock": "0.0.0.0/0",
+                    "destinationIpv6CidrBlock": "",
+                    "destinationPrefixListId": "",
+                    "egressOnlyGatewayId": "",
+                    "gatewayId": "",
+                    "id": "r-rtb-026029ea3acb887b41080289494",
+                    "instanceId": "",
+                    "instanceOwnerId": "",
+                    "localGatewayId": "",
+                    "natGatewayId": "nat-0a93646386a5ab968",
+                    "networkInterfaceId": "",
+                    "origin": "CreateRoute",
+                    "routeTableId": "rtb-026029ea3acb887b4",
+                    "state": "active",
+                    "transitGatewayId": "",
+                    "vpcEndpointId": "",
+                    "vpcPeeringConnectionId": ""
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-private-0",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway$aws:ec2/natGateway:NatGateway::demo-vpc-0",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-private-0"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "destinationCidrBlock": null,
+                    "natGatewayId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway$aws:ec2/natGateway:NatGateway::demo-vpc-0"
+                    ],
+                    "routeTableId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-private-0"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/route:Route::demo-vpc-private-0-nat-0"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/route:Route::demo-vpc-private-1-nat-1",
+                "custom": true,
+                "id": "r-rtb-0381a5ccf7eeff56d1080289494",
+                "type": "aws:ec2/route:Route",
+                "inputs": {
+                    "__defaults": [],
+                    "destinationCidrBlock": "0.0.0.0/0",
+                    "natGatewayId": "nat-079c2abe53d98700b",
+                    "routeTableId": "rtb-0381a5ccf7eeff56d"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":120000000000,\"delete\":300000000000}}",
+                    "carrierGatewayId": "",
+                    "destinationCidrBlock": "0.0.0.0/0",
+                    "destinationIpv6CidrBlock": "",
+                    "destinationPrefixListId": "",
+                    "egressOnlyGatewayId": "",
+                    "gatewayId": "",
+                    "id": "r-rtb-0381a5ccf7eeff56d1080289494",
+                    "instanceId": "",
+                    "instanceOwnerId": "",
+                    "localGatewayId": "",
+                    "natGatewayId": "nat-079c2abe53d98700b",
+                    "networkInterfaceId": "",
+                    "origin": "CreateRoute",
+                    "routeTableId": "rtb-0381a5ccf7eeff56d",
+                    "state": "active",
+                    "transitGatewayId": "",
+                    "vpcEndpointId": "",
+                    "vpcPeeringConnectionId": ""
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::demo-vpc-private-1",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway$aws:ec2/natGateway:NatGateway::demo-vpc-1",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-private-1"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "destinationCidrBlock": null,
+                    "natGatewayId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:NatGateway$aws:ec2/natGateway:NatGateway::demo-vpc-1"
+                    ],
+                    "routeTableId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet$aws:ec2/routeTable:RouteTable::demo-vpc-private-1"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Subnet$aws:ec2/route:Route::demo-vpc-private-1-nat-1"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-nodeSecurityGroup",
+                "custom": true,
+                "id": "sg-0e57aef3a081e6192",
+                "type": "aws:ec2/securityGroup:SecurityGroup",
+                "inputs": {
+                    "__defaults": [
+                        "name"
+                    ],
+                    "description": "Managed by Pulumi",
+                    "name": "demo-cluster-nodeSecurityGroup-77643db",
+                    "revokeRulesOnDelete": true,
+                    "tags": {
+                        "Name": "demo-cluster-nodeSecurityGroup",
+                        "__defaults": [],
+                        "console": "no",
+                        "env": "dev",
+                        "github": "pulumi-homelab",
+                        "kubernetes.io/cluster/demo-cluster-eksCluster-01e7231": "owned",
+                        "owner": "shaht",
+                        "pulumi": "yes"
+                    },
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":900000000000},\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:us-east-1:052848974346:security-group/sg-0e57aef3a081e6192",
+                    "description": "Managed by Pulumi",
+                    "egress": [],
+                    "id": "sg-0e57aef3a081e6192",
+                    "ingress": [],
+                    "name": "demo-cluster-nodeSecurityGroup-77643db",
+                    "namePrefix": "",
+                    "ownerId": "052848974346",
+                    "revokeRulesOnDelete": true,
+                    "tags": {
+                        "Name": "demo-cluster-nodeSecurityGroup",
+                        "console": "no",
+                        "env": "dev",
+                        "github": "pulumi-homelab",
+                        "kubernetes.io/cluster/demo-cluster-eksCluster-01e7231": "owned",
+                        "owner": "shaht",
+                        "pulumi": "yes"
+                    },
+                    "tagsAll": {
+                        "Name": "demo-cluster-nodeSecurityGroup",
+                        "console": "no",
+                        "env": "dev",
+                        "github": "pulumi-homelab",
+                        "kubernetes.io/cluster/demo-cluster-eksCluster-01e7231": "owned",
+                        "owner": "shaht",
+                        "pulumi": "yes"
+                    },
+                    "vpcId": "vpc-052795e946b755a53"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:eks/cluster:Cluster::demo-cluster-eksCluster"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "description": null,
+                    "revokeRulesOnDelete": null,
+                    "tags": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:eks/cluster:Cluster::demo-cluster-eksCluster"
+                    ],
+                    "vpcId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::awsx:x:ec2:Vpc$aws:ec2/vpc:Vpc::demo-vpc"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroupRule:SecurityGroupRule::demo-cluster-eksClusterIngressRule",
+                "custom": true,
+                "id": "sgrule-709306952",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [],
+                    "description": "Allow pods to communicate with the cluster API Server",
+                    "fromPort": 443,
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-03b67109e21ffa294",
+                    "sourceSecurityGroupId": "sg-0e57aef3a081e6192",
+                    "toPort": 443,
+                    "type": "ingress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "description": "Allow pods to communicate with the cluster API Server",
+                    "fromPort": 443,
+                    "id": "sgrule-709306952",
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-03b67109e21ffa294",
+                    "self": false,
+                    "sourceSecurityGroupId": "sg-0e57aef3a081e6192",
+                    "toPort": 443,
+                    "type": "ingress"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-eksClusterSecurityGroup",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-nodeSecurityGroup"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-eksClusterSecurityGroup"
+                    ],
+                    "sourceSecurityGroupId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-nodeSecurityGroup"
+                    ],
+                    "toPort": null,
+                    "type": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroupRule:SecurityGroupRule::demo-cluster-eksNodeInternetEgressRule",
+                "custom": true,
+                "id": "sgrule-2520818883",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [],
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "Allow internet access.",
+                    "fromPort": 0,
+                    "protocol": "-1",
+                    "securityGroupId": "sg-0e57aef3a081e6192",
+                    "toPort": 0,
+                    "type": "egress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "Allow internet access.",
+                    "fromPort": 0,
+                    "id": "sgrule-2520818883",
+                    "protocol": "-1",
+                    "securityGroupId": "sg-0e57aef3a081e6192",
+                    "self": false,
+                    "toPort": 0,
+                    "type": "egress"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-nodeSecurityGroup"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "cidrBlocks": null,
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-nodeSecurityGroup"
+                    ],
+                    "toPort": null,
+                    "type": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroupRule:SecurityGroupRule::demo-cluster-eksNodeClusterIngressRule",
+                "custom": true,
+                "id": "sgrule-2190939966",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [],
+                    "description": "Allow worker Kubelets and pods to receive communication from the cluster control plane",
+                    "fromPort": 1025,
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0e57aef3a081e6192",
+                    "sourceSecurityGroupId": "sg-03b67109e21ffa294",
+                    "toPort": 65535,
+                    "type": "ingress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "description": "Allow worker Kubelets and pods to receive communication from the cluster control plane",
+                    "fromPort": 1025,
+                    "id": "sgrule-2190939966",
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0e57aef3a081e6192",
+                    "self": false,
+                    "sourceSecurityGroupId": "sg-03b67109e21ffa294",
+                    "toPort": 65535,
+                    "type": "ingress"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-eksClusterSecurityGroup",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-nodeSecurityGroup"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-nodeSecurityGroup"
+                    ],
+                    "sourceSecurityGroupId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-eksClusterSecurityGroup"
+                    ],
+                    "toPort": null,
+                    "type": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroupRule:SecurityGroupRule::demo-cluster-eksNodeIngressRule",
+                "custom": true,
+                "id": "sgrule-1428197643",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [],
+                    "description": "Allow nodes to communicate with each other",
+                    "fromPort": 0,
+                    "protocol": "-1",
+                    "securityGroupId": "sg-0e57aef3a081e6192",
+                    "self": true,
+                    "toPort": 0,
+                    "type": "ingress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "description": "Allow nodes to communicate with each other",
+                    "fromPort": 0,
+                    "id": "sgrule-1428197643",
+                    "protocol": "-1",
+                    "securityGroupId": "sg-0e57aef3a081e6192",
+                    "self": true,
+                    "toPort": 0,
+                    "type": "ingress"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-nodeSecurityGroup"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-nodeSecurityGroup"
+                    ],
+                    "self": null,
+                    "toPort": null,
+                    "type": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroupRule:SecurityGroupRule::demo-cluster-eksExtApiServerClusterIngressRule",
+                "custom": true,
+                "id": "sgrule-4272037916",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [],
+                    "description": "Allow pods running extension API servers on port 443 to receive communication from cluster control plane",
+                    "fromPort": 443,
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0e57aef3a081e6192",
+                    "sourceSecurityGroupId": "sg-03b67109e21ffa294",
+                    "toPort": 443,
+                    "type": "ingress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "description": "Allow pods running extension API servers on port 443 to receive communication from cluster control plane",
+                    "fromPort": 443,
+                    "id": "sgrule-4272037916",
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0e57aef3a081e6192",
+                    "self": false,
+                    "sourceSecurityGroupId": "sg-03b67109e21ffa294",
+                    "toPort": 443,
+                    "type": "ingress"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-eksClusterSecurityGroup",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-nodeSecurityGroup"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-nodeSecurityGroup"
+                    ],
+                    "sourceSecurityGroupId": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-eksClusterSecurityGroup"
+                    ],
+                    "toPort": null,
+                    "type": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$pulumi:providers:kubernetes::demo-cluster-eks-k8s",
+                "custom": true,
+                "id": "4ba0a4f2-c8f1-442a-a2d8-1b276b2ca409",
+                "type": "pulumi:providers:kubernetes",
+                "inputs": {
+                    "kubeconfig": "{\"apiVersion\":\"v1\",\"clusters\":[{\"cluster\":{\"server\":\"https://33B8F8F0EF6A1522DD0874CF5BD3C543.gr7.us-east-1.eks.amazonaws.com\",\"certificate-authority-data\":\"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1EWXdNakUwTWpNeU0xb1hEVE14TURVek1URTBNak15TTFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTFg0CmRnY1BjTmN5L3lUVjdYeFJIZXBFZGM3U1c5Uy95WjE1VkloRWVkbHNja3gvb3ljNDFQWGxTSkRZYUI4MFY4bTgKU29KTVZtNmVRc2Z1TlNNU294aVdHMDdIdFpsS012VHR5cUpuYkZMMFErNWVBdzNhSGNOVDBYOHR2T2lTckVnKwozRG1SRTdsVUs5LzVSdmxXNG1wWGxpa2pqVDJRVFRScDBpaWFuQVlRN05DNXpsVHZUNnRJNWlGczFjbmRPQU1yCmwrdDRoQVdieDE4RGR4eG9KL1VDeHR5SVg3MDlHZnA1SkViV2J6c3JyOGV3ck9jdnhoQUVyWmdmWkd3NXVLZXUKTkZlVmdQeGFzWi9HSUJLMmtVaG1MV3BLOHBSSm1udWFzeGI0V05mSm1aYmJJOWIrVmtPN0l1elpCdDdFeFE5SgpOMmZOQjdTK0dZTHcvaitXRHlNQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZDM1k0K0xxU2JWY1dEMm8yY3U4QmtJcWhmdmlNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFDYW1tcUM5WGo0bUFYcmwrUklndlV4WDF4SElJdmVzY3l0cGM4enZkeFNHSGtkODBoQgp0Vkw3MGNBbjFKMi9ob2ZhRllxd1FESE9LL1pBM1A0V2ZqZUY4U1JaV1hubGdZeTZKMzBQNitkNE8vZCtyZ3J6CkhvSTdQZ2tOeEZYeUVtR01GVDJDQWtlaUNMaUNKVm9RWmxXSm5PMG9GV0ZOR3NJakJtNElXbmVTSXhQL1pteVYKRHBERStpR3R1NnBFaE9kSU95OFlRTHhPSEJsNnIrcFhRMWdiUy9hSjhFb2UrZWFtM285VVcwUHByd2hPSzNNUgpnb2dEeGhrbjkvSjJLeW83YWI1TjZuSzE0dllaelZZRWhkdW5xaGtZUHB4ek1pSzRiY1F4d1hMZlFHWmFtbzNXCk0wYWl6RkVtU2thOS9yMjN1cy9JNW9qZ3dxN2YzYndoUFovdQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==\"},\"name\":\"kubernetes\"}],\"contexts\":[{\"context\":{\"cluster\":\"kubernetes\",\"user\":\"aws\"},\"name\":\"aws\"}],\"current-context\":\"aws\",\"kind\":\"Config\",\"users\":[{\"name\":\"aws\",\"user\":{\"exec\":{\"apiVersion\":\"client.authentication.k8s.io/v1alpha1\",\"command\":\"aws\",\"args\":[\"eks\",\"get-token\",\"--cluster-name\",\"demo-cluster-eksCluster-01e7231\"]}}}]}",
+                    "version": "3.3.0"
+                },
+                "outputs": {
+                    "kubeconfig": "{\"apiVersion\":\"v1\",\"clusters\":[{\"cluster\":{\"server\":\"https://33B8F8F0EF6A1522DD0874CF5BD3C543.gr7.us-east-1.eks.amazonaws.com\",\"certificate-authority-data\":\"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1EWXdNakUwTWpNeU0xb1hEVE14TURVek1URTBNak15TTFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTFg0CmRnY1BjTmN5L3lUVjdYeFJIZXBFZGM3U1c5Uy95WjE1VkloRWVkbHNja3gvb3ljNDFQWGxTSkRZYUI4MFY4bTgKU29KTVZtNmVRc2Z1TlNNU294aVdHMDdIdFpsS012VHR5cUpuYkZMMFErNWVBdzNhSGNOVDBYOHR2T2lTckVnKwozRG1SRTdsVUs5LzVSdmxXNG1wWGxpa2pqVDJRVFRScDBpaWFuQVlRN05DNXpsVHZUNnRJNWlGczFjbmRPQU1yCmwrdDRoQVdieDE4RGR4eG9KL1VDeHR5SVg3MDlHZnA1SkViV2J6c3JyOGV3ck9jdnhoQUVyWmdmWkd3NXVLZXUKTkZlVmdQeGFzWi9HSUJLMmtVaG1MV3BLOHBSSm1udWFzeGI0V05mSm1aYmJJOWIrVmtPN0l1elpCdDdFeFE5SgpOMmZOQjdTK0dZTHcvaitXRHlNQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZDM1k0K0xxU2JWY1dEMm8yY3U4QmtJcWhmdmlNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFDYW1tcUM5WGo0bUFYcmwrUklndlV4WDF4SElJdmVzY3l0cGM4enZkeFNHSGtkODBoQgp0Vkw3MGNBbjFKMi9ob2ZhRllxd1FESE9LL1pBM1A0V2ZqZUY4U1JaV1hubGdZeTZKMzBQNitkNE8vZCtyZ3J6CkhvSTdQZ2tOeEZYeUVtR01GVDJDQWtlaUNMaUNKVm9RWmxXSm5PMG9GV0ZOR3NJakJtNElXbmVTSXhQL1pteVYKRHBERStpR3R1NnBFaE9kSU95OFlRTHhPSEJsNnIrcFhRMWdiUy9hSjhFb2UrZWFtM285VVcwUHByd2hPSzNNUgpnb2dEeGhrbjkvSjJLeW83YWI1TjZuSzE0dllaelZZRWhkdW5xaGtZUHB4ek1pSzRiY1F4d1hMZlFHWmFtbzNXCk0wYWl6RkVtU2thOS9yMjN1cy9JNW9qZ3dxN2YzYndoUFovdQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==\"},\"name\":\"kubernetes\"}],\"contexts\":[{\"context\":{\"cluster\":\"kubernetes\",\"user\":\"aws\"},\"name\":\"aws\"}],\"current-context\":\"aws\",\"kind\":\"Config\",\"users\":[{\"name\":\"aws\",\"user\":{\"exec\":{\"apiVersion\":\"client.authentication.k8s.io/v1alpha1\",\"command\":\"aws\",\"args\":[\"eks\",\"get-token\",\"--cluster-name\",\"demo-cluster-eksCluster-01e7231\"]}}}]}",
+                    "version": "3.3.0"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:eks/cluster:Cluster::demo-cluster-eksCluster"
+                ],
+                "propertyDependencies": {
+                    "kubeconfig": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:eks/cluster:Cluster::demo-cluster-eksCluster"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:VpcCni::demo-cluster-vpc-cni",
+                "custom": true,
+                "id": "c2d832f5b991b2ac",
+                "type": "eks:index:VpcCni",
+                "inputs": {
+                    "kubeconfig": "{\"apiVersion\":\"v1\",\"clusters\":[{\"cluster\":{\"server\":\"https://33B8F8F0EF6A1522DD0874CF5BD3C543.gr7.us-east-1.eks.amazonaws.com\",\"certificate-authority-data\":\"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1EWXdNakUwTWpNeU0xb1hEVE14TURVek1URTBNak15TTFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTFg0CmRnY1BjTmN5L3lUVjdYeFJIZXBFZGM3U1c5Uy95WjE1VkloRWVkbHNja3gvb3ljNDFQWGxTSkRZYUI4MFY4bTgKU29KTVZtNmVRc2Z1TlNNU294aVdHMDdIdFpsS012VHR5cUpuYkZMMFErNWVBdzNhSGNOVDBYOHR2T2lTckVnKwozRG1SRTdsVUs5LzVSdmxXNG1wWGxpa2pqVDJRVFRScDBpaWFuQVlRN05DNXpsVHZUNnRJNWlGczFjbmRPQU1yCmwrdDRoQVdieDE4RGR4eG9KL1VDeHR5SVg3MDlHZnA1SkViV2J6c3JyOGV3ck9jdnhoQUVyWmdmWkd3NXVLZXUKTkZlVmdQeGFzWi9HSUJLMmtVaG1MV3BLOHBSSm1udWFzeGI0V05mSm1aYmJJOWIrVmtPN0l1elpCdDdFeFE5SgpOMmZOQjdTK0dZTHcvaitXRHlNQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZDM1k0K0xxU2JWY1dEMm8yY3U4QmtJcWhmdmlNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFDYW1tcUM5WGo0bUFYcmwrUklndlV4WDF4SElJdmVzY3l0cGM4enZkeFNHSGtkODBoQgp0Vkw3MGNBbjFKMi9ob2ZhRllxd1FESE9LL1pBM1A0V2ZqZUY4U1JaV1hubGdZeTZKMzBQNitkNE8vZCtyZ3J6CkhvSTdQZ2tOeEZYeUVtR01GVDJDQWtlaUNMaUNKVm9RWmxXSm5PMG9GV0ZOR3NJakJtNElXbmVTSXhQL1pteVYKRHBERStpR3R1NnBFaE9kSU95OFlRTHhPSEJsNnIrcFhRMWdiUy9hSjhFb2UrZWFtM285VVcwUHByd2hPSzNNUgpnb2dEeGhrbjkvSjJLeW83YWI1TjZuSzE0dllaelZZRWhkdW5xaGtZUHB4ek1pSzRiY1F4d1hMZlFHWmFtbzNXCk0wYWl6RkVtU2thOS9yMjN1cy9JNW9qZ3dxN2YzYndoUFovdQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==\"},\"name\":\"kubernetes\"}],\"contexts\":[{\"context\":{\"cluster\":\"kubernetes\",\"user\":\"aws\"},\"name\":\"aws\"}],\"current-context\":\"aws\",\"kind\":\"Config\",\"users\":[{\"name\":\"aws\",\"user\":{\"exec\":{\"apiVersion\":\"client.authentication.k8s.io/v1alpha1\",\"command\":\"aws\",\"args\":[\"eks\",\"get-token\",\"--cluster-name\",\"demo-cluster-eksCluster-01e7231\"]}}}]}"
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:eks/cluster:Cluster::demo-cluster-eksCluster"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:eks::default::9d1be108-e4e7-4d33-85d9-60fa03337aa8",
+                "propertyDependencies": {
+                    "kubeconfig": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:eks/cluster:Cluster::demo-cluster-eksCluster"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$pulumi-nodejs:dynamic:Resource::demo-cluster-vpc-cni"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$kubernetes:core/v1:ConfigMap::demo-cluster-nodeAccess",
+                "custom": true,
+                "id": "kube-system/aws-auth",
+                "type": "kubernetes:core/v1:ConfigMap",
+                "inputs": {
+                    "apiVersion": "v1",
+                    "data": {
+                        "mapRoles": "- rolearn: 'arn:aws:iam::052848974346:role/demo-cluster-instanceRole-role-70b7324'\n  username: 'system:node:{{EC2PrivateDNSName}}'\n  groups:\n    - 'system:bootstrappers'\n    - 'system:nodes'\n"
+                    },
+                    "kind": "ConfigMap",
+                    "metadata": {
+                        "labels": {
+                            "app.kubernetes.io/managed-by": "pulumi"
+                        },
+                        "name": "aws-auth",
+                        "namespace": "kube-system"
+                    }
+                },
+                "outputs": {
+                    "__initialApiVersion": "v1",
+                    "__inputs": {
+                        "apiVersion": "v1",
+                        "data": {
+                            "mapRoles": "- rolearn: 'arn:aws:iam::052848974346:role/demo-cluster-instanceRole-role-70b7324'\n  username: 'system:node:{{EC2PrivateDNSName}}'\n  groups:\n    - 'system:bootstrappers'\n    - 'system:nodes'\n"
+                        },
+                        "kind": "ConfigMap",
+                        "metadata": {
+                            "labels": {
+                                "app.kubernetes.io/managed-by": "pulumi"
+                            },
+                            "name": "aws-auth",
+                            "namespace": "kube-system"
+                        }
+                    },
+                    "apiVersion": "v1",
+                    "data": {
+                        "mapRoles": "- rolearn: 'arn:aws:iam::052848974346:role/demo-cluster-instanceRole-role-70b7324'\n  username: 'system:node:{{EC2PrivateDNSName}}'\n  groups:\n    - 'system:bootstrappers'\n    - 'system:nodes'\n"
+                    },
+                    "kind": "ConfigMap",
+                    "metadata": {
+                        "annotations": {
+                            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"data\":{\"mapRoles\":\"- rolearn: 'arn:aws:iam::052848974346:role/demo-cluster-instanceRole-role-70b7324'\\n  username: 'system:node:{{EC2PrivateDNSName}}'\\n  groups:\\n    - 'system:bootstrappers'\\n    - 'system:nodes'\\n\"},\"kind\":\"ConfigMap\",\"metadata\":{\"labels\":{\"app.kubernetes.io/managed-by\":\"pulumi\"},\"name\":\"aws-auth\",\"namespace\":\"kube-system\"}}\n"
+                        },
+                        "creationTimestamp": "2021-06-02T14:29:30Z",
+                        "labels": {
+                            "app.kubernetes.io/managed-by": "pulumi"
+                        },
+                        "managedFields": [
+                            {
+                                "apiVersion": "v1",
+                                "fieldsType": "FieldsV1",
+                                "fieldsV1": {
+                                    "f:data": {
+                                        ".": {},
+                                        "f:mapRoles": {}
+                                    },
+                                    "f:metadata": {
+                                        "f:annotations": {
+                                            ".": {},
+                                            "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                                        },
+                                        "f:labels": {
+                                            ".": {},
+                                            "f:app.kubernetes.io/managed-by": {}
+                                        }
+                                    }
+                                },
+                                "manager": "pulumi-resource-kubernetes",
+                                "operation": "Update",
+                                "time": "2021-06-02T14:29:30Z"
+                            }
+                        ],
+                        "name": "aws-auth",
+                        "namespace": "kube-system",
+                        "resourceVersion": "953",
+                        "selfLink": "/api/v1/namespaces/kube-system/configmaps/aws-auth",
+                        "uid": "93a2c807-a746-4c6d-b3d6-44eaff4c1580"
+                    }
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-instanceRole-role",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-instanceRole-03516f97",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-instanceRole-3eb088f2",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-instanceRole-e1b295bd"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$pulumi:providers:kubernetes::demo-cluster-eks-k8s::4ba0a4f2-c8f1-442a-a2d8-1b276b2ca409",
+                "propertyDependencies": {
+                    "apiVersion": null,
+                    "data": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/role:Role::demo-cluster-instanceRole-role",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-instanceRole-03516f97",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-instanceRole-e1b295bd",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:ServiceRole$aws:iam/rolePolicyAttachment:RolePolicyAttachment::demo-cluster-instanceRole-3eb088f2"
+                    ],
+                    "kind": null,
+                    "metadata": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/launchConfiguration:LaunchConfiguration::demo-cluster-nodeLaunchConfiguration",
+                "custom": true,
+                "id": "demo-cluster-nodeLaunchConfiguration-a450983",
+                "type": "aws:ec2/launchConfiguration:LaunchConfiguration",
+                "inputs": {
+                    "__defaults": [
+                        "enableMonitoring",
+                        "name"
+                    ],
+                    "associatePublicIpAddress": true,
+                    "enableMonitoring": true,
+                    "iamInstanceProfile": "demo-cluster-instanceProfile-996482b",
+                    "imageId": "ami-0ef0c69399dbb5f3f",
+                    "instanceType": "t4g.medium",
+                    "name": "demo-cluster-nodeLaunchConfiguration-a450983",
+                    "rootBlockDevice": {
+                        "__defaults": [],
+                        "deleteOnTermination": true,
+                        "encrypted": true,
+                        "volumeSize": 20,
+                        "volumeType": "gp2"
+                    },
+                    "securityGroups": [
+                        "sg-0e57aef3a081e6192"
+                    ],
+                    "userData": "#!/bin/bash\n\n/etc/eks/bootstrap.sh --apiserver-endpoint \"https://33B8F8F0EF6A1522DD0874CF5BD3C543.gr7.us-east-1.eks.amazonaws.com\" --b64-cluster-ca \"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1EWXdNakUwTWpNeU0xb1hEVE14TURVek1URTBNak15TTFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTFg0CmRnY1BjTmN5L3lUVjdYeFJIZXBFZGM3U1c5Uy95WjE1VkloRWVkbHNja3gvb3ljNDFQWGxTSkRZYUI4MFY4bTgKU29KTVZtNmVRc2Z1TlNNU294aVdHMDdIdFpsS012VHR5cUpuYkZMMFErNWVBdzNhSGNOVDBYOHR2T2lTckVnKwozRG1SRTdsVUs5LzVSdmxXNG1wWGxpa2pqVDJRVFRScDBpaWFuQVlRN05DNXpsVHZUNnRJNWlGczFjbmRPQU1yCmwrdDRoQVdieDE4RGR4eG9KL1VDeHR5SVg3MDlHZnA1SkViV2J6c3JyOGV3ck9jdnhoQUVyWmdmWkd3NXVLZXUKTkZlVmdQeGFzWi9HSUJLMmtVaG1MV3BLOHBSSm1udWFzeGI0V05mSm1aYmJJOWIrVmtPN0l1elpCdDdFeFE5SgpOMmZOQjdTK0dZTHcvaitXRHlNQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZDM1k0K0xxU2JWY1dEMm8yY3U4QmtJcWhmdmlNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFDYW1tcUM5WGo0bUFYcmwrUklndlV4WDF4SElJdmVzY3l0cGM4enZkeFNHSGtkODBoQgp0Vkw3MGNBbjFKMi9ob2ZhRllxd1FESE9LL1pBM1A0V2ZqZUY4U1JaV1hubGdZeTZKMzBQNitkNE8vZCtyZ3J6CkhvSTdQZ2tOeEZYeUVtR01GVDJDQWtlaUNMaUNKVm9RWmxXSm5PMG9GV0ZOR3NJakJtNElXbmVTSXhQL1pteVYKRHBERStpR3R1NnBFaE9kSU95OFlRTHhPSEJsNnIrcFhRMWdiUy9hSjhFb2UrZWFtM285VVcwUHByd2hPSzNNUgpnb2dEeGhrbjkvSjJLeW83YWI1TjZuSzE0dllaelZZRWhkdW5xaGtZUHB4ek1pSzRiY1F4d1hMZlFHWmFtbzNXCk0wYWl6RkVtU2thOS9yMjN1cy9JNW9qZ3dxN2YzYndoUFovdQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==\" \"demo-cluster-eksCluster-01e7231\"\n\n/opt/aws/bin/cfn-signal --exit-code $? --stack demo-cluster-d0391efb --resource NodeGroup --region us-east-1\n"
+                },
+                "outputs": {
+                    "arn": "arn:aws:autoscaling:us-east-1:052848974346:launchConfiguration:628aa9f4-1c26-4d0a-a096-497a1ac3574b:launchConfigurationName/demo-cluster-nodeLaunchConfiguration-a450983",
+                    "associatePublicIpAddress": true,
+                    "ebsBlockDevices": [],
+                    "ebsOptimized": false,
+                    "enableMonitoring": true,
+                    "ephemeralBlockDevices": [],
+                    "iamInstanceProfile": "demo-cluster-instanceProfile-996482b",
+                    "id": "demo-cluster-nodeLaunchConfiguration-a450983",
+                    "imageId": "ami-0ef0c69399dbb5f3f",
+                    "instanceType": "t4g.medium",
+                    "keyName": "",
+                    "metadataOptions": null,
+                    "name": "demo-cluster-nodeLaunchConfiguration-a450983",
+                    "rootBlockDevice": {
+                        "deleteOnTermination": true,
+                        "encrypted": true,
+                        "iops": 0,
+                        "volumeSize": 20,
+                        "volumeType": "gp2"
+                    },
+                    "securityGroups": [
+                        "sg-0e57aef3a081e6192"
+                    ],
+                    "spotPrice": "",
+                    "userData": "b4a8ca782c87624d015fce94f86f249c470a8fae",
+                    "vpcClassicLinkId": "",
+                    "vpcClassicLinkSecurityGroups": []
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:iam/instanceProfile:InstanceProfile::demo-cluster-instanceProfile",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-nodeSecurityGroup",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroupRule:SecurityGroupRule::demo-cluster-eksClusterIngressRule",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:eks/cluster:Cluster::demo-cluster-eksCluster",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:RandomSuffix::demo-cluster-cfnStackName"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "associatePublicIpAddress": null,
+                    "iamInstanceProfile": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:iam/instanceProfile:InstanceProfile::demo-cluster-instanceProfile"
+                    ],
+                    "imageId": null,
+                    "instanceType": null,
+                    "rootBlockDevice": null,
+                    "securityGroups": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-nodeSecurityGroup",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroupRule:SecurityGroupRule::demo-cluster-eksClusterIngressRule"
+                    ],
+                    "userData": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:eks/cluster:Cluster::demo-cluster-eksCluster",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:RandomSuffix::demo-cluster-cfnStackName"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/launchConfiguration:LaunchConfiguration::demo-cluster-nodeLaunchConfiguration",
+                "custom": true,
+                "delete": true,
+                "id": "demo-cluster-nodeLaunchConfiguration-38b50fb",
+                "type": "aws:ec2/launchConfiguration:LaunchConfiguration",
+                "inputs": {
+                    "__defaults": [
+                        "enableMonitoring",
+                        "name"
+                    ],
+                    "associatePublicIpAddress": true,
+                    "enableMonitoring": true,
+                    "iamInstanceProfile": "demo-cluster-instanceProfile-996482b",
+                    "imageId": "ami-0ef0c69399dbb5f3f",
+                    "instanceType": "t4g.micro",
+                    "name": "demo-cluster-nodeLaunchConfiguration-38b50fb",
+                    "rootBlockDevice": {
+                        "__defaults": [],
+                        "deleteOnTermination": true,
+                        "encrypted": true,
+                        "volumeSize": 20,
+                        "volumeType": "gp2"
+                    },
+                    "securityGroups": [
+                        "sg-0e57aef3a081e6192"
+                    ],
+                    "userData": "#!/bin/bash\n\n/etc/eks/bootstrap.sh --apiserver-endpoint \"https://33B8F8F0EF6A1522DD0874CF5BD3C543.gr7.us-east-1.eks.amazonaws.com\" --b64-cluster-ca \"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1EWXdNakUwTWpNeU0xb1hEVE14TURVek1URTBNak15TTFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTFg0CmRnY1BjTmN5L3lUVjdYeFJIZXBFZGM3U1c5Uy95WjE1VkloRWVkbHNja3gvb3ljNDFQWGxTSkRZYUI4MFY4bTgKU29KTVZtNmVRc2Z1TlNNU294aVdHMDdIdFpsS012VHR5cUpuYkZMMFErNWVBdzNhSGNOVDBYOHR2T2lTckVnKwozRG1SRTdsVUs5LzVSdmxXNG1wWGxpa2pqVDJRVFRScDBpaWFuQVlRN05DNXpsVHZUNnRJNWlGczFjbmRPQU1yCmwrdDRoQVdieDE4RGR4eG9KL1VDeHR5SVg3MDlHZnA1SkViV2J6c3JyOGV3ck9jdnhoQUVyWmdmWkd3NXVLZXUKTkZlVmdQeGFzWi9HSUJLMmtVaG1MV3BLOHBSSm1udWFzeGI0V05mSm1aYmJJOWIrVmtPN0l1elpCdDdFeFE5SgpOMmZOQjdTK0dZTHcvaitXRHlNQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZDM1k0K0xxU2JWY1dEMm8yY3U4QmtJcWhmdmlNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFDYW1tcUM5WGo0bUFYcmwrUklndlV4WDF4SElJdmVzY3l0cGM4enZkeFNHSGtkODBoQgp0Vkw3MGNBbjFKMi9ob2ZhRllxd1FESE9LL1pBM1A0V2ZqZUY4U1JaV1hubGdZeTZKMzBQNitkNE8vZCtyZ3J6CkhvSTdQZ2tOeEZYeUVtR01GVDJDQWtlaUNMaUNKVm9RWmxXSm5PMG9GV0ZOR3NJakJtNElXbmVTSXhQL1pteVYKRHBERStpR3R1NnBFaE9kSU95OFlRTHhPSEJsNnIrcFhRMWdiUy9hSjhFb2UrZWFtM285VVcwUHByd2hPSzNNUgpnb2dEeGhrbjkvSjJLeW83YWI1TjZuSzE0dllaelZZRWhkdW5xaGtZUHB4ek1pSzRiY1F4d1hMZlFHWmFtbzNXCk0wYWl6RkVtU2thOS9yMjN1cy9JNW9qZ3dxN2YzYndoUFovdQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==\" \"demo-cluster-eksCluster-01e7231\"\n\n/opt/aws/bin/cfn-signal --exit-code $? --stack demo-cluster-d0391efb --resource NodeGroup --region us-east-1\n"
+                },
+                "outputs": {
+                    "arn": "arn:aws:autoscaling:us-east-1:052848974346:launchConfiguration:009e1b97-d3d6-4159-be5d-1025eedc1283:launchConfigurationName/demo-cluster-nodeLaunchConfiguration-38b50fb",
+                    "associatePublicIpAddress": true,
+                    "ebsBlockDevices": [],
+                    "ebsOptimized": false,
+                    "enableMonitoring": true,
+                    "ephemeralBlockDevices": [],
+                    "iamInstanceProfile": "demo-cluster-instanceProfile-996482b",
+                    "id": "demo-cluster-nodeLaunchConfiguration-38b50fb",
+                    "imageId": "ami-0ef0c69399dbb5f3f",
+                    "instanceType": "t4g.micro",
+                    "keyName": "",
+                    "metadataOptions": null,
+                    "name": "demo-cluster-nodeLaunchConfiguration-38b50fb",
+                    "rootBlockDevice": {
+                        "deleteOnTermination": true,
+                        "encrypted": true,
+                        "iops": 0,
+                        "volumeSize": 20,
+                        "volumeType": "gp2"
+                    },
+                    "securityGroups": [
+                        "sg-0e57aef3a081e6192"
+                    ],
+                    "spotPrice": "",
+                    "userData": "b4a8ca782c87624d015fce94f86f249c470a8fae",
+                    "vpcClassicLinkId": "",
+                    "vpcClassicLinkSecurityGroups": []
+                },
+                "parent": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster::demo-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:iam/instanceProfile:InstanceProfile::demo-cluster-instanceProfile",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-nodeSecurityGroup",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroupRule:SecurityGroupRule::demo-cluster-eksClusterIngressRule",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:eks/cluster:Cluster::demo-cluster-eksCluster",
+                    "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:RandomSuffix::demo-cluster-cfnStackName"
+                ],
+                "provider": "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::pulumi:providers:aws::default_4_6_0::f6bf27c4-9b49-4f47-9745-d9b2551ecd33",
+                "propertyDependencies": {
+                    "associatePublicIpAddress": null,
+                    "iamInstanceProfile": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:iam/instanceProfile:InstanceProfile::demo-cluster-instanceProfile"
+                    ],
+                    "imageId": null,
+                    "instanceType": null,
+                    "rootBlockDevice": null,
+                    "securityGroups": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroup:SecurityGroup::demo-cluster-nodeSecurityGroup",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:ec2/securityGroupRule:SecurityGroupRule::demo-cluster-eksClusterIngressRule"
+                    ],
+                    "userData": [
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$aws:eks/cluster:Cluster::demo-cluster-eksCluster",
+                        "urn:pulumi:dev::aws-eks-alb-controller-helm-x509-selfsigned-ts::eks:index:Cluster$eks:index:RandomSuffix::demo-cluster-cfnStackName"
+                    ]
+                }
+            }
+        ]
+    }
+}
