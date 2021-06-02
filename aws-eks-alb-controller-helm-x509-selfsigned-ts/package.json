@@ -1,0 +1,13 @@
+{
+    "name": "aws-eks-alb-controller-helm-x509-selfsigned-ts",
+    "devDependencies": {
+        "@types/node": "^14.0.0"
+    },
+    "dependencies": {
+        "@pulumi/awsx": "^0.30.0",
+        "@pulumi/eks": "0.30.0",
+        "@pulumi/kubernetes": "3.3.0",
+        "@pulumi/pulumi": "^3.3.1",
+        "@pulumi/tls": "4.0.0"
+    }
+}

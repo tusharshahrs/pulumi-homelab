@@ -3,14 +3,14 @@ import * as aws from "@pulumi/aws";
 import * as tls from "@pulumi/tls";
 import { StackReference, Config } from "@pulumi/pulumi";
 import { OrganizationalUnit } from "@pulumi/aws/organizations";
-import * as AWS from 'aws-sdk';
+//import * as AWS from 'aws-sdk';
 
 const config = new pulumi.Config();
 const mystackreference = new StackReference(config.require("sshkeystack"));
 const my_privatekey = mystackreference.getOutput("sshkey_privateKeyPem");
 const my_certpem = mystackreference.getOutput("certrequest_pem");
 
-const exampleCertificateAuthority = new aws.acmpca.CertificateAuthority("exampleCertificateAuthority", {
+/*const exampleCertificateAuthority = new aws.acmpca.CertificateAuthority("exampleCertificateAuthority", {
     certificateAuthorityConfiguration: {
         keyAlgorithm: "RSA_4096",
         signingAlgorithm: "SHA512WITHRSA",
@@ -31,25 +31,33 @@ const exampleCertificateAuthority = new aws.acmpca.CertificateAuthority("example
             
         },
     },
-    permanentDeletionTimeInDays:25,
+    permanentDeletionTimeInDays:7,
 
 });
+*/
 
-const cert = new aws.acm.Certificate("cert", {
+
+const mycert = new aws.acm.Certificate("shaht-cert", {
+    privateKey: my_privatekey,
+    certificateChain: my_certpem,
+    certificateBody: my_certpem,
+    domainName: "shahtexample.com",
+    //certificateAuthorityArn: my_certrequest_pem,
+    validationMethod: "DNS",
+});
+
+
+/*const cert = new aws.acm.Certificate("cert", {
     privateKey: my_privatekey,
     certificateBody: my_certpem,
     certificateAuthorityArn: exampleCertificateAuthority.id,
 });
 
-/* const mycert = new aws.acm.Certificate("shaht-cert", {
-    privateKey: my_privatekey,
-    certificateChain: my_certpem,
-    //certificateBody: my_certpem,
-    domainName: "myexample.com",
-    //certificateChain: my_certrequest_pem,
-    //certificateAuthorityArn: my_certrequest_pem,
-    //validationMethod: "DNS",
-}); */
+export const certificateauthority_arn = exampleCertificateAuthority.arn;
+export const certificateauthority_status = exampleCertificateAuthority.status
+*/
+
+/////////
 
 /* const exampleSelfSignedCert = new tls.SelfSignedCert("shaht-exampleSelfSignedCert", {
     keyAlgorithm: "RSA",
