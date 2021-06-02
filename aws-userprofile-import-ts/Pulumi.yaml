@@ -1,0 +1,3 @@
+name: aws-userprofile-import-ts
+runtime: nodejs
+description: A minimal AWS TypeScript Pulumi program
