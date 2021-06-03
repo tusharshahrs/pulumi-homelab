@@ -276,7 +276,7 @@ We can use Pulumi's [transformations functionality](https://www.pulumi.com/docs/
 
 1.  Note that it wants to:  **delete-replaced**, **replace**, **create_replace**. This is because we are using a self signed cert.
 
-1. When you add the transformation block of code in the index.ts, and then run `pulumi up`, you get no changes.
+1. When you add the [transformation block](https://github.com/tusharshahrs/pulumi-homelab/blob/tree/master/aws-eks-alb-controller-helm-x509-selfsigned-ts/index.ts#L48-L73) of code in the index.ts, and then run `pulumi up`, you get no changes.
 
 ```
     Previewing update (dev)
