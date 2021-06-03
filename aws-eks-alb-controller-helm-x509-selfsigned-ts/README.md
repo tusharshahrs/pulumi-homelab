@@ -36,7 +36,7 @@ We can use Pulumi's [transformations functionality](https://www.pulumi.com/docs/
     ```
         Previewing update (dev)
 
-        View Live: https://app.pulumi.com/shaht/aws-eks-alb-controller-helm-x509-selfsigned-ts/dev/previews/84ce9512-7924-4a70-a389-e166afb5f8b9
+        View Live: https://app.pulumi.com/myuser/aws-eks-alb-controller-helm-x509-selfsigned-ts/dev/previews/84ce9512-7924-4a70-a389-e166afb5f8b9
 
             Type                            Name                                                Plan       
         +   pulumi:pulumi:Stack             aws-eks-alb-controller-helm-x509-selfsigned-ts-dev  create.    
