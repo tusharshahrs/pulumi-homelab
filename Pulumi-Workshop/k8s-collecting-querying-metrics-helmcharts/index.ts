@@ -6,7 +6,7 @@ const metricsnamespace = new k8s.core.v1.Namespace("metrics-Namespace", {
     apiVersion: "v1",
     kind: "Namespace",
     metadata: {
-        name: "metrics",
+        name: "metrics-ns",
     },
 }, { provider: k8sProvider });
 
@@ -51,4 +51,12 @@ const clusterautoscaler = new k8s.helm.v3.Chart("autoscale",  {
               extraArgs: {"stderrthreshold":"info","skip-nodes-with-local-storage":false,"expander":"least-waste","balance-similar-node-groups":true,"skip-nodes-with-system-pods":false,},
               autoDiscovery: {clusterName: eks_cluster_name, tags: [tag_cluster_autoscaler_enabled_label,tag_cluster_autoscaler_autodiscovery_label]},
             },
+}, { provider: k8sProvider });
+
+const nginxnamespace = new k8s.core.v1.Namespace("nginx-Namespace", {
+    apiVersion: "v1",
+    kind: "Namespace",
+    metadata: {
+        name: "nginxingress-ns",
+    },
 }, { provider: k8sProvider });
