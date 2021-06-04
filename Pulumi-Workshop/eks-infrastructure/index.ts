@@ -28,12 +28,12 @@ const cluster = new eks.Cluster("shahteks",
     privateSubnetIds: vpc_privatesubnetids,
     publicSubnetIds: vpc_publicsubnetids,
     minSize: 1,
-    instanceType:"t3a.micro",
+    instanceType:"t3a.small",
     instanceRole: roles[0],
     tags: mytags,
     nodeRootVolumeSize: 10,
     encryptRootBockDevice: true,
-    version: "1.19",
+    version: "1.20",
     enabledClusterLogTypes: ["api", "audit", "authenticator", "controllerManager", "scheduler"],
 });
 
@@ -58,7 +58,7 @@ export const cluster_autoscale_tags = tag_cluster_autoscaler_autodiscovery.apply
 
 const ngstandard = new eks.NodeGroup(`${my_name}-ng`, {
     cluster: cluster,
-    instanceType: "t3a.small",
+    instanceType: "t3a.medium",
     instanceProfile: instanceProfiles[0],
     desiredCapacity: 3,
     minSize: 2,
