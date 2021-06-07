@@ -61,9 +61,9 @@ const nginxnamespace = new k8s.core.v1.Namespace("nginx-Namespace", {
     },
 }, { provider: k8sProvider });
 
-
+// https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx helm chart
 const nginxingresscontrollerchart = new k8s.helm.v3.Chart("nginxingress",  {
-    version: "3.32.0",
+    version: "3.33.0",
     namespace: nginxnamespace.metadata.name,
     chart: "ingress-nginx",
     fetchOpts: {
@@ -81,4 +81,14 @@ const nginxingresscontrollerchart = new k8s.helm.v3.Chart("nginxingress",  {
                                 },
                           }
             },
+}, { provider: k8sProvider });
+
+// https://artifacthub.io/packages/helm/prometheus-community/prometheus
+const prometheuschart = new k8s.helm.v3.Chart("prometheus",  {
+    version: "14.1.1",
+    namespace: metricsnamespace.metadata.name,
+    chart: "prometheus-community",
+    fetchOpts: {
+        repo: "https://prometheus-community.github.io/helm-charts",
+    },
 }, { provider: k8sProvider });
