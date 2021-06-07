@@ -32,7 +32,7 @@ We can use Pulumi's [transformations functionality](https://www.pulumi.com/docs/
     ```
 
 1.  Run `pulumi up` and select `y`
-
+    
     ```
         Previewing update (dev)
 
