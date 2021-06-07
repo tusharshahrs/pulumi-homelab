@@ -13,22 +13,22 @@ The best way to to work around this is to tell pulumi to ignore changes to these
 We can use Pulumi's [transformations functionality](https://www.pulumi.com/docs/intro/concepts/resources/#transformations) to set [ignoreChanges](https://www.pulumi.com/docs/intro/concepts/resources/#ignorechanges) on the child resources of the Helm chart in this case.
 ## Running the App
 
-1.  Create a new stack:
+1. Create a new stack:
 
-    ```
-    $ pulumi stack init dev
+    ```bash
+    pulumi stack init dev
     ```
 
-1.  Restore NPM dependencies:
+1. Restore NPM dependencies:
 
-    ```
-    $ npm install
+    ```bash
+    npm install
     ```
     
 1. Set the AWS region location to use.  This has to match the same region as the console created lambda function
     
-    ```
-    $ pulumi config set aws:region us-east-2
+    ```bash
+    pulumi config set aws:region us-east-2
     ```
 
 1.  Run `pulumi up` and select `y`
@@ -204,7 +204,7 @@ We can use Pulumi's [transformations functionality](https://www.pulumi.com/docs/
 1.  Run `pulumi up` again and it will say that changes are being made.  We did not change anythign yet.
 
     ```
-            $ pulumi up
+        pulumi up
         Previewing update (dev)
 
         View Live: https://app.pulumi.com/myuser/aws-eks-alb-controller-helm-x509-selfsigned-ts/dev/previews/f8a6c984-0106-4a87-b52a-fb6043a9354e
