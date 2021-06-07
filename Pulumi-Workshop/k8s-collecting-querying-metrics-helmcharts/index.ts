@@ -85,9 +85,9 @@ const nginxingresscontrollerchart = new k8s.helm.v3.Chart("nginxingress",  {
 
 // https://artifacthub.io/packages/helm/prometheus-community/prometheus
 const prometheuschart = new k8s.helm.v3.Chart("prometheus",  {
-    version: "14.1.1",
+    version: "13.8.0",
     namespace: metricsnamespace.metadata.name,
-    chart: "prometheus-community",
+    chart: "prometheus",
     fetchOpts: {
         repo: "https://prometheus-community.github.io/helm-charts",
     },
