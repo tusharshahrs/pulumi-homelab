@@ -85,10 +85,20 @@ const nginxingresscontrollerchart = new k8s.helm.v3.Chart("nginxingress",  {
 
 // https://artifacthub.io/packages/helm/prometheus-community/prometheus
 const prometheuschart = new k8s.helm.v3.Chart("prometheus",  {
-    version: "13.8.0",
+    version: "14.1.1",
     namespace: metricsnamespace.metadata.name,
     chart: "prometheus",
     fetchOpts: {
         repo: "https://prometheus-community.github.io/helm-charts",
     },
+    values: {
+        ingress: { enabled: true, hosts: "a70106980fc57425da7612f739a1e66d-1771779095.us-east-2.elb.amazonaws.com"},
+        annotations: 
+            {"ingress.kubernetes.io/ssl-redirect": "false",
+             "inginx.ingress.kubernetes.io/ssl-redirect":"false",
+        },
+    },
 }, { provider: k8sProvider });
+
+//export const my_nginxingresscontrollerchart_lb = nginxingresscontrollerchart.getResourceProperty("v1/Service","nginx","status");
+//export const front_end_lb = my_nginxingresscontrollerchart_lb.apply(x => x.loadBalancer.ingress[0].ip);
