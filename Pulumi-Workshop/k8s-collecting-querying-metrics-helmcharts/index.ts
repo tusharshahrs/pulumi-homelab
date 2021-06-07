@@ -60,3 +60,25 @@ const nginxnamespace = new k8s.core.v1.Namespace("nginx-Namespace", {
         name: "nginxingress-ns",
     },
 }, { provider: k8sProvider });
+
+
+const nginxingresscontrollerchart = new k8s.helm.v3.Chart("nginxingress",  {
+    version: "3.32.0",
+    namespace: nginxnamespace.metadata.name,
+    chart: "ingress-nginx",
+    fetchOpts: {
+        repo: "https://kubernetes.github.io/ingress-nginx",
+    },
+     values: {
+              controller: {
+                            metrics: 
+                                { enabled: true}, 
+                            service: 
+                                { annotations: 
+                                    {"service.beta.kubernetes.io/aws-load-balancer-backend-protocol":"http", 
+                                     "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "https"},
+                                     "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout": "3600"
+                                },
+                          }
+            },
+}, { provider: k8sProvider });
