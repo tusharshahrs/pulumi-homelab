@@ -1,0 +1,3 @@
+name: k8s-nginx-ts-helm3import
+runtime: nodejs
+description: A minimal AWS TypeScript Pulumi program
