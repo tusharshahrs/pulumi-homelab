@@ -1,13 +1,13 @@
 # Using Pulumi for launching a create subnets after vpc was previously created via cloudformation stack in Python.
 
-### What Is This?
+## What Is This?
 
 Create subnets, igw, route tables, and nat gateways building a well archtiected framework for the rest of the vpc.
 
-### We will use StackReferences
+## We will use StackReferences
 The [StackReference](https://www.pulumi.com/docs/intro/concepts/organizing-stacks-projects/#inter-stack-dependencies) constructor takes as input a string of the form `org/project/stack`, and lets you access the outputs of that stack.  This format is ONLY for the SaaS based backend of pulumi(not for self-hosted).
 
-### Which Backend are we using?
+## Which Backend are we using?
 
 We are going to use [Pulumi Service backend](https://www.pulumi.com/docs/intro/concepts/state/#pulumi-service-backend) for saving states/checkpoints.
 

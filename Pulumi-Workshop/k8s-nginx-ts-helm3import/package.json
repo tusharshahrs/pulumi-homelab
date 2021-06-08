@@ -1,0 +1,12 @@
+{
+    "name": "k8s-nginx-ts-helm3import",
+    "devDependencies": {
+        "@types/node": "^14.0.0"
+    },
+    "dependencies": {
+        "@pulumi/aws": "^4.0.0",
+        "@pulumi/awsx": "^0.30.0",
+        "@pulumi/kubernetes": "^3.1.2",
+        "@pulumi/pulumi": "^3.0.0"
+    }
+}
