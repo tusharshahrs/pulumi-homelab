@@ -1,3 +1,0 @@
-config:
-  aws:region: us-east-2
-  fargate-with-crosswalk-vpc:mystackpath: shaht/crosswalk-vpc/myvpc

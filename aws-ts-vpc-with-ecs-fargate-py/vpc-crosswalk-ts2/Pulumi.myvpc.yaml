@@ -1,6 +1,0 @@
-config:
-  aws:region: us-east-2
-  crosswalk-vpc:number_of_nat_gateways: "3"
-  crosswalk-vpc:vpc_cidr: 10.0.0.0/24
-  crosswalk-vpc:vpc_name: vpc-fargate-dev
-  crosswalk-vpc:zone_number: "3"
