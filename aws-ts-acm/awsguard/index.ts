@@ -1,6 +1,6 @@
 import { AwsGuard } from "@pulumi/awsguard";
 
 new AwsGuard({ 
-    all: "advisory",
+    all: "disabled",
     acmCertificateExpiration: { maxDaysUntilExpiration: 10 },
 });
