@@ -1,6 +1,0 @@
-config:
-  aws:region: us-east-2
-  crosswalk-vpc2:number_of_nat_gateways: "1"
-  crosswalk-vpc2:vpc_cidr: 10.0.0.0/23
-  crosswalk-vpc2:vpc_name: shaht-eksk8s
-  crosswalk-vpc2:zone_number: "3"

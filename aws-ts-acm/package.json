@@ -1,5 +1,5 @@
 {
-    "name": "aws-sshkey-ts",
+    "name": "aws-acm-ts",
     "devDependencies": {
         "@types/node": "^14.0.0"
     },

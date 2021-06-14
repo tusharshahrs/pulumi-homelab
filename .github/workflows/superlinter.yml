@@ -5,7 +5,7 @@ name: Super-Linter
 on: push
 
 jobs:
-  # Set the job key. The key is displayed as the job name 
+  # Set the job key. The key is displayed as the job name
   # when a job name is not provided
   super-lint:
     # Name the Job
@@ -20,7 +20,12 @@ jobs:
 
       # Runs the Super-Linter action
       - name: Run Super-Linter
-        uses: github/super-linter@v3
+        uses: docker://ghcr.io/github/super-linter:slim-v4
         env:
-          DEFAULT_BRANCH: main
+          VALIDATE_PYTHON_BLACK: false
+          VALIDATE_PYTHON_FLAKE8: false
+          VALIDATE_PYTHON_ISORT: false
+          VALIDATE_TYPESCRIPT_STANDARD: false
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
