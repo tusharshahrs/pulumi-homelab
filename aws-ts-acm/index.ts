@@ -2,6 +2,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 import * as tls from "@pulumi/tls";
 
+export const my_aws_region = aws.config.region;
+
 const examplePrivateKey = new tls.PrivateKey("shaht-examplePrivateKey", {algorithm: "RSA"});
 
 const exampleSelfSignedCert = new tls.SelfSignedCert("shaht-exampleSelfSignedCert", {

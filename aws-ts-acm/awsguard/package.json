@@ -2,9 +2,12 @@
     "name": "awsguard-typescript",
     "version": "0.1.0",
     "dependencies": {
-        "@pulumi/awsguard": "latest"
+        "@pulumi/awsguard": "latest",
+        "aws-sdk": "^2.925.0"
     },
     "devDependencies": {
-        "@types/node": "^14.0.0"
+        "@pulumi/aws": "4.7.0",
+        "@types/node": "^14.0.0",
+        "aws-sdk": "^2.925.0"
     }
 }
