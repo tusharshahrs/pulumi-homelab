@@ -1,16 +1,13 @@
-import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 import * as tls from "@pulumi/tls";
 
-export const my_aws_region = aws.config.region;
+const examplePrivateKey = new tls.PrivateKey("demo-examplePrivateKey", {algorithm: "RSA"});
 
-const examplePrivateKey = new tls.PrivateKey("shaht-examplePrivateKey", {algorithm: "RSA"});
-
-const exampleSelfSignedCert = new tls.SelfSignedCert("shaht-exampleSelfSignedCert", {
+const exampleSelfSignedCert = new tls.SelfSignedCert("demo-exampleSelfSignedCert", {
     keyAlgorithm: "RSA",
     privateKeyPem: examplePrivateKey.privateKeyPem,
     subjects: [{
-        commonName: "shahtushar.com",
+        commonName: "demoexample.acme.com",
         organization: "ACME Examples, Inc",
         country: "USA"
     }],
@@ -22,7 +19,7 @@ const exampleSelfSignedCert = new tls.SelfSignedCert("shaht-exampleSelfSignedCer
     ],
 });
 
-const cert = new aws.acm.Certificate("shaht-cert", {
+const cert = new aws.acm.Certificate("demo-cert", {
     privateKey: examplePrivateKey.privateKeyPem,
     certificateBody: exampleSelfSignedCert.certPem,
 });
