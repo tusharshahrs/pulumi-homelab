@@ -90,8 +90,8 @@ fixed_node_group = eks.NodeGroup('demo-my-cluster-ng-fixed',
                                  instance_profile=instance_profile_2,
                                  opts=pulumi.ResourceOptions(parent=cluster)
                                  )
-"""
 
+"""
 # Now create a preemptible node group, using spot pricing, for our variable, ephemeral workloads.
 """
 spot_node_group = eks.NodeGroup('demo-my-cluster-ng-spot',
