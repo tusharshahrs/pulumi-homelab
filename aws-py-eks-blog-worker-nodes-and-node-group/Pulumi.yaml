@@ -1,0 +1,6 @@
+name: aws-py-eks-blog-worker-nodes-and-node-group
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: A minimal AWS Python Pulumi program

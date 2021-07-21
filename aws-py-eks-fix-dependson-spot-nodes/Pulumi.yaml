@@ -1,0 +1,6 @@
+name: aws-py-eks-fix-dependson-spot-nodes
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: A minimal AWS Python Pulumi program

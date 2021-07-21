@@ -1,0 +1,3 @@
+config:
+  aws-py-eks-blog-worker-nodes-and-node-group:networkingstackpath: shaht/crosswalk-vpc/dev
+  aws:region: us-east-2
