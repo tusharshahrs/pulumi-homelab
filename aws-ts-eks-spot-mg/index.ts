@@ -31,7 +31,6 @@ const mycluster = new eks.Cluster("shaht-eks", {
 
 const mg = new eks.ManagedNodeGroup("manangednodegroup", {
     cluster: mycluster,
-    //subnetIds: myvpc.publicSubnetIds,
     capacityType: "SPOT",
     instanceTypes: ["t3a.medium"],
     nodeRole: roles[0],
