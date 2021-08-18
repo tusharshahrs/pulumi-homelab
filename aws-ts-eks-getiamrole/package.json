@@ -1,0 +1,11 @@
+{
+    "name": "aws-ts-eks-getiamrole",
+    "devDependencies": {
+        "@types/node": "^10.0.0"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^3.0.0",
+        "@pulumi/aws": "^4.0.0",
+        "@pulumi/eks":"^0.32.0"
+    }
+}
