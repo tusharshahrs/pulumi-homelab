@@ -1,0 +1,6 @@
+config:
+  aws-ts-autoscaling:name_prefix: demo-eks
+  aws-ts-autoscaling:number_of_nat_gateways: "1"
+  aws-ts-autoscaling:vpc_cidr: 10.0.0.0/24
+  aws-ts-autoscaling:zone_number: "3"
+  aws:region: us-east-2
