@@ -1,11 +1,10 @@
 {
     "name": "aws-ts-lakeformation",
     "devDependencies": {
-        "@types/node": "^10.0.0"
+        "@types/node": "^14.0.0"
     },
     "dependencies": {
-        "@pulumi/pulumi": "^3.0.0",
-        "@pulumi/aws": "^4.0.0",
-        "@pulumi/awsx": "^0.30.0"
+        "@pulumi/pulumi": "^3.10.0",
+        "@pulumi/aws": "3.36.0"
     }
 }
