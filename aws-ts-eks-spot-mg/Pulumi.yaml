@@ -1,3 +1,0 @@
-name: aws-ts-eks-spot-mg
-runtime: nodejs
-description: A minimal AWS TypeScript Pulumi program
