@@ -1,6 +1,2 @@
 config:
-  aws-ts-site2site-vpn:number_of_nat_gateways: "1"
-  aws-ts-site2site-vpn:vpc_cidr: 10.0.0.0/24
-  aws-ts-site2site-vpn:vpc_name: demo-site2site
-  aws-ts-site2site-vpn:zone_number: "3"
   aws:region: us-east-2
