@@ -1,3 +1,0 @@
-name: azure-subscriptionid-ts
-runtime: nodejs
-description: A minimal Azure Native TypeScript Pulumi program
