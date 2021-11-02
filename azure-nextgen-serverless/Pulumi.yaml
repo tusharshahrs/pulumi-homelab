@@ -1,3 +1,0 @@
-name: azure-nextgen-serverless
-runtime: nodejs
-description: A minimal Azure NextGen TypeScript Pulumi program
